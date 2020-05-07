@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo frontend</title>
+
+    <!--AWESOME ICONS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--VUE Develepment Tools and Production Link-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+    <!-- AXIOS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+    <!--Els nostres arxius-->
+    <!-- SYMFONY ASSET <link rel="stylesheet" href="{{ asset('style.css') }}"> -->
+    <link rel="stylesheet" href="css/frontend_v1.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <script src="js/functions.js"></script>
+
+
+</head>
+
+<body>
+    <!-- <div class="container"> -->
+
+    <!--MENU DE NAVEGACIO (ES CARREGARÀ PER VUE ??)-->
+    <nav class="primary-menu">
+        <ul id="hamburgesa">
+            <li>
+                <a>
+                    <i class="fa fa-bars"></i></a>
+            </li>
+
+        </ul>
+        <ul id="menu">
+            <li>
+                <a class="menu-icon" href="#menu_item_section_name_1">
+                    <i class="fa fa-user-circle"></i></a>
+                <a class="menu-link active" href="#menu_item_section_name_1">PRIMERO</a>
+            </li>
+            <li>
+                <a class="menu-icon" href="#menu_item_section_name_1">
+                    <i class="fa fa-comment"></i></a>
+                <a class="menu-link" href="#menu_item_section_name_2">SECTION</a>
+            </li>
+            <li><a class="menu-link" href="#menu_item_section_name_3">OTRO LINK</a></li>
+            <li><a class="menu-link" href="#menu_item_section_name_4">LOGIN</a></li>
+        </ul>
+    </nav>
+
+    <!--CONTINGUT DE LA WEB - ZONA DRETA-->
+    <main>
+        <div id="fade"></div>
+        <!-- SECTION 1-->
+        <section id="menu_item_section_name_1">
+            <h1 class="titulo">
+                Titulo del section
+            </h1>
+            <div class="text">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. At varius vel pharetra vel turpis nunc eget lorem
+                    dolor. Sociis natoque penatibus et magnis. Facilisis sed odio morbi quis commodo odio aenean.
+                </p>
+                <p>
+                    Et malesuada fames ac turpis egestas integer eget aliquet nibh. Semper auctor neque vitae tempus quam pellentesque nec. Magna etiam tempor orci eu lobortis elementum. Netus et malesuada fames ac turpis egestas maecenas. Mauris a diam maecenas sed enim.
+                    Condimentum mattis pellentesque id nibh. Ut sem nulla pharetra diam sit amet nisl. Quam lacus suspendisse faucibus interdum posuere lorem ipsum. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2-->
+        <section id="menu_item_section_name_2">
+            <h1 class="titulo">
+                Titulo del section
+            </h1>
+            <div class="text">
+                <p>
+                    Malesuada bibendum arcu vitae elementum curabitur vitae nunc. Aliquet risus feugiat in ante metus dictum. Leo duis ut diam quam. Velit aliquet sagittis id consectetur purus. Congue eu consequat ac felis donec et odio pellentesque. Amet nulla facilisi
+                    morbi tempus iaculis urna id. Amet tellus cras adipiscing enim eu. In fermentum posuere urna nec tincidunt praesent semper feugiat nibh.
+                </p>
+                <p>
+                    Id leo in vitae turpis massa sed elementum tempus egestas. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque elit. Ipsum dolor sit amet consectetur. Nunc sed augue lacus viverra vitae congue.
+                </p>
+                <p>
+                    Leo duis ut diam quam. Velit aliquet sagittis id consectetur purus. Congue eu consequat ac felis donec et odio pellentesque. Amet nulla facilisi.
+                </p>
+                <p>
+                    Amet nulla facilisi morbi tempus iaculis urna id. Amet tellus cras adipiscing enim eu. In fermentum posuere urna nec tincidunt praesent semper feugiat nibh.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3-->
+        <section id="menu_item_section_name_3">
+            <h1 class="titulo">
+                Titulo del section
+            </h1>
+            <div class="text">
+                <p>
+                    Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Nibh sit amet commodo nulla facilisi nullam. Ultricies lacus sed turpis tincidunt id aliquet. Tristique senectus et netus et malesuada. Gravida cum sociis natoque penatibus et magnis.
+                    Posuere ac ut consequat semper viverra nam libero justo laoreet.
+                </p>
+                <p>
+                    Condimentum mattis pellentesque id nibh. Ut sem nulla pharetra diam sit amet nisl. Quam lacus suspendisse faucibus interdum posuere lorem ipsum. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4-->
+        <section id="menu_item_section_name_4">
+            <h1 class="titulo">
+                Prototip de formulari
+            </h1>
+            <form>
+                <div class="form-group">
+                    <label for="input_text_01">Text etiqueta</label>
+                    <input type="text" id="input_text_1" name="input_1">
+                </div>
+                <div class="form-group">
+                    <label for="input_text_02">Text etiqueta del segon camp</label>
+                    <input type="text" id="input_text_2" name="input_2">
+                </div>
+
+            </form>
+        </section>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

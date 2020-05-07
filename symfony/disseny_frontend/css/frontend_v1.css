@@ -1,0 +1,198 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: #666;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5em;
+}
+
+p {
+    padding: 0.5em 0;
+}
+
+
+/* MENU NAVEGACIO */
+
+nav {
+    border-right: 3px solid red;
+    width: 25vw;
+    position: fixed;
+    top: 1%;
+    bottom: 1%;
+    left: 0;
+    z-index: 100;
+    transition-duration: 1s;
+}
+
+#hamburgesa {
+    font-size: 2em;
+    color: #999;
+    position: absolute;
+    right: 0;
+    top: 16vh;
+    padding: 0.6em;
+    list-style-type: none;
+    _display: none;
+}
+
+#menu {
+    position: absolute;
+    right: 0;
+    bottom: 16vh;
+    padding: 0.5em;
+    list-style-type: none;
+    text-align: right;
+}
+
+.menu-icon {
+    font-size: 2em;
+    color: #999;
+    text-decoration: none;
+    padding: 0.3em;
+    display: none;
+}
+
+.menu-link {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    color: #999;
+    text-decoration: none;
+    display: block;
+}
+
+.active {
+    color: red;
+}
+
+.menu-link :hover {
+    color: red;
+}
+
+
+/* CONTINGUT */
+
+#fade {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transition-duration: 1s;
+    position: fixed;
+    z-index: 1;
+}
+
+main {}
+
+section {
+    min-height: 100vh;
+    padding-left: 27%;
+    padding-right: 16%;
+}
+
+.titulo {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2em;
+    font-weight: unset;
+    color: #999;
+    position: relative;
+    top: 15vh;
+    margin-bottom: 20vh;
+}
+
+.text {
+    color: #666;
+    position: sticky;
+    top: 25vh;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    color: #666;
+    display: inline-block;
+    padding: 1em 1em 0.6em .8em;
+}
+
+.form-group input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #eee;
+    border-radius: .25rem;
+}
+
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1200px) {
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    section {
+        padding-left: 28%;
+    }
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding-left: 29%;
+    }
+    .menu-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .primary-menu {
+        width: 4.5em;
+    }
+    #hamburguesa {
+        display: block;
+    }
+    .menu-link {
+        display: none;
+    }
+    .menu-icon {
+        display: block;
+    }
+    section {
+        padding-left: 23%;
+        padding-right: 4%;
+    }
+    .titulo {
+        font-size: large;
+        top: 5vh;
+        margin-bottom: 10vh;
+    }
+    .text {
+        font-size: small;
+    }
+}

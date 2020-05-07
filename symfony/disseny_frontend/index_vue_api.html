@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo frontend</title>
+
+    <!--AWESOME ICONS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--VUE Develepment Tools and Production Link-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+    <!-- AXIOS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!--Mis archivos-->
+    <!-- SYMFONY ASSET <link rel="stylesheet" href="{{ asset('style.css') }}"> -->
+    <link rel="stylesheet" href="css/frontend_v1.css">
+    <link rel="stylesheet" href="css/bootstrap-grid">
+    <script src="js/functions.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+
+        <nav class="primary-menu">
+            <ul id="hamburgesa">
+                <li>
+                    <a>
+                        <i class="fa fa-bars"></i></a>
+                </li>
+
+            </ul>
+            <ul id="menu">
+                <li v-for="(actual, index) in results">
+                    <a class="menu-icon" v-bind:href="actual.menulink">
+                        <i class="fa fa-user-circle"></i></a>
+                    <a class="menu-link" v-bind:href="actual.menulink">{{actual.menulink}}</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!--CONTINGUT DE LA WEB - ZONA DRETA-->
+        <main>
+            <div id="fade"></div>
+
+
+            <section v-for="actual in results" v-bind:id="actual.menulink">
+                <h1 class="titulo">{{actual.titol}}</h1>
+                <div class="text">{{actual.contingut}}</div>
+            </section>
+
+
+        </main>
+        <script src="js/vue_app.js"></script>
+        <!-- <script src="js/vue_componente.js"></script> -->
+
+
+
+</body>
+
+</html>
