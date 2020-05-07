@@ -16,4 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 /.env
-/var
+/var/
