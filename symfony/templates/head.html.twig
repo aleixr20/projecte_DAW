@@ -1,0 +1,26 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>
+		{% block title %}B-NERDto.dev |
+			{#{page_title}#}
+		{% endblock %}
+	</title>
+	{% block stylesheets %}
+		<!--BOOTSRAP - En prinicipi no els farem servir, pero els deixo aqui per si de cas-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+		<!--AWESOME ICON FONT-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--CSS propi-->
+		{# <link rel="stylesheet" href="../../css/joborwork.css"> #}
+		{# asset(): #}
+		<!-- <link rel="stylesheet" href="{#{ asset('css/joborwork.css') }#}">-->
+		<link rel="stylesheet" href="{{ asset('css/b-nerd.css') }}"> <script src="{{ asset('js/b-nerd.js') }}"></script>
+	{% endblock %}
+
+</head>
