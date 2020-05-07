@@ -15,5 +15,4 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-/.env
-/var/
+var\cache
