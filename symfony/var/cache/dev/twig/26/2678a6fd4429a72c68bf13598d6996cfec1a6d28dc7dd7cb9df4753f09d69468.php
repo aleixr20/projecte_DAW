@@ -204,6 +204,6 @@ class __TwigTemplate_ebc34e4f0423dea125b2b76c5be15f468a655b45cb5ba5c3f9226b76608
     </button>
 </form>
 {% endblock %}
-", "security/login.html.twig", "C:\\wamp64\\www\\Projecte\\symfony\\templates\\security\\login.html.twig");
+", "security/login.html.twig", "C:\\xampp\\htdocs\\symfony\\projecte_DAW\\symfony\\templates\\security\\login.html.twig");
     }
 }

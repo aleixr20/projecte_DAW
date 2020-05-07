@@ -642,6 +642,6 @@ class __TwigTemplate_16a72f990d997508302f3d688e54d18cf4e55ff57784660f6fe57337a4c
         }());
     </script>
 {% endblock %}
-", "@WebProfiler/Profiler/layout.html.twig", "C:\\wamp64\\www\\Projecte\\symfony\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\layout.html.twig");
+", "@WebProfiler/Profiler/layout.html.twig", "C:\\xampp\\htdocs\\symfony\\projecte_DAW\\symfony\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\layout.html.twig");
     }
 }

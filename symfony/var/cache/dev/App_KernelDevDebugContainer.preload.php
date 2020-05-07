@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'\\vendor/autoload.php';
-require __DIR__.'/ContainerPKvRxrH/App_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerQdmTzxe/App_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -28,10 +28,12 @@ $classes[] = 'Symfony\Bridge\Monolog\Logger';
 $classes[] = 'Symfony\Component\HttpFoundation\RequestMatcher';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
 $classes[] = 'App\Controller\AppController';
+$classes[] = 'App\Controller\HomepageController';
 $classes[] = 'App\Controller\RegistrationController';
 $classes[] = 'App\Controller\SecurityController';
 $classes[] = 'App\EventSubscriber\RequestSubscriber';
 $classes[] = 'App\Form\RegistrationFormType';
+$classes[] = 'App\Repository\HomepageSectionsRepository';
 $classes[] = 'App\Repository\UserRepository';
 $classes[] = 'App\Security\LoginFormAuthenticator';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController';
@@ -150,6 +152,7 @@ $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\EnsureProductionSetti
 $classes[] = 'Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand';
 $classes[] = 'Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader';
 $classes[] = 'App\DataFixtures\AppFixtures';
+$classes[] = 'App\DataFixtures\HomepageFixtures';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\ConvertMappingDoctrineCommand';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\ImportMappingDoctrineCommand';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\InfoDoctrineCommand';

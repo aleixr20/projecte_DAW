@@ -154,6 +154,6 @@ class __TwigTemplate_f699e044115708bbee08d3526a215d78e80875454da010d06188178856c
     </ul>
 </div>
 {% endblock %}
-", "app/index.html.twig", "C:\\wamp64\\www\\Projecte\\symfony\\templates\\app\\index.html.twig");
+", "app/index.html.twig", "C:\\xampp\\htdocs\\symfony\\projecte_DAW\\symfony\\templates\\app\\index.html.twig");
     }
 }
