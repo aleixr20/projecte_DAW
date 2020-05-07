@@ -2,18 +2,51 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
+use App\Entity\Article;
+use App\Form\ArticleType;
+use App\Repository\TemaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class AppController extends AbstractController
 {
+
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index", methods={"GET"})
      */
-    public function index()
+    public function index(ArticleRepository $articleRepository)
     {
-        return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
+
+        return $this->render('article/index.html.twig', [
+            'articles' => $articleRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="article_new", methods={"GET","POST"})
+     */
+    public function new(Request $request)
+    {
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $article->setDataPublicacio(new \DateTime());
+            $article->setUser($this->getUser());
+            $article->setSlug(strtolower(str_replace(" ","-",$article->getTitol())));
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('article/new.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -52,6 +85,30 @@ class AppController extends AbstractController
 
         return $this->redirectToRoute('userProfile', [
             'userName' => $this->getUser()->getEmail()
+        ]);
+    }
+
+    /**
+     * @Route("/{tema}", name="tema", methods={"GET"})
+     */
+    public function tema($tema, ArticleRepository $articleRepository, TemaRepository $temaRepository)
+    {
+
+        $temaId = $temaRepository->findOneBy(array('nom' => $tema))->getId();
+        
+        return $this->render('article/index_tema.html.twig', [
+            'tema' => $tema,
+            'articles' => $articleRepository->findBy(array('tema' => $temaId)),
+        ]);
+    }
+
+    /**
+     * @Route("/{tema}/{slug}", name="slug", methods={"GET"})
+     */
+    public function slug($tema, $slug, ArticleRepository $articleRepository)
+    {
+        return $this->render('article/show.html.twig', [
+            'article' => $articleRepository->findOneBy(array('slug' => $slug)),
         ]);
     }
 

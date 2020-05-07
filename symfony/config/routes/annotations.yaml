@@ -1,6 +1,18 @@
-controllers:
-    resource: ../../src/Controller/
+Security:
+    resource: App\Controller\SecurityController
     type: annotation
+
+Registration:
+    resource: App\Controller\RegistrationController
+    type: annotation
+    
+App:
+    resource: App\Controller\AppController
+    type: annotation
+
+# controllers:
+#     resource: ../../src/Controller/
+#     type: annotation
 
 kernel:
     resource: ../../src/Kernel.php

@@ -70,6 +70,11 @@ class Article
      */
     private $comentaris;
 
+    /**
+     * @ORM\Column(type="string", length=99999)
+     */
+    private $contingut;
+
     public function __construct()
     {
         $this->comentaris = new ArrayCollection();
@@ -215,6 +220,18 @@ class Article
                 $comentari->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getContingut(): ?string
+    {
+        return $this->contingut;
+    }
+
+    public function setContingut(string $contingut): self
+    {
+        $this->contingut = $contingut;
 
         return $this;
     }

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tema }} index{% endblock %}
+
+{% block body %}
+    <h1>{{ tema }} index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titol</th>
+                <th>Subtitol</th>
+                <th>Data_publicacio</th>
+                <th>Data_actualitzacio</th>
+                <th>Slug</th>
+                <th>Tag_meta</th>
+                <th>Tag_web</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titol }}</td>
+                <td>{{ article.subtitol }}</td>
+                <td>{{ article.dataPublicacio ? article.dataPublicacio|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.dataActualitzacio ? article.dataActualitzacio|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.slug }}</td>
+                <td>{{ article.tagMeta ? article.tagMeta|join(', ') : '' }}</td>
+                <td>{{ article.tagWeb ? article.tagWeb|join(', ') : '' }}</td>
+                <td>
+                    <a href="{{ path('slug', {'tema': article.tema.nom, 'slug': article.slug }) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}">Create new</a>
+{% endblock %}
