@@ -32,13 +32,26 @@ class AppController extends AbstractController
      */
     public function userProfile($userName)
     {
-
         if ($this->getUser()->getEmail() != $userName) {
             return $this->redirectToRoute('index');
         }
 
         return $this->render('app/index.html.twig', [
             'controller_name' => $userName,
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="userProfileRedirect")
+     */
+    public function userProfileRedirect()
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->redirectToRoute('userProfile', [
+            'userName' => $this->getUser()->getEmail()
         ]);
     }
 

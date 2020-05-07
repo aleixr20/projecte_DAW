@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,22 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="id_user")
+     */
+    private $articles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comentari", mappedBy="user")
+     */
+    private $comentaris;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+        $this->comentaris = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,5 +129,67 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comentari[]
+     */
+    public function getComentaris(): Collection
+    {
+        return $this->comentaris;
+    }
+
+    public function addComentari(Comentari $comentari): self
+    {
+        if (!$this->comentaris->contains($comentari)) {
+            $this->comentaris[] = $comentari;
+            $comentari->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentari(Comentari $comentari): self
+    {
+        if ($this->comentaris->contains($comentari)) {
+            $this->comentaris->removeElement($comentari);
+            // set the owning side to null (unless already changed)
+            if ($comentari->getUser() === $this) {
+                $comentari->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
