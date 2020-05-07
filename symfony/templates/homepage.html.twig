@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('homemenu.html.twig') }}
+{% endblock %}
+{% block content %}
+
+	{% for section in sections %}
+		<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+		<main>
+
+			<div id="fade"></div>
+
+			<section id="{{section.menulink}}">
+				<h1 class="titulo">{{section.titol}}</h1>
+				<div class="text">{{section.contingut}}</div>
+			</section>
+
+		</main>
+	{% endfor %}
+{% endblock %}
