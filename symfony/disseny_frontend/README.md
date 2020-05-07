@@ -28,7 +28,8 @@ Versio adaptada amb VUE que renderitza la info que rep de la API de Symfony
 Carpeta amb l'estructura d'arxius twig que implementen la versió bura (base) d'HTML    
 🛠 Aquesta versió renderitza el frontend del HomePageController amb el classic
 
-```        return $this->render('homepage/index.html.twig', [    
+```        
+         return $this->render('homepage/index.html.twig', [    
             ... => ...,    
             ... => ...    
          ]);
