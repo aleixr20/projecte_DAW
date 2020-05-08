@@ -89,7 +89,9 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/{tema}", name="tema", methods={"GET"})
+     * @Route("/{tema}", name="tema", 
+     * methods={"GET"},
+     * condition="context.getPathInfo()  != '/favicon.ico'")
      */
     public function tema($tema, ArticleRepository $articleRepository, TemaRepository $temaRepository)
     {
