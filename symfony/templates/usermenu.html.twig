@@ -8,22 +8,33 @@
 	</ul>
 	<ul id="menu">
 		<li>
-			<a class="menu-icon" href="/homepage">
+			<a class="menu-icon" href="{{ path('homepage') }}">
 				<i class="fa fa-user-circle"></i>
 			</a>
-			<a class="menu-link-visible" href="/homepage">INICIO</a>
+			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICIO</a>
 		</li>
+		{% if app.user %}
+			<li>
+
+				<a class="menu-icon" href="{{ path('app_logout')}}">
+					<i class="fa fa-user-circle"></i>
+				</a>
+				<a class="menu-link-hidden" href="{{ path('app_logout')}}">SORTIR</a>
+			</li>
+
+		{% endif %}
+
 		{# <li>
-			<a class="menu-icon" href="/login">
-				<i class="fa fa-user-circle"></i>
-			</a>
-			<a class="menu-link-visible" href="/perfil">EDITAR PERFIL</a>
-		</li>
-		<li>
-			<a class="menu-icon" href="/homepage">
-				<i class="fa fa-user-circle"></i>
-			</a>
-			<a class="menu-link-visible active" href="/login">LOGIN</a>
-		</li> #}
+					<a class="menu-icon" href="/login">
+						<i class="fa fa-user-circle"></i>
+					</a>
+					<a class="menu-link-visible" href="/perfil">EDITAR PERFIL</a>
+				</li>
+				<li>
+					<a class="menu-icon" href="/homepage">
+						<i class="fa fa-user-circle"></i>
+					</a>
+					<a class="menu-link-visible active" href="/login">LOGIN</a>
+				</li> #}
 	</ul>
 </nav>

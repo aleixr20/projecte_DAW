@@ -1,28 +1,42 @@
-var show = true;
-var toggleMenu;
+let show = true;
+let toggleMenu;
 
 window.onload = function() {
+
 
     document.getElementById("hamburgesa").addEventListener("click", function() {
         let menu_lateral = document.getElementsByClassName("primary-menu")
         let shadow = document.getElementById("fade");
-        let links = document.getElementsByClassName("menu-link");
+        let links1 = document.getElementsByClassName("menu-link-visible");
+        let links2 = document.getElementsByClassName("menu-link-hidden");
+        for (i = 0; i < links2.length; i++) {
+            // links.push(links2[i])
+        }
+
         let icons = document.getElementsByClassName("menu-icon");
 
         if (show == true) {
             menu_lateral[0].style.width = "80%";
             menu_lateral[0].style.backgroundColor = "rgba(100, 100, 100, 0.1)";
             shadow.style.backgroundColor = "#fff";
+            shadow.style.zIndex = 1;
             toggleMenu = setTimeout(hideMenu(icons), 2000);
-            toggleMenu = setTimeout(showMenu(links), 2000);
+            toggleMenu = setTimeout(showMenu(links1), 2000);
+            toggleMenu = setTimeout(showMenu(links2), 2000);
+
             show = false;
         } else {
-            menu_lateral[0].style.width = "";
+            //menu_lateral[0].style.width = "";
             menu_lateral[0].style.backgroundColor = "transparent";
             shadow.style.backgroundColor = "transparent";
+            shadow.style.zIndex = -1;
             if (window.screen.availWidth < 576) {
-                toggleMenu = setTimeout(hideMenu(links), 2000);
+                menu_lateral[0].style.width = "4.5em";
+                toggleMenu = setTimeout(hideMenu(links1), 2000);
+                toggleMenu = setTimeout(hideMenu(links2), 2000);
                 toggleMenu = setTimeout(showMenu(icons), 2000);
+            } else {
+                menu_lateral[0].style.width = "25vw";
             }
             show = true;
         }

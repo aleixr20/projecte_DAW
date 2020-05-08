@@ -12,7 +12,7 @@ header('Access-Control-Allow-Origin: *');
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/homepage", name="homepage")
+     * @Route("/home", name="homepage")
      */
     public function getAll()
     {
@@ -36,28 +36,28 @@ class HomepageController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/inPHP", name="inPHP")
-     */
-    public function getPhp(): JsonResponse
-    {
-        $repository = $this->getDoctrine()->getRepository(HomepageSections::class);
-        $sections = $repository->findAll();
+    //     /**
+    //  * @Route("/inPHP", name="inPHP")
+    //  */
+    // public function getPhp(): JsonResponse
+    // {
+    //     $repository = $this->getDoctrine()->getRepository(HomepageSections::class);
+    //     $sections = $repository->findAll();
 
-        $data = [];
+    //     $data = [];
 
-        foreach ($sections as $pelicula) {
-            $data[] = [
-                'titol' => $pelicula->getTitol(),
-                'subtitol' => $pelicula->getSubtitol(),
-                'contingut' => $pelicula->getContingut(),
-                'menulink' => $pelicula->getMenulink()
-            ];
-        }
-        // return $this->json(['sections' => $data]);
+    //     foreach ($sections as $pelicula) {
+    //         $data[] = [
+    //             'titol' => $pelicula->getTitol(),
+    //             'subtitol' => $pelicula->getSubtitol(),
+    //             'contingut' => $pelicula->getContingut(),
+    //             'menulink' => $pelicula->getMenulink()
+    //         ];
+    //     }
+    //     // return $this->json(['sections' => $data]);
 
-        return new JsonResponse($data[0], Response::HTTP_OK);
-    }
+    //     return new JsonResponse($data[0], Response::HTTP_OK);
+    // }
     // public function index()
     // {
     //     $repository = $this->getDoctrine()->getRepository(HomepageSections::class);

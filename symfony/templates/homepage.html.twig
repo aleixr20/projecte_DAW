@@ -4,17 +4,17 @@
 {% endblock %}
 {% block content %}
 
-	{% for section in sections %}
-		<!--CONTINGUT DE LA WEB - ZONA DRETA-->
-		<main>
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
 
-			<div id="fade"></div>
+		<div id="fade"></div>
+		{% for section in sections %}
 
 			<section id="{{section.menulink}}">
 				<h1 class="titulo">{{section.titol}}</h1>
 				<div class="text">{{section.contingut}}</div>
 			</section>
+		{% endfor %}
 
-		</main>
-	{% endfor %}
+	</main>
 {% endblock %}

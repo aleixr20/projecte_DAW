@@ -22,10 +22,19 @@
 		{% endfor %}
 
 		<li>
-			<a class="menu-icon" href="/login">
-				<i class="fa fa-user-circle"></i>
-			</a>
-			<a class="menu-link-hidden" href="/login">LOGIN</a>
+			{% if app.user %}
+				<a class="menu-icon" href="{{ path('app_logout')}}">
+					<i class="fa fa-user-circle"></i>
+				</a>
+				<a class="menu-link-hidden" href="{{ path('app_logout')}}">SORTIR</a>
+			{% else %}
+
+				<a class="menu-icon" href="{{ path('app_login')}}">
+					<i class="fa fa-user-circle"></i>
+				</a>
+				<a class="menu-link-hidden" href="{{ path('app_login')}}">LOGIN</a>
+			{% endif %}
+
 		</li>
 	</ul>
 </nav>

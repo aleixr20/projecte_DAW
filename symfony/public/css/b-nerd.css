@@ -86,8 +86,10 @@ nav {
     color: red;
 }
 
-.menu-link :hover {
+.menu-link-visible:hover,
+.menu-link-hidden:hover {
     color: red;
+    text-decoration: none;
 }
 
 
@@ -99,7 +101,7 @@ nav {
     background-color: transparent;
     transition-duration: 1s;
     position: fixed;
-    z-index: 1;
+    z-index: -1;
 }
 
 main {}
@@ -186,7 +188,10 @@ section {
     #hamburguesa {
         display: block;
     }
-    .menu-link {
+    .menu-link-visible {
+        display: none;
+    }
+    .menu-link-hidden {
         display: none;
     }
     .menu-icon {

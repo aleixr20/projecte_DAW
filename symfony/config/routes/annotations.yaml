@@ -1,3 +1,6 @@
+#Unificant el login, logout i register al UserController,
+#El Security i el Resgistration sobren
+
 Security:
     resource: App\Controller\SecurityController
     type: annotation
@@ -8,6 +11,22 @@ Registration:
     
 App:
     resource: App\Controller\AppController
+    type: annotation
+
+Homepage:
+    resource: App\Controller\HomepageController
+    type: annotation
+
+User:
+    resource: App\Controller\UserController
+    type: annotation
+
+Admin:
+    resource: App\Controller\AdminController
+    type: annotation
+
+Articles:
+    resource: App\Controller\ArticlesController
     type: annotation
 
 # controllers:
