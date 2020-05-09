@@ -22,7 +22,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=200, unique=true)
      */
     private $email;
 
@@ -46,6 +46,51 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comentari", mappedBy="user")
      */
     private $comentaris;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $cognom;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $data_naixament;
+
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $genere;
+
+    /**
+     * @ORM\Column(type="string", length=12, nullable=true)
+     */
+    private $codi_postal;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $nom_usuari;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $imatge;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $ultim_login;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $data_registre;
 
     public function __construct()
     {
@@ -77,7 +122,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->nom_usuari;
     }
 
     /**
@@ -86,8 +131,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -189,6 +232,114 @@ class User implements UserInterface
                 $comentari->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getCognom(): ?string
+    {
+        return $this->cognom;
+    }
+
+    public function setCognom(string $cognom): self
+    {
+        $this->cognom = $cognom;
+
+        return $this;
+    }
+
+    public function getDataNaixament(): ?\DateTimeInterface
+    {
+        return $this->data_naixament;
+    }
+
+    public function setDataNaixament(?\DateTimeInterface $data_naixament): self
+    {
+        $this->data_naixament = $data_naixament;
+
+        return $this;
+    }
+
+    public function getGenere(): ?string
+    {
+        return $this->genere;
+    }
+
+    public function setGenere(?string $genere): self
+    {
+        $this->genere = $genere;
+
+        return $this;
+    }
+
+    public function getCodiPostal(): ?string
+    {
+        return $this->codi_postal;
+    }
+
+    public function setCodiPostal(?string $codi_postal): self
+    {
+        $this->codi_postal = $codi_postal;
+
+        return $this;
+    }
+
+    public function getNomUsuari(): ?string
+    {
+        return $this->nom_usuari;
+    }
+
+    public function setNomUsuari(string $nom_usuari): self
+    {
+        $this->nom_usuari = $nom_usuari;
+
+        return $this;
+    }
+
+    public function getImatge(): ?string
+    {
+        return $this->imatge;
+    }
+
+    public function setImatge(?string $imatge): self
+    {
+        $this->imatge = $imatge;
+
+        return $this;
+    }
+
+    public function getUltimLogin(): ?\DateTimeInterface
+    {
+        return $this->ultim_login;
+    }
+
+    public function setUltimLogin(?\DateTimeInterface $ultim_login): self
+    {
+        $this->ultim_login = $ultim_login;
+
+        return $this;
+    }
+
+    public function getDataRegistre(): ?\DateTimeInterface
+    {
+        return $this->data_registre;
+    }
+
+    public function setDataRegistre(\DateTimeInterface $data_registre): self
+    {
+        $this->data_registre = $data_registre;
 
         return $this;
     }

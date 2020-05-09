@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,13 +12,53 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nom')
+            ->add('cognom')
             ->add('email')
+            ->add('nom_usuari')
+            ->add('data_naixament', BirthdayType::class, [
+                'required'=> false,
+                'placeholder' => [
+                    'day' => 'Dia',
+                    'month' => 'Mes', 
+                    'year' => 'Any', 
+                ],
+                'format' => 'dd  MM  yyyy'
+            ])
+            ->add('genere', ChoiceType::class, [
+                'placeholder' => '',
+                'required' => false,
+                'choices' => [
+                    'Masculí' => 'masc',
+                    'Femení' => 'fem',
+                    'Altres' => 'altres',
+                ]
+            ])
+            ->add('imatge', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2000k',
+                        'mimeTypes' => [
+                            'image/png', 
+                            'image/jpeg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Puja una imatge vàlida (PNG, JPEG o GIF)',
+                    ])
+                ],
+            ])
+            ->add('codi_postal')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

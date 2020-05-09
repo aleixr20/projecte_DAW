@@ -4,20 +4,19 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use App\Security\LoginFormAuthenticator;
-
-
-
+use Error;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use DateTimeZone;
 
 class UserController extends AbstractController
 {
@@ -37,7 +36,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -64,6 +63,32 @@ class UserController extends AbstractController
 
             //AQUI HAURIEM D'ASSIGNAR UN ROLE USER PER DEFECTE
             $user->setRoles(["ROLE_USER"]);
+            $dataRegistre = new \DateTime();
+            $dataRegistre->setTimezone(new DateTimeZone('Europe/Madrid'));
+            $user->setDataRegistre($dataRegistre);
+
+            //Pujada de la imatge de perfil
+            $imatgePerfil = $form->get('imatge')->getData();
+
+            // this condition is needed because the 'imatge' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($imatgePerfil) {
+                $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $nomArxiu = $slugger->slug($nomArxiuOriginal);
+                $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
+
+                // Move the file to the directory where imatges are stored
+                try {
+                    $imatgePerfil->move('../img/imatges_perfil', $nouNomArxiu);
+                } catch (FileException $e) {
+                    throw new Error($e);
+                }
+
+                // updates the 'imatge' property to store the image file name
+                // instead of its contents
+                $user->setImatge($nouNomArxiu);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
