@@ -3,18 +3,25 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Tema;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Lenght;
+
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+    //    $tema_repository = $this->getDoctrine()->getRepository(Tema::class);
+    //   $temas = $tema_repository->findAll();
+
         $builder
             ->add('titol', TextType::class, [
                 'label' => 'Titol article',  
@@ -59,11 +66,12 @@ class ArticleType extends AbstractType
                 'mapped' => false,
             ])
 
-            ->add('tema', TextType::class, [
+            ->add('tema', EntityType::class, [
                 'attr' => ['class' => 'form-control'],
-                'required' => true,
-                'mapped' => false,
+                'class' => Tema::class,
+               // 'choises' => $temas->getNom()
             ])
+
         ;
     }
 
