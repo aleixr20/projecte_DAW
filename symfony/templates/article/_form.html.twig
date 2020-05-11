@@ -1,4 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('usermenu.html.twig') }}
+{% endblock %}
+
+{% block content %}
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+		<div id="fade"></div>
+		<section id="menu_item_section_name_4">
+			<h1 class="titulo">
+				Formulari d'alta nou usuari
+			</h1>
+
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+		</section>
+	</main>
+{% endblock %}
