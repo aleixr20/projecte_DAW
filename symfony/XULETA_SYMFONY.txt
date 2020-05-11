@@ -1,0 +1,63 @@
+symfony new nom_projecte
+symfony check:requirements
+
+
+composer require symfony/intl
+composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+composer require --dev orm-fixtures
+composer require annotations
+composer require twig
+composer require symfony/form
+composer require symfony/twig-bridge
+composer require symfony/validator
+
+
+https://symfony.com/doc/current/bundles/EasyAdminBundle/integration/ivoryckeditorbundle.html
+composer require friendsofsymfony/ckeditor-bundle
+php bin/console ckeditor:install
+php bin/console assets:install --symlink
+! [NOTE] Some assets were installed via copy. If you make changes to these assets you have to run this command again.
+
+# config/packages/easy_admin.yaml
+easy_admin:
+    design:
+        form_theme:
+            - '@EasyAdmin/form/bootstrap_4.html.twig'
+            - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+# config/packages/easy_admin.yaml
+easy_admin:
+    entities:
+        Product:
+            # ...
+            form:
+                fields:
+                    # ...
+                    - { property: 'description', type: 'fos_ckeditor' }
+
+
+
+git remote add origin https://github.com/rogercrdaw/prototip_frontend.git
+git push -u origin master
+
+ php bin/console about
+composer require logger
+symfony check:security
+
+php bin/console debug:autowiring
+git remote add origin https://github.com/rogercrdaw/prototip_frontend.git
+git push -u origin master
+git remote -v
+
+php bin/console doctrine:database:create
+php bin/console make:entity
+
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+
+php bin/console make:controller
+php bin/console make:crud
+
+php bin/console make:form

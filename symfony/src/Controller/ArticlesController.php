@@ -49,13 +49,29 @@ class ArticlesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $article->setDataPublicacio(new \DateTime());
-            $article->setUser($this->getUser());
-            $article->setSlug(strtolower(str_replace(" ", "-", $article->getTitol())));
+
+            $article->setTitol($form->get('titol')->getData())
+                ->setSubtitol($form->get('subtitol')->getData())
+                ->setDataPublicacio(new \DateTime());
+
+                //Aquest funcio s'ha de revisar
+                $text = $form->get('titol')->getData();
+                strtolower(str_replace(" ", "-",$text));
+                $article->setSlug($text);
+
+            $article->setUser($this->getUser())
+                ->setContingut($form->get('contingut')->getData());
+
+                $categoria = new Tema();
+                $categoria->setNom($form->get('tema')->getData());
+                $entityManager->persist($categoria);
+
+                $article->setTema($categoria);
+
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('article/new.html.twig', [
