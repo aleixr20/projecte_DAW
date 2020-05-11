@@ -5,8 +5,8 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/cache
-/vendor/
+/var
+/vendor
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -15,6 +15,5 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-var\cache
 .env
-src\Migrations\*
+/src/Migrations
