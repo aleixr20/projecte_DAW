@@ -61,6 +61,15 @@ class ArticlesController extends AbstractController
 
             $article->setUser($this->getUser())
                 ->setContingut($form->get('contingut')->getData());
+                
+            $inputTagMeta = $form->get('tag_meta')->getData();
+            $arrayTagMeta = explode(",", $inputTagMeta);
+
+            $inputTagWeb = $form->get('tag_web')->getData();
+            $arrayTagWeb = explode(",", $inputTagWeb);
+
+            $article->setTagMeta($arrayTagMeta)
+                ->setTagWeb($arrayTagWeb);
 
                 $categoria = new Tema();
                 $categoria->setNom($form->get('tema')->getData());
