@@ -1,11 +1,46 @@
 {% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('usermenu.html.twig') }}
+{% endblock %}
 
-{% block title %}New Article{% endblock %}
+{% block content %}
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+		<div id="fade"></div>
+		<section id="menu_item_section_name_4">
+			<h1 class="titulo">
+				Nou Article
+			</h1>
 
-{% block body %}
-    <h1>Create new Article</h1>
+            {{ form_start(formNouArticle) }}
+                <div class="form-group">
+                    {{ form_label(formNouArticle.titol) }}
+                    {{ form_widget(formNouArticle.titol) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formNouArticle.subtitol) }}
+                    {{ form_widget(formNouArticle.subtitol) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formNouArticle.tema) }}
+                    {{ form_widget(formNouArticle.tema) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formNouArticle.contingut) }}
+                    {{ form_widget(formNouArticle.contingut) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formNouArticle.tag_meta) }}
+                    {{ form_widget(formNouArticle.tag_meta) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(formNouArticle.tag_web) }}
+                    {{ form_widget(formNouArticle.tag_web) }}
+                </div>
+    {{ form_widget(formNouArticle) }}
+    <button class="btn btn-block btn-outline-secondary">{{ button_label|default('afegir article') }}</button>
+{{ form_end(formNouArticle) }}
 
-    {{ include('article/_form.html.twig') }}
-
-    <a href="{{ path('homepage') }}">back to list</a>
+		</section>
+	</main>
 {% endblock %}
