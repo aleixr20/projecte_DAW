@@ -185,11 +185,10 @@ class UserController extends AbstractController
 
     /**
      * METODE PER EDITAR EL PERFIL D'UN USUARI
-     * @Route("/profile", name="userProfileRedirect")
+     * @Route("/user/profile/edit", name="userProfileEdit")
      */
-    public function userProfileRedirect()
+    public function userProfileEdit()
     {
-
         /**
          * HI HA UNA ALGORITME TIPIC PER ALS INSERT/UPDATE
          * ES SEMPRE EL MATEIXA (COPIAR DEL FORM DE REGISTRE PER EXEMPLE)

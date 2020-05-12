@@ -93,6 +93,26 @@ class User implements UserInterface
      */
     private $data_registre;
 
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $github;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $linkedin;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $twitter;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $facebook;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -358,6 +378,54 @@ class User implements UserInterface
     public function setDataRegistre(\DateTimeInterface $data_registre): self
     {
         $this->data_registre = $data_registre;
+
+        return $this;
+    }
+
+    public function getGithub(): ?string
+    {
+        return $this->github;
+    }
+
+    public function setGithub(?string $github): self
+    {
+        $this->github = $github;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): self
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
 
         return $this;
     }
