@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('homemenu.html.twig') }}
+{% endblock %}
+{% block content %}
+
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+
+		<div id="fade"></div>
+		{% for section in sections %}
+
+			<section>
+				<table class="table">
+					{%for cat in section %}
+						<tr>
+							<td>
+								cat.nom</td>
+							<td>
+								cat.logo
+							</td>
+						</tr>
+					{% endfor %}
+
+				</section>
+			{% endfor %}
+
+		</main>
+	{% endblock %}
