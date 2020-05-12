@@ -31,6 +31,10 @@ class ArticlesFixtures extends Fixture
         ->setNom('Aleix')->setCognom('Revesado')->setCodiPostal('08400')
         ->setNomUsuari('aleixMaki')->setDataRegistre(new DateTime())
          ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"));
+
+        $roles = ["ROLE_ADMIN"];
+        $admin->setRoles($roles);
+
          $manager->persist($admin);
         
         $categoria_php = new Categoria();

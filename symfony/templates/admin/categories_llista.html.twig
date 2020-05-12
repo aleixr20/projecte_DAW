@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block navbar %}
-	{{ include('homemenu.html.twig') }}
 {% endblock %}
 {% block content %}
 
@@ -15,13 +14,13 @@
 					{%for cat in section %}
 						<tr>
 							<td>
-								cat.nom</td>
+								{{cat.nom}}</td>
 							<td>
-								cat.logo
+								{{cat.logo}}
 							</td>
 						</tr>
 					{% endfor %}
-
+				</table>
 				</section>
 			{% endfor %}
 
