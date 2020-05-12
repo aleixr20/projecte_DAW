@@ -39,7 +39,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="id_user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
      */
     private $articles;
 

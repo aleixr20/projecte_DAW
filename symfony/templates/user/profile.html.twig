@@ -10,7 +10,11 @@
     <section id="menu_item_section_name_4">
         <div class="row" id="profile-content">
             <div class="col-4 text-center">
-                <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" id="profile-img">
+                {% if app.user and user.username == app.user.username %}
+                    <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" id="img-modif" class="profile-img">
+                {% else %}
+                    <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" class="profile-img">
+                {% endif %}
             </div>
             <div class="col-7">
                 <h2>{{ user.nom }} {{ user.cognom }} <span id="profile-username">{{ user.username }}</span></h2>
@@ -37,7 +41,7 @@
                 {% endif %}
             </div>
             <div class="col-1">
-            {% if user.username == app.user.username %}
+            {% if app.user and user.username == app.user.username %}
             <button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Edita
             </button>
@@ -59,14 +63,14 @@
         </div>
         <hr>
             <div class="col-12 profile-box">
-                <h2><strong>5</strong></h2>                    
+                <h2><strong>{{ user.articles|length }}</strong></h2>                    
                 <p><small>Articles</small></p>
                 <i class="fa fa-thumbs-up"> 50</i>
                 <i class="fa fa-thumbs-down"> 10</i>
             </div>
             </br>
             <div class="col-12 profile-box">
-                <h2><strong> 30K </strong></h2>                    
+                <h2><strong> {{ user.comentaris|length }} </strong></h2>                    
                 <p><small>Comentaris</small></p>
                 <i class="fa fa-thumbs-up"> 50</i>
                 <i class="fa fa-thumbs-down"> 10</i>

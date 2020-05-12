@@ -17,6 +17,8 @@ use Error;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
+use App\Form\UserType;
+use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
@@ -166,45 +168,45 @@ class UserController extends AbstractController
     }
 
     /**
-     * AQUEST METODE EL TENIAS AL AppController (repetit)
-     * 
-     * @Route("/profile/{userName}", name="userProfile2")
-     */
-    public function userProfile2($userName)
-    {
-        if ($this->getUser()->getEmail() != $userName) {
-            return $this->redirectToRoute('index');
-        }
-
-        return $this->render('app/index.html.twig', [
-            'controller_name' => $userName,
-        ]);
-    }
-
-
-
-    /**
      * METODE PER EDITAR EL PERFIL D'UN USUARI
      * @Route("/user/profile/edit", name="userProfileEdit")
      */
-    public function userProfileEdit()
+    public function userProfileEdit(Request $request)
     {
-        /**
-         * HI HA UNA ALGORITME TIPIC PER ALS INSERT/UPDATE
-         * ES SEMPRE EL MATEIXA (COPIAR DEL FORM DE REGISTRE PER EXEMPLE)
-         * 
-         * 1- CREAR NOU USUARI / FER GET DE TOTS ELS VALORS DEL USUARI
-         * 2- CREAR FORMULARI
-         * 3- if summited -> USER->set.... + manager->flush
-         * 4- else RENDER FORM
-         */
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
-        // if (!$this->getUser()) {
-        //     return $this->redirectToRoute('app_login');
-        // }
+        $user = $this->getUser();
 
-        // return $this->redirectToRoute('userProfile', [
-        //     'userName' => $this->getUser()->getEmail()
-        // ]);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('userProfile');
+        }
+
+
+        return $this->render('user/edit.html.twig', [
+            'editForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * AQUEST METODE EL TENIAS AL AppController (repetit)
+     * 
+     * @Route("/user/profile/{userName}", name="otherUserProfile")
+     */
+    public function userProfile2($userName, UserRepository $userRepository)
+    {
+        $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
+
+        return $this->render('user/profile.html.twig', [
+            'user' => $user,
+        ]);
     }
 }
