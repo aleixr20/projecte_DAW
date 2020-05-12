@@ -58,7 +58,10 @@ class ArticlesFixtures extends Fixture
         $categoria_java->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
         $manager->persist($categoria_java);
 
-        
+        $nova_categoria = new Categoria();
+        $nova_categoria->setNom('afegir nova categoria');
+        $nova_categoria->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($nova_categoria);
 
         $manager->flush();
 

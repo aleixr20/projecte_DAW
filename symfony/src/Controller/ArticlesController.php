@@ -9,8 +9,8 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
 
-use App\Entity\Tema;
-use App\Repository\TemaRepository;
+use App\Entity\Categoria;
+//use App\Repository\TemaRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 //Faltaran afegir el USE dels components de formularis
 
@@ -76,7 +76,19 @@ class ArticlesController extends AbstractController
                 // $categoria->setNom($form->get('tema')->getData());
                 // $entityManager->persist($categoria);
 
-                $article->setCategoria($form->get('categoria')->getData());
+                $categoria = $form->get('categoria')->getData();
+
+            if($categoria->getNom() == "afegir nova categoria"){
+
+                $afegirCategoria = new Categoria();
+                $afegirCategoria->setNom($form->get('nova_categoria')->getData());
+                $afegirCategoria->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+                $entityManager->persist($afegirCategoria);
+
+                $categoria=$afegirCategoria;
+            }
+
+            $article->setCategoria($categoria);
 
             $entityManager->persist($article);
             $entityManager->flush();

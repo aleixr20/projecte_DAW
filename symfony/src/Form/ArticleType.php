@@ -72,12 +72,11 @@ class ArticleType extends AbstractType
                 //'choises' => $this->getNom()
             ])
 
-            ->add('crear_categoria', TextType::class, [
+            ->add('nova_categoria', TextType::class, [
                 'label' => 'Nova categoria',  
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
             ])
-
         ;
     }
 
