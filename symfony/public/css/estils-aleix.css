@@ -1,0 +1,26 @@
+#profile-username{
+    font-size: 1rem;
+}
+#profile-img{
+    height: 14rem;
+}
+#profile-content{
+    margin-top: 10vh;
+}
+
+.fa{
+    font-size: 2vw;
+    margin-right: 1vw;
+}
+
+.profile-box{
+    padding: 3vw;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 50px;
+}
+
+.profile-boxes{
+    margin-top: 5vh;
+    margin-left: 0.5vw;
+}

@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+	{{ include('usermenu.html.twig') }}
+{% endblock %}
+
+{% block content %}
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+<main>
+    <section id="menu_item_section_name_4">
+        <div class="row" id="profile-content">
+            <div class="col-4 text-center">
+                <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" id="profile-img">
+            </div>
+            <div class="col-8">
+                <h2>{{ user.nom }} {{ user.cognom }} <span id="profile-username">{{ user.username }}</span></h2>
+                <p>{{ user.email }}</p>
+                {% if user.genere == 'masc' %}
+                    <i class="fa fa-mars"></i>
+                {% elseif user.genere == 'fem' %}
+                    <i class="fa fa-venus"></i>
+                {% endif %}
+                {% if user.getEdat() %}
+                    <p>{{ user.getEdat() }}</span> anys</p>
+                {% endif %}
+                <i class="fa fa-github-square"></i>
+                <i class="fa fa-linkedin-square"></i>
+                <i class="fa fa-twitter-square"></i>
+                <i class="fa fa-facebook-square"></i>
+            </div>               
+        </div>
+        <hr>    
+        <div class="row profile-boxes">
+            <div class="col-5 profile-box">
+                <h2><strong> 30K </strong></h2>                    
+                <p><small>Comentaris</small></p>
+                <i class="fa fa-thumbs-up"> 50</i>
+                <i class="fa fa-thumbs-down"> 10</i>
+                {# <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button> #}
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-5 profile-box">
+                <h2><strong>5</strong></h2>                    
+                <p><small>Articles</small></p>
+                <i class="fa fa-thumbs-up"> 50</i>
+                <i class="fa fa-thumbs-down"> 10</i>
+                {# <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button> #}
+            </div>
+            {# <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong>43</strong></h2>                    
+                <p><small>Snippets</small></p>
+                <div class="btn-group dropup btn-block">
+                    <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu text-left" role="menu">
+                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                        <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
+                    </ul>
+                </div>
+            </div> #}
+        </div>
+    </section>
+</main>
+{% endblock %}
