@@ -59,11 +59,11 @@ class Article
      */
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tema", inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $tema;
+    // /**
+    //  * @ORM\ManyToOne(targetEntity="App\Entity\Tema", inversedBy="articles")
+    //  * @ORM\JoinColumn(nullable=true)
+    //  */
+    // private $tema;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comentari", mappedBy="article")
@@ -74,6 +74,12 @@ class Article
      * @ORM\Column(type="string", length=99999)
      */
     private $contingut;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categoria", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Categoria;
 
     public function __construct()
     {
@@ -181,17 +187,17 @@ class Article
         return $this;
     }
 
-    public function getTema(): ?Tema
-    {
-        return $this->tema;
-    }
+    // public function getTema(): ?Tema
+    // {
+    //     return $this->tema;
+    // }
 
-    public function setTema(?Tema $tema): self
-    {
-        $this->tema = $tema;
+    // public function setTema(?Tema $tema): self
+    // {
+    //     $this->tema = $tema;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Comentari[]
@@ -232,6 +238,18 @@ class Article
     public function setContingut(string $contingut): self
     {
         $this->contingut = $contingut;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?Categoria
+    {
+        return $this->Categoria;
+    }
+
+    public function setCategoria(?Categoria $Categoria): self
+    {
+        $this->Categoria = $Categoria;
 
         return $this;
     }

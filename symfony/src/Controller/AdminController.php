@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Categoria;
 
 class AdminController extends AbstractController
 {
@@ -27,5 +28,20 @@ class AdminController extends AbstractController
         // return $this->render('admin/index.html.twig', [
         //     'controller_name' => 'AdminController',
         // ]);
+    }
+
+    /**
+     * @Route("/admin/gestorcategories", name="gestorcategories")
+     */
+    public function llistarCategories()
+    {
+        $repository = $this->getDoctrine()->getRepository(Categoria::class);
+        $categories = $repository->findAll();
+
+        $sections = [$categories];
+
+        return $this->render('admin/categories_llista.html.twig', [
+            'sections' => $sections,
+        ]);
     }
 }
