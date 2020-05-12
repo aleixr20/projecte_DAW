@@ -35,7 +35,7 @@ nav {
     bottom: 1%;
     left: 0;
     z-index: 100;
-    transition-duration: 1s;
+    transition-duration: 0.68s;
 }
 
 #hamburgesa {
@@ -99,7 +99,7 @@ nav {
     width: 100%;
     height: 100%;
     background-color: transparent;
-    transition-duration: 1s;
+    transition-duration: 0.68s;
     position: fixed;
     z-index: -1;
 }
@@ -110,6 +110,7 @@ section {
     min-height: 100vh;
     padding-left: 27%;
     padding-right: 16%;
+    margin-bottom: 5em;
 }
 
 .titulo {
@@ -200,6 +201,7 @@ section {
     section {
         padding-left: 23%;
         padding-right: 4%;
+        margin-bottom: 5em;
     }
     .titulo {
         font-size: large;
