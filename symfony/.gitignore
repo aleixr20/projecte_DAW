@@ -15,6 +15,5 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-var\cache
 .env
-src\Migrations\*
+/src/Migrations
