@@ -72,11 +72,11 @@ class ArticlesController extends AbstractController
             $article->setTagMeta($arrayTagMeta)
                 ->setTagWeb($arrayTagWeb);
 
-                $categoria = new Tema();
-                $categoria->setNom($form->get('tema')->getData());
-                $entityManager->persist($categoria);
+                // $categoria = new Tema();
+                // $categoria->setNom($form->get('tema')->getData());
+                // $entityManager->persist($categoria);
 
-                $article->setTema($categoria);
+                $article->setCategoria($form->get('categoria')->getData());
 
             $entityManager->persist($article);
             $entityManager->flush();

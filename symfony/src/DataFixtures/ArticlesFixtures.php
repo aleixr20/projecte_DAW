@@ -8,8 +8,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 use App\Entity\User;
-use App\Entity\Tema;
+//use App\Entity\Tema;
 use App\Entity\Article;
+use App\Entity\Categoria;
+
 use DateTime;
 
 class ArticlesFixtures extends Fixture
@@ -24,14 +26,41 @@ class ArticlesFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        // $admin = new User();
-        // $admin->setEmail('admin@admin.com')
-        // ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"));
-        // $manager->persist($admin);
+         $admin = new User();
+         $admin->setEmail('admin@admin.com')
+        ->setNom('Aleix')->setCognom('Revesado')->setCodiPostal('08400')
+        ->setNomUsuari('aleixMaki')->setDataRegistre(new DateTime())
+         ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"));
+         $manager->persist($admin);
         
-        // $categoria_php = new Tema();
-        // $categoria_php->setNom('PHP');
-        // $manager->persist($categoria_php);
+        $categoria_php = new Categoria();
+        $categoria_php->setNom('PHP');
+        $categoria_php->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($categoria_php);
+
+        $categoria_css = new Categoria();
+        $categoria_css->setNom('CSS');
+        $categoria_css->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($categoria_css);
+
+        $categoria_html = new Categoria();
+        $categoria_html->setNom('HTML');
+        $categoria_html->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($categoria_html);
+
+        $categoria_js = new Categoria();
+        $categoria_js->setNom('JS');
+        $categoria_js->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($categoria_js);
+
+        $categoria_java = new Categoria();
+        $categoria_java->setNom('Java');
+        $categoria_java->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $manager->persist($categoria_java);
+
+        
+
+        $manager->flush();
 
         // $categoria_css = new Tema();
         // $categoria_css->setNom('CSS');

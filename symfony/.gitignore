@@ -17,4 +17,3 @@
 ###< symfony/phpunit-bridge ###
 .env
 /src/Migrations
-

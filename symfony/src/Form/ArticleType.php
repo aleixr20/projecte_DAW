@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\Tema;
+use App\Entity\Categoria;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -66,10 +66,16 @@ class ArticleType extends AbstractType
                 'mapped' => false,
             ])
 
-            ->add('tema', EntityType::class, [
+            ->add('categoria', EntityType::class, [
                 'attr' => ['class' => 'form-control'],
-                'class' => Tema::class,
-               // 'choises' => $temas->getNom()
+                'class' => Categoria::class,
+                //'choises' => $this->getNom()
+            ])
+
+            ->add('crear_categoria', TextType::class, [
+                'label' => 'Nova categoria',  
+                'attr' => ['class' => 'form-control'],
+                'mapped' => false,
             ])
 
         ;
