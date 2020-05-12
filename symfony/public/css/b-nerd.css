@@ -46,7 +46,7 @@ nav {
     top: 16vh;
     padding: 0.6em;
     list-style-type: none;
-    _display: none;
+    display: none;
 }
 
 #menu {
@@ -158,9 +158,13 @@ section {
 
 /* MEDIA QUERIES */
 
-@media (max-width: 1200px) {
+
+/* @media (max-width: 1200px) {
     .menu-icon {
         display: none;
+    }
+    #hamburguesa {
+        display: block;
     }
 }
 
@@ -171,22 +175,13 @@ section {
     .menu-icon {
         display: none;
     }
-}
+} */
 
-@media (max-width: 768px) {
-    section {
-        padding-left: 29%;
-    }
-    .menu-icon {
-        display: none;
-    }
-}
-
-@media (max-width: 576px) {
+@media only screen and (max-width: 576px) {
     .primary-menu {
         width: 4.5em;
     }
-    #hamburguesa {
+    #hamburgesa {
         display: block;
     }
     .menu-link-visible {
@@ -212,3 +207,16 @@ section {
         font-size: small;
     }
 }
+
+
+/* @media only screen and (min-width: 576px) {
+    section {
+        padding-left: 29%;
+    }
+    .menu-icon {
+        display: none;
+    }
+    #hamburguesa {
+        display: none;
+    }
+} */

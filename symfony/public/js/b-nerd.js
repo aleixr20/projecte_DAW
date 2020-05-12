@@ -4,7 +4,7 @@ let toggleMenu;
 window.onload = function() {
 
 
-    document.getElementById("hamburgesa").addEventListener("click", function() {
+    let burger = document.getElementById("hamburgesa").addEventListener("click", function() {
         let menu_lateral = document.getElementsByClassName("primary-menu")
         let shadow = document.getElementById("fade");
         let links1 = document.getElementsByClassName("menu-link-visible");
