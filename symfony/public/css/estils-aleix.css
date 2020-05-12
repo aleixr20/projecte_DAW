@@ -1,31 +1,43 @@
-#profile-username{
+#profile-username {
     font-size: 1rem;
 }
-.profile-img{
+
+.profile-img {
+    /* ES NOMES ORIENTATIU
+    JO TIRARIA PER ALGO RODO
+    I AL LATERAL ON HI HA EL MENU
+    */
     height: 14rem;
+    border-radius: 50%;
 }
-#profile-content{
+
+.profile-img-icon {
+    width: 2rem;
+    border-radius: 50%;
+}
+
+#profile-content {
     margin-top: 10vh;
 }
 
-.fa{
+.fa {
     font-size: 2vw;
     margin-right: 1vw;
     color: #666;
 }
 
-.profile-box{
+.profile-box {
     padding: 3vw;
     text-align: center;
     border: 1px solid grey;
     border-radius: 50px;
 }
 
-.profile-boxes{
+.profile-boxes {
     margin-top: 5vh;
     margin-left: 0.5vw;
 }
 
-.fa-white{
+.fa-white {
     color: white;
 }

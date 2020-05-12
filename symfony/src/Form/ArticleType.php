@@ -76,6 +76,7 @@ class ArticleType extends AbstractType
                 'label' => 'Nova categoria',  
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
+                'required' => false,
             ])
         ;
     }

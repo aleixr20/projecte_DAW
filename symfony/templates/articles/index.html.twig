@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block navbar %}
-	{{ include('usermenu.html.twig') }}
+	{{ include('articles/articlemenu.html.twig') }}
 {% endblock %}
 {% block content %}
 
@@ -8,21 +8,19 @@
 	<main>
 
 		<div id="fade"></div>
-		{% for section in articles %}
 
-			<section id="{{section.slug}}">
-				<h1 class="titulo">{{section.titol}}</h1>
-				<h3 class="text-secondary">{{section.subtitol}}</h3>
-				<div class="text">
-					{{section.contingut}}</div>
+			<section id="{{article.slug}}">
+				<h1 class="titulo">{{article.titol}}</h1>
+				<h3 class="text-secondary">{{article.subtitol}}</h3>
+				<div class="content">
+					{{article.contingut}}</div>
 				<ul>
-					<li>Tema:&nbsp;{{section.tema.nom}}</li>
-					<li>Autor:&nbsp;{{section.user.email}}</li>
+					<li>Categoria:&nbsp;{{article.categoria.nom}}</li>
+					<li>Autor:&nbsp;{{article.user.username}}</li>
 					{# <li>Data Publicacio&nbsp;{{section.data_publicacio|date("d/m/Y")}}</li> #}
-					<li>Slug:&nbsp;{{section.tema.nom}}</li>
+					<li>Slug:&nbsp;{{article.slug}}</li>
 
 				</section>
-			{% endfor %}
 
 		</main>
 	{% endblock %}

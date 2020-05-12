@@ -29,7 +29,7 @@ p {
 
 nav {
     border-right: 3px solid red;
-    width: 25vw;
+    width: 16vw;
     position: fixed;
     top: 1%;
     bottom: 1%;
@@ -108,7 +108,7 @@ main {}
 
 section {
     min-height: 100vh;
-    padding-left: 27%;
+    padding-left: 18%;
     padding-right: 16%;
     margin-bottom: 5em;
 }
@@ -123,10 +123,41 @@ section {
     margin-bottom: 20vh;
 }
 
+ul {
+    padding: 0.66em 1.6em;
+}
+
 .text {
     color: #666;
     position: sticky;
     top: 25vh;
+}
+
+#novaCategoria {
+    transition-duration: 0.5s;
+}
+
+.article_titol a {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: unset;
+    color: #999;
+    text-decoration: none;
+}
+
+.article_subtitol {}
+
+#article_autor {
+    position: absolute;
+    right: 0;
+    top: 66vh;
+    padding: 0.5em;
+    list-style-type: none;
+    text-align: right;
+}
+
+#article_autor .menu-icon {
+    display: block;
 }
 
 
@@ -158,8 +189,7 @@ section {
 
 /* MEDIA QUERIES */
 
-
-/* @media (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
     .menu-icon {
         display: none;
     }
@@ -168,14 +198,26 @@ section {
     }
 }
 
-@media (max-width: 992px) {
+@media only screen and (max-width: 992px) {
     section {
-        padding-left: 28%;
+        padding-left: 19%;
     }
     .menu-icon {
         display: none;
     }
-} */
+}
+
+@media only screen and (max-width: 576px) {
+    section {
+        padding-left: 20%;
+    }
+    .menu-icon {
+        display: none;
+    }
+    #hamburguesa {
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 576px) {
     .primary-menu {
@@ -207,16 +249,3 @@ section {
         font-size: small;
     }
 }
-
-
-/* @media only screen and (min-width: 576px) {
-    section {
-        padding-left: 29%;
-    }
-    .menu-icon {
-        display: none;
-    }
-    #hamburguesa {
-        display: none;
-    }
-} */

@@ -6,6 +6,15 @@
 			</a>
 		</li>
 	</ul>
+		<ul id="article_autor">
+		<li>
+			<li>
+				<a class="menu-icon" href="{{ path('userProfileEdit')}}">
+					<img src="/img/imatges_perfil/{{ asset(article.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
+				</a>
+				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{article.user.username}}</a>
+			</li>
+	</ul>
 	<ul id="menu">
 		<li>
 			<a class="menu-icon" href="{{ path('homepage') }}">
@@ -14,12 +23,12 @@
 			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICIO</a>
 		</li>
 		{% if app.user %}
-			<li>
+			<!-- <li>
 				<a class="menu-icon" href="{{ path('userProfileEdit')}}">
 					<img src="/img/imatges_perfil/{{ asset(user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
 				</a>
 				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{user.username}}</a>
-			</li>
+			</li> -->
 			<li>
 				<a class="menu-icon" href="{{ path('app_logout')}}">
 					<i class="fa fa-user-circle"></i>

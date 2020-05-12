@@ -25,6 +25,25 @@ class RegistrationFormType extends AbstractType
             ->add('cognom')
             ->add('email')
             ->add('nom_usuari')
+
+            //he tornat a afegir aquest troç
+            //Si els vols treure o fer d'un altre manera, ara tira            
+            ->add('imatge', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2000k',
+                        'mimeTypes' => [
+                            'image/png', 
+                            'image/jpeg',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Puja una imatge vàlida (PNG, JPEG o GIF)',
+                    ])
+                ],
+            ])
+            
             ->add('data_naixament', BirthdayType::class, [
                 'required'=> false,
                 'placeholder' => [

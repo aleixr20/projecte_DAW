@@ -3,7 +3,6 @@ let toggleMenu;
 
 window.onload = function() {
 
-
     let burger = document.getElementById("hamburgesa").addEventListener("click", function() {
         let menu_lateral = document.getElementsByClassName("primary-menu")
         let shadow = document.getElementById("fade");
@@ -36,11 +35,24 @@ window.onload = function() {
                 toggleMenu = setTimeout(hideMenu(links2), 2000);
                 toggleMenu = setTimeout(showMenu(icons), 2000);
             } else {
-                menu_lateral[0].style.width = "25vw";
+                menu_lateral[0].style.width = "16vw";
             }
             show = true;
         }
     });
+
+    if (this.document.URL == "http://localhost:8000/new") {
+        $('#article_categoria').children('option').click(function() {
+            if ($(this).html() == 'afegir nova categoria') {
+                $('#novaCategoria').show();
+                $('#article_nova_categoria').attr("required", "required");
+
+            } else {
+                $('#novaCategoria').hide();
+                $('#article_nova_categoria').val("").removeAttr("required");
+            }
+        });
+    }
 }
 
 function showMenu(elements) {

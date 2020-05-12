@@ -11,7 +11,8 @@
         <div class="row" id="profile-content">
             <div class="col-4 text-center">
                 {% if app.user and user.username == app.user.username %}
-                    <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" id="img-modif" class="profile-img">
+                {# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
+                    <img src="/img/imatges_perfil/{{ asset(user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img">
                 {% else %}
                     <img src="/img/imatges_perfil/{{ user.imatge }}" alt="imatge de perfil" class="profile-img">
                 {% endif %}

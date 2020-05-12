@@ -57,8 +57,8 @@ class ArticlesController extends AbstractController
 
                 //Aquest funcio s'ha de revisar
                 $text = $form->get('titol')->getData();
-                strtolower(str_replace(" ", "-",$text));
-                $article->setSlug($text);
+                $slug = strtolower(str_replace(" ", "-",$text));
+                $article->setSlug($slug);
 
             $article->setUser($this->getUser())
                 ->setContingut($form->get('contingut')->getData());
@@ -72,9 +72,6 @@ class ArticlesController extends AbstractController
             $article->setTagMeta($arrayTagMeta)
                 ->setTagWeb($arrayTagWeb);
 
-                // $categoria = new Tema();
-                // $categoria->setNom($form->get('tema')->getData());
-                // $entityManager->persist($categoria);
 
                 $categoria = $form->get('categoria')->getData();
 
@@ -140,33 +137,32 @@ class ArticlesController extends AbstractController
     //     ]);
     // }
 
-    // /**
-    //  * @Route("/in{tema}/{slug}", name="slug", methods={"GET"})
-    //  */
-    // public function slug($tema, $slug, ArticleRepository $articleRepository)
-    // {
-    //     if ($tema == 'login') {
-    //         // redirects to the "homepage" route
-    //         return $this->redirectToRoute('app_login');
-    //     }
+    /**
+     * @Route("/post/{slug}", name="slug", methods={"GET"})
+     */
+    public function slug($slug, ArticleRepository $articleRepository)
+    {
 
-    //     return $this->render('article/show.html.twig', [
-    //         'article' => $articleRepository->findOneBy(array('slug' => $slug)),
-    //     ]);
-    // }
+        $post_repository = $this->getDoctrine()->getRepository(Article::class);
+        $post = $post_repository->findOneBy(array('slug' => $slug));
+
+        return $this->render('articles/index.html.twig', [
+            'article' => $post
+        ]);
+    }
 
     /**
      * @Route("/inPHP", name="inPHP")
      */
     public function getAll()
     {
-        $tema_repository = $this->getDoctrine()->getRepository(Tema::class);
-        $tema = $tema_repository->findBy(['nom' => "PHP"]);
+        $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
+        $cat = $cat_repository->findBy(['nom' => "PHP"]);
 
         $post_repository = $this->getDoctrine()->getRepository(Article::class);
-        $posts = $post_repository->findBy(['tema' => $tema[0]]);
+        $posts = $cat[0]->getArticles();
 
-        return $this->render('articles/index.html.twig', [
+        return $this->render('articles/llista_articles.html.twig', [
             'articles' => $posts,
         ]);
     }

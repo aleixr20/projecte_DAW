@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('usermenu.html.twig') }}
+{% endblock %}
+{% block content %}
+
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+
+		<div id="fade"></div>
+		<section>
+			<div style="padding-top:15vh">
+				{% for article in articles %}
+
+					<h2 class="article_titol">
+						<a href="/post{{asset(article.slug)}}">{{article.titol}}</a>
+					</h2>
+					<h4 class="article_subtitol">{{article.subtitol}}</h4>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+{% endblock %}
