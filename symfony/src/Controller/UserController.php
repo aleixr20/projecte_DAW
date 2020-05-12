@@ -80,7 +80,7 @@ class UserController extends AbstractController
 
                 // Move the file to the directory where imatges are stored
                 try {
-                    $imatgePerfil->move('../img/imatges_perfil', $nouNomArxiu);
+                    $imatgePerfil->move('/img/imatges_perfil', $nouNomArxiu);
                 } catch (FileException $e) {
                     throw new Error($e);
                 }
@@ -150,23 +150,23 @@ class UserController extends AbstractController
     /**
      * METODE PER VEURE EL PERFIL D'UN USUARI
      * ELS SEUS POSTS, COMENTARIS, VOTS +/-, LINKEDIN....
-     * @Route("/user/profile", name="userProfileRedirect")
+     * @Route("/user/profile", name="userProfile")
      */
     public function userProfile()
     {
-        // if (!$this->getUser()) {
-        //     return $this->redirectToRoute('app_login');
-        // }
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
-        // return $this->redirectToRoute('userProfile', [
-        //     'userName' => $this->getUser()->getEmail()
-        // ]);
+        return $this->render('user/profile.html.twig', [
+            'user' => $this->getUser()
+        ]);
     }
 
     /**
      * AQUEST METODE EL TENIAS AL AppController (repetit)
      * 
-     * @Route("/profile/{userName}", name="userProfile")
+     * @Route("/profile/{userName}", name="userProfile2")
      */
     public function userProfile2($userName)
     {

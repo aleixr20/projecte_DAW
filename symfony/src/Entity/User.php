@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -270,6 +271,23 @@ class User implements UserInterface
         $this->data_naixament = $data_naixament;
 
         return $this;
+    }
+
+    public function getEdat(): ?int
+    {
+        if($this->data_naixament == null){
+            return null;
+        }
+
+        $data_naixament = $this->data_naixament;
+        $dataStr = $data_naixament->format('Y-m-d');
+        list($any,$mes,$dia) = explode("-",$dataStr);
+        $any_diferencia  = date("Y") - $any;
+        $mes_diferencia = date("m") - $mes;
+        $dia_diferencia   = date("d") - $dia;
+        if ($dia_diferencia < 0 || $mes_diferencia < 0)
+            $any_diferencia--;
+        return $any_diferencia;
     }
 
     public function getGenere(): ?string
