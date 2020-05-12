@@ -34,15 +34,6 @@ class RegistrationFormType extends AbstractType
                 ],
                 'format' => 'dd  MM  yyyy'
             ])
-            ->add('genere', ChoiceType::class, [
-                'placeholder' => '',
-                'required' => false,
-                'choices' => [
-                    'Masculí' => 'masc',
-                    'Femení' => 'fem',
-                    'Altres' => 'altres',
-                ]
-            ])
             ->add('imatge', FileType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -58,7 +49,6 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('codi_postal')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

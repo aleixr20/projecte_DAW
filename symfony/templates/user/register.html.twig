@@ -38,10 +38,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				{{ form_label(registrationForm.codi_postal, 'Codi Postal') }}
-				{{ form_widget(registrationForm.codi_postal, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="form-group">
 				{{ form_label(registrationForm.imatge, 'Imatge de perfil') }}
 				{{ form_widget(registrationForm.imatge, {'attr': {'class': 'form-control'}}) }}
 			</div>
@@ -49,10 +45,6 @@
 				{# HAURIEM DE CREAR UN DATE PICKER #}
 				{{ form_label(registrationForm.data_naixament, 'Data de naixament') }}
 				{{ form_widget(registrationForm.data_naixament, {'attr': {'class': 'form-control'}}) }}
-			</div>
-			<div class="form-group">
-				{{ form_label(registrationForm.genere, 'Génere') }}
-				{{ form_widget(registrationForm.genere, {'attr': {'class': 'custom-select'}}) }}
 			</div>
 			{# <div class="form-group">
 				{{ form_label(registrationForm.roles) }}

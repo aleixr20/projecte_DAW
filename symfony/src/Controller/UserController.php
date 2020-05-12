@@ -80,7 +80,7 @@ class UserController extends AbstractController
 
                 // Move the file to the directory where imatges are stored
                 try {
-                    $imatgePerfil->move('/img/imatges_perfil', $nouNomArxiu);
+                    $imatgePerfil->move('img\imatges_perfil', $nouNomArxiu);
                 } catch (FileException $e) {
                     throw new Error($e);
                 }
@@ -88,6 +88,8 @@ class UserController extends AbstractController
                 // updates the 'imatge' property to store the image file name
                 // instead of its contents
                 $user->setImatge($nouNomArxiu);
+            }else{
+                $user->setImatge('default.jpg');
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -159,7 +161,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/profile.html.twig', [
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
         ]);
     }
 
