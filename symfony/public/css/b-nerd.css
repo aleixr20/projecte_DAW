@@ -35,7 +35,7 @@ ul {
 
 nav {
     border-right: 3px solid red;
-    width: 16vw;
+    width: 20vw;
     position: fixed;
     top: 1%;
     bottom: 1%;
@@ -126,7 +126,7 @@ main {}
 
 section {
     min-height: 100vh;
-    padding-left: 18%;
+    padding-left: 22%;
     padding-right: 16%;
     margin-bottom: 5em;
 }
