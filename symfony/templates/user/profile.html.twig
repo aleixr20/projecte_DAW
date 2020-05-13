@@ -29,16 +29,20 @@
                     <p>{{ user.getEdat() }}</span> anys</p>
                 {% endif %}
                 {% if user.github %}
-                    <a href="{{ user.github }}" target="_blank"><i class="fa fa-github-square"></i></a>
+                {% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
+                    <a href="{{ urlGithub }}" target="_blank"><i class="fa fa-github-square"></i></a>
                 {% endif %}
                 {% if user.linkedin %}
-                    <a href="{{ user.linkedin }}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                {% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %}
+                    <a href="{{ urlLinkedin }}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
                 {% endif %}
                 {% if user.twitter %}
-                    <a href="{{ user.twitter }}" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                {% set urlTwitter = user.twitter | slice(0,4) == 'http' ? user.twitter : 'http://' ~ user.twitter %}
+                    <a href="{{ urlTwitter }}" target="_blank"><i class="fa fa-twitter-square"></i></a>
                 {% endif %}
                 {% if user.facebook %}
-                    <a href="{{ user.facebook }}" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                {% set urlFacebook = user.facebook | slice(0,4) == 'http' ? user.facebook : 'http://' ~ user.facebook %}
+                    <a href="{{ urlFacebook }}" target="_blank"><i class="fa fa-facebook-square"></i></a>
                 {% endif %}
             </div>
             <div class="col-md-1 col-sm-12">
