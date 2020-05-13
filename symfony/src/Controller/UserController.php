@@ -201,9 +201,14 @@ class UserController extends AbstractController
      * 
      * @Route("/user/profile/{userName}", name="otherUserProfile")
      */
-    public function userProfile2($userName, UserRepository $userRepository)
+    public function otherUserProfile($userName, UserRepository $userRepository)
     {
-        $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
+        if($userRepository->findOneBy(['nom_usuari' => $userName])){
+            $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
+        }else{
+            throw new Error("No existeix l'usuari");
+        }
+        
 
         return $this->render('user/profile.html.twig', [
             'user' => $user,

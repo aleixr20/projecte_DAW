@@ -32,7 +32,7 @@ class ArticlesFixtures extends Fixture
             ->setNom('Aleix')->setCognom('Revesado')->setCodiPostal('08400')
             ->setNomUsuari('aleixMaki')->setDataRegistre(new DateTime())
             ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"))
-            ->setImatge('62-5ebb15c428d2f.jpeg');
+            ->setImatge('default.jpg');
 
         $roles = ["ROLE_ADMIN"];
         $admin->setRoles($roles);
