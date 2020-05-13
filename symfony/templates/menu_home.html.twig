@@ -1,0 +1,61 @@
+<nav class="primary-menu">
+	<ul id="menu-top">
+
+		<li id="search">
+			<a>
+				<i class="fa fa-search"></i>
+			</a>
+		</li>
+		<li id="hamburgesa">
+			<a>
+				<i class="fa fa-bars"></i>
+			</a>
+		</li>
+	</ul>
+	<ul
+		id="menu-bottom">
+
+		<!--SI HI HA UN USUARI LOGGEJAT - primer mostrar el seu perfil-->
+		{% if app.user %}
+			<li>
+				<!--SI L'USUARI TE IMATGE DE PERFIL-->
+				{% if app.user.imatge %}
+					<a class="menu-link-hidden" href="{{ path('userProfile')}}">
+						<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="menu-user-icon">
+						<br/>
+						{{app.user.username}}
+					</a>
+				{% else %}
+					<a class="menu-user-icon" href="{{ path('userProfile')}}">
+						<i class="fa fa-user-circle"></i>
+						{{article.user.username}}
+					</a>
+				{% endif %}
+			</li>
+		{% endif %}
+
+		<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+		{% for section in sections %}
+			<li>
+				<a class="menu-icon" href="{{section.menulink}}">
+					<i class="fa fa-user-circle"></i>
+				</a>
+				{% if loop.first %}
+					<a class="menu-link-visible active" href="#{{section.menulink}}">{{section.menulink}}</a>
+				{% else %}
+					<a class="menu-link-visible" href="#{{section.menulink}}">{{section.menulink}}</a>
+				{% endif %}
+			</li>
+		{% endfor %}
+
+		<!--SI NO HI HA USUARI LOGGEJAR, MOSTREM AL FINAL LA ICONA DE LOGIN-->
+		{% if not app.user %}
+			<li>
+				<a class="menu-user-icon" href="{{ path('app_login')}}">
+					<i class="fa fa-user-circle"></i>
+				</a>
+				{# <a class="menu-link-hidden" href="{{ path('login')}}">LOGIN</a> #}
+			{% endif %}
+
+		</ul>
+	</nav>

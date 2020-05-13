@@ -12,7 +12,7 @@ header('Access-Control-Allow-Origin: *');
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function getAll()
     {

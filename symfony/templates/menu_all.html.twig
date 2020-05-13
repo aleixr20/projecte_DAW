@@ -1,7 +1,12 @@
 <nav class="primary-menu">
-	<img src="/img/categories/{{ asset(article.categoria.logo) }}" class="article_categoria_icon" alt="{{article.categoria.nom}} logotip">
 
-	<ul id="hamburgesa">
+	<ul id="menu-top">
+
+		<li id="search">
+			<a>
+				<i class="fa fa-search"></i>
+			</a>
+		</li>
 		<li id="hamburgesa">
 			<a>
 				<i class="fa fa-bars"></i>
@@ -10,8 +15,7 @@
 	</ul>
 
 	<ul
-		id="menu">
-
+		id="menu-bottom">
 		<!--PRIMER ITEM DEL MENU -> USUARI-->
 		<li>
 			<!--SI HI HA UN USUARI LOGGEJAT-->
@@ -21,7 +25,7 @@
 					<a class="menu-user-icon" href="{{ path('userProfile')}}">
 						<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="menu-user-icon">
 						<br/>
-						{{article.user.username}}
+						{{app.user.username}}
 					</a>
 				{% else %}
 					<a class="menu-user-icon" href="{{ path('userProfile')}}">
@@ -40,7 +44,7 @@
 			<a class="menu-icon" href="{{ path('homepage') }}">
 				<i class="fa fa-home"></i>
 			</a>
-			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICIO</a>
+			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICI</a>
 		</li>
 		<!--TERCER ITEM SORTIR-->
 		{% if app.user %}

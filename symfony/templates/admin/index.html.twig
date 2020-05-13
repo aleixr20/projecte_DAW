@@ -1,21 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!
-{% endblock %}
-
 {% block navbar %}
-	{{ include('admin/adminmenu.html.twig') }}
+	{{ include('admin/menu_admin.html.twig') }}
 {% endblock %}
 
 {% block content %}
 
-	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
-	<main>
-		<div id="fade"></div>
-		<section>
-			<h1 class="article_individual_titol">{{controller_name}}</h1>
-            <p>Ara per ara jugo amb els links del menu lateral</p>
-		</section>
+	<section>
+		<h1 class="article_individual_titol">{{controller_name}}</h1>
+		<p>Ara per ara jugo amb els links del menu lateral</p>
+	</section>
 
-	</main>
 {% endblock %}

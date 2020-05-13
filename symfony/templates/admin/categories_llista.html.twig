@@ -1,37 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block navbar %}
-	{{ include('admin/adminmenu.html.twig') }}
+	{{ include('admin/menu_admin.html.twig') }}
 {% endblock %}
+
 {% block content %}
 
-	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
-	<main>
+	<section class="onepage">
+		<h1>Llista de categories actuals</h1>
+		<table class="table">
+			<tr>
+				<th class="text-right">ID</th>
+				<th class="text-right">Icona</th>
+				<th class="text-left">Nom de la categoria</th>
+				<th class="text-center">nº Articles</th>
+				<th></th>
+			</tr>
 
-		<div id="fade"></div>
-		<section class="onepage">
-			<h1>Llista de categories actuals</h1>
-			<table class="table">
+			{%for cat in section %}
 				<tr>
-					<th class="text-right">ID</th>
-					<th class="text-right">Icona</th>
-					<th class="text-left">Nom de la categoria</th>
-					<th class="text-center">nº Articles</th>
-					<th></th>
+					<td class="text-right">{{cat.id}}</td>
+					<td class="text-right"><img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip"></td>
+					<td class="text-left">{{cat.nom}}</td>
+					<td class="text-center">{{cat.articles|length}}</td>
+					<td class="text-center">
+						<a class="btn btn-outline-warning" href="{{ path('editar_categoria', {id: cat.id}) }}" alt"editar categoria">EDITAR</td>
+					</td>
 				</tr>
+			{% endfor %}
+		</table>
+	</section>
 
-				{%for cat in section %}
-					<tr>
-						<td class="text-right">{{cat.id}}</td>
-						<td class="text-right"><img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip"></td>
-						<td class="text-left">{{cat.nom}}</td>
-						<td class="text-center">{{cat.articles|length}}</td>
-						<td class="text-center">
-							<a class="btn btn-outline-warning" href="{{ path('editar_categoria', {id: cat.id}) }}" alt"editar categoria">EDITAR</td>
-						</td>
-					</tr>
-				{% endfor %}
-			</table>
-		</section>
-
-	</main>
 {% endblock %}

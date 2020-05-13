@@ -101,7 +101,7 @@ class ArticlesController extends AbstractController
             return $this->redirectToRoute('article_detall', ['slug' => $slug]);
         }
 
-        return $this->render('article/new.html.twig', [
+        return $this->render('articles/form_nou_article.html.twig', [
             'article' => $article,
             'formNouArticle' => $form->createView(),
         ]);

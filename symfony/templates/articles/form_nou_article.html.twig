@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('menu_all.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	<section id="menu_item_section_name_4">
+		<h1 class="titulo">
+			Nou Article
+		</h1>
+
+		{{ form_start(formNouArticle) }}
+		<div class="form-group">
+			{{ form_label(formNouArticle.titol) }}
+			{{ form_widget(formNouArticle.titol) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(formNouArticle.subtitol) }}
+			{{ form_widget(formNouArticle.subtitol) }}
+		</div>
+		<div class="form-group" id="categories">
+			{{ form_label(formNouArticle.categoria) }}
+			{{ form_widget(formNouArticle.categoria) }}
+		</div>
+		<div class="form-group" id="novaCategoria" style="display:none">
+			{{ form_label(formNouArticle.nova_categoria) }}
+			{{ form_widget(formNouArticle.nova_categoria) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(formNouArticle.contingut) }}
+			{{ form_widget(formNouArticle.contingut) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(formNouArticle.tag_meta) }}
+			{{ form_widget(formNouArticle.tag_meta) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(formNouArticle.tag_web) }}
+			{{ form_widget(formNouArticle.tag_web) }}
+		</div>
+
+		{{ form_widget(formNouArticle) }}
+		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('afegir article') }}</button>
+		{{ form_end(formNouArticle) }}
+
+	</section>
+
+{% endblock %}

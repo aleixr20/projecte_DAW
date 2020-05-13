@@ -44,7 +44,7 @@ nav {
     transition-duration: 0.68s;
 }
 
-#hamburgesa {
+#menu-top {
     font-size: 2em;
     color: #999;
     position: absolute;
@@ -52,10 +52,13 @@ nav {
     top: 16vh;
     padding: 0.6em;
     list-style-type: none;
+}
+
+#hamburgesa {
     display: none;
 }
 
-#menu {
+#menu-bottom {
     position: absolute;
     right: 0;
     bottom: 16vh;
@@ -128,7 +131,7 @@ section {
     min-height: 100vh;
     padding-left: 22%;
     padding-right: 16%;
-    margin-bottom: 5em;
+    padding-bottom: 5em;
 }
 
 .onepage {

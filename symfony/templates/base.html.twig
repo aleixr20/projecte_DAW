@@ -6,9 +6,15 @@
 	{% endblock %}
 
 	<body>
+	<!--MENU DE NAVEGACIO - LATERAL ESQUERRA-->
+		{% block navbar %}{% endblock %}
+
 		{% block body %}
-			{% block navbar %}{% endblock %}
-			{% block content %}{% endblock %}
+			<main>
+					<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+				<div id="fade"></div>
+				{% block content %}{% endblock %}
+			</main>
 		{% endblock %}
 		{% block javascripts %}{% endblock %}
 	</body>

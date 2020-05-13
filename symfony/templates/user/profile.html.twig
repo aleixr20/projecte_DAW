@@ -1,85 +1,109 @@
 {% extends 'base.html.twig' %}
 
 {% block navbar %}
-	{{ include('usermenu.html.twig') }}
+	{{ include('menu_all.html.twig') }}
 {% endblock %}
 
 {% block content %}
-	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
-<main>
-    <section id="menu_item_section_name_4">
-        <div class="row d-flex flex-wrap" id="profile-content">
-            <div class="col-md-5 col-sm-7 col-xs-12 text-center">
-                {% if app.user and user.username == app.user.username %}
-                {# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
-                    <img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img">
-                {% else %}
-                    <img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-img">
-                {% endif %}
-            </div>
-            <div class="col-md-6 col-sm-5 col-xs-12">
-                <h2>{{ user.nom }} {{ user.cognom }} <span id="profile-username">{{ user.username }}</span></h2>
-                <p>{{ user.email }}</p>
-                {% if user.genere == 'masc' %}
-                    <i class="fa fa-mars"></i>
-                {% elseif user.genere == 'fem' %}
-                    <p><i class="fa fa-venus"></i></p>
-                {% endif %}
-                {% if user.getEdat() %}
-                    <p>{{ user.getEdat() }}</span> anys</p>
-                {% endif %}
-                {% if user.github %}
-                {% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
-                    <a href="{{ urlGithub }}" target="_blank"><i class="fa fa-github-square"></i></a>
-                {% endif %}
-                {% if user.linkedin %}
-                {% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %}
-                    <a href="{{ urlLinkedin }}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
-                {% endif %}
-                {% if user.twitter %}
-                {% set urlTwitter = user.twitter | slice(0,4) == 'http' ? user.twitter : 'http://' ~ user.twitter %}
-                    <a href="{{ urlTwitter }}" target="_blank"><i class="fa fa-twitter-square"></i></a>
-                {% endif %}
-                {% if user.facebook %}
-                {% set urlFacebook = user.facebook | slice(0,4) == 'http' ? user.facebook : 'http://' ~ user.facebook %}
-                    <a href="{{ urlFacebook }}" target="_blank"><i class="fa fa-facebook-square"></i></a>
-                {% endif %}
-            </div>
-            <div class="col-md-1 col-sm-12">
-            {% if app.user and user.username == app.user.username %}
-            <button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Edita
-            </button>
-            {% else %}
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-cog fa-white"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div>
-            {% endif %}
-            </div>
-        </div>
-        <hr>
-            <div class="col-12 profile-box">
-                <h2><strong>{{ user.articles|length }}</strong></h2>                    
-                <p><small>Articles</small></p>
-                <i class="fa fa-thumbs-up"> 50</i>
-                <i class="fa fa-thumbs-down"> 10</i>
-            </div>
-            </br>
-            <div class="col-12 profile-box">
-                <h2><strong> {{ user.comentaris|length }} </strong></h2>                    
-                <p><small>Comentaris</small></p>
-                <i class="fa fa-thumbs-up"> 50</i>
-                <i class="fa fa-thumbs-down"> 10</i>
-            </div>
-    </section>
-</main>
-{% endblock %}
+
+	<section id="menu_item_section_name_4">
+		<div class="row d-flex flex-wrap" id="profile-content">
+			<div class="col-md-5 col-sm-7 col-xs-12 text-center">
+				{% if app.user and user.username == app.user.username %}
+					{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img">
+				{% else %}
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-img">
+				{% endif %}
+			</div>
+			<div class="col-md-6 col-sm-5 col-xs-12">
+				<h2>{{ user.nom }}
+					{{ user.cognom }}
+					<span id="profile-username">{{ user.username }}</span>
+				</h2>
+				<p>{{ user.email }}</p>
+				{% if user.genere == 'masc' %}
+					<i class="fa fa-mars"></i>
+				{% elseif user.genere == 'fem' %}
+					<p>
+						<i class="fa fa-venus"></i>
+					</p>
+				{% endif %}
+				{% if user.getEdat() %}
+					<p>{{ user.getEdat() }}</p>
+				</span>
+				anys</p>
+		{% endif %}
+		{% if user.github %}
+			{% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
+			<a href="{{ urlGithub }}" target="_blank">
+				<i class="fa fa-github-square"></i>
+			</a>
+		{% endif %}
+		{% if user.linkedin %}
+			{% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %}
+			<a href="{{ urlLinkedin }}" target="_blank">
+				<i class="fa fa-linkedin-square"></i>
+			</a>
+		{% endif %}
+		{% if user.twitter %}
+			{% set urlTwitter = user.twitter | slice(0,4) == 'http' ? user.twitter : 'http://' ~ user.twitter %}
+			<a href="{{ urlTwitter }}" target="_blank">
+				<i class="fa fa-twitter-square"></i>
+			</a>
+		{% endif %}
+		{% if user.facebook %}
+			{% set urlFacebook = user.facebook | slice(0,4) == 'http' ? user.facebook : 'http://' ~ user.facebook %}
+			<a href="{{ urlFacebook }}" target="_blank">
+				<i class="fa fa-facebook-square"></i>
+			</a>
+		{% endif %}
+	</div>
+	<div class="col-md-1 col-sm-12">
+		{% if app.user and user.username == app.user.username %}
+			<button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Edita
+			</button>
+		{% else %}
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-cog fa-white"></i>
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Separated link</a>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>
+<hr>
+<div class="col-12 profile-box">
+	<h2>
+		<strong>{{ user.articles|length }}</strong>
+	</h2>
+	<p>
+		<small>Articles</small>
+	</p>
+	<i class="fa fa-thumbs-up">
+		50</i>
+	<i class="fa fa-thumbs-down">
+		10</i>
+</div><br/>
+<div class="col-12 profile-box">
+	<h2>
+		<strong>
+			{{ user.comentaris|length }}
+		</strong>
+	</h2>
+	<p>
+		<small>Comentaris</small>
+	</p>
+	<i class="fa fa-thumbs-up">
+		50</i>
+	<i class="fa fa-thumbs-down">
+		10</i>
+</div></section>{% endblock %}
