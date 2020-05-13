@@ -1,0 +1,51 @@
+<nav class="primary-menu">
+	<ul id="hamburgesa">
+		<li>
+			<a>
+				<i class="fa fa-bars"></i>
+			</a>
+		</li>
+	</ul>
+	<ul id="article_autor"></ul>
+	<ul id="menu">
+		<li>
+			<a class="menu-user-icon" href="{{ path('userProfileEdit')}}">
+				<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="menu-user-icon">
+			</a>
+			<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{app.user.username}}</a>
+		</li>
+		<li>
+			<a class="menu-icon" href="{{ path('homepage') }}">
+				<i class="fa fa-home"></i>
+			</a>
+			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICIO</a>
+		</li>
+		<a class="menu-icon" href="{{ path('gestorcategories') }}">
+			<i class="fa fa-user-circle"></i>
+		</a>
+		<a class="menu-link-visible active" href="{{ path('gestorcategories') }}">CATEGORIES</a>
+	</li>
+	{% if app.user %}
+
+		<li>
+			<a class="menu-icon" href="{{ path('app_logout')}}">
+				<i class="fa fa-user-circle"></i>
+			</a>
+			<a class="menu-link-hidden" href="{{ path('app_logout')}}">SORTIR</a>
+		</li>
+
+	{% endif %}
+
+	{# <li>
+									<a class="menu-icon" href="/login">
+										<i class="fa fa-user-circle"></i>
+									</a>
+									<a class="menu-link-visible" href="/perfil">EDITAR PERFIL</a>
+								</li>
+								<li>
+									<a class="menu-icon" href="/homepage">
+										<i class="fa fa-user-circle"></i>
+									</a>
+									<a class="menu-link-visible active" href="/login">LOGIN</a>
+								</li> #}
+</ul></nav>

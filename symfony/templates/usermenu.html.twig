@@ -16,9 +16,9 @@
 		{% if app.user %}
 			<li>
 				<a class="menu-icon" href="{{ path('userProfileEdit')}}">
-					<img src="/img/imatges_perfil/{{ asset(user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
+					<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
 				</a>
-				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{user.username}}</a>
+				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{app.user.username}}</a>
 			</li>
 			<li>
 				<a class="menu-icon" href="{{ path('app_logout')}}">

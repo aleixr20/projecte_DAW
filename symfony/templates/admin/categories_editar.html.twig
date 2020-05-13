@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('admin/adminmenu.html.twig') }}
+{% endblock %}
+{% block content %}
+
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+
+		<div id="fade"></div>
+		<section class="onepage">
+			<h1>Editar Categoria</h1>
+
+			{{ form_start(formEditarCategoria) }}
+			<div class="form-group">
+				{{ form_label(formEditarCategoria.nom) }}
+				{{ form_widget(formEditarCategoria.nom) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(formEditarCategoria.logo) }}
+				{{ form_widget(formEditarCategoria.logo) }}
+			</div>
+
+			<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+			{{ form_end(formEditarCategoria) }}
+		</section>
+
+	</main>
+{% endblock %}

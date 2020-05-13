@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello AdminController!
+{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block navbar %}
+	{{ include('admin/adminmenu.html.twig') }}
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block content %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/symfony/projecte_DAW/symfony/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/symfony/projecte_DAW/symfony/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<!--CONTINGUT DE LA WEB - ZONA DRETA-->
+	<main>
+		<div id="fade"></div>
+		<section>
+			<h1 class="article_individual_titol">{{controller_name}}</h1>
+            <p>Ara per ara jugo amb els links del menu lateral</p>
+		</section>
+
+	</main>
 {% endblock %}

@@ -24,8 +24,14 @@ p {
     padding: 0.5em 0;
 }
 
+ul {
+    padding: 0.66em 1.6em;
+}
 
-/* MENU NAVEGACIO */
+
+/*****************************
+    MENUS NAVEGACIO
+ *****************************/
 
 nav {
     border-right: 3px solid red;
@@ -66,6 +72,11 @@ nav {
     display: none;
 }
 
+.menu-user-icon {
+    width: 3em;
+    border-radius: 50%;
+}
+
 .menu-link-visible {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 600;
@@ -93,7 +104,9 @@ nav {
 }
 
 
-/* CONTINGUT */
+/*****************************
+    COMPOSICIO CONTENT DRETA
+ *****************************/
 
 #fade {
     width: 100%;
@@ -106,6 +119,11 @@ nav {
 
 main {}
 
+
+/*****************************
+    HOMEPAGE
+ *****************************/
+
 section {
     min-height: 100vh;
     padding-left: 18%;
@@ -113,18 +131,18 @@ section {
     margin-bottom: 5em;
 }
 
+.onepage {
+    padding-top: 15vh;
+}
+
 .titulo {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 2em;
+    _font-size: 2em;
     font-weight: unset;
     color: #999;
     position: relative;
     top: 15vh;
     margin-bottom: 20vh;
-}
-
-ul {
-    padding: 0.66em 1.6em;
 }
 
 .text {
@@ -133,8 +151,35 @@ ul {
     top: 25vh;
 }
 
+
+/*****************************
+    FORM D'ARTICLES
+ *****************************/
+
 #novaCategoria {
     transition-duration: 0.5s;
+}
+
+
+/*****************************
+    ARTICLES
+ *****************************/
+
+.article_individual_titol {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: unset;
+    color: #999;
+    padding-top: 15vh
+}
+
+.article_individual_resum {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: unset;
+    color: #333;
+}
+
+.article_individual_content {
+    padding-top: 2em;
 }
 
 .article_titol a {
@@ -145,8 +190,6 @@ ul {
     text-decoration: none;
 }
 
-.article_subtitol {}
-
 #article_autor {
     position: absolute;
     right: 0;
@@ -156,8 +199,18 @@ ul {
     text-align: right;
 }
 
-#article_autor .menu-icon {
-    display: block;
+.article_categoria_icon {
+    width: 3em;
+    position: absolute;
+    right: 0;
+    top: 15vh;
+}
+
+.categoria_icon {
+    width: 3em;
+    _border-radius: 2px;
+    padding: 0.5em;
+    _border: 1px solid #999;
 }
 
 
@@ -187,7 +240,9 @@ ul {
 } */
 
 
-/* MEDIA QUERIES */
+/*****************************
+    MEDIA QUERIES
+ *****************************/
 
 @media only screen and (max-width: 1200px) {
     .menu-icon {
