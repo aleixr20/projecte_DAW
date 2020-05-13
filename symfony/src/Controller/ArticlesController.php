@@ -10,6 +10,7 @@ use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
 
 use App\Entity\Categoria;
+
 //use App\Repository\TemaRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 //Faltaran afegir el USE dels components de formularis
@@ -41,56 +42,63 @@ class ArticlesController extends AbstractController
      * 
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request)
+    public function nouarticle(Request $request)
     {
+        //Crear Objecte Article i Form
         $article = new Article();
-
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
+        //Si el formulari es enviat, capture dde dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $article->setTitol($form->get('titol')->getData())
                 ->setSubtitol($form->get('subtitol')->getData())
-                ->setDataPublicacio(new \DateTime());
+                //Ara per ara la data de publicació es fixa, un timestamp manual
+                ->setContingut($form->get('contingut')->getData())
+                ->setDataPublicacio(new \DateTime())
+                ->setUser($this->getUser());
 
-                //Aquest funcio s'ha de revisar
-                $text = $form->get('titol')->getData();
-                $slug = strtolower(str_replace(" ", "-",$text));
-                $article->setSlug($slug);
+            //Aquest funcio s'ha de revisar
+            //Capturar el titol i convertir-lo a Slug amb lowercase i guions
+            $text = strtolower($form->get('titol')->getData());
+            $slug = strtolower(str_replace(" ", "-", $text));
+            //Assignar al article l'Slug creat
+            $article->setSlug($slug);
 
-            $article->setUser($this->getUser())
-                ->setContingut($form->get('contingut')->getData());
-                
+            //Capturar input type="text" (String) de camp meta i convertirlo a array
             $inputTagMeta = $form->get('tag_meta')->getData();
             $arrayTagMeta = explode(",", $inputTagMeta);
 
+            //Idem per tag web
             $inputTagWeb = $form->get('tag_web')->getData();
             $arrayTagWeb = explode(",", $inputTagWeb);
 
+            //Assignem a article els dos camps meta
             $article->setTagMeta($arrayTagMeta)
                 ->setTagWeb($arrayTagWeb);
 
-
-                $categoria = $form->get('categoria')->getData();
-
-            if($categoria->getNom() == "afegir nova categoria"){
-
+            //Capturem categoria del selsect del formulari
+            $categoria = $form->get('categoria')->getData();
+            //Si la categoria es "afegir nova categoria"
+            if ($categoria->getNom() == "afegir nova categoria") {
+                //Creem nova categoria amb el que hi hagi al input "nova categoria"
                 $afegirCategoria = new Categoria();
                 $afegirCategoria->setNom($form->get('nova_categoria')->getData());
                 $afegirCategoria->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
                 $entityManager->persist($afegirCategoria);
-
-                $categoria=$afegirCategoria;
+                //fem el cambiazo
+                $categoria = $afegirCategoria;
             }
-
+            //Afegir la categoria
             $article->setCategoria($categoria);
-
+            //Persistir dades i pujar dades a DB
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('article_detall', ['slug' => $slug]);
         }
 
         return $this->render('article/new.html.twig', [
@@ -106,7 +114,7 @@ class ArticlesController extends AbstractController
      * 
      * @Route("/article/editar/$id", name="article_update", methods={"GET","POST"})
      */
-    public function update(Request $request)
+    public function editarArticle(Request $request)
     {
 
         //PENDENT IMPLEMENTAR
@@ -138,7 +146,7 @@ class ArticlesController extends AbstractController
     // }
 
     /**
-     * @Route("/post/{slug}", name="slug", methods={"GET"})
+     * @Route("/post/{slug}", name="article_detall", methods={"GET"})
      */
     public function slug($slug, ArticleRepository $articleRepository)
     {

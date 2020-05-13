@@ -1,21 +1,27 @@
 <nav class="primary-menu">
-	<ul id="hamburgesa">
-		<li>
+	<img src="/img/categories/{{ asset(article.categoria.logo) }}" class="article_categoria_icon" alt="{{article.categoria.nom}} logotip">
+
+	{# <ul id="hamburgesa">
+		<li id="hamburgesa">
 			<a>
 				<i class="fa fa-bars"></i>
 			</a>
 		</li>
-	</ul>
-		<ul id="article_autor">
-		<li>
-			<li>
-				<a class="menu-icon" href="{{ path('userProfileEdit')}}">
-					<img src="/img/imatges_perfil/{{ asset(article.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
-				</a>
-				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{article.user.username}}</a>
-			</li>
-	</ul>
+	</ul> #}
+	<ul id="article_autor"></ul>
+
 	<ul id="menu">
+		<li id="hamburgesa">
+			<a>
+				<i class="fa fa-bars"></i>
+			</a>
+		</li>
+		<li>
+			<a class="menu-user-icon" href="{{ path('userProfileEdit')}}">
+				<img src="/img/imatges_perfil/{{ asset(article.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="menu-user-icon">
+			</a>
+			<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{article.user.username}}</a>
+		</li>
 		<li>
 			<a class="menu-icon" href="{{ path('homepage') }}">
 				<i class="fa fa-user-circle"></i>
@@ -23,12 +29,7 @@
 			<a class="menu-link-visible active" href="{{ path('homepage') }}">INICIO</a>
 		</li>
 		{% if app.user %}
-			<!-- <li>
-				<a class="menu-icon" href="{{ path('userProfileEdit')}}">
-					<img src="/img/imatges_perfil/{{ asset(user.imatge) }}" alt="imatge de perfil" id="img-modif" class="profile-img-icon">
-				</a>
-				<a class="menu-link-hidden" href="{{ path('userProfileEdit')}}">{{user.username}}</a>
-			</li> -->
+
 			<li>
 				<a class="menu-icon" href="{{ path('app_logout')}}">
 					<i class="fa fa-user-circle"></i>
@@ -39,16 +40,16 @@
 		{% endif %}
 
 		{# <li>
-							<a class="menu-icon" href="/login">
-								<i class="fa fa-user-circle"></i>
-							</a>
-							<a class="menu-link-visible" href="/perfil">EDITAR PERFIL</a>
-						</li>
-						<li>
-							<a class="menu-icon" href="/homepage">
-								<i class="fa fa-user-circle"></i>
-							</a>
-							<a class="menu-link-visible active" href="/login">LOGIN</a>
-						</li> #}
+													<a class="menu-icon" href="/login">
+														<i class="fa fa-user-circle"></i>
+													</a>
+													<a class="menu-link-visible" href="/perfil">EDITAR PERFIL</a>
+												</li>
+												<li>
+													<a class="menu-icon" href="/homepage">
+														<i class="fa fa-user-circle"></i>
+													</a>
+													<a class="menu-link-visible active" href="/login">LOGIN</a>
+												</li> #}
 	</ul>
 </nav>

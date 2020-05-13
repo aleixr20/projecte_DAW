@@ -42,12 +42,12 @@ class ArticlesFixtures extends Fixture
         //Creem algunes categories predefinides per anar provant
         $categoria_php = new Categoria();
         $categoria_php->setNom('PHP');
-        $categoria_php->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $categoria_php->setLogo('php-5ebbbc8aa8516.svg');
         $manager->persist($categoria_php);
 
         $categoria_css = new Categoria();
         $categoria_css->setNom('CSS');
-        $categoria_css->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+        $categoria_css->setLogo('css-3-5ebbbde6704a2.svg');
         $manager->persist($categoria_css);
 
         $categoria_html = new Categoria();
