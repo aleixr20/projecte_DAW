@@ -113,10 +113,16 @@ class User implements UserInterface
      */
     private $facebook;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\SocialMedia", mappedBy="usuari")
+     */
+    private $socialMedia;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->comentaris = new ArrayCollection();
+        $this->socialMedia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -426,6 +432,34 @@ class User implements UserInterface
     public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SocialMedia[]
+     */
+    public function getSocialMedia(): Collection
+    {
+        return $this->socialMedia;
+    }
+
+    public function addSocialMedium(SocialMedia $socialMedium): self
+    {
+        if (!$this->socialMedia->contains($socialMedium)) {
+            $this->socialMedia[] = $socialMedium;
+            $socialMedium->addUsuari($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSocialMedium(SocialMedia $socialMedium): self
+    {
+        if ($this->socialMedia->contains($socialMedium)) {
+            $this->socialMedia->removeElement($socialMedium);
+            $socialMedium->removeUsuari($this);
+        }
 
         return $this;
     }

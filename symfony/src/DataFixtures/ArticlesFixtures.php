@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 use App\Entity\User;
-//use App\Entity\Tema;
+use App\Entity\SocialMedia;
 use App\Entity\Article;
 use App\Entity\Categoria;
 
@@ -32,7 +32,8 @@ class ArticlesFixtures extends Fixture
             ->setNom('Aleix')->setCognom('Revesado')->setCodiPostal('08400')
             ->setNomUsuari('aleixMaki')->setDataRegistre(new DateTime())
             ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"))
-            ->setImatge('default.jpg');
+            ->setImatge('default.jpg')
+            ->setGithub('aleixr20');
 
         $roles = ["ROLE_ADMIN"];
         $admin->setRoles($roles);
@@ -64,6 +65,31 @@ class ArticlesFixtures extends Fixture
         $categoria_java->setNom('Java');
         $categoria_java->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
         $manager->persist($categoria_java);
+
+        $media_git = new SocialMedia();
+        $media_git->setNom('Github');
+        $media_git->setLogo('fa fa-github');
+        $media_git->setUrl('https://www.github.com/');
+        $media_git->addUsuari($admin);
+        $manager->persist($media_git);
+
+        $media_in = new SocialMedia();
+        $media_in->setNom('Linkedin');
+        $media_in->setLogo('fa fa-linkedin');
+        $media_in->setUrl('http://www.linkedin.com');
+        $manager->persist($media_in);
+
+        $media_twt = new SocialMedia();
+        $media_twt->setNom('Twitter');
+        $media_twt->setLogo('fa fa-twitter');
+        $media_twt->setUrl('http://www.twitter.com');
+        $manager->persist($media_twt);
+
+        $media_fb = new SocialMedia();
+        $media_fb->setNom('Facebook');
+        $media_fb->setLogo('fa fa-facebook');
+        $media_fb->setUrl('http://www.facebook.com');
+        $manager->persist($media_fb);
 
         /**
          * Aquesta categoria, s'ha de manualment cambiar l'ID a la base de dades
