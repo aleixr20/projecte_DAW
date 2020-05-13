@@ -24,10 +24,7 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('cognom')
             ->add('email')
-            ->add('nom_usuari')
-
-            //he tornat a afegir aquest troç
-            //Si els vols treure o fer d'un altre manera, ara tira            
+            ->add('nom_usuari')          
             ->add('imatge', FileType::class, [
                 'mapped' => false,
                 'required' => false,
