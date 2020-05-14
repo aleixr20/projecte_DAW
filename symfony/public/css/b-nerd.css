@@ -72,7 +72,6 @@ nav {
 
 #menu-bottom a {
     color: #999;
-    text-decoration: none;
 }
 
 #menu-bottom a:hover,
@@ -157,6 +156,12 @@ section {
     color: #666;
     position: sticky;
     top: 25vh;
+}
+
+.code {
+    font-size: 0.9rem;
+    padding: 1em;
+    background-color: #eee;
 }
 
 
@@ -252,9 +257,20 @@ section {
     MEDIA QUERIES
  *****************************/
 
+
+/* @media only screen and (max-width: 576px) and (orientation: landscape) {
+    #menu-bottom {
+        bottom: 5vh;
+    }
+} */
+
 @media only screen and (max-width: 1200px) {
     #hamburguesa {
         visibility: hidden;
+    }
+    section {
+        _padding-left: 22%;
+        padding-right: 13%;
     }
 }
 
@@ -263,7 +279,8 @@ section {
         visibility: hidden;
     }
     section {
-        padding-left: 19%;
+        padding-left: 22%;
+        padding-right: 10%;
     }
 }
 
@@ -272,7 +289,8 @@ section {
         visibility: hidden;
     }
     section {
-        padding-left: 20%;
+        padding-left: 22%;
+        padding-right: 7%;
     }
 }
 
@@ -281,7 +299,7 @@ section {
         visibility: visible;
     }
     .menu-user img {
-        width: 2em;
+        width: 1.6em;
     }
     .menu-icon-logout {
         display: block;
@@ -301,16 +319,26 @@ section {
         width: 3.5em;
     }
     section {
-        padding-left: 23%;
+        padding-left: 18%;
         padding-right: 4%;
-        margin-bottom: 5em;
+        padding-bottom: 5em;
     }
     .titulo {
-        font-size: large;
         top: 5vh;
         margin-bottom: 10vh;
     }
-    .text {
-        font-size: small;
+    .text {}
+}
+
+@media only screen and (max-width: 350px) {
+    section {
+        padding-left: 20%;
     }
 }
+
+
+/* @media only screen and (max-height: 576px) {
+    #primary-menu {
+        bottom: 5vh;
+    }
+} */

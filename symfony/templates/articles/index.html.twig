@@ -9,13 +9,15 @@
 		<h1 class="article_individual_titol">{{article.titol}}</h1>
 		<h4 class="article_individual_resum">{{article.subtitol}}</h4>
 		<div class="article_individual_content">
-			{{article.contingut}}</div>
+			{{article.contingut|raw}}</div>
 		<ul>
 			<li>Categoria:&nbsp;{{article.categoria.nom}}</li>
 			<li>Autor:&nbsp;{{article.user.username}}</li>
 			{# <li>Data Publicacio&nbsp;{{section.data_publicacio|date("d/m/Y")}}</li> #}
 			<li>Slug:&nbsp;{{article.slug}}</li>
 		</ul>
+
+		<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
 
 	</section>
 

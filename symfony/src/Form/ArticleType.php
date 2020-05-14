@@ -12,19 +12,19 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Lenght;
-
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-    //    $tema_repository = $this->getDoctrine()->getRepository(Tema::class);
-    //   $temas = $tema_repository->findAll();
+        //    $tema_repository = $this->getDoctrine()->getRepository(Tema::class);
+        //   $temas = $tema_repository->findAll();
 
         $builder
             ->add('titol', TextType::class, [
-                'label' => 'Titol article',  
+                'label' => 'Titol article',
                 'attr' => ['class' => 'form-control'],
                 // 'constraints' => [
                 //     new Length([
@@ -34,10 +34,10 @@ class ArticleType extends AbstractType
                 //         'maxMassage' => 'Error, més de {{ limit }} ',
                 //      ]) 
                 //     ]
-                ])
+            ])
 
             ->add('subtitol', TextType::class, [
-                'label' => 'Subtitol article',  
+                'label' => 'Subtitol article',
                 'attr' => ['class' => 'form-control'],
                 // 'constraints' => [
                 //     new Length([
@@ -47,21 +47,25 @@ class ArticleType extends AbstractType
                 //         'maxMassage' => 'Error, més de {{ limit }} ',
                 //      ]) 
                 //     ]
-                ])
+            ])
+            // ->add('description', CKEditorType::class, [
+            //     'mapped' => false
+            // ])
 
-            ->add('contingut', TextareaType::class, [
-                'label' => 'Contingut article',  
+            ->add('contingut', CKEditorType::class, [
+                'label' => 'Contingut article',
                 'attr' => ['class' => 'form-control', 'rows' => 5]
-                ])
+
+            ])
 
             ->add('tag_meta', TextType::class, [
-                'label' => 'etiquetes posicionament SEO',  
+                'label' => 'etiquetes posicionament SEO',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
             ])
 
             ->add('tag_web', TextType::class, [
-                'label' => 'etiquetes buscador intern',  
+                'label' => 'etiquetes buscador intern',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
             ])
@@ -73,12 +77,11 @@ class ArticleType extends AbstractType
             ])
 
             ->add('nova_categoria', TextType::class, [
-                'label' => 'Nova categoria',  
+                'label' => 'Nova categoria',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
