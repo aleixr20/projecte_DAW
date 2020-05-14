@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class UserController extends AbstractController
 {
@@ -197,8 +202,78 @@ class UserController extends AbstractController
     }
 
     /**
-     * AQUEST METODE EL TENIAS AL AppController (repetit)
-     * 
+     * METODE PER CANVIAR LA CONTRASENYA D'UN USUARI
+     * @Route("/user/profile/edit/password", name="userChangePassword")
+     */
+    public function canviaContrasenya(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user = $this->getUser();
+
+        $form = $this->createFormBuilder()
+            ->add('oldPassword', PasswordType::class, [
+                'label' => 'Contrasenya actual',
+            ])
+            ->add('newPassword', PasswordType::class, [
+                'label' => 'Contrasenya nova'
+            ])
+            ->add('repitNewPassword', PasswordType::class, [
+                'label' => 'Repeteix la contrasenya',
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Desa',
+                'attr' => ['class' => 'btn btn-outline-info']
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $data = $form->getData();
+
+            if($passwordEncoder->isPasswordValid($user, $data['oldPassword'])) {
+
+                if($data['newPassword'] == $data['repitNewPassword']) {
+
+                    $encodedPassword = $passwordEncoder->encodePassword($user, $data['newPassword']);
+
+                    $user->setPassword($encodedPassword);
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('userProfile');
+
+                }else{
+
+                    return $this->render('user/change_password.html.twig', [
+                        'changePasswordForm' => $form->createView(),
+                        'error' => 'Les contrasenyes no coincideixen.'
+                    ]);
+
+                }
+            }else{
+
+                return $this->render('user/change_password.html.twig', [
+                    'changePasswordForm' => $form->createView(),
+                    'error' => 'La contrasenya actual no es correcte.'
+                ]);
+            }
+        }
+
+
+        return $this->render('user/change_password.html.twig', [
+            'changePasswordForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI
      * @Route("/user/profile/{userName}", name="otherUserProfile")
      */
     public function otherUserProfile($userName, UserRepository $userRepository)

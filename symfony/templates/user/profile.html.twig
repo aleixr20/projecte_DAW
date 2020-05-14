@@ -32,30 +32,34 @@
 				{% if user.getEdat() %}
 					<p>{{ user.getEdat() }} anys</p>
 		        {% endif %}
-		{% if user.github %}
-			{% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
-			<a href="{{ urlGithub }}" target="_blank">
-				<i class="fa fa-github-square"></i>
-			</a>
+		{% if user.github or user.linkedin or user.twitter or user.facebook %}
+			<div id="xxss">
+			{% if user.github %}
+				{% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
+				<a href="{{ urlGithub }}" target="_blank">
+					<i class="fa fa-github-square"></i>
+				</a>
+			{% endif %}
+			{% if user.linkedin %}
+				{% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %}
+				<a href="{{ urlLinkedin }}" target="_blank">
+					<i class="fa fa-linkedin-square"></i>
+				</a>
+			{% endif %}
+			{% if user.twitter %}
+				{% set urlTwitter = user.twitter | slice(0,4) == 'http' ? user.twitter : 'http://' ~ user.twitter %}
+				<a href="{{ urlTwitter }}" target="_blank">
+					<i class="fa fa-twitter-square"></i>
+				</a>
+			{% endif %}
+			{% if user.facebook %}
+				{% set urlFacebook = user.facebook | slice(0,4) == 'http' ? user.facebook : 'http://' ~ user.facebook %}
+				<a href="{{ urlFacebook }}" target="_blank">
+					<i class="fa fa-facebook-square"></i>
+				</a>
+			{% endif %}
 		{% endif %}
-		{% if user.linkedin %}
-			{% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %}
-			<a href="{{ urlLinkedin }}" target="_blank">
-				<i class="fa fa-linkedin-square"></i>
-			</a>
-		{% endif %}
-		{% if user.twitter %}
-			{% set urlTwitter = user.twitter | slice(0,4) == 'http' ? user.twitter : 'http://' ~ user.twitter %}
-			<a href="{{ urlTwitter }}" target="_blank">
-				<i class="fa fa-twitter-square"></i>
-			</a>
-		{% endif %}
-		{% if user.facebook %}
-			{% set urlFacebook = user.facebook | slice(0,4) == 'http' ? user.facebook : 'http://' ~ user.facebook %}
-			<a href="{{ urlFacebook }}" target="_blank">
-				<i class="fa fa-facebook-square"></i>
-			</a>
-		{% endif %}
+		</div>
 	</div>
 	<div class="col-md-1 col-sm-12">
 		{% if app.user and user.username == app.user.username %}

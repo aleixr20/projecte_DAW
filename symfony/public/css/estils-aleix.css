@@ -41,3 +41,11 @@
 .fa-white {
     color: white;
 }
+
+#xxss > a {
+    display: inline-block;
+}
+
+#error-msg {
+    color: red;
+}
