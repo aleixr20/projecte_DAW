@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class UserController extends AbstractController
 {
@@ -74,7 +79,7 @@ class UserController extends AbstractController
 
             // this condition is needed because the 'imatge' field is not required
             // so the image file must be processed only when a file is uploaded
-            if ($imatgePerfil) {
+            if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
                 $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $nomArxiu = $slugger->slug($nomArxiuOriginal);
@@ -90,8 +95,6 @@ class UserController extends AbstractController
                 // updates the 'imatge' property to store the image file name
                 // instead of its contents
                 $user->setImatge($nouNomArxiu);
-            }else{
-                $user->setImatge('default.jpg');
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -171,7 +174,7 @@ class UserController extends AbstractController
      * METODE PER EDITAR EL PERFIL D'UN USUARI
      * @Route("/user/profile/edit", name="userProfileEdit")
      */
-    public function userProfileEdit(Request $request)
+    public function userProfileEdit(Request $request, SluggerInterface $slugger)
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -183,6 +186,37 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Pujada de la imatge de perfil
+            $imatgePerfil = $form->get('imatge')->getData();
+
+            // this condition is needed because the 'imatge' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
+                $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $nomArxiu = $slugger->slug($nomArxiuOriginal);
+                $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
+
+                // Move the file to the directory where imatges are stored
+                try {
+                    $imatgePerfil->move('img\imatges_perfil', $nouNomArxiu);
+                } catch (FileException $e) {
+                    throw new Error($e);
+                }
+
+                // updates the 'imatge' property to store the image file name
+                // instead of its contents
+                $user->setImatge($nouNomArxiu);
+            }else if($imatgePerfil && !($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')){
+                return $this->render('user/edit.html.twig', [
+                    'editForm' => $form->createView(),
+                    'error' => 'La imatge seleccionada no és vàlida.'
+                ]);
+            }
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -197,8 +231,78 @@ class UserController extends AbstractController
     }
 
     /**
-     * AQUEST METODE EL TENIAS AL AppController (repetit)
-     * 
+     * METODE PER CANVIAR LA CONTRASENYA D'UN USUARI
+     * @Route("/user/profile/edit/password", name="userChangePassword")
+     */
+    public function canviaContrasenya(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user = $this->getUser();
+
+        $form = $this->createFormBuilder()
+            ->add('oldPassword', PasswordType::class, [
+                'label' => 'Contrasenya actual',
+            ])
+            ->add('newPassword', PasswordType::class, [
+                'label' => 'Contrasenya nova'
+            ])
+            ->add('repitNewPassword', PasswordType::class, [
+                'label' => 'Repeteix la contrasenya',
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Desa',
+                'attr' => ['class' => 'btn btn-outline-info']
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $data = $form->getData();
+
+            if($passwordEncoder->isPasswordValid($user, $data['oldPassword'])) {
+
+                if($data['newPassword'] == $data['repitNewPassword']) {
+
+                    $encodedPassword = $passwordEncoder->encodePassword($user, $data['newPassword']);
+
+                    $user->setPassword($encodedPassword);
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('userProfile');
+
+                }else{
+
+                    return $this->render('user/change_password.html.twig', [
+                        'changePasswordForm' => $form->createView(),
+                        'error' => 'Les contrasenyes no coincideixen.'
+                    ]);
+
+                }
+            }else{
+
+                return $this->render('user/change_password.html.twig', [
+                    'changePasswordForm' => $form->createView(),
+                    'error' => 'La contrasenya actual no es correcte.'
+                ]);
+            }
+        }
+
+
+        return $this->render('user/change_password.html.twig', [
+            'changePasswordForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI
      * @Route("/user/profile/{userName}", name="otherUserProfile")
      */
     public function otherUserProfile($userName, UserRepository $userRepository)

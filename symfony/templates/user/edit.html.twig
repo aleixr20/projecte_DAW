@@ -10,6 +10,11 @@
 		<h1 class="titulo">
 			Edita
 		</h1>
+		<p id="error-msg">
+			{% if error is defined %}
+				{{ error }}
+			{% endif %}
+		</p>
 		{{ form_start(editForm) }}
 
 		<div class="form-group form-row">
@@ -29,6 +34,16 @@
 		<div class="form-group">
 			{{ form_label(editForm.nom_usuari) }}
 			{{ form_widget(editForm.nom_usuari, {'attr': {'class': 'form-control'}}) }}
+		</div>
+		<div class="form-group">
+			<button onclick="location.href='{{ path('userChangePassword') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Canvia la contrasenya
+			</button>
+		</div>
+		<div class="form-group">
+			{{ form_label(editForm.imatge) }}
+			{{ form_widget(editForm.imatge, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(editForm.imatge) }}
 		</div>
 		<div
 			class="form-group">
@@ -64,6 +79,7 @@
 		<br/>
 
 		<button class="btn btn-outline-info">Desa</button>
+		<button class="btn btn-outline-info" type="button" onclick="location.href='{{ path('userProfile') }}'">Cancel·la</button>
 		{{ form_end(editForm) }}
 	</section>
 {% endblock %}

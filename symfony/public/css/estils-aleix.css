@@ -21,13 +21,13 @@
 }
 
 
-/*
-.fa {
+
+#xxss .fa, .fa-gender, .profile-box .fa {
     font-size: 25px;
     margin-right: 1vw;
     color: #666;
 }
-*/
+
 
 .profile-box {
     padding: 3vw;
@@ -43,4 +43,12 @@
 
 .fa-white {
     color: white;
+}
+
+#xxss > a {
+    display: inline-block;
+}
+
+#error-msg {
+    color: red;
 }
