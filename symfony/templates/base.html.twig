@@ -6,16 +6,21 @@
 	{% endblock %}
 
 	<body>
-	<!--MENU DE NAVEGACIO - LATERAL ESQUERRA-->
-		{% block navbar %}{% endblock %}
-
 		{% block body %}
+
+			<!--MENU DE NAVEGACIO - LATERAL ESQUERRA-->
+			<nav class="primary-menu">
+				{% block navbar %}{% endblock %}
+			</nav>
+
+			<!--CONTINGUT DE LA WEB - ZONA DRETA-->
 			<main>
-					<!--CONTINGUT DE LA WEB - ZONA DRETA-->
 				<div id="fade"></div>
 				{% block content %}{% endblock %}
 			</main>
+
 		{% endblock %}
+
 		{% block javascripts %}{% endblock %}
 	</body>
 </html>
