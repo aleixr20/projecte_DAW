@@ -95,8 +95,6 @@ class UserController extends AbstractController
                 // updates the 'imatge' property to store the image file name
                 // instead of its contents
                 $user->setImatge($nouNomArxiu);
-            }else{
-                $user->setImatge('default.jpg');
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -210,7 +208,7 @@ class UserController extends AbstractController
                 // updates the 'imatge' property to store the image file name
                 // instead of its contents
                 $user->setImatge($nouNomArxiu);
-            }else{
+            }else if($imatgePerfil && !($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')){
                 return $this->render('user/edit.html.twig', [
                     'editForm' => $form->createView(),
                     'error' => 'La imatge seleccionada no és vàlida.'
