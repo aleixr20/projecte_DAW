@@ -23,10 +23,10 @@
 				</h2>
 				<p>{{ user.email }}</p>
 				{% if user.genere == 'masc' %}
-					<i class="fa fa-mars"></i>
+					<i class="fa fa-mars fa-gender"></i>
 				{% elseif user.genere == 'fem' %}
 					<p>
-						<i class="fa fa-venus"></i>
+						<i class="fa fa-venus fa-gender"></i>
 					</p>
 				{% endif %}
 				{% if user.getEdat() %}
