@@ -48,17 +48,18 @@ class ArticlesController extends AbstractController
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-
-        //Si el formulari es enviat, capture dde dades i pujar nou article a DB
+        
+        //Si el formulari es enviat, captura les dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
-
+            //Crear EntityManager
             $entityManager = $this->getDoctrine()->getManager();
-
+            //Capturar dades del formulari i assignar-les al article
             $article->setTitol($form->get('titol')->getData())
                 ->setSubtitol($form->get('subtitol')->getData())
                 //Ara per ara la data de publicació es fixa, un timestamp manual
                 ->setContingut($form->get('contingut')->getData())
                 ->setDataPublicacio(new \DateTime())
+                ->setVisible(true)
                 ->setUser($this->getUser());
 
             //Aquest funcio s'ha de revisar
@@ -69,16 +70,12 @@ class ArticlesController extends AbstractController
             $article->setSlug($slug);
 
             //Capturar input type="text" (String) de camp meta i convertirlo a array
-            $inputTagMeta = $form->get('tag_meta')->getData();
-            $arrayTagMeta = explode(",", $inputTagMeta);
+            $inputMetaTag = $form->get('meta_tag')->getData();
+            $correccioTags = str_replace(', ', ',', $inputMetaTag);
 
-            //Idem per tag web
-            $inputTagWeb = $form->get('tag_web')->getData();
-            $arrayTagWeb = explode(",", $inputTagWeb);
-
-            //Assignem a article els dos camps meta
-            $article->setTagMeta($arrayTagMeta)
-                ->setTagWeb($arrayTagWeb);
+            //Assignem a article els camps meta
+            $article->setMetaTag($correccioTags)
+                ->setMetaDescription($form->get('meta_description')->getData());
 
             //Capturem categoria del selsect del formulari
             $categoria = $form->get('categoria')->getData();
@@ -102,8 +99,8 @@ class ArticlesController extends AbstractController
         }
 
         return $this->render('articles/form_nou_article.html.twig', [
-            'article' => $article,
-            'formNouArticle' => $form->createView(),
+            // 'article' => $article,
+            'formArticle' => $form->createView(),
         ]);
     }
 
@@ -117,31 +114,23 @@ class ArticlesController extends AbstractController
     public function editarArticle($slug, Request $request)
     {
 
-        //Crear Objecte Article i Form
-        //$article = new Article();
-
-
+        //Obtenir dades del article
         $post_repository = $this->getDoctrine()->getRepository(Article::class);
         $article = $post_repository->findOneBy(array('slug' => $slug));
-
+        //Crear formulari amb les dades del article obtingut
         $form = $this->createForm(ArticleType::class, $article);
-        // $meta = join(",",$article->getTagMeta());
-        // echo $meta;
-        // $form->setData('tag_meta')->$meta;
         $form->handleRequest($request);
         
-
-
-        //Si el formulari es enviat, capture dde dades i pujar nou article a DB
+        //Si el formulari es enviat, captura les dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
-
+            //Crear EntityManager
             $entityManager = $this->getDoctrine()->getManager();
-
+            //Capturar dades del formulari i assignar-les al article
             $article->setTitol($form->get('titol')->getData())
                 ->setSubtitol($form->get('subtitol')->getData())
                 //Ara per ara la data de publicació es fixa, un timestamp manual
                 ->setContingut($form->get('contingut')->getData())
-                ->setDataPublicacio(new \DateTime())
+                ->setDataActualitzacio(new \DateTime())
                 ->setUser($this->getUser());
 
             //Aquest funcio s'ha de revisar
@@ -152,16 +141,12 @@ class ArticlesController extends AbstractController
             $article->setSlug($slug);
 
             //Capturar input type="text" (String) de camp meta i convertirlo a array
-            $inputTagMeta = $form->get('tag_meta')->getData();
-            $arrayTagMeta = explode(",", $inputTagMeta);
+            $inputMetaTag = $form->get('meta_tag')->getData();
+            $correccioTags = str_replace(', ', ',', $inputMetaTag);
 
-            //Idem per tag web
-            $inputTagWeb = $form->get('tag_web')->getData();
-            $arrayTagWeb = explode(",", $inputTagWeb);
-
-            //Assignem a article els dos camps meta
-            $article->setTagMeta($arrayTagMeta)
-                ->setTagWeb($arrayTagWeb);
+            //Assignem a article els camps meta
+            $article->setMetaTag($correccioTags)
+                ->setMetaDescription($form->get('meta_description')->getData());
 
             //Capturem categoria del selsect del formulari
             $categoria = $form->get('categoria')->getData();
@@ -186,7 +171,7 @@ class ArticlesController extends AbstractController
 
         return $this->render('articles/form_nou_article.html.twig', [
             'article' => $article,
-            'formNouArticle' => $form->createView(),
+            'formArticle' => $form->createView(),
         ]);    }
 
 

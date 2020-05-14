@@ -270,7 +270,7 @@ section {
     }
     section {
         _padding-left: 22%;
-        padding-right: 13%;
+        padding-right: 10%;
     }
 }
 
@@ -336,9 +336,11 @@ section {
     }
 }
 
-
-/* @media only screen and (max-height: 576px) {
-    #primary-menu {
-        bottom: 5vh;
+@media only screen and (orientation: landscape) {
+    #hamburgesa {
+        margin-top: 0;
     }
-} */
+    /* #menu-bottom {
+        bottom: 5vh;
+    } */
+}

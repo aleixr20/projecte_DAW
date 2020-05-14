@@ -117,9 +117,9 @@ class ArticlesFixtures extends Fixture
         ->setSlug(str_replace(" ", "-", $titol_php1))
         ->setUser($admin)
         ->setCategoria($categoria_php)
-        ->setTagMeta(['form', 'php', 'htmlentities', 'htmlspecialchars', 'FILTER_INPUT'])
-        ->setContingut("Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex veritatis qui optio quaerat tempore impedit enim esse unde, autem obcaecati. Excepturi, provident?");
-        
+        ->setMetaTag('form,php,htmlentities,htmlspecialchars,FILTER_INPUT')
+        ->setContingut("Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex veritatis qui optio quaerat tempore impedit enim esse unde, autem obcaecati. Excepturi, provident?")
+        ->setVisible(true);
         $manager->persist($article_php1);
 
         //ARTICLE 2
@@ -132,8 +132,9 @@ class ArticlesFixtures extends Fixture
         ->setSlug(str_replace(" ", "-", $titol_php2))
         ->setUser($admin)
         ->setCategoria($categoria_php)
-        ->setTagMeta(['mvc', 'php', 'modelo', 'vista', 'controlador'])
-        ->setContingut("Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex veritatis qui optio quaerat tempore impedit enim esse unde, autem obcaecati. Excepturi, provident?");
+        ->setMetaTag('mvc,php,modelo,vista,controlador')
+        ->setContingut("Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex veritatis qui optio quaerat tempore impedit enim esse unde, autem obcaecati. Excepturi, provident?")
+        ->setVisible(true);
         $manager->persist($article_php2);
 
         $manager->flush();

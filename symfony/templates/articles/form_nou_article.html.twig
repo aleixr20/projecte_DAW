@@ -11,39 +11,44 @@
 			Nou Article
 		</h1>
 
-		{{ form_start(formNouArticle) }}
+		{{ form_start(formArticle) }}
 		<div class="form-group">
-			{{ form_label(formNouArticle.titol) }}
-			{{ form_widget(formNouArticle.titol) }}
+			{{ form_label(formArticle.titol) }}
+			{{ form_widget(formArticle.titol) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(formNouArticle.subtitol) }}
-			{{ form_widget(formNouArticle.subtitol) }}
+			{{ form_label(formArticle.subtitol) }}
+			{{ form_widget(formArticle.subtitol) }}
 		</div>
 		<div class="form-group" id="categories">
-			{{ form_label(formNouArticle.categoria) }}
-			{{ form_widget(formNouArticle.categoria) }}
+			{{ form_label(formArticle.categoria) }}
+			{{ form_widget(formArticle.categoria) }}
 		</div>
 		<div class="form-group" id="novaCategoria" style="display:none">
-			{{ form_label(formNouArticle.nova_categoria) }}
-			{{ form_widget(formNouArticle.nova_categoria) }}
+			{{ form_label(formArticle.nova_categoria) }}
+			{{ form_widget(formArticle.nova_categoria) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(formNouArticle.contingut) }}
-			{{ form_widget(formNouArticle.contingut) }}
+			{{ form_label(formArticle.contingut) }}
+			{{ form_widget(formArticle.contingut) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(formNouArticle.tag_meta) }}
-			{{ form_widget(formNouArticle.tag_meta) }}
+			{{ form_label(formArticle.meta_tag) }}
+			{{ form_widget(formArticle.meta_tag) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(formNouArticle.tag_web) }}
-			{{ form_widget(formNouArticle.tag_web) }}
+			{{ form_label(formArticle.meta_description) }}
+			{{ form_widget(formArticle.meta_description) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(formArticle.visible) }}
+			{{ form_widget(formArticle.visible) }}
 		</div>
 
-		{{ form_widget(formNouArticle) }}
-		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('afegir article') }}</button>
-		{{ form_end(formNouArticle) }}
+
+		{{ form_widget(formArticle) }}
+		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar dades') }}</button>
+		{{ form_end(formArticle) }}
 
 	</section>
 

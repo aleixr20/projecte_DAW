@@ -9,48 +9,45 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextAreaType;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\Lenght;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        //    $tema_repository = $this->getDoctrine()->getRepository(Tema::class);
-        //   $temas = $tema_repository->findAll();
 
         $builder
             ->add('titol', TextType::class, [
                 'label' => 'Titol article',
                 'attr' => ['class' => 'form-control'],
-                // 'constraints' => [
-                //     new Length([
-                //         'min' => 25,
-                //         'minMassage' => 'Error, menys de {{ limit }} ',
-                //         'max' => 100,
-                //         'maxMassage' => 'Error, més de {{ limit }} ',
-                //      ]) 
-                //     ]
+                'constraints' => [
+                    new Length([
+                        'min' => 25,
+                        'minMessage' => 'Error, menys de {{ limit }} ',
+                        'max' => 100,
+                        'maxMessage' => 'Error, més de {{ limit }} ',
+                    ])
+                ]
             ])
 
             ->add('subtitol', TextType::class, [
                 'label' => 'Subtitol article',
                 'attr' => ['class' => 'form-control'],
-                // 'constraints' => [
-                //     new Length([
-                //         'min' => 50,
-                //         'minMassage' => 'Error, menys de {{ limit }} ',
-                //         'max' => 150,
-                //         'maxMassage' => 'Error, més de {{ limit }} ',
-                //      ]) 
-                //     ]
+                'constraints' => [
+                    new Length([
+                        'min' => 50,
+                        'minMessage' => 'Error, menys de {{ limit }} ',
+                        'max' => 150,
+                        'maxMessage' => 'Error, més de {{ limit }} ',
+                    ])
+                ]
             ])
-            // ->add('description', CKEditorType::class, [
-            //     'mapped' => false
-            // ])
 
             ->add('contingut', CKEditorType::class, [
                 'label' => 'Contingut article',
@@ -58,22 +55,27 @@ class ArticleType extends AbstractType
 
             ])
 
-            ->add('tag_meta', TextType::class, [
+            ->add('meta_tag', TextType::class, [
                 'label' => 'etiquetes posicionament SEO',
                 'attr' => ['class' => 'form-control'],
-                'mapped' => false,
             ])
 
-            ->add('tag_web', TextType::class, [
-                'label' => 'etiquetes buscador intern',
-                'attr' => ['class' => 'form-control'],
-                'mapped' => false,
+            ->add('meta_description', TextAreaType::class, [
+                'label' => 'Breu descripcio Snippet SEO (maxim 155 caràcters)',
+                'attr' => ['class' => 'form-control', 'rows' => 2],
+                'constraints' => [
+                    new Length([
+                        'min' => 100,
+                        'minMessage' => 'Error, menys de {{ limit }} ',
+                        'max' => 160,
+                        'maxMessage' => 'Error, més de {{ limit }} ',
+                    ])
+                ]
             ])
 
             ->add('categoria', EntityType::class, [
                 'attr' => ['class' => 'form-control'],
                 'class' => Categoria::class,
-                //'choises' => $this->getNom()
             ])
 
             ->add('nova_categoria', TextType::class, [
@@ -81,6 +83,14 @@ class ArticleType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
                 'required' => false,
+            ])
+
+            ->add('visible', ChoiceType::class, [
+                'attr' => ['class' => 'form-control'],
+                'choices'  => [
+                    'Esborrany' => false,
+                    'Publica' => true,
+                ],
             ]);
     }
 

@@ -25,7 +25,7 @@ class Article
     private $titol;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $subtitol;
 
@@ -45,14 +45,14 @@ class Article
     private $slug;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $tag_meta = [];
+    private $meta_tag;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $tag_web = [];
+    private $meta_description;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
@@ -81,6 +81,11 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      */
     private $Categoria;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
 
     public function __construct()
     {
@@ -152,26 +157,26 @@ class Article
         return $this;
     }
 
-    public function getTagMeta(): ?array
+    public function getMetaTag(): ?string
     {
-        return $this->tag_meta;
+        return $this->meta_tag;
     }
 
-    public function setTagMeta(?array $tag_meta): self
+    public function setMetaTag(?string $meta_tag): self
     {
-        $this->tag_meta = $tag_meta;
+        $this->meta_tag = $meta_tag;
 
         return $this;
     }
 
-    public function getTagWeb(): ?array
+    public function getMetaDescription(): ?string
     {
-        return $this->tag_web;
+        return $this->meta_description;
     }
 
-    public function setTagWeb(?array $tag_web): self
+    public function setMetaDescription(?string $meta_description): self
     {
-        $this->tag_web = $tag_web;
+        $this->meta_description = $meta_description;
 
         return $this;
     }
@@ -187,18 +192,6 @@ class Article
 
         return $this;
     }
-
-    // public function getTema(): ?Tema
-    // {
-    //     return $this->tema;
-    // }
-
-    // public function setTema(?Tema $tema): self
-    // {
-    //     $this->tema = $tema;
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection|Comentari[]
@@ -251,6 +244,18 @@ class Article
     public function setCategoria(?Categoria $Categoria): self
     {
         $this->Categoria = $Categoria;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }
