@@ -30,10 +30,8 @@
 					</p>
 				{% endif %}
 				{% if user.getEdat() %}
-					<p>{{ user.getEdat() }}</p>
-				</span>
-				anys</p>
-		{% endif %}
+					<p>{{ user.getEdat() }} anys</p>
+		        {% endif %}
 		{% if user.github %}
 			{% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
 			<a href="{{ urlGithub }}" target="_blank">
