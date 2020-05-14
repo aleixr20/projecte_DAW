@@ -3,6 +3,7 @@ let toggleMenu;
 
 window.onload = function() {
 
+    /*
     let burger = document.getElementById("hamburgesa").addEventListener("click", function() {
         let menu_lateral = document.getElementsByClassName("primary-menu")
         let shadow = document.getElementById("fade");
@@ -40,6 +41,7 @@ window.onload = function() {
             show = true;
         }
     });
+    */
 
     if (this.document.URL == "http://localhost:8000/new") {
         $('#article_categoria').children('option').click(function() {

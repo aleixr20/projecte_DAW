@@ -1,61 +1,57 @@
-<nav class="primary-menu">
-	<ul id="menu-top">
-
-		<li id="search">
-			<a>
-				<i class="fa fa-search"></i>
-			</a>
-		</li>
-		<li id="hamburgesa">
-			<a>
-				<i class="fa fa-bars"></i>
-			</a>
-		</li>
-	</ul>
-	<ul
-		id="menu-bottom">
-
-		<!--SI HI HA UN USUARI LOGGEJAT - primer mostrar el seu perfil-->
-		{% if app.user %}
-			<li>
+<ul
+	id="menu-bottom">
+	<!--SI HI HA UN USUARI LOGGEJAT - primer mostrar el seu perfil-->
+	{% if app.user %}
+		<li>
+			<a
+				class="menu-user" href="{{ path('userProfile')}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
-					<a class="menu-link-hidden" href="{{ path('userProfile')}}">
-						<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif" class="menu-user-icon">
-						<br/>
-						{{app.user.username}}
-					</a>
+					<img src="/img/imatges_perfil/{{ asset(app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
-					<a class="menu-user-icon" href="{{ path('userProfile')}}">
-						<i class="fa fa-user-circle"></i>
-						{{article.user.username}}
-					</a>
-				{% endif %}
-			</li>
-		{% endif %}
-
-		<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
-		{% for section in sections %}
-			<li>
-				<a class="menu-icon" href="{{section.menulink}}">
 					<i class="fa fa-user-circle"></i>
-				</a>
-				{% if loop.first %}
-					<a class="menu-link-visible active" href="#{{section.menulink}}">{{section.menulink}}</a>
-				{% else %}
-					<a class="menu-link-visible" href="#{{section.menulink}}">{{section.menulink}}</a>
 				{% endif %}
-			</li>
-		{% endfor %}
+			</a>
+		</li>
+		<li>
+			<a class="menu-username" href="{{ path('userProfile')}}">{{app.user.username}}</a>
+		</li>
+		<li>
+			<a class="menu-icon-logout" href="{{ path('app_logout')}}">
+				<i class="fa fa-power-off"></i>
+			</a>
+			<a class="menu-link-logout" href="{{ path('app_logout')}}">
+				sortir
+			</a>
+		</li>
+	{% else %}
+		<li>
+			<a class="menu-icon" href="{{ path('app_login')}}">
+				<i class="fa fa-user-circle"></i>
+			</a>
+		</li>
+	{% endif %}
+	<!-- HAMBURGUESA TOGGLE -->
 
-		<!--SI NO HI HA USUARI LOGGEJAR, MOSTREM AL FINAL LA ICONA DE LOGIN-->
-		{% if not app.user %}
-			<li>
-				<a class="menu-user-icon" href="{{ path('app_login')}}">
-					<i class="fa fa-user-circle"></i>
-				</a>
-				{# <a class="menu-link-hidden" href="{{ path('login')}}">LOGIN</a> #}
+	<li id="hamburgesa">
+		<i class="menu-icon fa fa-bars"></i>
+	</li>
+
+
+	<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+	{% for section in sections %}
+		<li class="scrollable">
+			{% if loop.first %}
+				<a class="menu-link active" href="#{{section.menulink}}">{{section.menulink}}</a>
+			{% else %}
+				<a class="menu-link" href="#{{section.menulink}}">{{section.menulink}}</a>
 			{% endif %}
+		</li>
+	{% endfor %}
+	<!-- BUSCADOR -->
+	<li id="search">
+		<i class="menu-icon fa fa-search"></i>
+	</li>
 
-		</ul>
-	</nav>
+
+</ul>

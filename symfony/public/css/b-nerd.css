@@ -44,66 +44,71 @@ nav {
     transition-duration: 0.68s;
 }
 
+
+/*
 #menu-top {
-    font-size: 2em;
+    _font-size: 2em;
     color: #999;
     position: absolute;
     right: 0;
-    top: 16vh;
+    top: 56vh;
     padding: 0.6em;
     list-style-type: none;
+    text-align: right;
 }
-
-#hamburgesa {
-    display: none;
-}
+*/
 
 #menu-bottom {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    color: #999;
+    text-align: right;
+    list-style-type: none;
     position: absolute;
     right: 0;
     bottom: 16vh;
     padding: 0.5em;
-    list-style-type: none;
-    text-align: right;
 }
 
-.menu-icon {
-    font-size: 2em;
+#menu-bottom a {
     color: #999;
     text-decoration: none;
-    padding: 0.3em;
-    display: none;
 }
 
-.menu-user-icon {
+#menu-bottom a:hover,
+#menu-bottom i:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.menu-user img {
     width: 3em;
     border-radius: 50%;
 }
 
-.menu-link-visible {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 600;
-    color: #999;
-    text-decoration: none;
-    display: block;
+.menu-icon-logout {
+    font-size: 1.6em;
+    padding: 0.2em 0;
+    display: none;
 }
 
-.menu-link-hidden {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 600;
-    color: #999;
-    text-decoration: none;
-    display: block;
+.menu-link-logout {
+    font-weight: 500;
+    font-style: italic;
+}
+
+.menu-icon {
+    font-size: 1.6em;
+    padding: 0.2em 0;
 }
 
 .active {
-    color: red;
+    color: red !important;
 }
 
-.menu-link-visible:hover,
-.menu-link-hidden:hover {
-    color: red;
-    text-decoration: none;
+#hamburgesa {
+    visibility: hidden;
+    margin-top: 2em;
 }
 
 
@@ -248,50 +253,52 @@ section {
  *****************************/
 
 @media only screen and (max-width: 1200px) {
-    .menu-icon {
-        display: none;
-    }
     #hamburguesa {
-        display: block;
+        visibility: hidden;
     }
 }
 
 @media only screen and (max-width: 992px) {
+    #hamburguesa {
+        visibility: hidden;
+    }
     section {
         padding-left: 19%;
     }
-    .menu-icon {
-        display: none;
-    }
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 780px) {
+    #hamburguesa {
+        visibility: hidden;
+    }
     section {
         padding-left: 20%;
     }
-    .menu-icon {
-        display: none;
-    }
-    #hamburguesa {
-        display: none;
-    }
 }
 
 @media only screen and (max-width: 576px) {
-    .primary-menu {
-        width: 4.5em;
-    }
     #hamburgesa {
-        display: block;
+        visibility: visible;
     }
-    .menu-link-visible {
+    .menu-user img {
+        width: 2em;
+    }
+    .menu-icon-logout {
+        display: block;
+        position: relative;
+        bottom: -6em;
+    }
+    .scrollable,
+    .menu-username,
+    .menu-link-logout {
         display: none;
     }
-    .menu-link-hidden {
-        display: none;
+    #menu-bottom {
+        text-align: center;
+        margin-right: 0.3em;
     }
-    .menu-icon {
-        display: block;
+    .primary-menu {
+        width: 3.5em;
     }
     section {
         padding-left: 23%;
