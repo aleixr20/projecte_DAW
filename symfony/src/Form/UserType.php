@@ -51,21 +51,15 @@ class UserType extends AbstractType
                 'required'=> false,
             ])
             ->add('nom_usuari', TextType::class)
-            // ->add('imatge', FileType::class, [
-            //     'mapped' => false,
-            //     'required' => false,
-            //     'constraints' => [
-            //         new File([
-            //             'maxSize' => '2000k',
-            //             'mimeTypes' => [
-            //                 'image/png', 
-            //                 'image/jpeg',
-            //                 'image/gif'
-            //             ],
-            //             'mimeTypesMessage' => 'Puja una imatge vàlida (PNG, JPEG o GIF)',
-            //         ])
-            //     ],
-            // ])
+            ->add('imatge', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2000k',
+                    ])
+                ],
+            ])
             ->add('github', TextType::class, [
                 'required'=> false,
             ])

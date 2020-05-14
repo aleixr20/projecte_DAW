@@ -79,7 +79,7 @@ class UserController extends AbstractController
 
             // this condition is needed because the 'imatge' field is not required
             // so the image file must be processed only when a file is uploaded
-            if ($imatgePerfil) {
+            if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
                 $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $nomArxiu = $slugger->slug($nomArxiuOriginal);
@@ -176,7 +176,7 @@ class UserController extends AbstractController
      * METODE PER EDITAR EL PERFIL D'UN USUARI
      * @Route("/user/profile/edit", name="userProfileEdit")
      */
-    public function userProfileEdit(Request $request)
+    public function userProfileEdit(Request $request, SluggerInterface $slugger)
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -188,6 +188,37 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Pujada de la imatge de perfil
+            $imatgePerfil = $form->get('imatge')->getData();
+
+            // this condition is needed because the 'imatge' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
+                $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $nomArxiu = $slugger->slug($nomArxiuOriginal);
+                $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
+
+                // Move the file to the directory where imatges are stored
+                try {
+                    $imatgePerfil->move('img\imatges_perfil', $nouNomArxiu);
+                } catch (FileException $e) {
+                    throw new Error($e);
+                }
+
+                // updates the 'imatge' property to store the image file name
+                // instead of its contents
+                $user->setImatge($nouNomArxiu);
+            }else{
+                return $this->render('user/edit.html.twig', [
+                    'editForm' => $form->createView(),
+                    'error' => 'La imatge seleccionada no és vàlida.'
+                ]);
+            }
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
