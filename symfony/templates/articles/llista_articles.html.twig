@@ -10,7 +10,7 @@
 			{% for article in articles %}
 
 				<h2 class="article_titol">
-					<a href="/post{{asset(article.slug)}}">{{article.titol}}</a>
+					<a href="{{ asset("post/" ~ article.slug) }}">{{article.titol}}</a>
 				</h2>
 				<h4 class="article_subtitol">{{article.subtitol}}</h4>
 			{% endfor %}

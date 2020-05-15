@@ -87,7 +87,7 @@ class UserController extends AbstractController
 
                 // Move the file to the directory where imatges are stored
                 try {
-                    $imatgePerfil->move('img\imatges_perfil', $nouNomArxiu);
+                    $imatgePerfil->move('img/imatges_perfil', $nouNomArxiu);
                 } catch (FileException $e) {
                     throw new Error($e);
                 }
@@ -200,7 +200,7 @@ class UserController extends AbstractController
 
                 // Move the file to the directory where imatges are stored
                 try {
-                    $imatgePerfil->move('img\imatges_perfil', $nouNomArxiu);
+                    $imatgePerfil->move('img/imatges_perfil', $nouNomArxiu);
                 } catch (FileException $e) {
                     throw new Error($e);
                 }
