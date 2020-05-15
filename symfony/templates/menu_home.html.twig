@@ -7,7 +7,7 @@
 				class="menu-user" href="{{ path('userProfile')}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
-					<img src="{{ asset("/img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
+					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
 					<i class="fa fa-user-circle"></i>
 				{% endif %}
