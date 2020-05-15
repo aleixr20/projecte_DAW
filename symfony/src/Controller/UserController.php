@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
 {
@@ -305,7 +306,7 @@ class UserController extends AbstractController
      * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI
      * @Route("/user/profile/{userName}", name="otherUserProfile")
      */
-    public function otherUserProfile($userName, UserRepository $userRepository)
+    public function otherUserProfile($userName, UserRepository $userRepository, SerializerInterface $serializer)
     {
         if($userRepository->findOneBy(['nom_usuari' => $userName])){
             $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
@@ -313,9 +314,16 @@ class UserController extends AbstractController
             throw new Error("No existeix l'usuari");
         }
         
-
-        return $this->render('user/profile.html.twig', [
-            'user' => $user,
+        $userJson = $serializer->serialize($user, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
         ]);
+
+        return new JsonResponse(json_decode($userJson));
+        
+        // return $this->render('user/profile.html.twig', [
+        //     'user' => $user,
+        // ]);
     }
 }
