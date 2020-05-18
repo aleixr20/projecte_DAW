@@ -21,6 +21,7 @@
 					{{ user.cognom }}
 					<span id="profile-username">{{ user.username }}</span>
 				</h2>
+				{# DEFINIR ESTRUCTURA #}
 				<p>{{ user.email }}</p>
 				{% if user.genere == 'masc' %}
 					<i class="fa fa-mars fa-gender"></i>
@@ -60,7 +61,9 @@
 					{% endif %}
 				</div>
 				{% endif %}
+
 			</div>
+			
 			<div class="col-md-1 col-sm-12">
 				{% if app.user and user.username == app.user.username %}
 					<button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,6 +86,16 @@
 			</div>
 		</div>
 <hr>
+
+<div id="profile-description">
+	<h4>Descripció</h4>
+	<hr>
+	{% if user.descripcio %}
+		<p>{{ user.descripcio }}</p>
+	{% else %}
+		<p><i>L'usuari encara no ha afegit cap descripció.</i></p>
+	{% endif %}
+</div>
 <div class="col-12 profile-box">
 	<h2>
 		<strong>{{ user.articles|length }}</strong>

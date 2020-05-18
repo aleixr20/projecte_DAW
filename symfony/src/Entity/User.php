@@ -118,6 +118,11 @@ class User implements UserInterface
      */
     private $socialMedia;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     */
+    private $descripcio;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -460,6 +465,18 @@ class User implements UserInterface
             $this->socialMedia->removeElement($socialMedium);
             $socialMedium->removeUsuari($this);
         }
+
+        return $this;
+    }
+
+    public function getDescripcio(): ?string
+    {
+        return $this->descripcio;
+    }
+
+    public function setDescripcio(?string $descripcio): self
+    {
+        $this->descripcio = $descripcio;
 
         return $this;
     }

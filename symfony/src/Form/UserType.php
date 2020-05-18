@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserType extends AbstractType
 {
@@ -51,6 +52,11 @@ class UserType extends AbstractType
                 'required'=> false,
             ])
             ->add('nom_usuari', TextType::class)
+            ->add('descripcio', TextAreaType::class, [
+                'label' => 'Descripció',
+                'required'=> false,
+                'attr' => ['rows' => '6'],
+            ])
             ->add('imatge', FileType::class, [
                 'mapped' => false,
                 'required' => false,
