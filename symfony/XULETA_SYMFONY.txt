@@ -77,3 +77,7 @@ $ php bin/console assets:install --symlink
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+
+
+programa->FTP -> winscp
