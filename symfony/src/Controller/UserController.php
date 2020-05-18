@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
@@ -313,8 +314,11 @@ class UserController extends AbstractController
         }else{
             throw new Error("No existeix l'usuari");
         }
-        
+
+
         $userJson = $serializer->serialize($user, 'json', [
+            'ignored_attributes' => ['comentaris', 'articles'],
+            'circular_reference_limit' => 1,
             'circular_reference_handler' => function ($object) {
                 return $object->getId();
             }

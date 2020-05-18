@@ -12,6 +12,7 @@ window.onload = function() {
 
     document.getElementById("hamburgesa").addEventListener("click", function() {
 
+
         if (menuVisibilityStatus == false) {
             showMenu();
         } else {
@@ -32,6 +33,7 @@ window.onload = function() {
             menulinks[i].style.zIndex = "+5";
             menulinks[i].addEventListener("click", hideMenu);
         }
+
         menuVisibilityStatus = true;
     }
 
@@ -48,6 +50,7 @@ window.onload = function() {
                 menulinks[i].style.opacity = "0";
                 menulinks[i].style.zIndex = "-5";
                 menulinks[i].removeEventListener("click", function() {});
+
             }
         } else {
             menu_lateral[0].style.width = "16vw";
@@ -66,42 +69,18 @@ window.onload = function() {
                 $('#article_nova_categoria').val("").removeAttr("required");
             }
         });
-
-        //Validar contingut inputs
-        // $('#article_titol').change(console.log('hola'));
-        // $('#article_titol').change(console.log($(this).html()));
-
-        $('#article_titol').change(function() {
-            inputLength($(this), 25, 100, null);
-        });
-
-
     }
-
-    function inputLength(inputObj, min, max, missatge_error) {
-        console.log(inputObj)
-        if (inputObj.val().length < min || inputObj.val().length > max) {
-            inputObj.css({ 'border': '1px solid red', 'box-shadow': '0 0 0 .2rem rgba(255, 0 , 0, .25)' })
-            $('#articleSubmit').hide()
-
-        } else {
-            inputObj.css({ 'border': '1px solid #ced4da', 'box-shadow': 'unset' })
-            $('#articleSubmit').show()
-
-        }
-
-    }
-
-
 
     $('#contrast').click(function() {
         if (contrast == false) {
             $(this).html('<i class="menu-icon fa fa-toggle-off"></i>');
             $('body').css({ 'color': '#666', 'background-color': '#fff' })
+
             contrast = true;
         } else {
             $(this).html('<i class="menu-icon fa fa-toggle-on"></i>')
             $('body').css({ 'color': '#999', 'background-color': '#333' })
+
             contrast = false;
         }
     });

@@ -298,17 +298,6 @@
         margin: 0;
         background-color: #eee;
     }
-    /*****************************
-        FORMULARIS
-    ***************************/
-    
-    .form.control:focus {
-        color: #495057;
-        background-color: #fff;
-        border-color: #80bdff;
-        outline: 0;
-        box-shadow: 0 0 0 .1rem rgba(0, 123, 255, .25);
-    }
     /* .form-group {
     margin-bottom: 1rem;
 }
