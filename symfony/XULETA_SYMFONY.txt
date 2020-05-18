@@ -61,3 +61,23 @@ php bin/console make:controller
 php bin/console make:crud
 
 php bin/console make:form
+
+
+php bin/console cache:clear
+
+
+//INSTALAR FOS-CKEDITOR
+$ composer require friendsofsymfony/ckeditor-bundle
+$ php app/console ckeditor:install
+$ php bin/console assets:install --symlink
+
+# Symfony 2/3: app/config/config.yml
+# Symfony 4: config/packages/twig.yaml
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+
+
+programa->FTP -> winscp
