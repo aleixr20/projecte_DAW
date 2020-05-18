@@ -1,14 +1,3 @@
-#Unificant el login, logout i register al UserController,
-#El Security i el Resgistration sobren
-
-Security:
-    resource: App\Controller\SecurityController
-    type: annotation
-
-Registration:
-    resource: App\Controller\RegistrationController
-    type: annotation
-    
 App:
     resource: App\Controller\AppController
     type: annotation

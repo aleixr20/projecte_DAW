@@ -5,6 +5,20 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+
+use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
+use Symfony\Component\Serializer\SerializerInterface;
+
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
@@ -48,7 +62,7 @@ class ArticlesController extends AbstractController
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        
+
         //Si el formulari es enviat, captura les dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
             //Crear EntityManager
@@ -104,7 +118,6 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-
     /**
      * METODE PER EDITAR UN ARTICLE EXISTENT
      * Podem entrar per nom(slug) o per id
@@ -120,7 +133,7 @@ class ArticlesController extends AbstractController
         //Crear formulari amb les dades del article obtingut
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        
+
         //Si el formulari es enviat, captura les dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
             //Crear EntityManager
@@ -172,34 +185,11 @@ class ArticlesController extends AbstractController
         return $this->render('articles/form_nou_article.html.twig', [
             'article' => $article,
             'formArticle' => $form->createView(),
-        ]);    }
-
-
-
-    /*************************************************
-     * AQUI ES ON ENS ESTEM FOTENT D'OSTIES NO?
-     * ***********************************************/
-
-
-    // /**
-    //  * @Route("/in{tema}", name="tema", methods={"GET"})
-    //  */
-    // public function tema($tema, ArticleRepository $articleRepository, TemaRepository $temaRepository)
-    // {
-
-    //     if ($tema == 'login') {
-    //         // redirects to the "homepage" route
-    //         return $this->redirectToRoute('app_login');
-    //     }
-    //     $temaId = $temaRepository->findOneBy(array('nom' => $tema))->getId();
-
-    //     return $this->render('article/index_tema.html.twig', [
-    //         'tema' => $tema,
-    //         'articles' => $articleRepository->findBy(array('tema' => $temaId)),
-    //     ]);
-    // }
+        ]);
+    }
 
     /**
+     * PER VEURE UN ARTICLE
      * @Route("/post/{slug}", name="article_detall", methods={"GET"})
      */
     public function slug($slug, ArticleRepository $articleRepository)
@@ -209,23 +199,69 @@ class ArticlesController extends AbstractController
         $post = $post_repository->findOneBy(array('slug' => $slug));
 
         return $this->render('articles/index.html.twig', [
-            'article' => $post
+            'article' => $post,
+            'color' => $post->getCategoria()->getColor()
         ]);
     }
 
+
+
     /**
-     * @Route("/inPHP", name="inPHP")
+     * PER A FRONTEND AMB VUE -> RETORNA UN ARRAY D'OBJECTES ARTICLE
+     * @Route("/post_vue/{slug}", name="article_detall_vue")
      */
-    public function getAll()
+    public function slug_vue($slug, ArticleRepository $articleRepository, SerializerInterface $serializer): JsonResponse
     {
-        $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
-        $cat = $cat_repository->findBy(['nom' => "PHP"]);
 
         $post_repository = $this->getDoctrine()->getRepository(Article::class);
-        $posts = $cat[0]->getArticles();
+        $post = $post_repository->findOneBy(array('slug' => $slug));
 
-        return $this->render('articles/llista_articles.html.twig', [
-            'articles' => $posts,
+        // $result = $serializer->normalize($level1, null, [AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true]);
+        $postJson = $serializer->serialize($post, 'json', [
+            'ignored_attributes' => ['user', 'categoria'],
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
         ]);
+
+        return new JsonResponse(json_decode($postJson));
+    }
+
+    /**
+     * RETORNA TOTS ELS ARTICLES D'UNA CATEGORIA
+     * SI NO TROBA UNA CATEGORIA AMB EL MATEIX NOM
+     * REDIRIGEIX CAP AL HOMEPAGE (PODEM CREAR UN 404)
+     * @Route("/{cat_name}", name="articles_categoria")
+     */
+    public function getArticles($cat_name, SerializerInterface $serializer)
+    {
+        $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
+        $categories = $cat_repository->findAll();
+
+        //Comprovar si la categoria entrada coincideix amb el nom d'una categoria existent
+        for ($i = 0; $i < count($categories); $i++) {
+            if ($cat_name == $categories[$i]->getNom()) {
+                $posts = $categories[$i]->getArticles();
+
+                //Si hi ha coincidencia, fer return
+                return $this->render('articles/llista_articles.html.twig', [
+                    'articles' => $posts,
+                    'categoria' => $categories[$i],
+                    'color' => $categories[$i]->getColor()
+                ]);
+
+                //OPCIO JSON
+                // $catJson = $serializer->serialize($posts, 'json', [
+                //     'ignored_attributes' => ['user', 'categoria'],
+                //     'circular_reference_handler' => function ($object) {
+                //         return $object->getId();
+                //     }
+                // ]);
+        
+                // return new JsonResponse(json_decode($catJson));
+            }
+        }
+        //Si ha fet tot el bucle i no ha trobat coincidencia, redirigir a homepage
+        return $this->redirectToRoute('homepage');
     }
 }

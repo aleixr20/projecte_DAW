@@ -33,6 +33,16 @@ class Categoria
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tipus;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $color;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -99,6 +109,30 @@ class Categoria
                 $article->setCategoria(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTipus(): ?string
+    {
+        return $this->tipus;
+    }
+
+    public function setTipus(string $tipus): self
+    {
+        $this->tipus = $tipus;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

@@ -1,0 +1,50 @@
+<ul class="menu-user">
+	<li>
+		<a
+			href="{{ path('userProfile')}}">
+			<!--SI L'USUARI TE IMATGE DE PERFIL-->
+			{% if article.user.imatge %}
+				<img src="{{ asset("img/imatges_perfil/" ~ article.user.imatge) }}" alt="imatge de perfil" id="img-modif">
+			{% else %}
+				<i class="fa fa-user-circle"></i>
+			{% endif %}
+		</a>
+	</li>
+	<li>
+		<a class="menu-link menu-username" href="{{ path('userProfile')}}">{{article.user.username}}</a>
+	</li>
+	{% if app.user and (app.user == article.user) %}
+		<li>
+			{# <a class="menu-icon-logout" href="{{ path('app_logout')}}">
+				<i class="fa fa-power-off"></i>
+			</a> #}
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
+				sortir
+			</a>
+		</li>
+	{% endif %}
+</ul>
+
+	<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+<ul
+	class="menu-bottom">
+	<li class="scrollable">
+		<a class="menu-link active" href="/#about-us">b-NERD toDEVELOPE</a>
+	</li>
+	<li class="scrollable">
+		<a class="menu-link" href="/#hard-skills">ARTICLES</a>
+	</li>
+
+	<!-- BUSCADOR -->
+	<li id="search">
+		<a class="menu-link" href="/#contact">SEARCH</a>
+		{# <i class="menu-icon fa fa-search"></i> #}
+	</li>
+	<li id="hamburgesa">
+		<i class="menu-icon fa fa-bars"></i>
+	</li>
+	<li id="contrast">
+		<i class="menu-icon fa fa-toggle-off"></i>
+	</li>
+
+</ul>

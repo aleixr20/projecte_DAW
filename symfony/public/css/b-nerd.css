@@ -1,51 +1,60 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    color: #666;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.5em;
-}
-
-p {
-    padding: 0.5em 0;
-}
-
-ul {
-    padding: 0.66em 1.6em;
-}
-
-
-/*****************************
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+        width: 100%;
+        height: 100%;
+    }
+    
+    body {
+        color: #666;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.5em;
+    }
+    
+    p {
+        padding: 0.66em 0;
+        margin-bottom: 0;
+    }
+    
+    a {
+        color: #aaa;
+        font-style: italic;
+    }
+    
+    a:hover {
+        text-decoration: dotted;
+        color: #666;
+    }
+    /* RESET DEL BOOTSTRAP */
+    
+    ul {
+        padding: 0.66em 1.6em;
+        margin-bottom: 0;
+    }
+    /*****************************
     MENUS NAVEGACIO
  *****************************/
-
-nav {
-    border-right: 3px solid red;
-    width: 20vw;
-    position: fixed;
-    top: 1%;
-    bottom: 1%;
-    left: 0;
-    z-index: 100;
-    transition-duration: 0.68s;
-}
-
-
-/*
+    
+    nav {
+        border-right: 3px solid red;
+        width: 20vw;
+        position: fixed;
+        top: 1%;
+        bottom: 1%;
+        left: 0;
+        z-index: 100;
+        transition-duration: 0.68s;
+    }
+    /*
 #menu-top {
     _font-size: 2em;
     color: #999;
@@ -57,177 +66,239 @@ nav {
     text-align: right;
 }
 */
-
-#menu-bottom {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 600;
-    color: #999;
-    text-align: right;
-    list-style-type: none;
-    position: absolute;
-    right: 0;
-    bottom: 16vh;
-    padding: 0.5em;
-}
-
-#menu-bottom a {
-    color: #999;
-}
-
-#menu-bottom a:hover,
-#menu-bottom i:hover {
-    color: red;
-    text-decoration: none;
-}
-
-.menu-user img {
-    width: 3em;
-    border-radius: 50%;
-}
-
-.menu-icon-logout {
-    font-size: 1.6em;
-    padding: 0.2em 0;
-    display: none;
-}
-
-.menu-link-logout {
-    font-weight: 500;
-    font-style: italic;
-}
-
-.menu-icon {
-    font-size: 1.6em;
-    padding: 0.2em 0;
-}
-
-.active {
-    color: red !important;
-}
-
-#hamburgesa {
-    visibility: hidden;
-    margin-top: 2em;
-}
-
-
-/*****************************
+    
+    .menu-top,
+    .menu-user,
+    .menu-bottom {
+        font-family: Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 600;
+        color: #999;
+        text-align: right;
+        list-style-type: none;
+        position: absolute;
+        right: 0;
+        padding: 0.5em;
+    }
+    
+    .menu-top {
+        top: 14vh
+    }
+    
+    .menu-top img {
+        height: inherit;
+    }
+    
+    .menu-user {
+        bottom: 30vh;
+        transition-duration: 1s;
+        transition-timing-function: ease-in-out;
+    }
+    
+    .menu-user img {
+        width: 4em;
+        border-radius: 50%;
+    }
+    
+    .menu-bottom {
+        bottom: 10vh;
+    }
+    
+    .menu-bottom a {
+        color: #999;
+        font-style: initial;
+    }
+    
+    .menu-bottom a:hover,
+    .menu-bottom i:hover {
+        color: red;
+        text-decoration: none;
+    }
+    
+    .menu-icon-logout {
+        font-size: 1.6em;
+        padding: 0.2em 0;
+        display: none;
+    }
+    
+    .logout-link {
+        font-weight: 500;
+        font-style: italic;
+    }
+    
+    .menu-icon {
+        font-size: 1.6em;
+        padding: 0.2em 0;
+    }
+    
+    .menu-username,
+    .active {
+        color: red !important;
+    }
+    
+    #hamburgesa {
+        visibility: hidden;
+        _margin-top: 2em;
+        /* position: absolute;
+        right: 0;
+        top: 10vh; */
+    }
+    
+    #contrast {
+        font-size: 0.5rem;
+    }
+    /*****************************
+    SECTIONS HOMEPAGE
+ *****************************/
+    
+    .cat-list {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .cat-list li {
+        float: left;
+        list-style: none;
+        width: 4em;
+        height: 4em;
+        padding: 0.4em;
+        border-radius: 5px;
+        border: 1px solid #eee;
+        margin: 0.5rem;
+        filter: grayscale(50%);
+    }
+    
+    .cat-list li:hover {
+        background-color: #eee;
+        filter: grayscale(0%);
+    }
+    
+    .cat-icon {
+        width: 100%;
+    }
+    
+    .cat-length {
+        position: relative;
+        top: -4.5em;
+        right: -4.2em;
+        color: #fff;
+        background-color: #999;
+        font-style: normal;
+    }
+    /*****************************
     COMPOSICIO CONTENT DRETA
  *****************************/
-
-#fade {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    transition-duration: 0.68s;
-    position: fixed;
-    z-index: -1;
-}
-
-main {}
-
-
-/*****************************
+    
+    #fade {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        transition-duration: 0.68s;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    main {}
+    /*****************************
     HOMEPAGE
  *****************************/
-
-section {
-    min-height: 100vh;
-    padding-left: 22%;
-    padding-right: 16%;
-    padding-bottom: 5em;
-}
-
-.onepage {
-    padding-top: 15vh;
-}
-
-.titulo {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    _font-size: 2em;
-    font-weight: unset;
-    color: #999;
-    position: relative;
-    top: 15vh;
-    margin-bottom: 20vh;
-}
-
-.text {
-    color: #666;
-    position: sticky;
-    top: 25vh;
-}
-
-.code {
-    font-size: 0.9rem;
-    padding: 1em;
-    background-color: #eee;
-}
-
-
-/*****************************
+    
+    section {
+        min-height: 100vh;
+        padding-left: 22%;
+        padding-right: 16%;
+        padding-bottom: 5em;
+    }
+    
+    .onepage {
+        padding-top: 15vh;
+    }
+    
+    .titulo {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        _font-size: 2em;
+        font-weight: unset;
+        color: #999;
+        position: relative;
+        top: 15vh;
+        margin-bottom: 20vh;
+    }
+    
+    .text {
+        _color: #666;
+        position: sticky;
+        top: 25vh;
+    }
+    /*****************************
     FORM D'ARTICLES
  *****************************/
-
-#novaCategoria {
-    transition-duration: 0.5s;
-}
-
-
-/*****************************
+    
+    #novaCategoria {
+        transition-duration: 0.5s;
+    }
+    /*****************************
     ARTICLES
  *****************************/
-
-.article_individual_titol {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: unset;
-    color: #999;
-    padding-top: 15vh
-}
-
-.article_individual_resum {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: unset;
-    color: #333;
-}
-
-.article_individual_content {
-    padding-top: 2em;
-}
-
-.article_titol a {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 2rem;
-    font-weight: unset;
-    color: #999;
-    text-decoration: none;
-}
-
-#article_autor {
-    position: absolute;
-    right: 0;
-    top: 66vh;
-    padding: 0.5em;
-    list-style-type: none;
-    text-align: right;
-}
-
-.article_categoria_icon {
-    width: 3em;
-    position: absolute;
-    right: 0;
-    top: 15vh;
-}
-
-.categoria_icon {
-    width: 3em;
-    _border-radius: 2px;
-    padding: 0.5em;
-    _border: 1px solid #999;
-}
-
-
-/* .form-group {
+    
+    .article_individual_titol {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: unset;
+        color: #999;
+        padding-top: 15vh
+    }
+    
+    .article_individual_resum {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: unset;
+        color: #aaa;
+        font-style: italic;
+        font-size: 1.4rem;
+        padding-left: 0.16rem;
+    }
+    
+    .article_individual_content {
+        padding-top: 2em;
+        font-size: 1.1rem;
+    }
+    
+    .article_titol a {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 2rem;
+        font-weight: unset;
+        color: #999;
+        text-decoration: none;
+    }
+    
+    #article_autor {
+        position: absolute;
+        right: 0;
+        top: 66vh;
+        padding: 0.5em;
+        list-style-type: none;
+        text-align: right;
+    }
+    
+    .article_categoria_icon {
+        width: 3em;
+        position: absolute;
+        right: 0;
+        top: 15vh;
+    }
+    
+    .categoria_icon {
+        width: 3em;
+        _border-radius: 2px;
+        padding: 0.5em;
+        _border: 1px solid #999;
+    }
+    
+    pre {
+        font-size: 0.75em;
+        padding: 1em 1em 1em 4em;
+        margin: 0;
+        background-color: #eee;
+    }
+    /* .form-group {
     margin-bottom: 1rem;
 }
 
@@ -251,96 +322,109 @@ section {
     border: 1px solid #eee;
     border-radius: .25rem;
 } */
-
-
-/*****************************
+    /*****************************
     MEDIA QUERIES
  *****************************/
-
-
-/* @media only screen and (max-width: 576px) and (orientation: landscape) {
+    /* @media only screen and (max-width: 576px) and (orientation: landscape) {
     #menu-bottom {
         bottom: 5vh;
     }
 } */
-
-@media only screen and (max-width: 1200px) {
-    #hamburguesa {
-        visibility: hidden;
+    
+    @media only screen and (max-width: 1200px) {
+        #hamburguesa {
+            visibility: hidden;
+        }
+        section {
+            _padding-left: 22%;
+            padding-right: 10%;
+        }
     }
-    section {
-        _padding-left: 22%;
-        padding-right: 10%;
+    
+    @media only screen and (max-width: 992px) {
+        #hamburguesa {
+            visibility: hidden;
+        }
+        section {
+            padding-left: 22%;
+            padding-right: 10%;
+        }
     }
-}
-
-@media only screen and (max-width: 992px) {
-    #hamburguesa {
-        visibility: hidden;
+    
+    @media only screen and (max-width: 780px) {
+        #hamburguesa {
+            visibility: hidden;
+        }
+        section {
+            padding-left: 22%;
+            padding-right: 7%;
+        }
     }
-    section {
-        padding-left: 22%;
-        padding-right: 10%;
+    
+    @media only screen and (max-width: 576px) {
+        #hamburgesa {
+            visibility: visible;
+        }
+        .menu-user img {
+            width: 1.6em;
+        }
+        .menu-icon-logout {
+            display: block;
+            position: relative;
+            bottom: -6em;
+        }
+        .menu-link,
+        .menu-username,
+        .menu-link-logout {
+            _display: none;
+            _visibility: hidden;
+            transition-duration: 1s;
+            opacity: 0;
+        }
+        #menu-bottom {
+            text-align: center;
+            margin-right: 0.3em;
+        }
+        .primary-menu {
+            width: 3em;
+        }
+        section {
+            padding-left: 18%;
+            padding-right: 4%;
+            padding-bottom: 5em;
+        }
+        .titulo {
+            top: 5vh;
+            margin-bottom: 10vh;
+            font-size: 2rem;
+        }
+        .text {
+            font-size: 1rem;
+        }
+        .article_individual_titol {
+            font-size: 2rem;
+            padding-top: 5vh
+        }
+        .article_individual_resum {
+            font-size: 1.4rem;
+            padding-left: 0.16rem;
+        }
+        .article_individual_content {
+            font-size: 1rem;
+        }
     }
-}
-
-@media only screen and (max-width: 780px) {
-    #hamburguesa {
-        visibility: hidden;
+    
+    @media only screen and (max-width: 350px) {
+        section {
+            padding-left: 20%;
+        }
     }
-    section {
-        padding-left: 22%;
-        padding-right: 7%;
-    }
-}
-
-@media only screen and (max-width: 576px) {
-    #hamburgesa {
-        visibility: visible;
-    }
-    .menu-user img {
-        width: 1.6em;
-    }
-    .menu-icon-logout {
-        display: block;
-        position: relative;
-        bottom: -6em;
-    }
-    .scrollable,
-    .menu-username,
-    .menu-link-logout {
-        display: none;
-    }
-    #menu-bottom {
-        text-align: center;
-        margin-right: 0.3em;
-    }
-    .primary-menu {
-        width: 3.5em;
-    }
-    section {
-        padding-left: 18%;
-        padding-right: 4%;
-        padding-bottom: 5em;
-    }
-    .titulo {
-        top: 5vh;
-        margin-bottom: 10vh;
-    }
-    .text {}
-}
-
-@media only screen and (max-width: 350px) {
-    section {
-        padding-left: 20%;
-    }
-}
-
-@media only screen and (orientation: landscape) {
-    #hamburgesa {
-        margin-top: 0;
-    }
-    /* #menu-bottom {
+    
+    @media only screen and (orientation: landscape) {
+        #hamburgesa {
+            margin-top: 0;
+        }
+        /* #menu-bottom {
         bottom: 5vh;
     } */
-}
+    }

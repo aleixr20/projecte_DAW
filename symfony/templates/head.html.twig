@@ -15,14 +15,31 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 		<!--AWESOME ICON FONT-->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--CSS propi-->
-		{# <link rel="stylesheet" href="../../css/joborwork.css"> #}
-		{# asset(): #}
-		<!-- <link rel="stylesheet" href="{#{ asset('css/joborwork.css') }#}">-->
-		<link rel="stylesheet" href="{{ asset('css/b-nerd.css') }}"> 
-		<link rel="stylesheet" href="{{ asset('css/estils-aleix.css') }}"> 
+		<link
+		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<!--PROPIS del PROJECTE-->
+		<link rel="stylesheet" href="{{ asset('css/b-nerd.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/estils-aleix.css') }}">
 		<script src="{{ asset('js/b-nerd.js') }}"></script>
 	{% endblock %}
+	{% block style %}
+		{% if (color is defined) and (color is not empty) %}
+			<style>
+				nav {
+					border-right: 3px solid {{color}};
+				}
+				.menu-username,
+				.active {
+					color: {{color}} !important;
+				}
+				.menu-bottom a:hover,
+				.menu-bottom i:hover {
+					color: {{color}};
+				}
+			</style>
+		{% endif %}
+	{% endblock %}
+
 
 </head>

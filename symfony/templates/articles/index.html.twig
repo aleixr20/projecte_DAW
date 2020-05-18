@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block navbar %}
-	{{ include('menu_all.html.twig') }}
+	{{ include('articles/menu_articles.html.twig') }}
 {% endblock %}
 {% block content %}
 
@@ -9,16 +9,20 @@
 		<h1 class="article_individual_titol">{{article.titol}}</h1>
 		<h4 class="article_individual_resum">{{article.subtitol}}</h4>
 		<div class="article_individual_content">
-			{{article.contingut|raw}}</div>
-		<ul>
-			<li>Categoria:&nbsp;{{article.categoria.nom}}</li>
-			<li>Autor:&nbsp;{{article.user.username}}</li>
-			{# <li>Data Publicacio&nbsp;{{section.data_publicacio|date("d/m/Y")}}</li> #}
-			<li>Slug:&nbsp;{{article.slug}}</li>
-		</ul>
+			Publicada el&nbsp;{{article.datapublicacio|date("d/m/Y")}}&nbsp;en&nbsp;{{article.categoria.nom}}<br/>
+			Por&nbsp;{{article.user.username}}<br>
+			{{article.contingut|raw}}
+		</div>
+		<h3>
+			<p>
+				Publicada el&nbsp;{{article.datapublicacio|date("d/m/Y")}}&nbsp;en&nbsp;{{article.categoria.nom}}<br/>
+				Por&nbsp;{{article.user.username}}
+			</p>
 
-		<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
+			{% if app.user and is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
+			{% endif %}
 
-	</section>
+		</section>
 
-{% endblock %}
+	{% endblock %}

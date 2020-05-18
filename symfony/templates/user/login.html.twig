@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block navbar %}
-	{{ include('menu_all.html.twig') }}
+	{{ include('menu.html.twig') }}
 {% endblock %}
 
 {% block content %}
 
 	<section id="menu_item_section_name_4">
 		<form method="post">
-			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
+
 
 			{% if app.user %}
 				<div class="mb-3">
@@ -23,6 +21,10 @@
 			<h1 class="titulo">
 				Please sign in
 			</h1>
+
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
 			<div class="form-group">
 				<label for="inputEmail">Email</label>
@@ -44,6 +46,7 @@
 			<!--</div>-->
 				<button class="btn btn-block btn-outline-secondary" type="submit"> Sign in
 			</button>
+
 		</form>
 	</section>
 {% endblock %}

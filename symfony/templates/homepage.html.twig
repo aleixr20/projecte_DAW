@@ -1,16 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block navbar %}
-	{{ include('menu_home.html.twig') }}
+	{{ include('menu.html.twig') }}
 {% endblock %}
 
 {% block content %}
 
-	{% for section in sections %}
-		<section id="{{section.menulink}}">
-			<h1 class="titulo">{{section.titol}}</h1>
-			<div class="text">{{section.contingut}}</div>
-		</section>
-	{% endfor %}
+
+	{% block section_01 %}
+		{{ include('home/ca_section_1.html.twig') }}
+	{% endblock %}
+
+	{% block section_02 %}
+		{{ include('home/ca_section_2.html.twig') }}
+	{% endblock %}
+
+	{% block section_03 %}
+		{{ include('home/ca_section_3.html.twig') }}
+	{% endblock %}
+
+	{% block section_04 %}
+		{{ include('home/ca_section_4.html.twig') }}
+	{% endblock %}
+
+
+	{# {% for section in sections %}
+			<section id="{{section.menuLink}}">
+				<h1 class="titulo">{{section.titol}}</h1>
+				<div class="text">{{section.contingut|raw }}</div>
+			</section>
+		{% endfor %} #}
 
 {% endblock %}

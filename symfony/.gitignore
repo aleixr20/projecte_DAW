@@ -14,15 +14,6 @@
 .phpunit.result.cache
 /phpunit.xml
 
-<<<<<<< HEAD
-.env
-/src/Migrations
-=======
 ###< symfony/phpunit-bridge ###
 .env
 /src/Migrations
-<<<<<<< HEAD
-=======
-
->>>>>>> 329a4ff15cec17a000705876ca761bdeb4d0da81
->>>>>>> dfd54e97ac721adc8886f857a3311d1e3685b144

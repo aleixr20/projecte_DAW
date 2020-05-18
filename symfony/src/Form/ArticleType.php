@@ -46,7 +46,9 @@ class ArticleType extends AbstractType
                         'max' => 150,
                         'maxMessage' => 'Error, més de {{ limit }} ',
                     ])
-                ]
+                ],
+                'required' => false,
+
             ])
 
             ->add('contingut', CKEditorType::class, [

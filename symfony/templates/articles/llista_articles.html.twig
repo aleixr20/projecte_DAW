@@ -1,19 +1,36 @@
 {% extends 'base.html.twig' %}
+{% block menu_top %}{% endblock %}
 
 {% block navbar %}
-	{{ include('menu_all.html.twig') }}
+	{{ include('menu.html.twig') }}
 {% endblock %}
 
 {% block content %}
+
+
+	{# {{dump(app.user)}} #}
+
+
 	<section>
-		<div style="padding-top:15vh">
+		<div
+			style="padding-top:15vh">
+			{# <a class="menu-top" href="{{ path('articles_categoria', {cat_name: categoria.nom}) }}" alt"enllaç a articles de la categoria {{categoria.nom}}" title="Veure articles de {{categoria.nom}}">
+													<img src="{{ asset("img/categories/" ~ categoria.logo) }}" alt="{{categoria.nom}} icon" class="cat-icon">
+												</a> #}
 			{% for article in articles %}
 
 				<h2 class="article_titol">
 					<a href="{{ asset("post/" ~ article.slug) }}">{{article.titol}}</a>
 				</h2>
-				<h4 class="article_subtitol">{{article.subtitol}}</h4>
+				<h4 class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.subtitol}}</h4>
+				{# <h4 class="article_subtitol" onclick="{{ "mostrar(" ~ article.titol }})">{{article.subtitol}}</h4> #}
+
 			{% endfor %}
 		</div>
+		<script>
+			function mostrar(obj) {
+			console.log(obj)
+			}
+		</script>
 	</section>
 {% endblock %}

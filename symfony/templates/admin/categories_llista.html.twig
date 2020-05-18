@@ -5,8 +5,8 @@
 
 {% block content %}
 
-	<section class="onepage">
-		<h1>Llista de categories actuals</h1>
+	<section>
+		<h1 class="titulo">Llista de categories actuals</h1>
 		<table class="table">
 			<tr>
 				<th class="text-right">ID</th>
@@ -16,7 +16,7 @@
 				<th></th>
 			</tr>
 
-			{%for cat in section %}
+			{%for cat in categories %}
 				<tr>
 					<td class="text-right">{{cat.id}}</td>
 					<td class="text-right"><img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip"></td>

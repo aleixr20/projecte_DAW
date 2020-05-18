@@ -1,0 +1,33 @@
+Al home page els titols estan en h1 -> a la llista de articles d'una categoria en h2 ?? haurien de ser iguals??
+Retocar imatges de logos
+    -> Que no tingin marges lateral, aixi agafen tota la amplada del espai que tinguin,
+    -> Que estigin en alpha, fons transparent (PNG)
+    -> Que el tamany sigui coherent
+    -> Pasarles pel thinypng 
+
+Menu lateral HOME
+    -> gestionar hamburguessa amb jQuery
+    -> cambiar scroll efect amb jQuery
+    -> aplicar herencia TWIG
+
+Eliminar entitat, repository i controlador de HOME
+Mira si es pot gestionar l'ordre de les categories
+No he adaptat el formulari per editar Categories, segur que peta
+
+NOU /EDITAR ARTICLE
+-> CKEditor -> controlar la Toolbar amb els items necessaris
+-> Controlar la gestio d'errors amb JQuery
+
+SLUG d'articles arreglat en fomr de nou article, pero s'ha de copiar a fixtures
+
+Responsive, proposta per movils
+    .cat-list {
+        width: 10vw;
+        height: 10vw;
+        no padding, border, border-radius
+    }
+    .cat-lenght {
+        top: -11.5vw -> funcionara amb diferents tamanys ??
+        right: -7.5vw -> funcionara amb diferents tamanys ??
+        font-size: .66rem
+    }

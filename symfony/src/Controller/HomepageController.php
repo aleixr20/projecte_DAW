@@ -4,67 +4,33 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\HomepageSections;
+use App\Entity\Categoria;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Origin: *');
 class HomepageController extends AbstractController
 {
+
+    //Per tenir nomes una funci{o, podem pasar aqueta a algun Controllador generic
+
+
     /**
      * @Route("/", name="homepage")
      */
     public function getAll()
     {
-        $repository = $this->getDoctrine()->getRepository(HomepageSections::class);
-        $sections = $repository->findAll();
 
-        // $data = [];
-        // foreach ($sections as $pelicula) {
-        //     $data[] = [
-        //         'titol' => $pelicula->getTitol(),
-        //         'subtitol' => $pelicula->getSubtitol(),
-        //         'contingut' => $pelicula->getContingut(),
-        //         'menulink' => strtoupper($pelicula->getMenulink()),
-        //     ];
-        // }
-        // // return $this->json(['sections' => $data]);
-        // return new JsonResponse($data, Response::HTTP_OK);
+        $repo_categories = $this->getDoctrine()->getRepository(Categoria::class);
+        $categories_frontend = $repo_categories->findBy(['tipus' => 'frontend']);
+        $categories_backend = $repo_categories->findBy(['tipus' => 'backend']);
+        $categories_sistemes = $repo_categories->findBy(['tipus' => 'sistemes']);
 
         return $this->render('homepage.html.twig', [
-            'sections' => $sections,
+            'categories_frontend' => $categories_frontend,
+            'categories_backend' => $categories_backend,
+            'categories_sistemes' => $categories_sistemes,
         ]);
     }
-
-    //     /**
-    //  * @Route("/inPHP", name="inPHP")
-    //  */
-    // public function getPhp(): JsonResponse
-    // {
-    //     $repository = $this->getDoctrine()->getRepository(HomepageSections::class);
-    //     $sections = $repository->findAll();
-
-    //     $data = [];
-
-    //     foreach ($sections as $pelicula) {
-    //         $data[] = [
-    //             'titol' => $pelicula->getTitol(),
-    //             'subtitol' => $pelicula->getSubtitol(),
-    //             'contingut' => $pelicula->getContingut(),
-    //             'menulink' => $pelicula->getMenulink()
-    //         ];
-    //     }
-    //     // return $this->json(['sections' => $data]);
-
-    //     return new JsonResponse($data[0], Response::HTTP_OK);
-    // }
-    // public function index()
-    // {
-    //     $repository = $this->getDoctrine()->getRepository(HomepageSections::class);
-    //     $sections = $repository->findAll();
-    //     return $this->json(['sections' => $sections[0]]);
-    //     // return $this->render('homepage/index.html.twig', [
-    //     //     'controller_name' => 'HomepageController',
-    //     // ]);
-    // }
 }
