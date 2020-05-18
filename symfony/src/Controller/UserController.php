@@ -44,7 +44,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, \Swift_Mailer $mailer): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -52,6 +52,7 @@ class UserController extends AbstractController
         }
 
         $user = new User();
+        $user->setToken(bin2hex(random_bytes(50)));
 
         /**
          * Aquest RegistrationFormType es generic i ve per defecte amb Syfony
@@ -102,20 +103,30 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
-            //Aquest return em sembla que es el que et fa l'autologin
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
+            
+            
+            
+            
+            
+            
+            // CORREU DE VERIFICACIÓ
+            $message = (new \Swift_Message('Email de verificació'))
+            ->setFrom('bnerdtodev@gmail.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/registration.html.twig
+                    'emails/registration.html.twig',[
+                    'name' => $user->getNom(),
+                    'token' => $user->getToken()
+                    ]
+                ),
+                'text/html'
             );
 
-            // return $this->redirectToRoute('homepage');
-            // return $this->redirectToRoute('userProfile', [
-            //     'userName' => $user->getEmail()
-            // ]);
+            $mailer->send($message);
+
+            return $this->redirectToRoute('app_login');
         }
 
         // return $this->render('registration/register.html.twig', [
@@ -124,6 +135,27 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * VERIFICACIÓ DE NOU USUARI
+     * @Route("/user/verificacio/{token}", name="verificar_compte")
+     */
+    public function verificar($token, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findOneBy([
+            'token' => $token
+        ]);
+
+        if($user){
+            $user->addRole("ROLE_VALIDATED");
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        return $this->render('user/verificated.html.twig', [
+            'user' => $user
+        ]);
+    }
 
     /**
      * METODE DE LOGIN
