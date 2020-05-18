@@ -21,10 +21,10 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-
         $builder
             ->add('titol', TextType::class, [
                 'label' => 'Titol article',
+                // 'attr' => ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '10'],
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
