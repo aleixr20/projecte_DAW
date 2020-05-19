@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\MailGenerator;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,7 +45,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, \Swift_Mailer $mailer): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, MailGenerator $mailGenerator): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -103,30 +104,8 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            
-            
-            
-            
-            
-            
             // CORREU DE VERIFICACIÓ
-            $message = (new \Swift_Message('Email de verificació'))
-            ->setFrom('bnerdtodev@gmail.com')
-            ->setTo($user->getEmail())
-            ->setBody(
-                $this->renderView(
-                    // templates/emails/registration.html.twig
-                    'emails/registration.html.twig',[
-                    'name' => $user->getNom(),
-                    'token' => $user->getToken()
-                    ]
-                ),
-                'text/html'
-            );
-
-            $mailer->send($message);
-
-            return $this->redirectToRoute('app_login');
+            $mailGenerator->sendVerificationMail($user);
         }
 
         // return $this->render('registration/register.html.twig', [
