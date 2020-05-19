@@ -6,15 +6,17 @@
 
 {% block content %}
 
-	<section id="menu_item_section_name_4">
+	<section>
 		<h1 class="titulo">
-			Edita
+			Editar perfil
 		</h1>
 		<p id="error-msg">
 			{% if error is defined %}
 				{{ error }}
 			{% endif %}
 		</p>
+
+
 		{{ form_start(editForm) }}
 
 		<div class="form-group form-row">
@@ -27,60 +29,77 @@
 				{{ form_widget(editForm.cognom, {'attr': {'class': 'form-control'}}) }}
 			</div>
 		</div>
-		<div class="form-group">
-			{{ form_label(editForm.email) }}
-			{{ form_widget(editForm.email, {'attr': {'class': 'form-control'}}) }}
+
+		<div class="form-group form-row">
+			<div class="col-md-6">
+				{{ form_label(editForm.email) }}
+				{{ form_widget(editForm.email, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_label(editForm.nom_usuari) }}
+				{{ form_widget(editForm.nom_usuari) }}
+				{{ form_errors(editForm.imatge) }}
+				<p class="form-error-text"></p>
+			</div>
 		</div>
-		<div class="form-group">
-			{{ form_label(editForm.nom_usuari) }}
-			{{ form_widget(editForm.nom_usuari, {'attr': {'class': 'form-control'}}) }}
-		</div>
-		<div class="form-group">
-			<button onclick="location.href='{{ path('userChangePassword') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+		<div class="form-group form-row">
+			<div class="col-md-9">
+				<label for="user_imatge">Imatge del perfil</label>
+				<div class="input-group">
+					<div class="custom-file">
+						{{ form_widget(editForm.imatge) }}
+						{{ form_label(editForm.imatge) }}
+					</div>
+				</div>
+				{{ form_errors(editForm.imatge) }}
+				<p class="form-error-text"></p>
+			</div>
+			<div class="col-md-3 col-sm-12">
+				<button onclick="location.href='{{ path('userChangePassword') }}'" type="button" class="btn btn-light">
 					Canvia la contrasenya
-			</button>
+				</button>
+			</div>
 		</div>
-		<div class="form-group">
-			{{ form_label(editForm.imatge) }}
-			{{ form_widget(editForm.imatge, {'attr': {'class': 'form-control'}}) }}
-			{{ form_errors(editForm.imatge) }}
-		</div>
+
+
 		<div class="form-group">
 			{{ form_label(editForm.descripcio) }}
-			{{ form_widget(editForm.descripcio, {'attr': {'class': 'form-control'}}) }}
+			{{ form_widget(editForm.descripcio) }}
 			{{ form_errors(editForm.descripcio) }}
 		</div>
-		<div
-			class="form-group">
-			{# HAURIEM DE CREAR UN DATE PICKER #}
-			{{ form_label(editForm.data_naixament) }}
-			{{ form_widget(editForm.data_naixament, {'attr': {'class': 'form-control'}}) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(editForm.genere) }}
-			{{ form_widget(editForm.genere, {'attr': {'class': 'form-control'}}) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(editForm.codi_postal) }}
-			{{ form_widget(editForm.codi_postal, {'attr': {'class': 'form-control'}}) }}
-		</div>
+
 		<h2>Xarxes Socials</h2>
 		<div class="form-group">
 			{{ form_label(editForm.github) }}
-			{{ form_widget(editForm.github, {'attr': {'class': 'form-control'}}) }}
+			{{ form_widget(editForm.github) }}
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.linkedin) }}
-			{{ form_widget(editForm.linkedin, {'attr': {'class': 'form-control'}}) }}
+			{{ form_widget(editForm.linkedin) }}
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.twitter) }}
-			{{ form_widget(editForm.twitter, {'attr': {'class': 'form-control'}}) }}
+			{{ form_widget(editForm.twitter) }}
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.facebook) }}
-			{{ form_widget(editForm.facebook, {'attr': {'class': 'form-control'}}) }}
+			{{ form_widget(editForm.facebook) }}
 		</div>
+
+		<div class="form-group">
+			{{ form_label(editForm.data_naixament) }}
+			{{ form_widget(editForm.data_naixament) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(editForm.genere) }}
+			{{ form_widget(editForm.genere) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(editForm.codi_postal) }}
+			{{ form_widget(editForm.codi_postal) }}
+		</div>
+
 		<br/>
 
 		<button class="btn btn-outline-info">Desa</button>

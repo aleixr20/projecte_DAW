@@ -87,6 +87,12 @@ window.onload = function() {
                 //view.validateFormArticles(data.articleForm)
                 view.listenFormInputs(data.articleForm)
             }
+            if (document.URL == "http://localhost:8000/user/profile/edit") {
+                //model.loadArticleForm();
+                //view.validateFormArticles(data.articleForm)
+                //view.listenFormInputs(data.articleForm)
+                view.changeFileInput();
+            }
         },
 
         toggleMenu: function() {
@@ -238,6 +244,22 @@ window.onload = function() {
                 input.style.border = '1px solid #ced4da'
                 console.info(inputObj.value, 'CAMPO CORRECTO')
             }
+        },
+
+        changeFileInput: function() {
+            let f = document.getElementById('user_imatge')
+            f.addEventListener("change", (function() {
+                return function() {
+                    let fileName = f.value;
+                    fileName = fileName.split("\\");
+                    //fileName = fileName.split("");
+                    fileName = fileName[fileName.length - 1]
+
+                    document.getElementsByClassName('custom-file-label')[0].innerHTML = fileName
+                    console.log(fileName)
+
+                }
+            })());
         }
 
 
