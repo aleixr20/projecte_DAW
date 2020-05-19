@@ -89,7 +89,7 @@
     }
     
     .menu-user {
-        bottom: 30vh;
+        bottom: 35vh;
         transition-duration: 1s;
         transition-timing-function: ease-in-out;
     }
@@ -137,14 +137,10 @@
     
     #hamburgesa {
         visibility: hidden;
-        _margin-top: 2em;
-        /* position: absolute;
-        right: 0;
-        top: 10vh; */
     }
     
-    #contrast {
-        font-size: 0.5rem;
+    #contrast i {
+        font-size: 1em;
     }
     /*****************************
     SECTIONS HOMEPAGE
@@ -309,6 +305,12 @@
         outline: 0;
         box-shadow: 0 0 0 .1rem rgba(0, 123, 255, .25);
     }
+    
+    .form-error {
+        font-size: 0.75em;
+        color: red;
+        padding-left: 1em;
+    }
     /* .form-group {
     margin-bottom: 1rem;
 }
@@ -388,13 +390,12 @@
         .menu-username,
         .menu-link-logout {
             _display: none;
-            _visibility: hidden;
+            visibility: hidden;
             transition-duration: 1s;
             opacity: 0;
         }
-        #menu-bottom {
-            text-align: center;
-            margin-right: 0.3em;
+        .menu-bottom {
+            bottom: 5vh;
         }
         .primary-menu {
             width: 3em;
