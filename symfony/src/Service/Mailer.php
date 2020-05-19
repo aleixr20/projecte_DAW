@@ -2,17 +2,22 @@
 
 namespace App\Service;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Twig\Environment;
 
-class MailGenerator
+class Mailer
 {
     private $mailer;
-    private $controller;
+    private $router;
+    private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, AbstractController $controller)
+    public function __construct(\Swift_Mailer $mailer, Environment $twig, RouterInterface $router)
     {
         $this->mailer = $mailer;
-        $this->controller = $controller;
+        $this->router = $router;
+        $this->twig = $twig;
+
     }
 
     public function sendVerificationMail($user)
@@ -21,8 +26,7 @@ class MailGenerator
             ->setFrom('bnerdtodev@gmail.com')
             ->setTo($user->getEmail())
             ->setBody(
-                $this->controller->renderView(
-                    // templates/emails/registration.html.twig
+                $this->twig->render(
                     'emails/registration.html.twig',[
                     'name' => $user->getNom(),
                     'token' => $user->getToken()
@@ -32,8 +36,6 @@ class MailGenerator
             );
 
         $this->mailer->send($message);
-
-        return $this->controller->redirectToRoute('app_login');
     }
 }
 

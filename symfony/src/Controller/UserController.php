@@ -19,7 +19,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
 use App\Form\UserType;
 use App\Repository\UserRepository;
-use App\Service\MailGenerator;
+use App\Service\Mailer;
+use App\Service\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,7 +46,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, MailGenerator $mailGenerator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -105,7 +106,11 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             // CORREU DE VERIFICACIÓ
-            $mailGenerator->sendVerificationMail($user);
+            $mailer->sendVerificationMail($user);
+            // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
+            $queryBuilder->autoDestroyToken($user->getId());
+
+            return $this->redirectToRoute('app_login');
         }
 
         // return $this->render('registration/register.html.twig', [
