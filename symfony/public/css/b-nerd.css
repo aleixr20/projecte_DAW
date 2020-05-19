@@ -139,8 +139,8 @@
         visibility: hidden;
     }
     
-    #contrast i {
-        font-size: 1em;
+    #dark-mode .menu-icon {
+        font-size: 1.2em;
     }
     /*****************************
     SECTIONS HOMEPAGE
