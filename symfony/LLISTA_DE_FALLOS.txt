@@ -33,3 +33,4 @@ Responsive, proposta per movils
     }
 
     s'ha de cambiar el position absoculte del boto "canviar contrasenya" o posar media queries
+    GESTIONAR QUE QUNA NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL

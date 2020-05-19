@@ -1,0 +1,11 @@
+<link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"> 
+font-family: 'Inria Serif', serif;
+
+
+ <link href="https://fonts.googleapis.com/css2?family=Abel&family=Inria+Serif:ital,wght@0,300;0,400;1,300;1,400&family=Roboto:wght@300;400&display=swap" rel="stylesheet"> 
+
+     font-family: 'Abel', sans-serif;
+
+    font-family: 'Inria Serif', serif;
+
+    font-family: 'Roboto', sans-serif;

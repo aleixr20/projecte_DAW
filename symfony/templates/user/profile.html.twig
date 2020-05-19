@@ -6,34 +6,79 @@
 
 {% block content %}
 
-	<section id="menu_item_section_name_4">
-		<div class="row d-flex flex-wrap" id="profile-content">
-			<div class="col-md-5 col-sm-7 col-xs-12 text-center">
-				{% if user.imatge %}
-					{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
-					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-img">
-				{% else %}
-					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="imatge de perfil" class="profile-img">
+	<section>
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="titulo">{{user.username}}</h1>
+				<p>
+					{{ user.nom }}
+					{{ user.cognom }}</p>
+
+
+				{% if user.github is defined and (user.github is not empty)%}
+					<a class="menu-username" href="https://www.github.com/{{ user.github }}" target="_blank">
+						<i class="socialmedia-icon fa fa-github-square"></i>&nbsp;{{user.github}}
+					</a>
 				{% endif %}
-			</div>
-			<div class="col-md-6 col-sm-5 col-xs-12">
-				<h2>{{ user.nom }}
-					{{ user.cognom }}
-					<span id="profile-username">{{ user.username }}</span>
-				</h2>
-				{# DEFINIR ESTRUCTURA #}
-				<p>{{ user.email }}</p>
-				{% if user.genere == 'masc' %}
-					<i class="fa fa-mars fa-gender"></i>
-				{% elseif user.genere == 'fem' %}
-					<p>
-						<i class="fa fa-venus fa-gender"></i>
-					</p>
+				<br/>
+				{% if user.linkedin is defined and (user.linkedin is not empty)%}
+					<a class="menu-username" href="https://www.linkedin.com/{{ user.linkedin }}" target="_blank">
+						<i class="socialmedia-icon fa fa-linkedin-square"></i>&nbsp;{{user.linkedin}}
+					</a>
 				{% endif %}
-				{% if user.getEdat() %}
-					<p>{{ user.getEdat() }} anys</p>
-		        {% endif %}
-				{% if user.github or user.linkedin or user.twitter or user.facebook %}
+			</p>
+		</div>
+		<div class="col-md-6">
+			{% if user.imatge %}
+				{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
+				<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-image">
+			{% else %}
+				<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="imatge de perfil" class="profile-image">
+			{% endif %}
+		</div>
+	</div>
+
+	<p class="text">{{ user.descripcio|raw }}</p>
+<p class="text">{{user.username}} es usuari registrat desde {{user.dataregistre|date('M\'y')}} i ha participat amb {{user.articles|length}} articles
+
+			{# {% for cat in user.articles.categoria %}
+				<li>
+					<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+						<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
+						<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
+					</a>
+				</li>
+			{% endfor %} #}
+</section>
+<section>
+	<div class="row d-flex flex-wrap" id="profile-content">
+		<div class="col-md-5 col-sm-7 col-xs-12 text-center">
+			{% if user.imatge %}
+				{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
+				<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-img">
+			{% else %}
+				<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="imatge de perfil" class="profile-img">
+			{% endif %}
+		</div>
+		<div class="col-md-6 col-sm-5 col-xs-12">
+			<h2>{{ user.nom }}
+				{{ user.cognom }}
+				<span id="profile-username">{{ user.username }}</span>
+			</h2>
+			{# DEFINIR ESTRUCTURA #}
+			<p>{{ user.email }}</p>
+			{% if user.genere == 'masc' %}
+				<i class="fa fa-mars fa-gender"></i>
+			{% elseif user.genere == 'fem' %}
+				<p>
+					<i class="fa fa-venus fa-gender"></i>
+				</p>
+			{% endif %}
+			{% if user.getEdat() %}
+				<p>{{ user.getEdat() }}
+					anys</p>
+			{% endif %}
+			{% if user.github or user.linkedin or user.twitter or user.facebook %}
 				<div id="xxss">
 					{% if user.github %}
 						{% set urlGithub = user.github | slice(0,4) == 'http' ? user.github : 'http://' ~ user.github %}
@@ -60,65 +105,68 @@
 						</a>
 					{% endif %}
 				</div>
-				{% endif %}
+			{% endif %}
 
-			</div>
-			
-			<div class="col-md-1 col-sm-12">
-				{% if app.user and user.username == app.user.username %}
-					<button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Edita
-					</button>
-				{% else %}
-					<div class="btn-group">
-						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fa fa-cog fa-white"></i>
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div>
-					</div>
-				{% endif %}
-			</div>
 		</div>
-<hr>
 
-<div id="profile-description">
-	<h4>Descripció</h4>
+		<div class="col-md-1 col-sm-12">
+			{% if app.user and user.username == app.user.username %}
+				<button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Edita
+				</button>
+			{% else %}
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-cog fa-white"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
 	<hr>
-	{% if user.descripcio %}
-		<p>{{ user.descripcio }}</p>
-	{% else %}
-		<p><i>L'usuari encara no ha afegit cap descripció.</i></p>
-	{% endif %}
-</div>
-<div class="col-12 profile-box">
-	<h2>
-		<strong>{{ user.articles|length }}</strong>
-	</h2>
-	<p>
-		<small>Articles</small>
-	</p>
-	<i class="fa fa-thumbs-up">
-		50</i>
-	<i class="fa fa-thumbs-down">
-		10</i>
-</div><br/>
-<div class="col-12 profile-box">
-	<h2>
-		<strong>
-			{{ user.comentaris|length }}
-		</strong>
-	</h2>
-	<p>
-		<small>Comentaris</small>
-	</p>
-	<i class="fa fa-thumbs-up">
-		50</i>
-	<i class="fa fa-thumbs-down">
-		10</i>
-</div></section>{% endblock %}
+
+	<div id="profile-description">
+		<h4>Descripció</h4>
+		<hr>
+		{% if user.descripcio %}
+			<p>{{ user.descripcio }}</p>
+		{% else %}
+			<p>
+				<i>L'usuari encara no ha afegit cap descripció.</i>
+			</p>
+		{% endif %}
+	</div>
+	<div class="col-12 profile-box">
+		<h2>
+			<strong>{{ user.articles|length }}</strong>
+		</h2>
+		<p>
+			<small>Articles</small>
+		</p>
+		<i class="fa fa-thumbs-up">
+			50</i>
+		<i class="fa fa-thumbs-down">
+			10</i>
+	</div><br/>
+	<div class="col-12 profile-box">
+		<h2>
+			<strong>
+				{{ user.comentaris|length }}
+			</strong>
+		</h2>
+		<p>
+			<small>Comentaris</small>
+		</p>
+		<i class="fa fa-thumbs-up">
+			50</i>
+		<i class="fa fa-thumbs-down">
+			10</i>
+	</div>
+</section>{% endblock %}

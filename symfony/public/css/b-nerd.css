@@ -17,6 +17,8 @@ body {
     position: relative;
     font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Abel', sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.5em;
 }
 
@@ -27,6 +29,7 @@ h4,
 h5,
 h6 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Inria Serif', serif;
 }
 
 p {
@@ -364,6 +367,24 @@ pre {
 
 .btn-light:hover {
     background-color: transparent;
+}
+
+
+/****************************
+    PERFIL USUARIS
+*******************************/
+
+.socialmedia-icon {
+    font-size: 1.6em;
+    vertical-align: sub;
+    padding: 0.16em;
+}
+
+.profile-image {
+    padding: 15vh 1em 0 0;
+    position: absolute;
+    right: 0;
+    height: 100%;
 }
 
 

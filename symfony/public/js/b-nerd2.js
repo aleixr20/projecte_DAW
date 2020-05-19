@@ -269,6 +269,15 @@ window.onload = function() {
 
 window.onscroll = function() {
 
+    //GESTIONAR QUE QUNA NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
+    // let homeURLs = this.document.getElementsByClassName('scrollable')[0].getElementsByClassName('menu-link');
+
+    // for (let i=0; i<homeURLs.length;i++){
+    //     if
+    // }
+
+
+    if (document.URL == "http://localhost:8000/user/profile/edit") {}
     //Capturar numero de seccions que te la pàgina
     let sections = document.getElementsByClassName("scrollable")
         //Capturar els links que hi ha al menu
