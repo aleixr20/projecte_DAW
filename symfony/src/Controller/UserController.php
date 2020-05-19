@@ -46,7 +46,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -54,7 +54,6 @@ class UserController extends AbstractController
         }
 
         $user = new User();
-        $user->setToken(bin2hex(random_bytes(50)));
 
         /**
          * Aquest RegistrationFormType es generic i ve per defecte amb Syfony
@@ -105,12 +104,16 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // CREAR TOKEN
+            $userRepository->generateToken($user);
             // CORREU DE VERIFICACIÓ
             $mailer->sendVerificationMail($user);
             // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
-            $queryBuilder->autoDestroyToken($user->getId());
+            $queryBuilder->autoDestroyToken($user);
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('correct_registration', [
+                'userId' => $user->getId(),
+            ]);
         }
 
         // return $this->render('registration/register.html.twig', [
@@ -119,6 +122,48 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * REENVIAMENT DEL TOKEN
+     * @Route("/user/correct_registration/{userId}", name="correct_registration")
+     */
+    public function correctRegistration($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
+    {
+
+        $user = $userRepository->findOneBy(['id' => $userId]);
+
+        foreach($user->getRoles() as $role){
+            if ($role == "ROLE_ADMIN" || $role == "ROLE_VALIDATED") {
+                return $this->redirectToRoute('profileUser', [
+                    'userId' => $user->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('user/verify_email.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * REENVIAMENT DEL TOKEN
+     * @Route("/user/reenviament_token/{userId}", name="reenviament_token")
+     */
+    public function reenviamentToken($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
+    {
+
+        $user = $userRepository->findOneBy(['id' => $userId]);
+
+        // CREAR TOKEN
+        $userRepository->generateToken($user);
+        // CORREU DE VERIFICACIÓ
+        $mailer->sendVerificationMail($user);
+        // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
+        $queryBuilder->autoDestroyToken($user);
+
+        return $this->render('user/verify_email.html.twig', [
+            'user' => $user,
+        ]);
+    }
     /**
      * VERIFICACIÓ DE NOU USUARI
      * @Route("/user/verificacio/{token}", name="verificar_compte")
