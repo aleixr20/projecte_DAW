@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
 
         $builder
             ->add('titol', TextType::class, [
-                'label' => 'Titol article',
+                'label' => 'Titol article *',
                 'help' => 'Títol molt curt i descriptiu del article (10-50 caràcters)',
                 // 'attr' => ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '10'],
                 'attr' => ['class' => 'form-control'],
@@ -56,13 +56,13 @@ class ArticleType extends AbstractType
             ])
 
             ->add('meta_tag', TextType::class, [
-                'label' => 'Meta Tags',
+                'label' => 'Meta Tags *',
                 'help' => 'Paraules clau del article separades per comes. Seràn les meta-tag per al posicionament SEO',
                 'attr' => ['class' => 'form-control'],
             ])
 
             ->add('meta_description', TextType::class, [
-                'label' => 'Meta Description',
+                'label' => 'Meta Description *',
                 'attr' => ['class' => 'form-control', 'rows' => 2],
                 'help' => 'Text molt resumit i descriptiu per al Snippet dels buscadors. (maxim 155 caràcters)',
 
@@ -77,26 +77,29 @@ class ArticleType extends AbstractType
             ])
 
             ->add('categoria', EntityType::class, [
+                'label' => 'Categoria *',
+                //'help' => 'Categoria a la que pertany l\'article',
                 'attr' => ['class' => 'form-control'],
                 'class' => Categoria::class,
             ])
 
             ->add('nova_categoria', TextType::class, [
-                'label' => 'Nova categoria',
+                'label' => 'Nova categoria *',
+                //'help' => 'Nom que tindrà la nova categoria. Recorda que totes les categories comencen amb in (inPHP, inHTML...)',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
                 'required' => false,
             ])
             ->add('contingut', CKEditorType::class, [
-                'label' => 'Contingut article',
+                'label' => 'Contingut article *',
+                //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
                 'attr' => ['class' => 'form-control', 'rows' => 5]
-
             ])
 
-
-
             ->add('visible', ChoiceType::class, [
+                'label' => 'Estat de l\'article',
                 'attr' => ['class' => 'form-control'],
+                //'help' => 'Indica el grau de visibilitat de l\'article',
                 'choices'  => [
                     'Esborrany' => false,
                     'Publica' => true,
