@@ -232,6 +232,22 @@
     #novaCategoria {
         transition-duration: 0.5s;
     }
+    
+    .help-text {
+        display: none;
+        margin-top: 1em;
+        padding: 0.5em 0.16em 0 1em;
+        font-size: 0.75em;
+        line-height: 1.16;
+        color: #999;
+    }
+    
+    .form-error-text {
+        display: none;
+        padding: 0.2em 1em;
+        font-size: 0.75em;
+        color: tomato;
+    }
     /*****************************
     ARTICLES
  *****************************/
@@ -423,6 +439,14 @@
         }
         .article_individual_content {
             font-size: 1rem;
+        }
+        .help-text {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .form-error-text {
+            padding-left: 0;
+            padding-right: 0;
         }
     }
     

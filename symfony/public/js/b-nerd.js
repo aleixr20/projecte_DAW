@@ -10,6 +10,10 @@ let contrast = true
 //Al cargar la pàgina
 window.onload = function() {
 
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
+
     //Obtenir elements del DOM que han de cmabiar amb el Toggle Menu
     const shadow = document.getElementById("fade")
     const menu_lateral = (document.getElementsByClassName("primary-menu"))[0]
@@ -26,6 +30,9 @@ window.onload = function() {
         }
     });
 
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
     //Funcio per a desplegar i mostrar elements el menu
     function showMenu() {
         shadow.style.backgroundColor = "#fff";
@@ -44,6 +51,9 @@ window.onload = function() {
         menuVisibilityStatus = true;
     }
 
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
     //Funcio per a ocular el menu desplegat
     function hideMenu() {
         shadow.style.backgroundColor = "transparent";
@@ -90,8 +100,9 @@ window.onload = function() {
 
 
 
-
-
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
     $('#contrast').click(function() {
         if (contrast == false) {
             $(this).html('<i class="menu-icon fa fa-toggle-off"></i>');
@@ -123,7 +134,9 @@ function validarInputLength(inputObj, min, max, missatge_error) {
 
 }
 
-
+/**
+ * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+ */
 window.onscroll = function() {
 
     //Capturar numero de seccions que te la pàgina
