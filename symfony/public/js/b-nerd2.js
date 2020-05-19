@@ -27,6 +27,7 @@ window.onload = function() {
             // metaTags: null,
             // metaDescription: null,
         },
+        articleInputs: []
 
     };
 
@@ -63,13 +64,15 @@ window.onload = function() {
             }
         },
         loadArticleForm: function() {
-            data.articleForm.titol = document.forms['article']['article_titol'];
-            data.articleForm.subtitol = document.forms['article']['article_subtitol'];
-            data.articleForm.categoria = document.forms['article']['article_categoria'];
-            data.articleForm.novaCategoria = document.forms['article']['article_nova_categoria'];
-            data.articleForm.contingut = document.forms['article']['article_contingut'];
-            data.articleForm.metaTags = document.forms['article']['article_meta_tag'];
-            data.articleForm.metaDescription = document.forms['article']['article_meta_description'];
+            data.articleForm.titol = document.getElementById('article_titol').parentNode
+            data.articleForm.subtitol = document.getElementById('article_subtitol').parentNode
+            data.articleForm.categoria = document.getElementById('article_categoria').parentNode
+            data.articleForm.novaCategoria = document.getElementById('article_nova_categoria').parentNode
+            data.articleForm.contingut = document.getElementById('article_contingut').parentNode
+            data.articleForm.metaTags = document.getElementById('article_meta_tag').parentNode
+            data.articleForm.metaDescription = document.getElementById('article_meta_description').parentNode
+                // data.articleInputs = document.getElementsByClassName('form-group')
+                // titol = document.getElementById('article_titol').parentNode
         }
 
     };
@@ -81,7 +84,8 @@ window.onload = function() {
 
             if (document.URL == "http://localhost:8000/new") {
                 model.loadArticleForm();
-                view.validateFormArticles(data.articleForm)
+                //view.validateFormArticles(data.articleForm)
+                view.listenFormInputs(data.articleForm)
             }
         },
 
@@ -185,65 +189,55 @@ window.onload = function() {
             body.style.color = '#666';
             body.style.backgroundColor = '#fff';
         },
-        validateFormArticles: function(Obj) {
-            Obj.titol.addEventListener("focusout", (function() {
-                return function() {
-                    view.validateLength(Obj.titol, 10, 20, 'Error de tamanyo');
-                }
-            })());
-            Obj.subtitol.addEventListener("focusout", (function() {
-                return function() {
-                    view.validateLength(Obj.titol, 10, 20, 'Error de tamanyo');
-                }
-            })());
-            Obj.metaTags.addEventListener("focusout", (function() {
-                return function() {
-                    view.validateLength(Obj.titol, 10, 20, 'Error de tamanyo');
-                }
-            })());
+
+        listenFormInputs(Obj) {
+            //Dels elements del formulari, especificar la accio del Listener
+            view.validateFormArticles(Obj.titol, 10, 50)
+            view.validateFormArticles(Obj.subtitol, 50, 200)
+            view.validateFormArticles(Obj.metaTags, 0, 100)
+            view.validateFormArticles(Obj.metaDescription, 100, 160)
+
+            //Afegir listener de nova Categoria
 
         },
+        validateFormArticles: function(Obj, min, max) {
+            //Quan entri al Input, mostrar Ajuda i Errors
+            Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
+                return function() {
+                    Obj.getElementsByClassName('help-text')[0].style.display = 'block'
+                    Obj.getElementsByClassName('form-error-text')[0].style.display = 'block'
+                }
+            })());
+            //Quan surti del Input, amagar Ajuda i Errors
+            Obj.getElementsByTagName('input')[0].addEventListener("focusout", (function() {
+                return function() {
+                    Obj.getElementsByClassName('help-text')[0].style.display = 'none'
+                    Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
+                }
+            })());
+            //Mentres escrigui -> eventListener per actualitzar Error
+            Obj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
+                    view.validateLength(Obj, min, max);
+                }
+            })());
+        },
 
-        validateLength: function(inputObj, min, max, errorMsg) {
+        validateLength: function(inputObj, min, max) {
+            //Capturar l'objecte input i error
+            let input = inputObj.getElementsByTagName('input')[0]
+            let error = inputObj.getElementsByClassName('form-error-text')[0]
+            error.innerHTML = `Actualmente ${input.value.length} carácteres)`
 
-            //Primer de tot esborrr els errors de pantalla (son molestos)
-            let errors = document.getElementsByClassName('form-error')
-            for (i = 0; i < errors.length; i++) {
-                errors[i].remove()
-            }
-            inputObj.style.border = '1px solid #ced4da'
-
-            if (inputObj.value.length < min) {
-                let newNode = document.createElement("p");
-                var nodeText = document.createTextNode(`${errorMsg}! El texto introducido no puede ser inferior a ${min} carácteres`);
-                newNode.appendChild(nodeText);
-                newNode.classList.add("form-error")
-                newNode.setAttribute('id', 'error')
-                inputObj.style.border = '1px solid red'
-                inputObj.insertAdjacentElement("afterend", newNode);
-            } else if (inputObj.value.length > max) {
-                let newNode = document.createElement("p");
-                var nodeText = document.createTextNode(`${errorMsg}! El texto introducido no puede ser superior a ${max} carácteres`);
-                newNode.appendChild(nodeText);
-                newNode.classList.add("form-error")
-                newNode.setAttribute('id', 'error')
-                inputObj.style.border = '1px solid red'
-                inputObj.insertAdjacentElement("afterend", newNode);
+            //Si el tamany es mes petit o mes gran dels especificats
+            if (input.value.length < min || input.value.length > max) {
+                error.style.color = 'tomato'
+                input.style.border = '1px solid red'
             } else {
-
+                error.style.color = '#999'
+                input.style.border = '1px solid #ced4da'
                 console.info(inputObj.value, 'CAMPO CORRECTO')
             }
-
-            // if (inputObj.val().length < min || inputObj.val().length > max) {
-            //     inputObj.css({ 'border': '1px solid red', 'box-shadow': '0 0 0 .2rem rgba(255, 0 , 0, .25)' })
-            //     $('#articleSubmit').hide()
-
-            // } else {
-            //     inputObj.css({ 'border': '1px solid #ced4da', 'box-shadow': 'unset' })
-            //     $('#articleSubmit').show()
-
-            // }
-
         }
 
 

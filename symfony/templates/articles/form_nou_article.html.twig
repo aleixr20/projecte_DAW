@@ -14,11 +14,28 @@
 		{{ form_start(formArticle) }}
 		<div class="form-group">
 			{{ form_label(formArticle.titol) }}
+			<i class="fa fa-question-circle"></i>
 			{{ form_widget(formArticle.titol) }}
+			{{ form_help(formArticle.titol) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(formArticle.subtitol) }}
 			{{ form_widget(formArticle.subtitol) }}
+			{{ form_help(formArticle.subtitol) }}
+			<p class="form-error-text"></p>
+		</div>
+		<div class="form-group">
+			{{ form_label(formArticle.meta_tag) }}
+			{{ form_widget(formArticle.meta_tag) }}
+			{{ form_help(formArticle.meta_tag) }}
+			<p class="form-error-text"></p>
+		</div>
+		<div class="form-group">
+			{{ form_label(formArticle.meta_description) }}
+			{{ form_widget(formArticle.meta_description) }}
+			{{ form_help(formArticle.meta_description) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group" id="categories">
 			{{ form_label(formArticle.categoria) }}
@@ -31,14 +48,6 @@
 		<div class="form-group">
 			{{ form_label(formArticle.contingut) }}
 			{{ form_widget(formArticle.contingut) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(formArticle.meta_tag) }}
-			{{ form_widget(formArticle.meta_tag) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(formArticle.meta_description) }}
-			{{ form_widget(formArticle.meta_description) }}
 		</div>
 		<div class="form-group">
 			{{ form_label(formArticle.visible) }}
