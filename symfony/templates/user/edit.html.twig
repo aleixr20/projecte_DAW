@@ -10,11 +10,13 @@
 		<h1 class="titulo">
 			Editar perfil
 		</h1>
-		<p id="error-msg">
-			{% if error is defined %}
-				{{ error }}
-			{% endif %}
-		</p>
+		<div class="form-alert-errors">
+			{{ form_errors(editForm.nom) }}
+			{{ form_errors(editForm.cognom) }}
+			{{ form_errors(editForm.email) }}
+			{{ form_errors(editForm.nom_usuari) }}
+
+		</div>
 
 
 		{{ form_start(editForm) }}
@@ -22,29 +24,33 @@
 		<div class="form-group form-row">
 			<div class="col-md-6">
 				{{ form_label(editForm.nom) }}
-				{{ form_widget(editForm.nom, {'attr': {'class': 'form-control'}}) }}
+				{{ form_widget(editForm.nom) }}
+				{{ form_help(editForm.nom) }}
 			</div>
 			<div class="col-md-6">
 				{{ form_label(editForm.cognom) }}
-				{{ form_widget(editForm.cognom, {'attr': {'class': 'form-control'}}) }}
+				{{ form_widget(editForm.cognom) }}
+				{{ form_help(editForm.cognom) }}
 			</div>
 		</div>
 
 		<div class="form-group form-row">
 			<div class="col-md-6">
 				{{ form_label(editForm.email) }}
-				{{ form_widget(editForm.email, {'attr': {'class': 'form-control'}}) }}
+				{{ form_widget(editForm.email) }}
+				{{ form_help(editForm.email) }}
+
 			</div>
 			<div class="col-md-6">
 				{{ form_label(editForm.nom_usuari) }}
 				{{ form_widget(editForm.nom_usuari) }}
-				{{ form_errors(editForm.imatge) }}
+				{{ form_help(editForm.imatge) }}
 				<p class="form-error-text"></p>
 			</div>
 		</div>
 
 		<div class="form-group form-row">
-			<div class="col-md-9">
+			<div class="col-lg-9">
 				<label for="user_imatge">Imatge del perfil</label>
 				<div class="input-group">
 					<div class="custom-file">
@@ -55,9 +61,9 @@
 				{{ form_errors(editForm.imatge) }}
 				<p class="form-error-text"></p>
 			</div>
-			<div class="col-md-3 col-sm-12">
+			<div class="col-lg-3 ">
 				<button onclick="location.href='{{ path('userChangePassword') }}'" type="button" class="btn btn-light">
-					Canvia la contrasenya
+					Canviar contrasenya
 				</button>
 			</div>
 		</div>
@@ -66,8 +72,10 @@
 		<div class="form-group">
 			{{ form_label(editForm.descripcio) }}
 			{{ form_widget(editForm.descripcio) }}
-			{{ form_errors(editForm.descripcio) }}
+			{{ form_help(editForm.descripcio) }}
+			<p class="form-error-text"></p>
 		</div>
+
 
 		<h2>Xarxes Socials</h2>
 		<div class="form-group">
@@ -91,19 +99,12 @@
 			{{ form_label(editForm.data_naixament) }}
 			{{ form_widget(editForm.data_naixament) }}
 		</div>
-		<div class="form-group">
-			{{ form_label(editForm.genere) }}
-			{{ form_widget(editForm.genere) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(editForm.codi_postal) }}
-			{{ form_widget(editForm.codi_postal) }}
-		</div>
+
 
 		<br/>
 
-		<button class="btn btn-outline-info">Desa</button>
-		<button class="btn btn-outline-info" type="button" onclick="location.href='{{ path('userProfile') }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary">Desa</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('userProfile', {username: app.user.username}) }}'">Cancel·la</button>
 		{{ form_end(editForm) }}
 	</section>
 {% endblock %}

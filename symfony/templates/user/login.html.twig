@@ -13,7 +13,7 @@
 			</h1>
 
 			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				<div class="form-alert-errors">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
 
 			<div class="form-group">

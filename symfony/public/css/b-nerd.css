@@ -361,6 +361,23 @@ pre {
     padding-left: 1em;
 }
 
+.form-alert-errors {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    _border: 1px solid transparent;
+    _border-radius: .25rem;
+    color: tomato;
+    background-color: transparent;
+    _background-color: #f8d7da;
+    _border-color: #f5c6cb;
+}
+
+.form-alert-errors ul {
+    padding: 0.25em 0;
+    margin-bottom: 0;
+}
+
 .btn-light {
     background-color: #e2e6ea;
     color: #444;
@@ -369,8 +386,15 @@ pre {
 }
 
 .btn-light:hover {
-    background-color: transparent;
+    border-color: #6c757d;
+    background-color: #6c757d;
+    color: #fff;
 }
+
+
+/* .btn-outline-secondary:hover {
+    color: transparent
+} */
 
 
 /****************************
@@ -445,6 +469,11 @@ pre {
     section {
         padding-left: 22%;
         padding-right: 10%;
+    }
+    .btn-light {
+        position: relative;
+        margin-top: 1em;
+        width: inherit;
     }
 }
 

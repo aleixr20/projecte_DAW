@@ -3,19 +3,18 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Length;
-
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserType extends AbstractType
 {
@@ -43,10 +42,10 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
-                        'min' => 6,
-                        'minMessage' => 'El nom d\usuari no pot ser inferior a {{ limit }} caràcters',
+                        'min' => 8,
+                        'minMessage' => 'El nom d\'usuari no pot ser inferior a {{ limit }} caràcters',
                         'max' => 14,
-                        'maxMessage' => 'El nom d\usuari no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El nom d\'usuari no pot ser superior a {{ limit }} caràcters',
                     ])
                 ]
             ])
@@ -102,20 +101,20 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
 
-            ])
-            ->add('genere', ChoiceType::class, [
-                'label' => 'Génere',
-                'choices' => [
-                    'Masculí' => 'masc',
-                    'Femení' => 'fem',
-                    'Altres' => 'altres'
-                ],
-                'required' => false,
-
-            ])
-            ->add('codi_postal', TextType::class, [
-                'required' => false,
             ]);
+            // ->add('genere', ChoiceType::class, [
+            //     'label' => 'Génere',
+            //     'choices' => [
+            //         'Masculí' => 'masc',
+            //         'Femení' => 'fem',
+            //         'Altres' => 'altres'
+            //     ],
+            //     'required' => false,
+
+            // ])
+            // ->add('codi_postal', TextType::class, [
+            //     'required' => false,
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

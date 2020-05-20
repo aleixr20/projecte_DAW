@@ -30,35 +30,19 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
 {
-    /**
-     * JO UNIFICARIA AQUI TOTS ELS METODES RELACIONATS AMB ELS USUARIS
-     * 
-     * Per exemple:
-     * Registre, Login, veure perfil, editar perfil
-     * 
-     **********************************************************************/
-
-
 
     /**
      * REGISTRE DE NOU USUARI
-     * AQUEST METODE ES POT MILLORAR AMB UN FORMULARI PERSONALITZAT
-     * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
-            //return $this->redirectToRoute('index');
             return $this->redirectToRoute('homepage');
         }
 
         $user = new User();
 
-        /**
-         * Aquest RegistrationFormType es generic i ve per defecte amb Syfony
-         * quan es fa allò del make:auth, pero es 100% customizable
-         */
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -78,27 +62,27 @@ class UserController extends AbstractController
             $user->setDataRegistre($dataRegistre);
 
             //Pujada de la imatge de perfil
-            $imatgePerfil = $form->get('imatge')->getData();
+            // $imatgePerfil = $form->get('imatge')->getData();
 
-            // this condition is needed because the 'imatge' field is not required
-            // so the image file must be processed only when a file is uploaded
-            if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
-                $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $nomArxiu = $slugger->slug($nomArxiuOriginal);
-                $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
+            // // this condition is needed because the 'imatge' field is not required
+            // // so the image file must be processed only when a file is uploaded
+            // if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
+            //     $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
+            //     // this is needed to safely include the file name as part of the URL
+            //     $nomArxiu = $slugger->slug($nomArxiuOriginal);
+            //     $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
 
-                // Move the file to the directory where imatges are stored
-                try {
-                    $imatgePerfil->move('img/imatges_perfil', $nouNomArxiu);
-                } catch (FileException $e) {
-                    throw new Error($e);
-                }
+            //     // Move the file to the directory where imatges are stored
+            //     try {
+            //         $imatgePerfil->move('img/imatges_perfil', $nouNomArxiu);
+            //     } catch (FileException $e) {
+            //         throw new Error($e);
+            //     }
 
-                // updates the 'imatge' property to store the image file name
-                // instead of its contents
-                $user->setImatge($nouNomArxiu);
-            }
+            //     // updates the 'imatge' property to store the image file name
+            //     // instead of its contents
+            //     $user->setImatge($nouNomArxiu);
+            // }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -116,7 +100,6 @@ class UserController extends AbstractController
             ]);
         }
 
-        // return $this->render('registration/register.html.twig', [
         return $this->render('user/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
@@ -188,7 +171,6 @@ class UserController extends AbstractController
 
     /**
      * METODE DE LOGIN
-     * S'HAN D'AFEGIR ALGUNS USUARIS A DataFixtures PER FER PROVES
      * @Route("/user/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
