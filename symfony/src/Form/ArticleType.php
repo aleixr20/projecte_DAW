@@ -15,80 +15,91 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-
         $builder
             ->add('titol', TextType::class, [
-                'label' => 'Titol article',
+                'label' => 'Titol article *',
+                'help' => 'Títol molt curt i descriptiu del article (10-50 caràcters)',
+                // 'attr' => ['class' => 'form-control', 'minlength' => '4', 'maxlength' => '10'],
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
-                        'min' => 25,
-                        'minMessage' => 'Error, menys de {{ limit }} ',
-                        'max' => 100,
-                        'maxMessage' => 'Error, més de {{ limit }} ',
+                        'min' => 10,
+                        'minMessage' => 'Error, el titol no pot contenir menys de {{ limit }} caràcters',
+                        'max' => 50,
+                        'maxMessage' => 'Error, el títol no pot contenir mes de {{ limit }} caràcters ',
                     ])
                 ]
             ])
 
             ->add('subtitol', TextType::class, [
-                'label' => 'Subtitol article',
+                'label' => 'Breu resum del contingut del article',
+                'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 50,
-                        'minMessage' => 'Error, menys de {{ limit }} ',
-                        'max' => 150,
-                        'maxMessage' => 'Error, més de {{ limit }} ',
+                        'minMessage' => 'Error, el resum no pot contenir menys de {{ limit }} caràcters',
+                        'max' => 200,
+                        'maxMessage' => 'Error, el resum no pot contenir mes de {{ limit }} caràcters',
                     ])
                 ],
                 'required' => false,
 
             ])
 
-            ->add('contingut', CKEditorType::class, [
-                'label' => 'Contingut article',
-                'attr' => ['class' => 'form-control', 'rows' => 5]
-
-            ])
-
             ->add('meta_tag', TextType::class, [
-                'label' => 'etiquetes posicionament SEO',
+                'label' => 'Meta Tags *',
+                'help' => 'Paraules clau del article separades per comes. Seràn les meta-tag per al posicionament SEO',
                 'attr' => ['class' => 'form-control'],
             ])
 
-            ->add('meta_description', TextAreaType::class, [
-                'label' => 'Breu descripcio Snippet SEO (maxim 155 caràcters)',
+            ->add('meta_description', TextType::class, [
+                'label' => 'Meta Description *',
                 'attr' => ['class' => 'form-control', 'rows' => 2],
+                'help' => 'Text molt resumit i descriptiu per al Snippet dels buscadors. (maxim 155 caràcters)',
+
                 'constraints' => [
                     new Length([
                         'min' => 100,
-                        'minMessage' => 'Error, menys de {{ limit }} ',
+                        'minMessage' => 'Error, la meta descripció no pot contenir menys de {{ limit }} caràcters',
                         'max' => 160,
-                        'maxMessage' => 'Error, més de {{ limit }} ',
+                        'maxMessage' => 'Error, la meta descricpió no pot contenir mes de {{ limit }} caràcters',
                     ])
                 ]
             ])
 
             ->add('categoria', EntityType::class, [
+                'label' => 'Categoria *',
+                //'help' => 'Categoria a la que pertany l\'article',
                 'attr' => ['class' => 'form-control'],
                 'class' => Categoria::class,
             ])
 
             ->add('nova_categoria', TextType::class, [
-                'label' => 'Nova categoria',
+                'label' => 'Nova categoria *',
+                //'help' => 'Nom que tindrà la nova categoria. Recorda que totes les categories comencen amb in (inPHP, inHTML...)',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
                 'required' => false,
             ])
+            ->add('contingut', CKEditorType::class, [
+                'label' => 'Contingut article *',
+                //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
+                'attr' => ['class' => 'form-control', 'rows' => 5]
+            ])
 
             ->add('visible', ChoiceType::class, [
+                'label' => 'Estat de l\'article',
                 'attr' => ['class' => 'form-control'],
+                //'help' => 'Indica el grau de visibilitat de l\'article',
                 'choices'  => [
                     'Esborrany' => false,
                     'Publica' => true,

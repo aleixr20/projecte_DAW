@@ -118,6 +118,16 @@ class User implements UserInterface
      */
     private $socialMedia;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     */
+    private $descripcio;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -165,6 +175,13 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRole($role): self
+    {
+        array_push($this->roles, $role);
 
         return $this;
     }
@@ -460,6 +477,30 @@ class User implements UserInterface
             $this->socialMedia->removeElement($socialMedium);
             $socialMedium->removeUsuari($this);
         }
+
+        return $this;
+    }
+
+    public function getDescripcio(): ?string
+    {
+        return $this->descripcio;
+    }
+
+    public function setDescripcio(?string $descripcio): self
+    {
+        $this->descripcio = $descripcio;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

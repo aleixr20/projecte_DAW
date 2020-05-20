@@ -1,0 +1,7 @@
+<h3>Enhorabona! T'has registrat!</h3>
+
+<p>Hola {{ name }}! T'has registrat correctament.</p>
+
+<p>Gràcies per registrar-te a b-nerd. Fes click al link de sota per verificar el teu compte:</p>
+<a href="{{ url('verificar_compte', {'token': token})}}">Verificar correu!</a>
+<p>Aquest enllaç caduca en 1 hora</p>

@@ -12,46 +12,47 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Length;
+
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Email *'
-            ])
+
             ->add('nom', TextType::class, [
-                'label' => 'Nom *'
+                'label' => 'Nom *',
+                'attr' => ['class' => 'form-control'],
             ])
+
             ->add('cognom', TextType::class, [
-                'label' => 'Cognom *'
+                'label' => 'Cognom *',
+                'attr' => ['class' => 'form-control'],
             ])
-            ->add('data_naixament', BirthdayType::class, [
-                'label' => 'Data de naixament',
-                'required'=> false,
-                'placeholder' => [
-                    'day' => 'Dia',
-                    'month' => 'Mes', 
-                    'year' => 'Any', 
-                ],
-                'format' => 'dd  MM  yyyy'
+
+            ->add('email', EmailType::class, [
+                'label' => 'Email *',
+                'attr' => ['class' => 'form-control'],
             ])
-            ->add('genere', ChoiceType::class, [
-                'label' => 'Génere',
-                'required'=> false,
-                'choices' => [
-                    'Masculí' => 'masc',
-                    'Femení' => 'fem',
-                    'Altres' => 'altres'
+
+            ->add('nom_usuari', TextType::class, [
+                'label' => 'Nom d\'usuari',
+                'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'El nom d\usuari no pot ser inferior a {{ limit }} caràcters',
+                        'max' => 14,
+                        'maxMessage' => 'El nom d\usuari no pot ser superior a {{ limit }} caràcters',
+                    ])
                 ]
             ])
-            ->add('codi_postal', TextType::class, [
-                'required'=> false,
-            ])
-            ->add('nom_usuari', TextType::class)
+
             ->add('imatge', FileType::class, [
+                'label' => 'Seleccionar una imatge (format jpg, png)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -59,23 +60,62 @@ class UserType extends AbstractType
                         'maxSize' => '2000k',
                     ])
                 ],
+                'label_attr' => ['class' => 'custom-file-label']
             ])
+
+            ->add('descripcio', TextAreaType::class, [
+                'label' => 'Presentació',
+                'attr' => ['class' => 'form-control', 'rows' => '6'],
+                'required' => false,
+            ])
+
+
             ->add('github', TextType::class, [
-                'required'=> false,
-            ])
-            ->add('codi_postal', TextType::class, [
-                'required'=> false,
+                'label' => 'Github',
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
             ])
             ->add('linkedin', TextType::class, [
-                'required'=> false,
+                'label' => 'Linkedin',
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
             ])
             ->add('twitter', TextType::class, [
-                'required'=> false,
+                'label' => 'Twitter',
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
             ])
             ->add('facebook', TextType::class, [
-                'required'=> false,
+                'label' => 'Facebook',
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
             ])
-        ;
+
+            ->add('data_naixament', BirthdayType::class, [
+                'label' => 'Data de naixament',
+                'placeholder' => [
+                    'day' => 'Dia',
+                    'month' => 'Mes',
+                    'year' => 'Any',
+                ],
+                'format' => 'dd  MM  yyyy',
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
+
+            ])
+            ->add('genere', ChoiceType::class, [
+                'label' => 'Génere',
+                'choices' => [
+                    'Masculí' => 'masc',
+                    'Femení' => 'fem',
+                    'Altres' => 'altres'
+                ],
+                'required' => false,
+
+            ])
+            ->add('codi_postal', TextType::class, [
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

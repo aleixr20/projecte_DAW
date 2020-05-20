@@ -1,17 +1,27 @@
+//Variables per a la gestió del menu toggle
 let menuVisibilityStatus = false;
 let toggleMenu;
+
+//Variables per al Dark Mode
 let contrast = true
 
 
+
+//Al cargar la pàgina
 window.onload = function() {
 
-    let menu_lateral = document.getElementsByClassName("primary-menu")
-    let shadow = document.getElementById("fade");
-    let menulinks = document.getElementsByClassName("menu-link");
-    let menu_usuari = document.getElementsByClassName("menu-user");
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
 
+    //Obtenir elements del DOM que han de cmabiar amb el Toggle Menu
+    const shadow = document.getElementById("fade")
+    const menu_lateral = (document.getElementsByClassName("primary-menu"))[0]
+    const menu_usuari = document.getElementsByClassName("menu-user")[0];
+    const menulinks = document.getElementsByClassName("menu-link");
+
+    //Obtenir l'element hamburguesa i assignar un Event Listener
     document.getElementById("hamburgesa").addEventListener("click", function() {
-
 
         if (menuVisibilityStatus == false) {
             showMenu();
@@ -20,37 +30,44 @@ window.onload = function() {
         }
     });
 
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
+    //Funcio per a desplegar i mostrar elements el menu
     function showMenu() {
-        menu_usuari[0].style.bottom = "75%"
-        menu_lateral[0].style.width = "80%";
-        menu_lateral[0].style.backgroundColor = "rgba(100, 100, 100, 0.1)";
         shadow.style.backgroundColor = "#fff";
         shadow.style.zIndex = 1;
         shadow.addEventListener("click", hideMenu);
 
+        menu_usuari[0].style.bottom = "75%"
+        menu_lateral[0].style.width = "80%";
+        menu_lateral[0].style.backgroundColor = "rgba(100, 100, 100, 0.1)";
+
         for (i = 0; i < menulinks.length; i++) {
             menulinks[i].style.opacity = "1";
-            menulinks[i].style.zIndex = "+5";
+            menulinks[i].style.visibility = "visible";
             menulinks[i].addEventListener("click", hideMenu);
         }
-
         menuVisibilityStatus = true;
     }
 
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
+    //Funcio per a ocular el menu desplegat
     function hideMenu() {
-        menu_usuari[0].style.bottom = "30%"
-        menu_lateral[0].style.backgroundColor = "transparent";
         shadow.style.backgroundColor = "transparent";
         shadow.style.zIndex = -1;
         shadow.removeEventListener("click", function() {});
 
+        menu_usuari[0].style.bottom = "30%"
+        menu_lateral[0].style.backgroundColor = "transparent";
         if (window.screen.availWidth < 576) {
             menu_lateral[0].style.width = "3em";
             for (i = 0; i < menulinks.length; i++) {
                 menulinks[i].style.opacity = "0";
-                menulinks[i].style.zIndex = "-5";
+                menulinks[i].style.visibility = "hidden";
                 menulinks[i].removeEventListener("click", function() {});
-
             }
         } else {
             menu_lateral[0].style.width = "16vw";
@@ -69,25 +86,57 @@ window.onload = function() {
                 $('#article_nova_categoria').val("").removeAttr("required");
             }
         });
+
+        //Validar contingut inputs
+        // $('#article_titol').change(console.log('hola'));
+        // $('#article_titol').change(console.log($(this).html()));
+
+        $('#article_titol').change(function() {
+            inputLength($(this), 25, 100, null);
+        });
+
+
     }
 
+
+
+    /**
+     * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+     */
     $('#contrast').click(function() {
         if (contrast == false) {
             $(this).html('<i class="menu-icon fa fa-toggle-off"></i>');
             $('body').css({ 'color': '#666', 'background-color': '#fff' })
-
             contrast = true;
         } else {
             $(this).html('<i class="menu-icon fa fa-toggle-on"></i>')
             $('body').css({ 'color': '#999', 'background-color': '#333' })
-
             contrast = false;
         }
     });
 }
 
+function validarForArticle() {
 
+}
 
+function validarInputLength(inputObj, min, max, missatge_error) {
+    console.log(inputObj)
+    if (inputObj.val().length < min || inputObj.val().length > max) {
+        inputObj.css({ 'border': '1px solid red', 'box-shadow': '0 0 0 .2rem rgba(255, 0 , 0, .25)' })
+        $('#articleSubmit').hide()
+
+    } else {
+        inputObj.css({ 'border': '1px solid #ced4da', 'box-shadow': 'unset' })
+        $('#articleSubmit').show()
+
+    }
+
+}
+
+/**
+ * AQUESTA PART ESTA TOTA PASADA AL NOU JS-MVC
+ */
 window.onscroll = function() {
 
     //Capturar numero de seccions que te la pàgina
@@ -108,12 +157,12 @@ window.onscroll = function() {
         }
     }
 
-    let menuUserPositions = (height / 43); // =69 saltos winScroll
+    let menuUserPositions = (height / 37); // =69 saltos winScroll
     let menuUser = document.getElementsByClassName('menu-user')
 
-    for (i = 1; i <= 43; i++) {
+    for (i = 1; i <= 38; i++) {
         if ((winScroll > (menuUserPositions * (i - 1))) && (winScroll < (menuUserPositions * i))) {
-            menuUser[0].style.bottom = (30 + i) + "%"
+            menuUser[0].style.bottom = (35 + i) + "%"
 
         }
     }

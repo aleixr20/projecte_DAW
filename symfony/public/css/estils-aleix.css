@@ -28,6 +28,12 @@
     color: #666;
 }
 
+#profile-description {
+    margin-bottom: 5vh;
+    padding: 1vw;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
 
 .profile-box {
     padding: 3vw;

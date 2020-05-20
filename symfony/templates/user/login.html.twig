@@ -5,18 +5,8 @@
 {% endblock %}
 
 {% block content %}
-
-	<section id="menu_item_section_name_4">
+	<section>
 		<form method="post">
-
-
-			{% if app.user %}
-				<div class="mb-3">
-					You are logged in as
-					{{ app.user.username }},
-					<a href="{{ path('app_logout') }}">Logout</a>
-				</div>
-			{% endif %}
 
 			<h1 class="titulo">
 				Please sign in
@@ -38,15 +28,15 @@
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-			<!-- Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.-->
-			<!--See https://symfony.com/doc/current/security/remember_me.html-->
-			<!--<div class="checkbox mb-3">-->
-			<!--<label>-->
-			<!--<input type="checkbox" name="_remember_me"> Remember me</label> -->
-			<!--</div>-->
-				<button class="btn btn-block btn-outline-secondary" type="submit"> Sign in
+			<button class="btn btn-block btn-outline-secondary" type="submit">
+				Entrar !
 			</button>
 
 		</form>
+		{# <button type="button" class="btn btn-block btn-outline-secondary" onclick="location.href='{{ path('app_register') }}'"> Registra`t
+											</button> #}
+		<p class="text">Encara no t'has registrar? a que esperas,
+			<a href="{{ path('app_register') }}">Uneixte al club !</a>
+		</p>
 	</section>
 {% endblock %}

@@ -31,3 +31,6 @@ Responsive, proposta per movils
         right: -7.5vw -> funcionara amb diferents tamanys ??
         font-size: .66rem
     }
+
+    s'ha de cambiar el position absoculte del boto "canviar contrasenya" o posar media queries
+    GESTIONAR QUE QUNA NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL

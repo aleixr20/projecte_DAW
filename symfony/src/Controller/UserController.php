@@ -19,12 +19,13 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use DateTimeZone;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\Mailer;
+use App\Service\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
@@ -45,7 +46,7 @@ class UserController extends AbstractController
      * I AFEGINT ELS CAMPS QUE TROBEM NECESSARIS
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, SluggerInterface $slugger): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
             //return $this->redirectToRoute('index');
@@ -103,20 +104,16 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            // CREAR TOKEN
+            $userRepository->generateToken($user);
+            // CORREU DE VERIFICACIÓ
+            $mailer->sendVerificationMail($user);
+            // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
+            $queryBuilder->autoDestroyToken($user);
 
-            //Aquest return em sembla que es el que et fa l'autologin
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
-
-            // return $this->redirectToRoute('homepage');
-            // return $this->redirectToRoute('userProfile', [
-            //     'userName' => $user->getEmail()
-            // ]);
+            return $this->redirectToRoute('correct_registration', [
+                'userId' => $user->getId(),
+            ]);
         }
 
         // return $this->render('registration/register.html.twig', [
@@ -125,6 +122,69 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * REENVIAMENT DEL TOKEN
+     * @Route("/user/correct_registration/{userId}", name="correct_registration")
+     */
+    public function correctRegistration($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
+    {
+
+        $user = $userRepository->findOneBy(['id' => $userId]);
+
+        foreach($user->getRoles() as $role){
+            if ($role == "ROLE_ADMIN" || $role == "ROLE_VALIDATED") {
+                return $this->redirectToRoute('profileUser', [
+                    'userId' => $user->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('user/verify_email.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * REENVIAMENT DEL TOKEN
+     * @Route("/user/reenviament_token/{userId}", name="reenviament_token")
+     */
+    public function reenviamentToken($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
+    {
+
+        $user = $userRepository->findOneBy(['id' => $userId]);
+
+        // CREAR TOKEN
+        $userRepository->generateToken($user);
+        // CORREU DE VERIFICACIÓ
+        $mailer->sendVerificationMail($user);
+        // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
+        $queryBuilder->autoDestroyToken($user);
+
+        return $this->render('user/verify_email.html.twig', [
+            'user' => $user,
+        ]);
+    }
+    /**
+     * VERIFICACIÓ DE NOU USUARI
+     * @Route("/user/verificacio/{token}", name="verificar_compte")
+     */
+    public function verificar($token, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findOneBy([
+            'token' => $token
+        ]);
+
+        if($user){
+            $user->addRole("ROLE_VALIDATED");
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        return $this->render('user/verificated.html.twig', [
+            'user' => $user
+        ]);
+    }
 
     /**
      * METODE DE LOGIN
@@ -314,11 +374,8 @@ class UserController extends AbstractController
         }else{
             throw new Error("No existeix l'usuari");
         }
-
-
+        
         $userJson = $serializer->serialize($user, 'json', [
-            'ignored_attributes' => ['comentaris', 'articles'],
-            'circular_reference_limit' => 1,
             'circular_reference_handler' => function ($object) {
                 return $object->getId();
             }

@@ -81,3 +81,6 @@ twig:
 
 
 programa->FTP -> winscp
+
+composer require symfony/swiftmailer-bundle
+editar .env amb MAILER_URL=gmail:// XXX @localhost
