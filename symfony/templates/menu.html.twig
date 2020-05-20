@@ -2,7 +2,7 @@
 	{% if app.user %}
 		<li>
 			<a
-				href="{{ path('userProfile')}}">
+				href="{{ path('userProfile', {username: app.user.username}) }}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -12,12 +12,12 @@
 			</a>
 		</li>
 		<li>
-			<a class="menu-link menu-username" href="{{ path('userProfile')}}">{{app.user.username}}</a>
+			<a class="menu-link menu-username" href="{{ path('userProfile', {username: app.user.username}) }}">{{app.user.username}}</a>
 		</li>
 		<li>
 			{# <a class="menu-icon-logout" href="{{ path('app_logout')}}">
-				<i class="fa fa-power-off"></i>
-			</a> #}
+							<i class="fa fa-power-off"></i>
+						</a> #}
 			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
 				sortir
 			</a>
@@ -31,9 +31,8 @@
 	{% endif %}
 </ul>
 
-	<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
-<ul
-	class="menu-bottom">
+<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+<ul class="menu-bottom">
 	<li class="scrollable">
 		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
 	</li>

@@ -219,16 +219,28 @@ class UserController extends AbstractController
     /**
      * METODE PER VEURE EL PERFIL D'UN USUARI
      * ELS SEUS POSTS, COMENTARIS, VOTS +/-, LINKEDIN....
-     * @Route("/user/profile", name="userProfile")
+     * @Route("/user/{username}", name="userProfile")
      */
-    public function userProfile()
+    public function userProfile($username,UserRepository $userRepository)
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
+        //Aqui podem fer algun comptador de visites i limitar les visites anonimes per IP
+        // if (!$this->getUser()) {
+        //     return $this->redirectToRoute('app_login');
+        // }
 
+        $user = $userRepository->findOneBy(['nom_usuari' => $username]);
+        if ($user == null) {
+                        //Aqui hauriem de redirigir a una pagina 404
+            // o una pagina amb un missatge de usuari no trobat
+            throw new Error("No existeix l'usuari");
+
+            // return $this->render('user/profile.html.twig', [
+            //     'user' => $user
+            // ]);
+        }
+        //Si ha trobat un usari, mostrar el perfil
         return $this->render('user/profile.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $user,
         ]);
     }
 

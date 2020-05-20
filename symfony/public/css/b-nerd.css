@@ -30,6 +30,8 @@ h5,
 h6 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-family: 'Inria Serif', serif;
+    font-weight: unset;
+    color: #999;
 }
 
 p {
@@ -39,11 +41,15 @@ p {
 
 a {
     color: #aaa;
+    font-style: none;
+}
+
+.text a {
+    color: #aaa;
     font-style: italic;
 }
 
 a:hover {
-    text-decoration: dotted;
     color: #666;
 }
 
@@ -236,9 +242,6 @@ section {
 
 .titulo {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    _font-size: 2em;
-    font-weight: unset;
-    color: #999;
     position: relative;
     top: 15vh;
     margin-bottom: 20vh;
