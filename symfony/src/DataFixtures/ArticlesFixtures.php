@@ -178,28 +178,27 @@ class ArticlesFixtures extends Fixture
             ->setUser($admin)
             ->setCategoria($categoria_php)
             ->setMetaTag('php,form,htmlentities')
-            ->setContingut('
-            <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+            ->setContingut('<p>Meetus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
 
             <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit.</p>
             
             <p>Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
             
             <pre>
-$result = $serializer-&gt;normalize($level1, null, [
-    AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
-]);
-</pre>
+            $result = $serializer-&gt;normalize($level1, null, [
+                AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+            ]);
+            </pre>
             
             <p>Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
             
             <pre>
-$postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
-    &#39;circular_reference_handler&#39; =&gt; function ($object) {
-    return $object-&gt;getId();
-    }
-]);
-</pre>
+            $postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
+                &#39;circular_reference_handler&#39; =&gt; function ($object) {
+                return $object-&gt;getId();aaa
+                }
+            ]);
+            </pre>
             
             <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>            
             ')
@@ -217,8 +216,7 @@ $postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
             ->setUser($admin)
             ->setCategoria($categoria_php)
             ->setMetaTag('mvc,php,modelo,vista,controlador')
-            ->setContingut('
-            <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
 
             <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
             
@@ -231,124 +229,512 @@ $postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
             
             <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
             
+            <div class="code">
             <pre>
-$result = $serializer-&gt;normalize($level1, null, [
-    AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
-]);
-</pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
             
             <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
-                        ')
+            
+            <p>&nbsp;</p>
+            ')
             ->setVisible(true);
         $manager->persist($article_php2);
 
         //ARTICLE 3
-        $titol_php3 = "Ullamcorper morbi tincidunt ornare massa eget egestas";
+        $titol_apa1 = "Configuració Apache";
 
-        $article_php3 = new Article();
-        $article_php3->setTitol($titol_php3)
-            ->setSubtitol("Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.")
+        $article_apa1 = new Article();
+        $article_apa1->setTitol($titol_apa1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
-            ->setSlug(str_replace(" ", "-", strtolower($titol_php3)))
+            ->setSlug(str_replace(" ", "-", strtolower($titol_apa1)))
             ->setUser($admin)
-            ->setCategoria($categoria_php)
-            ->setMetaTag('mvc,php,modelo,vista,controlador')
-            ->setContingut('
-            <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+            ->setCategoria($categoria_apache)
+            ->setMetaTag('servidor,apache, localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
 
             <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
-                                
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
             <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
             
+            <div class="code">
             <pre>
-$result = $serializer-&gt;normalize($level1, null, [
-    AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
-    ]);
-</pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
             
             <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
-
-            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
-
-            <p>Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
-
-            <pre>
-php bin/console make:entity
-php bin/console make:auth
-php bin/console make:controller
-php bin/console make:crud
-php bin/console make:form
-</pre>
-
-            <p>Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
-                                ')
+            
+            <p>&nbsp;</p>
+            ')
             ->setVisible(true);
-        $manager->persist($article_php3);
+        $manager->persist($article_apa1);
 
         //ARTICLE 4
-        $titol_php4 = " Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate";
+        $titol_nginx1 = "Configuració Nginx";
 
-        $article_php4 = new Article();
-        $article_php4->setTitol($titol_php4)
-            ->setSubtitol("Urna et pharetra pharetra massa massa. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere.")
+        $article_nginx1 = new Article();
+        $article_nginx1->setTitol($titol_nginx1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
-            ->setSlug(str_replace(" ", "-", strtolower($titol_php4)))
+            ->setSlug(str_replace(" ", "-", strtolower($titol_nginx1)))
             ->setUser($admin)
-            ->setCategoria($categoria_php)
-            ->setMetaTag('mvc,php,modelo,vista,controlador')
-            ->setContingut('
-            <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+            ->setCategoria($categoria_nginx)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
 
             <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
-                      
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
             <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
             
+            <div class="code">
             <pre>
-Obj.metaTags.addEventListener("focusout", (function() {
-    return function() {
-        view.validateLength(Obj.titol, 10, 20, "Error de tamanyo");
-    }
-})());            
-</pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
             
             <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
-
-            <pre>
-validateLength: function(inputObj, min, max, errorMsg) {
-
-    //Primer de tot esborrr els errors de pantalla (son molestos)
-    let errors = document.getElementsByClassName(\'form-error\')
-    for (i = 0; i < errors.length; i++) {
-        errors[i].remove()
-    }
-    inputObj.style.border = \'1px solid #ced4da\'
-
-    if (inputObj.value.length < min) {
-        let newNode = document.createElement("p");
-        var nodeText = document.createTextNode(`${errorMsg}! El texto introducido no puede ser inferior a ${min} carácteres`);
-        newNode.appendChild(nodeText);
-        newNode.classList.add("form-error")
-        newNode.setAttribute(\'id\', \'error\')
-        inputObj.style.border = \'1px solid red\'
-        inputObj.insertAdjacentElement("afterend", newNode);
-    } else if (inputObj.value.length > max) {
-        let newNode = document.createElement("p");
-        var nodeText = document.createTextNode(`${errorMsg}! El texto introducido no puede ser superior a ${max} carácteres`);
-        newNode.appendChild(nodeText);
-        newNode.classList.add("form-error")
-        newNode.setAttribute(\'id\', \'error\')
-        inputObj.style.border = \'1px solid red\'
-        inputObj.insertAdjacentElement("afterend", newNode);
-    } else {
-
-        console.info(inputObj.value, \'CAMPO CORRECTO\')
-    }
-</pre>
-
-                <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
-                        ')
+            
+            <p>&nbsp;</p>
+            ')
             ->setVisible(true);
-        $manager->persist($article_php4);
+        $manager->persist($article_nginx1);
+
+        //ARTICLE 5
+        $titol_sql1 = "Sentencies SQL";
+
+        $article_sql1 = new Article();
+        $article_sql1->setTitol($titol_sql1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_sql1)))
+            ->setUser($admin)
+            ->setCategoria($categoria_sql)
+            ->setMetaTag('bbdd,sql,')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_sql1);
+
+        //ARTICLE 6
+        $titol_mongo = "Configuració MongoDB";
+
+        $article_mongo1 = new Article();
+        $article_mongo1->setTitol($titol_mongo)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_mongo)))
+            ->setUser($admin)
+            ->setCategoria($categoria_mongo)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_mongo1);
+
+        //ARTICLE 7
+        $titol_symfony1 = "Instal·lació Symfony";
+
+        $article_symfony1 = new Article();
+        $article_symfony1->setTitol($titol_symfony1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_symfony1)))
+            ->setUser($admin)
+            ->setCategoria($categoria_symfony)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_symfony1);
+
+        //ARTICLE 8
+        $titol_symfony2 = "Crear Entity a Symfony";
+
+        $article_symfony2 = new Article();
+        $article_symfony2->setTitol($titol_symfony2)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_symfony2)))
+            ->setUser($admin)
+            ->setCategoria($categoria_symfony)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_symfony2);
+
+        //ARTICLE 9
+        $titol_java1 = "Crear una classe amb Java";
+
+        $article_java1 = new Article();
+        $article_java1->setTitol($titol_java1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_java1)))
+            ->setUser($admin)
+            ->setCategoria($categoria_java)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_java1);
+
+        //ARTICLE 10
+        $titol_java2 = "Getters i setters(Java)";
+
+        $article_java2 = new Article();
+        $article_java2->setTitol($titol_java2)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_java2)))
+            ->setUser($admin)
+            ->setCategoria($categoria_java)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+            
+            <p>Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Sit amet volutpat consequat mauris nunc congue. Dis parturient montes nascetur ridiculus mus mauris vitae. Magna fermentum iaculis eu non diam phasellus vestibulum.</p>
+            
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_java2);
+
+        //ARTICLE 11
+        $titol_html1 = "Getters i setters(Java)";
+
+        $article_htm1 = new Article();
+        $article_htm1->setTitol($titol_html1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_html1)))
+            ->setUser($admin)
+            ->setCategoria($categoria_html)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_htm1);
+
+        //ARTICLE 12
+        $titol_html2 = "Estructura HTML";
+
+        $article_html2 = new Article();
+        $article_html2->setTitol($titol_html2)
+            ->setSubtitol("Exemple bàsic de la estructura HTML")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_html2)))
+            ->setUser($admin)
+            ->setCategoria($categoria_html)
+            ->setMetaTag('html,disseny, estructures')
+            ->setContingut('
+
+            <div class="code">
+            <pre>
+            <!DOCTYPE HTML>
+            <html lang="en">
+            <head>
+            <meta charset=utf-8>
+            <title>Sample HTML5 Structure</title>
+            </head>
+            <body>
+                <div id="container">
+                    <header>
+                        <h1>Sample HTML5 web document</h1>
+                    <nav>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </nav>
+                    </header>
+                    <section>
+                    <hgroup>
+                        <h1>Main Section</h1>
+                        <h2>This is a sample HTML5 Page</h2>
+                    </hgroup>
+                    <article>
+                        <p>Content of the first article</p>
+                    </article>
+                    <article>
+                        <p>Content of the second article</p>
+                    </article>
+                    </section>
+                    <footer>
+                        <p>This is the Footer of the web document</p>
+                    </footer>
+                </div>
+            </body>
+            </html> 
+
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_html2);       
+
+        //ARTICLE 13
+        $titol_html1 = "Getters i setters(Java)";
+
+        $article_htm1 = new Article();
+        $article_htm1->setTitol($titol_html1)
+            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setDataPublicacio(new DateTime())
+            ->setSlug(str_replace(" ", "-", strtolower($titol_html1)))
+            ->setUser($admin)
+            ->setCategoria($categoria_html)
+            ->setMetaTag('servidor,nginx,localhost')
+            ->setContingut('<p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
+
+            <p>Tortor condimentum lacinia quis vel eros donec ac odio. Varius quam quisque id diam vel quam elementum pulvinar etiam. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id semper risus in hendrerit. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
+            
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+            
+            <p>Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
+            
+            <div class="code">
+            <pre>
+                    $result = $serializer-&gt;normalize($level1, null, [
+                        AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
+                    ]);
+            </pre>
+            </div>
+
+            <ul>
+                <li>Elementum pulvinar etiam</li>
+                <li>non quam lacus suspendisse faucibus interdum posuere.</li>
+                <li>Urna et pharetra pharetra massa massa.</li>
+                <li>Fermentum posuere urna nec tincidunt praesent.</li>
+            </ul>
+
+            <p>&nbsp;</p>
+            ')
+            ->setVisible(true);
+        $manager->persist($article_htm1);
+//hola
 
         $manager->flush();
     }
