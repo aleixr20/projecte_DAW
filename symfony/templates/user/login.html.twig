@@ -9,8 +9,19 @@
 		<form method="post">
 
 			<h1 class="titulo">
-				Please sign in
+				Registre d'usuaris
 			</h1>
+
+			{% if tokenPendent is defined %}
+				{% if tokenPendent %}
+					<div class="form-alert-errors">T'hem enviat un mail i estas pendent de verificació</div>
+				{% else %}
+					<div class="alert alert-success">Gracies per registrar-te. Fes login i disfruta</div>
+				{% endif %}
+			{% endif %}
+
+
+
 
 			{% if error %}
 				<div class="form-alert-errors">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -34,7 +45,7 @@
 
 		</form>
 		{# <button type="button" class="btn btn-block btn-outline-secondary" onclick="location.href='{{ path('app_register') }}'"> Registra`t
-											</button> #}
+																				</button> #}
 		<p class="text">Encara no t'has registrar? a que esperas,
 			<a href="{{ path('app_register') }}">Uneixte al club !</a>
 		</p>

@@ -84,3 +84,20 @@ programa->FTP -> winscp
 
 composer require symfony/swiftmailer-bundle
 editar .env amb MAILER_URL=gmail:// XXX @localhost
+https://ckeditor.com/latest/samples/toolbarconfigurator/index.html#basic
+
+CKEDITOR.editorConfig = function( config ) {
+	config.toolbar = [
+		{ name: 'tools', items: [ 'Maximize', 'ShowBlocks', 'CreateDiv', 'Source'] },
+		{ name: 'document', items: [ 'Preview', 'Print'] },
+		{ name: 'clipboard', items: [ 'SelectAll', 'PasteText'] },
+		{ name: 'editing', items: [ 'Find', 'Replace'] },
+		{ name: 'insert', items: [ 'Link', 'Unlink', 'Image', 'HorizontalRule', 'PageBreak', 'Iframe' ] },
+		'/',
+		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'Blockquote', 'TextColor', 'BGColor' , '-', 'RemoveFormat' ] },
+		{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', , , '-', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+	];
+};
+
+Mirar aquesta web. JS per detectr codi i mostrar com un IDE
+https://highlightjs.org/usage/

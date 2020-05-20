@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+	{{ include('menu.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+
+	<section>
+
+		<h1 class="titulo">
+			Registre d'usuaris
+		</h1>
+
+		{% if tokenPendent is defined %}
+			{% if tokenPendent %}
+				<div class="form-alert-errors">T'hem enviat un mail i estas pendent de verificació</div>
+			{% else %}
+				<div class="alert alert-success">Gracies per registrar-te. Fes login i disfruta</div>
+			{% endif %}
+		{% endif %}
+
+		{% if tokenCaducat is defined and tokenCaducat %}
+			<div class="form-alert-errors">El mail de verificació ha caducat, <a href="{{path('app_token_recover') }}">vols que et tornem a enviar el mail?</a></div>
+		{% endif %}
+
+	</section>
+
+
+{% endblock %}

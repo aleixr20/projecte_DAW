@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+	{{ include('menu.html.twig') }}
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h1 class="titulo">
+			Reenviemtn de correu de verificació
+		</h1>
+
+		{% if tokenCaducat is defined and tokenCaducat %}
+			<div class="form-alert-errors">El mail de verificació ha caducat, vols que et tornem a enviar el mail?</div>
+		{% endif %}
+
+		{{ form_start(registrationForm) }}
+
+		{# {% if form.valid == false %} #}
+		<div class="form-alert-errors">
+			{{ form_errors(registrationForm.nom_usuari) }}
+			{{ form_errors(registrationForm.email) }}
+		</div>
+		{# {% endif %} #}
+
+
+		<div class="form-group">
+			{{ form_label(registrationForm.nom_usuari) }}
+			{{ form_widget(registrationForm.nom_usuari) }}
+			{{ form_help(registrationForm.nom_usuari) }}
+			<p class="form-error-text"></p>
+		</div>
+		<div class="form-group">
+			{{ form_label(registrationForm.email) }}
+			{{ form_widget(registrationForm.email) }}
+			{{ form_help(registrationForm.email) }}
+		</div>
+
+		<br/>
+
+		<button class="btn btn-outline-secondary">Reenviar mail de verificació</button>
+		{{ form_end(registrationForm) }}
+	</section>
+{% endblock %}

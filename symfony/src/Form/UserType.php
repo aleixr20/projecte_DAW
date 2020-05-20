@@ -51,7 +51,7 @@ class UserType extends AbstractType
             ])
 
             ->add('imatge', FileType::class, [
-                'label' => 'Seleccionar una imatge (format jpg, png)',
+                'label' => 'Seleccionar una imatge (jpg, png)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -68,7 +68,7 @@ class UserType extends AbstractType
                 'required' => false,
             ])
 
-
+            
             ->add('github', TextType::class, [
                 'label' => 'Github',
                 'attr' => ['class' => 'form-control'],
@@ -100,21 +100,7 @@ class UserType extends AbstractType
                 'format' => 'dd  MM  yyyy',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
-
             ]);
-            // ->add('genere', ChoiceType::class, [
-            //     'label' => 'Génere',
-            //     'choices' => [
-            //         'Masculí' => 'masc',
-            //         'Femení' => 'fem',
-            //         'Altres' => 'altres'
-            //     ],
-            //     'required' => false,
-
-            // ])
-            // ->add('codi_postal', TextType::class, [
-            //     'required' => false,
-            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -6,9 +6,6 @@ twig:
 
 fos_ck_editor:
     input_sync: true
-    default_config: base_config
-    configs:
-        base_config:
-            # toolbar:
-            #     - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'BulletedList', 'Link', 'Source', 'BidiLtr', 'Maximize'] }
-            uiColor: "#eeeeee"
+    # default_config: base_config
+    # configs:
+    #     base_config:

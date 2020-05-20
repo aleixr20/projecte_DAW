@@ -301,7 +301,7 @@ section {
 
 .article_individual_content {
     padding-top: 2em;
-    font-size: 1.1rem;
+    _font-size: 1.1rem;
 }
 
 .article_titol a {
@@ -337,9 +337,12 @@ section {
 
 pre {
     font-size: 0.75em;
-    padding: 1em 1em 1em 4em;
+    _padding: 1em 1em 1em 4em;
     margin: 0;
-    background-color: #eee;
+}
+
+code {
+    padding: 1em 1em 1em 4em !important
 }
 
 

@@ -71,13 +71,7 @@
 		</h2>
 		{# DEFINIR ESTRUCTURA #}
 		<p>{{ user.email }}</p>
-		{% if user.genere == 'masc' %}
-			<i class="fa fa-mars fa-gender"></i>
-		{% elseif user.genere == 'fem' %}
-			<p>
-				<i class="fa fa-venus fa-gender"></i>
-			</p>
-		{% endif %}
+
 		{% if user.getEdat() %}
 			<p>{{ user.getEdat() }}
 				anys</p>
@@ -118,19 +112,6 @@
 			<button onclick="location.href='{{ path('userProfileEdit') }}'" type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Edita
 			</button>
-		{% else %}
-			<div class="btn-group">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<i class="fa fa-cog fa-white"></i>
-				</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-				</div>
-			</div>
 		{% endif %}
 	</div>
 </div><hr><div id="profile-description">

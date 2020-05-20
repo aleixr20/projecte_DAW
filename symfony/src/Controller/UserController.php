@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\TokenRecoverType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -35,137 +36,127 @@ class UserController extends AbstractController
      * REGISTRE DE NOU USUARI
      * @Route("/user/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
     {
+        //Si hi ha un usuari logejat, redirigir a homepage
         if ($this->getUser()) {
             return $this->redirectToRoute('homepage');
         }
 
+        //crear usuari i formulari del tipus User
         $user = new User();
-
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        //Si estem en un Submit (el formulari conte dades)
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // Codificar password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
-
-            //AQUI HAURIEM D'ASSIGNAR UN ROLE USER PER DEFECTE
+            //Com l'usuari encara no ha verifict mail, assignar ROLE_USER per defecte
             $user->setRoles(["ROLE_USER"]);
             $dataRegistre = new \DateTime();
             $dataRegistre->setTimezone(new DateTimeZone('Europe/Madrid'));
             $user->setDataRegistre($dataRegistre);
 
-            //Pujada de la imatge de perfil
-            // $imatgePerfil = $form->get('imatge')->getData();
-
-            // // this condition is needed because the 'imatge' field is not required
-            // // so the image file must be processed only when a file is uploaded
-            // if ($imatgePerfil && ($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
-            //     $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
-            //     // this is needed to safely include the file name as part of the URL
-            //     $nomArxiu = $slugger->slug($nomArxiuOriginal);
-            //     $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
-
-            //     // Move the file to the directory where imatges are stored
-            //     try {
-            //         $imatgePerfil->move('img/imatges_perfil', $nouNomArxiu);
-            //     } catch (FileException $e) {
-            //         throw new Error($e);
-            //     }
-
-            //     // updates the 'imatge' property to store the image file name
-            //     // instead of its contents
-            //     $user->setImatge($nouNomArxiu);
-            // }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // CREAR TOKEN
+            // Crear token
             $userRepository->generateToken($user);
-            // CORREU DE VERIFICACIÓ
+            // Enviar mail de verificació
             $mailer->sendVerificationMail($user);
             // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
             $queryBuilder->autoDestroyToken($user);
 
-            return $this->redirectToRoute('correct_registration', [
-                'userId' => $user->getId(),
+            //Redirigir a homepage amb missatge
+            //Aquesta part la podem millorar per un modal
+            return $this->render('error.html.twig', [
+                'tokenPendent' => true,
             ]);
         }
 
+        //Si no hi habia Submit, redirigir a formulari en blanc (nou registre)
         return $this->render('user/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
 
     /**
-     * REENVIAMENT DEL TOKEN
-     * @Route("/user/correct_registration/{userId}", name="correct_registration")
-     */
-    public function correctRegistration($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
-    {
-
-        $user = $userRepository->findOneBy(['id' => $userId]);
-
-        foreach($user->getRoles() as $role){
-            if ($role == "ROLE_ADMIN" || $role == "ROLE_VALIDATED") {
-                return $this->redirectToRoute('profileUser', [
-                    'userId' => $user->getId(),
-                ]);
-            }
-        }
-
-        return $this->render('user/verify_email.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    /**
-     * REENVIAMENT DEL TOKEN
-     * @Route("/user/reenviament_token/{userId}", name="reenviament_token")
-     */
-    public function reenviamentToken($userId, UserRepository $userRepository, Mailer $mailer, QueryBuilder $queryBuilder): Response
-    {
-
-        $user = $userRepository->findOneBy(['id' => $userId]);
-
-        // CREAR TOKEN
-        $userRepository->generateToken($user);
-        // CORREU DE VERIFICACIÓ
-        $mailer->sendVerificationMail($user);
-        // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
-        $queryBuilder->autoDestroyToken($user);
-
-        return $this->render('user/verify_email.html.twig', [
-            'user' => $user,
-        ]);
-    }
-    /**
      * VERIFICACIÓ DE NOU USUARI
      * @Route("/user/verificacio/{token}", name="verificar_compte")
      */
     public function verificar($token, UserRepository $userRepository): Response
     {
+
+        //Buscar el usuari amb aquest token
         $user = $userRepository->findOneBy([
             'token' => $token
         ]);
 
-        if($user){
+        if ($user) { //Nomes si s'ha trobat l'usuari
             $user->addRole("ROLE_VALIDATED");
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            //Redirigir a homepage amb missatge
+            //Aquesta part la podem millorar per un modal            
+            return $this->render('error.html.twig', [
+                'tokenPendent' => false,
+                // 'error_msg' => 'El nom d\'usuari no es correspon amb aquest mail'
+            ]);
         }
 
-        return $this->render('user/verificated.html.twig', [
-            'user' => $user
+        //Per defecte (no s'ha trobat el token o està caducat)
+        //Redirigir a homepage amb missatge
+        //Aquesta part la podem millorar per un modal
+        return $this->render('error.html.twig', [
+            'tokenCaducat' => true,
+        ]);
+    }
+
+    /**
+     * RECUPERACIO DE TOKEN
+     * @Route("/user/tokenRecover", name="app_token_recover")
+     */
+    public function tokenRecover(Request $request, Mailer $mailer, QueryBuilder $queryBuilder, UserRepository $userRepository): Response
+    {
+
+        //crear usuari i formulari del tipus TokenRecover
+        $user = new User();
+        $form = $this->createForm(TokenRecoverType::class, $user);
+        $form->handleRequest($request);
+
+        //Si estem en un Submit (el formulari conte dades)
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
+
+            //Si el mail no coincideix amb el nom d'usuari, redirig a homepage amb error
+            if ($user->getNomUsuari() != $form->get('nom_usuari')->getData()) {
+                return $this->render('error.html.twig', [
+                    'tokenCaducat' => true,
+                ]);
+            } else {
+                $userRepository->generateToken($user); // Crear token
+                $mailer->sendVerificationMail($user); // Enviar mail de verificació
+                $queryBuilder->autoDestroyToken($user); // AUTODESTRUCCIÓ DEL TOKEN (1 HORA)
+            }
+            //Redirigir a homepage amb missatge de mail enviat
+            return $this->render('error.html.twig', [
+                'tokenPendent' => true,
+            ]);
+        }
+
+        //Si no hi habia Submit, redirigir a formulari en blanc (nou registre)
+        return $this->render('user/tokenRecover.html.twig', [
+            'registrationForm' => $form->createView(),
         ]);
     }
 
@@ -184,7 +175,6 @@ class UserController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
         return $this->render('user/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
@@ -203,7 +193,7 @@ class UserController extends AbstractController
      * ELS SEUS POSTS, COMENTARIS, VOTS +/-, LINKEDIN....
      * @Route("/user/{username}", name="userProfile")
      */
-    public function userProfile($username,UserRepository $userRepository)
+    public function userProfile($username, UserRepository $userRepository)
     {
         //Aqui podem fer algun comptador de visites i limitar les visites anonimes per IP
         // if (!$this->getUser()) {
@@ -212,14 +202,11 @@ class UserController extends AbstractController
 
         $user = $userRepository->findOneBy(['nom_usuari' => $username]);
         if ($user == null) {
-                        //Aqui hauriem de redirigir a una pagina 404
+            //Aqui hauriem de redirigir a una pagina 404
             // o una pagina amb un missatge de usuari no trobat
             throw new Error("No existeix l'usuari");
-
-            // return $this->render('user/profile.html.twig', [
-            //     'user' => $user
-            // ]);
         }
+
         //Si ha trobat un usari, mostrar el perfil
         return $this->render('user/profile.html.twig', [
             'user' => $user,
@@ -252,7 +239,7 @@ class UserController extends AbstractController
                 $nomArxiuOriginal = pathinfo($imatgePerfil->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $nomArxiu = $slugger->slug($nomArxiuOriginal);
-                $nouNomArxiu = $nomArxiu.'-'.uniqid().'.'.$imatgePerfil->guessExtension();
+                $nouNomArxiu = $nomArxiu . '-' . uniqid() . '.' . $imatgePerfil->guessExtension();
 
                 // Move the file to the directory where imatges are stored
                 try {
@@ -264,14 +251,12 @@ class UserController extends AbstractController
                 // updates the 'imatge' property to store the image file name
                 // instead of its contents
                 $user->setImatge($nouNomArxiu);
-            }else if($imatgePerfil && !($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')){
+            } else if ($imatgePerfil && !($imatgePerfil->getClientMimeType() == 'image/png' || $imatgePerfil->getClientMimeType() == 'image/jpeg' || $imatgePerfil->getClientMimeType() == 'image/gif')) {
                 return $this->render('user/edit.html.twig', [
                     'editForm' => $form->createView(),
                     'error' => 'La imatge seleccionada no és vàlida.'
                 ]);
             }
-
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -279,7 +264,6 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('userProfile');
         }
-
 
         return $this->render('user/edit.html.twig', [
             'editForm' => $form->createView(),
@@ -317,12 +301,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $data = $form->getData();
 
-            if($passwordEncoder->isPasswordValid($user, $data['oldPassword'])) {
+            if ($passwordEncoder->isPasswordValid($user, $data['oldPassword'])) {
 
-                if($data['newPassword'] == $data['repitNewPassword']) {
+                if ($data['newPassword'] == $data['repitNewPassword']) {
 
                     $encodedPassword = $passwordEncoder->encodePassword($user, $data['newPassword']);
 
@@ -333,16 +317,14 @@ class UserController extends AbstractController
                     $entityManager->flush();
 
                     return $this->redirectToRoute('userProfile');
-
-                }else{
+                } else {
 
                     return $this->render('user/change_password.html.twig', [
                         'changePasswordForm' => $form->createView(),
                         'error' => 'Les contrasenyes no coincideixen.'
                     ]);
-
                 }
-            }else{
+            } else {
 
                 return $this->render('user/change_password.html.twig', [
                     'changePasswordForm' => $form->createView(),
@@ -358,17 +340,17 @@ class UserController extends AbstractController
     }
 
     /**
-     * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI
+     * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI en JSON
      * @Route("/user/profile/{userName}", name="otherUserProfile")
      */
     public function otherUserProfile($userName, UserRepository $userRepository, SerializerInterface $serializer)
     {
-        if($userRepository->findOneBy(['nom_usuari' => $userName])){
+        if ($userRepository->findOneBy(['nom_usuari' => $userName])) {
             $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
-        }else{
+        } else {
             throw new Error("No existeix l'usuari");
         }
-        
+
         $userJson = $serializer->serialize($user, 'json', [
             'circular_reference_handler' => function ($object) {
                 return $object->getId();
@@ -376,7 +358,7 @@ class UserController extends AbstractController
         ]);
 
         return new JsonResponse(json_decode($userJson));
-        
+
         // return $this->render('user/profile.html.twig', [
         //     'user' => $user,
         // ]);
