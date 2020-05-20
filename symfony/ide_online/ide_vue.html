@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--AWESOME ICONS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--VUE Develepment Tools and Production Link-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+    <!-- AXIOS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!--Mis archivos-->
+    <link rel="stylesheet" href="css/ide_style.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="container contenido">
+
+            <!-- CONTENDIO DEL ARTICULO -->
+            <div id="enunciado" class="alert alert-secondary">
+                <h5 class="text-secondary">Titulo del articulo</h5>
+                <p class="text-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores doloribus quaerat saepe rerum tenetur vitae fugit veniam quae minima, perferendis odit dolores repudiandae nesciunt ab tempora, eligendi aliquam, temporibus ad!</p>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DEL EJERCICIO -->
+        <div class="container">
+            <div id="pestanyas" class="row">
+                <button class="col-4 btn btn-danger" v-on:click="mostrarHtml">HTML</button>
+                <button class="col-4 btn btn-success" v-on:click="mostrarCss">CSS</button>
+                <button class="col-4 btn btn-warning" v-on:click="mostrarJs">JS</button>
+            </div>
+            <div class="row">
+                <div id="box_html" class="col-4">
+                    <textarea v-model="input_html" rows="10" class="form-control"></textarea>
+                </div>
+                <div id="box_css" class="col-4">
+                    <textarea v-model="input_css" rows="10" class="form-control"></textarea>
+                </div>
+                <div id="box_js" class="col-4">
+                    <textarea v-model="input_js" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+            <button class="btn btn-block btn-secondary" v-on:click="cargarFrame(input_html, input_css, input_js)">cargar contenido</button>
+        </div>
+
+        <div class="container">
+            <iframe src="ide_iframe.html" height="500px" width="100%" name="iframe_resultado" class="embed-responsive"></iframe>
+        </div>
+    </div>
+    <script src="js/ide_vue.js"></script>
+</body>
+
+</html>

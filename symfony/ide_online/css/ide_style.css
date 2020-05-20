@@ -1,0 +1,23 @@
+.contenido {
+    margin-top: 2em;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#pestanyas button {
+    padding: 0;
+}
+
+#box_html,
+#box_css,
+#box_js {
+    padding: 0;
+}
+
+.embed-responsive {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
