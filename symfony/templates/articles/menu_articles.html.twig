@@ -1,7 +1,7 @@
 <ul class="menu-user">
 	<li>
 		<a
-			href="{{ path('userProfile')}}">
+			href="{{ path('userProfile', {username: article.user.username}) }}">
 			<!--SI L'USUARI TE IMATGE DE PERFIL-->
 			{% if article.user.imatge %}
 				<img src="{{ asset("img/imatges_perfil/" ~ article.user.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -11,7 +11,7 @@
 		</a>
 	</li>
 	<li>
-		<a class="menu-link menu-username" href="{{ path('userProfile')}}">{{article.user.username}}</a>
+		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.user.username})}}">{{article.user.username}}</a>
 	</li>
 	{% if app.user and (app.user == article.user) %}
 		<li>

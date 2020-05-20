@@ -734,7 +734,7 @@ class ArticlesFixtures extends Fixture
             ')
             ->setVisible(true);
         $manager->persist($article_htm1);
-
+//hola
 
         $manager->flush();
     }

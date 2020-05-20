@@ -19,10 +19,10 @@
 												</a> #}
 			{% for article in articles %}
 
-				<h2 class="article_titol">
+				<h3 class="article_titol">
 					<a href="{{ asset("post/" ~ article.slug) }}">{{article.titol}}</a>
-				</h2>
-				<h4 class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.subtitol}}</h4>
+				</h3>
+				<p class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.subtitol}}</p>
 				{# <h4 class="article_subtitol" onclick="{{ "mostrar(" ~ article.titol }})">{{article.subtitol}}</h4> #}
 
 			{% endfor %}
