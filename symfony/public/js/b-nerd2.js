@@ -27,7 +27,7 @@ window.onload = function() {
             // metaTags: null,
             // metaDescription: null,
         },
-        articleInputs: []
+        registerForm: {}
 
     };
 
@@ -75,8 +75,16 @@ window.onload = function() {
             data.articleForm.contingut = document.getElementById('article_contingut').parentNode
             data.articleForm.metaTags = document.getElementById('article_meta_tag').parentNode
             data.articleForm.metaDescription = document.getElementById('article_meta_description').parentNode
-                // data.articleInputs = document.getElementsByClassName('form-group')
-                // titol = document.getElementById('article_titol').parentNode
+        },
+        loadRegisterForm: function() {
+            data.registerForm.nom = document.getElementById('registration_form_nom').parentNode
+            data.registerForm.cognom = document.getElementById('registration_form_cognom').parentNode
+            data.registerForm.email = document.getElementById('registration_form_email').parentNode
+            data.registerForm.nomUsuari = document.getElementById('registration_form_nom_usuari').parentNode
+            data.registerForm.pass1 = document.getElementById('registration_form_plainPassword').parentNode
+            data.registerForm.pass2 = document.getElementById('registration_form_pass2').parentNode
+            data.registerForm.birthday = document.getElementById('registration_form_data_naixament').parentNode
+
         }
 
     };
@@ -86,11 +94,22 @@ window.onload = function() {
             model.init();
             view.init(data.darkMode);
 
+            //Si estem al formulari de registre
+            if (document.URL == "http://localhost:8000/user/register") {
+                model.loadRegisterForm();
+                //view.validateFormArticles(data.articleForm)
+                view.listenRegisterFormInputs(data.registerForm)
+            }
+
+            //Si estem al formulari d'articles
             if (document.URL == "http://localhost:8000/new") {
                 model.loadArticleForm();
                 //view.validateFormArticles(data.articleForm)
-                view.listenFormInputs(data.articleForm)
+                view.listenArticleFormInputs(data.articleForm)
             }
+
+
+
             if (document.URL == "http://localhost:8000/user/profile/edit") {
                 //model.loadArticleForm();
                 //view.validateFormArticles(data.articleForm)
@@ -200,17 +219,50 @@ window.onload = function() {
             body.style.backgroundColor = '#fff';
         },
 
-        listenFormInputs(Obj) {
-            //Dels elements del formulari, especificar la accio del Listener
-            view.validateFormArticles(Obj.titol, 10, 50)
-            view.validateFormArticles(Obj.subtitol, 50, 200)
-            view.validateFormArticles(Obj.metaTags, 0, 100)
-            view.validateFormArticles(Obj.metaDescription, 100, 160)
+        listenRegisterFormInputs(Obj) {
 
-            //Afegir listener de nova Categoria
+            //Dels elements del formulari, especificar la accio del Listener
+            view.toggleHelpErrors(Obj.nom)
+            view.validateLength(Obj.nom, 2, 40)
+
+            view.toggleHelpErrors(Obj.cognom)
+            view.validateLength(Obj.cognom, 2, 40)
+
+            view.toggleHelpErrors(Obj.email)
+            view.validateLength(Obj.email, 0, 100)
+
+            view.toggleHelpErrors(Obj.nomUsuari)
+            view.validateLength(Obj.nomUsuari, 8, 14)
+                //FER CRIDA AJAX PER SABER SI ESTA REPETIT
+
+            view.toggleHelpErrors(Obj.pass1)
+            view.validateLength(Obj.pass1, 8, 50)
+            view.validatePassword(Obj.pass1, 3, 2, 1)
+
+
+            view.toggleHelpErrors(Obj.pass2)
+            view.validatePass2(Obj.pass1, Obj.pass2)
+
+            // view.toggleHelpErrors(Obj.birthday)
 
         },
-        validateFormArticles: function(Obj, min, max) {
+        listenArticleFormInputs(Obj) {
+            //Dels elements del formulari, especificar la accio del Listener
+            view.toggleHelpErrors(Obj.titol)
+            view.validateLength(Obj.titol, 10, 50)
+
+            view.toggleHelpErrors(Obj.subtitol)
+            view.validateLength(Obj.subtitol, 50, 200)
+
+            view.toggleHelpErrors(Obj.metaTags)
+            view.validateLength(Obj.metaTags, 0, 100)
+
+            view.toggleHelpErrors(Obj.metaDescription)
+            view.validateLength(Obj.metaDescription, 100, 160)
+
+            //Afegir listener de nova Categoria
+        },
+        toggleHelpErrors: function(Obj) {
             //Quan entri al Input, mostrar Ajuda i Errors
             Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
                 return function() {
@@ -225,29 +277,113 @@ window.onload = function() {
                     Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
                 }
             })());
-            //Mentres escrigui -> eventListener per actualitzar Error
-            Obj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
-                return function() {
-                    view.validateLength(Obj, min, max);
-                }
-            })());
         },
 
         validateLength: function(inputObj, min, max) {
-            //Capturar l'objecte input i error
-            let input = inputObj.getElementsByTagName('input')[0]
-            let error = inputObj.getElementsByClassName('form-error-text')[0]
-            error.innerHTML = `Actualmente ${input.value.length} carácteres)`
+            //Mentres escrigui -> eventListener per actualitzar Error
+            inputObj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
 
-            //Si el tamany es mes petit o mes gran dels especificats
-            if (input.value.length < min || input.value.length > max) {
-                error.style.color = 'tomato'
-                input.style.border = '1px solid red'
-            } else {
-                error.style.color = '#999'
-                input.style.border = '1px solid #ced4da'
-                console.info(inputObj.value, 'CAMPO CORRECTO')
+                    //Capturar l'objecte input i error
+                    let input = inputObj.getElementsByTagName('input')[0]
+                    let error = inputObj.getElementsByClassName('form-error-text')[0]
+
+                    //Si el tamany es mes petit o mes gran dels especificats
+                    if (input.value.length < min || input.value.length > max) {
+                        error.style.color = 'tomato'
+                        input.style.border = '1px solid red'
+                        error.innerHTML = `Actualmente ${input.value.length} carácteres)`
+
+                    } else {
+                        error.style.color = '#999'
+                        input.style.border = '1px solid #ced4da'
+                        console.info(inputObj.value, 'CAMPO CORRECTO')
+                        error.innerHTML = ``
+
+                    }
+                }
+            })());
+        },
+        validatePassword: function(inputObj) {
+
+            let config = {
+                min: 8,
+                max: 50,
+                lowercase: 1,
+                uppercase: 1,
+                numbers: 2,
+                special: "$#%&-!?"
             }
+
+            let error = inputObj.getElementsByClassName('form-error-text')[0]
+
+            inputObj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
+
+                    let error_msg = '';
+                    let pass = inputObj.getElementsByTagName('input')[0].value
+
+                    if ((pass.length < config.min) || pass.length > config.max) {
+                        error_msg = `Actualmente ${pass.length} carácteres)`
+
+                    } else if (view.checkPattern(pass, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") < config.uppercase) {
+                        error_msg = `La contrasenya ha de contenir mínim ${config.uppercase} lletra en majúscula`
+
+                    } else if (view.checkPattern(pass, "abcdefghijklmnopqrstuvwxyz") < config.lowercase) {
+                        error_msg = `La contrasenya ha de contenir mínim ${config.uppercase} lletra en minúscula`
+
+                    } else if (view.checkPattern(pass, "1234567890") < config.numbers) {
+                        error_msg = `La contrasenya ha de contenir mínim ${config.numbers} números`
+
+                    } else {
+                        error.style.color = '#999'
+                        this.style.border = '1px solid #ced4da'
+                        error_msg = null
+                        error.innerHTML = ``;
+                    }
+
+                    if (error_msg != null) { //Si al final, no s'ha passat error_msg a null
+                        error.style.color = 'tomato'
+                        this.style.border = '1px solid red'
+                        error.innerHTML = error_msg;
+                    }
+                }
+            })());
+        },
+        checkPattern: function(word, patt) {
+            let string = word
+            let chars = patt
+            let count = 0;
+            //Para cada lletra/caracter, comrpovar si està en el patró
+            for (i = 0; i < string.length; i++) {
+                if (chars.indexOf(string.charAt(i)) != -1) { //Si hi ha coincidencia
+                    count++
+                }
+            }
+            return count
+        },
+        validatePass2: function(fieldPass1, fieldPass2) {
+
+            let pass1 = fieldPass1.getElementsByTagName('input')[0]
+            let error = fieldPass2.getElementsByClassName('form-error-text')[0]
+
+            //Mentres escrigui -> eventListener per actualitzar Error
+            fieldPass2.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
+
+                    let pass2 = fieldPass2.getElementsByTagName('input')[0]
+
+                    if (pass1.value === pass2.value) {
+                        error.style.color = '#999'
+                        pass2.style.border = '1px solid #ced4da'
+                        error.innerHTML = ``
+                    } else {
+                        error.style.color = 'tomato'
+                        pass2.style.border = '1px solid red'
+                        error.innerHTML = `Les contrasenyes no coincideixen`
+                    }
+                }
+            })());
         },
 
         changeFileInput: function() {

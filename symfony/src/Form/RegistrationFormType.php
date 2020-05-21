@@ -25,20 +25,44 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom *',
                 'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'El nom no pot ser inferior a {{ limit }} caràcters',
+                        'max' => 40,
+                        'maxMessage' => 'El nom no pot ser superior a {{ limit }} caràcters',
+                    ])
+                ]
             ])
 
             ->add('cognom', TextType::class, [
                 'label' => 'Cognom *',
                 'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'El cognom no pot ser inferior a {{ limit }} caràcters',
+                        'max' => 40,
+                        'maxMessage' => 'El cognom no pot ser superior a {{ limit }} caràcters',
+                    ])
+                ]
             ])
 
             ->add('email', EmailType::class, [
                 'label' => 'Email *',
+                'help' => 'Adreça de correu electrònic on rebre la verificació del registre.',
                 'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new Length([
+                        'max' => 100,
+                        'maxMessage' => 'El mail no pot ser superior a {{ limit }} caràcters',
+                    ])
+                ]
             ])
 
             ->add('nom_usuari', TextType::class, [
                 'label' => 'Nom d\'usuari *',
+                'help' => 'Aques serà el teu nom públic. Ha de ser unic i de 8 a 14 caràcters.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
@@ -52,6 +76,7 @@ class RegistrationFormType extends AbstractType
 
             ->add('plainPassword', PasswordType::class, [
                 'label' => 'Contrasenya *',
+                'help' => 'Tria una contrasenya de minim 8 caracters que contingui lletres minuscules, majuscules i algun numeros',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
@@ -59,9 +84,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                        'minMessage' => 'La contrasenya ha de ser sminim de {{ limit }} caràcters',
+                        'max' => 50,
+                        'maxMessage' => 'La contrasenya no pot ser superior a {{ limit }} caràcters',
                     ]),
                 ],
                 'mapped' => false,
@@ -69,18 +94,22 @@ class RegistrationFormType extends AbstractType
 
             ->add('pass2', PasswordType::class, [
                 'label' => 'Repetir contrasenya *',
+                'help' => 'Torna a escriure la contrasenya i asegurat que la mateixa',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false
             ])
 
             ->add('data_naixament', BirthdayType::class, [
-                'required' => false,
+                'label' => 'Data de naixement',
+                'help' => 'Aquest camp es opcional. ',
+                'attr' => ['class' => 'form-control'],
                 'placeholder' => [
                     'day' => 'Dia',
                     'month' => 'Mes',
                     'year' => 'Any',
                 ],
-                'format' => 'dd  MM  yyyy'
+                'format' => 'dd  MM  yyyy',
+                'required' => false,
             ])
 
             ->add('agreeTerms', CheckboxType::class, [

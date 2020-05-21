@@ -27,25 +27,26 @@
 		<div class="form-group">
 			{{ form_label(registrationForm.nom) }}
 			{{ form_widget(registrationForm.nom) }}
-			{{ form_help(registrationForm.nom) }}
+			<p class="help-text"></p>
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(registrationForm.cognom) }}
 			{{ form_widget(registrationForm.cognom) }}
-			{{ form_help(registrationForm.cognom) }}
+			<p class="help-text"></p>
+			<p class="form-error-text"></p>
 		</div>
 
 		<div class="form-group">
 			{{ form_label(registrationForm.email) }}
 			{{ form_widget(registrationForm.email) }}
 			{{ form_help(registrationForm.email) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(registrationForm.nom_usuari) }}
 			{{ form_widget(registrationForm.nom_usuari) }}
 			{{ form_help(registrationForm.nom_usuari) }}
-			{{ form_errors(registrationForm.nom_usuari) }}
-
 			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
@@ -65,7 +66,7 @@
 			{{ form_label(registrationForm.data_naixament) }}
 			{{ form_widget(registrationForm.data_naixament) }}
 			{{ form_help(registrationForm.data_naixament) }}
-
+			<p class="form-error-text"></p>
 		</div>
 
 		{{ form_widget(registrationForm.agreeTerms) }}
