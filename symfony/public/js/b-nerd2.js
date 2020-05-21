@@ -43,10 +43,14 @@ window.onload = function() {
             data.DOM.menuLinks = document.getElementsByClassName("menu-link");
         },
         loadLocalStorage: function() {
-            if (localStorage.getItem("darkMode") != null) {
-                data.darkMode = localStorage.getItem("darkMode")
-            } else {
+
+            //Aqui esta el error. 
+            if (localStorage.getItem("darkMode") == null) {
                 data.darkMode = false
+            } else if (localStorage.getItem("darkMode") == "true") {
+                data.darkMode = true;
+            } else if (localStorage.getItem("darkMode") == "false") {
+                data.darkMode = false;
             }
 
         },
