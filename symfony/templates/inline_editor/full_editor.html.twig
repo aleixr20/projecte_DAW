@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor VUE</title>
+    <script src="{{ asset('js/inline_editor.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/inline_editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+</head>
+<body onload="refresh()">
+<div class="inline-editor">
+    {# ALERTA!  No tabular ni afegir salts de linia dintre dels textarea #}
+    <h1 id="html-title" class="editor-title">HTML</h1>
+    <textarea id="html-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi HTML aqui...">{% if html is defined %}{{ html }}{% endif %}</textarea>
+    <h1 id="css-title" class="editor-title">CSS</h1>
+    <textarea id="css-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi CSS aqui...">{% if css is defined %}{{ css }}{% endif %}</textarea>
+    <h1 id="js-title" class="editor-title">JavaScript</h1>
+    <textarea id="js-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi JavaScript aqui...">{% if js is defined %}{{ js }}{% endif %}</textarea>
+    <div id="viewer-box">
+        <iframe id="viewer">
+        </iframe>
+    </div>
+</div>
+
+</body>
+</html>

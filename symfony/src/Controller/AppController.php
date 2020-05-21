@@ -122,14 +122,46 @@ class AppController extends AbstractController
 //         ]);
 //     }
 
-//     /**
-//      * @Route("/{tema}/{slug}", name="slug", methods={"GET"})
-//      */
-//     public function slug($tema, $slug, ArticleRepository $articleRepository)
-//     {
-//         return $this->render('article/show.html.twig', [
-//             'article' => $articleRepository->findOneBy(array('slug' => $slug)),
-//         ]);
-//     }
+
+    /**
+     * @Route("/editor", name="inline_editor_article", methods={"GET"})
+     */
+    public function inlineEditorArticle()
+    {
+
+        return $this->render('inline_editor/full_editor.html.twig');
+    }
+
+    /**
+     * @Route("/editor/{slug}", name="inline_editor", methods={"GET"})
+     */
+    public function inlineEditor($slugArticle, ArticleRepository $repositoryArticle)
+    {
+
+        $article = $repositoryArticle->findOneBy(['slug' => $slugArticle]);
+
+        $html = $article->getHtml();
+        $css = $article->getCss();
+        $js = $article->getJs();
+
+        if(!isset($html)){
+            $html = "";
+        }
+
+        if(!isset($css)){
+            $css = "";
+        }
+
+        if(!isset($js)){
+            $css = "";
+        }
+
+        return $this->render('inline_editor/full_editor.html.twig', [
+            'html' => $html,
+            'css' => $css,
+            'js' => $js
+        ]);
+    }
+
 
 }

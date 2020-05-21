@@ -1,0 +1,53 @@
+#html-title { grid-area: html-title; }
+#html-editor { grid-area: html-editor; }
+#css-title { grid-area: css-title; }
+#css-editor { grid-area: css-editor; }
+#js-title { grid-area: js-title; }
+#js-editor { grid-area: js-editor; }
+#viewer-box { grid-area: viewer; }
+
+.inline-editor {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+      'html-title css-title js-title'
+      'html-editor css-editor js-editor'
+      'viewer viewer viewer';
+    grid-column-gap: 2px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.3fr 1.2fr 1.5fr;
+    background: #313131;
+}
+
+.editor-title {
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+
+#viewer-box {
+    background: #313131;
+    padding: 10px;
+}
+
+#viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: whitesmoke;
+    color: white;
+}
+
+.editor {
+    height: 100%;
+    border: none;
+    resize: none;
+    background: #131816;
+    color: white;
+    font-family: monospace;
+}
+
+#css-editor {
+    border-left: 1px;
+    border-color: #313131;
+}
