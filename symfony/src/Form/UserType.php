@@ -50,7 +50,7 @@ class UserType extends AbstractType
 
             ->add('email', EmailType::class, [
                 'label' => 'Email *',
-                'help' => 'Adreça de correu electrònic on rebre la verificació del registre.',
+                'help' => 'Adreça de correu electronic.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
@@ -93,7 +93,7 @@ class UserType extends AbstractType
                 'constraints' => [
                     new Length([
                         'max' => 2000,
-                        'maxMessage' => 'La descripció no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'La presentació no pot ser superior a {{ limit }} caràcters',
                     ]),
                 ],
                 'required' => false,
@@ -128,7 +128,7 @@ class UserType extends AbstractType
             ->add('data_naixament', BirthdayType::class, [
                 'label' => 'Data de naixement',
                 'help' => 'Aquest camp es opcional. ',
-                'attr' => ['class' => 'form-control'],
+                // 'attr' => ['class' => 'form-control'],
                 'placeholder' => [
                     'day' => 'Dia',
                     'month' => 'Mes',

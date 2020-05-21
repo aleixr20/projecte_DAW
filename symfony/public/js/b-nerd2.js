@@ -10,6 +10,9 @@ window.onload = function() {
 
     var data = {
 
+        // path: 'http://localhost:8000',
+        path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
+
         menuVisibilityStatus: false,
         DOM: {
             shadow: null,
@@ -18,23 +21,16 @@ window.onload = function() {
             menuLinks: null,
         },
         darkMode: null,
-        articleForm: {
-            // titol: null,
-            // subtitol: null,
-            // categoria: null,
-            // novaCategoria: null,
-            // contingut: null,
-            // metaTags: null,
-            // metaDescription: null,
-        },
-        registerForm: {}
-
+        articleForm: {},
+        registerForm: {},
+        editProfileForm: {},
     };
 
     var model = {
         init: function() {
             model.loadDOMdata();
             model.loadLocalStorage();
+            model.loadPath();
         },
         loadDOMdata: function() {
             data.DOM.shadow = document.getElementById("fade");
@@ -53,6 +49,10 @@ window.onload = function() {
                 data.darkMode = false;
             }
 
+        },
+        loadPath: function() {
+
+            let uri = document.Uri
         },
         toggleDarkMode: function() {
             if (data.darkMode == false) {
@@ -84,7 +84,17 @@ window.onload = function() {
             data.registerForm.pass1 = document.getElementById('registration_form_plainPassword').parentNode
             data.registerForm.pass2 = document.getElementById('registration_form_pass2').parentNode
             data.registerForm.birthday = document.getElementById('registration_form_data_naixament').parentNode
-
+        },
+        loadEditProfileForm: function() {
+            data.editProfileForm.nom = document.getElementById('user_nom').parentNode
+            data.editProfileForm.cognom = document.getElementById('user_cognom').parentNode
+            data.editProfileForm.email = document.getElementById('user_email').parentNode
+            data.editProfileForm.nomUsuari = document.getElementById('user_nom_usuari').parentNode
+            data.editProfileForm.github = document.getElementById('user_github').parentNode
+            data.editProfileForm.linkedin = document.getElementById('user_linkedin').parentNode
+            data.editProfileForm.twitter = document.getElementById('user_twitter').parentNode
+            data.editProfileForm.facebook = document.getElementById('user_facebook').parentNode
+            data.editProfileForm.birthday = document.getElementById('user_data_naixament').parentNode
         }
 
     };
@@ -95,14 +105,22 @@ window.onload = function() {
             view.init(data.darkMode);
 
             //Si estem al formulari de registre
-            if (document.URL == "http://localhost:8000/user/register") {
+            if (document.URL == data.path + "/user/register") {
                 model.loadRegisterForm();
                 //view.validateFormArticles(data.articleForm)
                 view.listenRegisterFormInputs(data.registerForm)
             }
 
+            //Si estem al formualari d'editar usuari
+            if (document.URL == data.path + "/user/profile/edit") {
+                model.loadEditProfileForm();
+                //view.validateFormArticles(data.articleForm)
+                //view.listenFormInputs(data.articleForm)
+                view.listenEditProfileFormInputs(data.editProfileForm);
+            }
+
             //Si estem al formulari d'articles
-            if (document.URL == "http://localhost:8000/new") {
+            if (document.URL == data.path + "/new") {
                 model.loadArticleForm();
                 //view.validateFormArticles(data.articleForm)
                 view.listenArticleFormInputs(data.articleForm)
@@ -110,12 +128,7 @@ window.onload = function() {
 
 
 
-            if (document.URL == "http://localhost:8000/user/profile/edit") {
-                //model.loadArticleForm();
-                //view.validateFormArticles(data.articleForm)
-                //view.listenFormInputs(data.articleForm)
-                view.changeFileInput();
-            }
+
         },
 
         toggleMenu: function() {
@@ -219,7 +232,7 @@ window.onload = function() {
             body.style.backgroundColor = '#fff';
         },
 
-        listenRegisterFormInputs(Obj) {
+        listenRegisterFormInputs: function(Obj) {
 
             //Dels elements del formulari, especificar la accio del Listener
             view.toggleHelpErrors(Obj.nom)
@@ -239,14 +252,44 @@ window.onload = function() {
             view.validateLength(Obj.pass1, 8, 50)
             view.validatePassword(Obj.pass1, 3, 2, 1)
 
-
             view.toggleHelpErrors(Obj.pass2)
             view.validatePass2(Obj.pass1, Obj.pass2)
 
             // view.toggleHelpErrors(Obj.birthday)
-
         },
-        listenArticleFormInputs(Obj) {
+
+        listenEditProfileFormInputs: function(Obj) {
+            //Dels elements del formulari, especificar la accio del Listener
+            view.toggleHelpErrors(Obj.nom)
+            view.validateLength(Obj.nom, 2, 40)
+
+            view.toggleHelpErrors(Obj.cognom)
+            view.validateLength(Obj.cognom, 2, 40)
+
+            view.toggleHelpErrors(Obj.email)
+            view.validateLength(Obj.email, 0, 100)
+
+            view.toggleHelpErrors(Obj.nomUsuari)
+            view.validateLength(Obj.nomUsuari, 8, 14)
+            view.checkUniqueUsername(Obj.nomUsuari)
+
+            //FER CRIDA AJAX PER SABER SI ESTA REPETIT
+
+            //User_descricpio es textarea no input !!
+            // view.toggleHelpErrors(Obj.descripcio)
+            // view.validateLength(Obj.descripcio, 0, 2000)
+
+            view.toggleHelpErrors(Obj.github)
+            view.validateSocialMedia(Obj.github)
+            view.toggleHelpErrors(Obj.linkedin)
+            view.validateSocialMedia(Obj.linkedin)
+            view.toggleHelpErrors(Obj.twitter)
+            view.validateSocialMedia(Obj.twitter)
+            view.toggleHelpErrors(Obj.facebook)
+            view.validateSocialMedia(Obj.facebook)
+        },
+
+        listenArticleFormInputs: function(Obj) {
             //Dels elements del formulari, especificar la accio del Listener
             view.toggleHelpErrors(Obj.titol)
             view.validateLength(Obj.titol, 10, 50)
@@ -304,6 +347,23 @@ window.onload = function() {
                 }
             })());
         },
+        checkUniqueUsername: function(Obj) {
+
+            Obj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
+
+                    let string = Obj.getElementsByTagName('input')[0].value
+
+                    //Fer consulta a API
+                    axios.get(`http://labs.iam.cat/~a14alerevagu/b-nerd/user/validateUsername/${string}`)
+                        .then(response => {
+                            console.log(response.data)
+                            console.log(response)
+                        });
+                }
+            })());
+        },
+
         validatePassword: function(inputObj) {
 
             let config = {
@@ -350,11 +410,12 @@ window.onload = function() {
                 }
             })());
         },
+        //Metode per comprovar quantes vegades es repeteix un patro en un string
         checkPattern: function(word, patt) {
             let string = word
             let chars = patt
             let count = 0;
-            //Para cada lletra/caracter, comrpovar si està en el patró
+            //Per cada lletra/caracter, comrpovar si està en el patró
             for (i = 0; i < string.length; i++) {
                 if (chars.indexOf(string.charAt(i)) != -1) { //Si hi ha coincidencia
                     count++
@@ -385,6 +446,27 @@ window.onload = function() {
                 }
             })());
         },
+        //Funcio per validar que un input de socail media no conte l'arrel
+        validateSocialMedia: function(Obj) {
+            //Mentres escrigui -> eventListener per actualitzar Error
+            Obj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                return function() {
+
+                    //Capturar el valor del input
+                    let inputObj = Obj.getElementsByTagName('input')[0]
+                    let string = inputObj.value;
+                    //Reemplaçar inline els valors escapats del string
+                    string = string.replace('http', '');
+                    string = string.replace(':', '');
+                    string = string.replace('/', '');
+                    string = string.replace('www', '');
+                    string = string.replace('<', '');
+                    string = string.replace('>', '');
+                    //Cambir el valor del input del formulari
+                    inputObj.value = string;
+                }
+            })());
+        },
 
         changeFileInput: function() {
             let f = document.getElementById('user_imatge')
@@ -397,12 +479,9 @@ window.onload = function() {
 
                     document.getElementsByClassName('custom-file-label')[0].innerHTML = fileName
                     console.log(fileName)
-
                 }
             })());
         }
-
-
     };
     controller.init();
 }

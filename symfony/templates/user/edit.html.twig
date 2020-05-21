@@ -15,7 +15,7 @@
 			{{ form_errors(editForm.cognom) }}
 			{{ form_errors(editForm.email) }}
 			{{ form_errors(editForm.nom_usuari) }}
-
+			{{ form_errors(editForm.descripcio) }}
 		</div>
 
 
@@ -25,12 +25,14 @@
 			<div class="col-md-6">
 				{{ form_label(editForm.nom) }}
 				{{ form_widget(editForm.nom) }}
-				{{ form_help(editForm.nom) }}
+				<p class="help-text"></p>
+				<p class="form-error-text"></p>
 			</div>
 			<div class="col-md-6">
 				{{ form_label(editForm.cognom) }}
 				{{ form_widget(editForm.cognom) }}
-				{{ form_help(editForm.cognom) }}
+				<p class="help-text"></p>
+				<p class="form-error-text"></p>
 			</div>
 		</div>
 
@@ -39,12 +41,12 @@
 				{{ form_label(editForm.email) }}
 				{{ form_widget(editForm.email) }}
 				{{ form_help(editForm.email) }}
-
+				<p class="form-error-text"></p>
 			</div>
 			<div class="col-md-6">
 				{{ form_label(editForm.nom_usuari) }}
 				{{ form_widget(editForm.nom_usuari) }}
-				{{ form_help(editForm.imatge) }}
+				{{ form_help(editForm.nom_usuari) }}
 				<p class="form-error-text"></p>
 			</div>
 		</div>
@@ -81,23 +83,33 @@
 		<div class="form-group">
 			{{ form_label(editForm.github) }}
 			{{ form_widget(editForm.github) }}
+			{{ form_help(editForm.github) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.linkedin) }}
 			{{ form_widget(editForm.linkedin) }}
+			{{ form_help(editForm.linkedin) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.twitter) }}
 			{{ form_widget(editForm.twitter) }}
+			{{ form_help(editForm.twitter) }}
+			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
 			{{ form_label(editForm.facebook) }}
 			{{ form_widget(editForm.facebook) }}
+			{{ form_help(editForm.facebook) }}
+			<p class="form-error-text"></p>
 		</div>
 
 		<div class="form-group">
 			{{ form_label(editForm.data_naixament) }}
 			{{ form_widget(editForm.data_naixament) }}
+			{{ form_help(editForm.data_naixament) }}
+			<p class="form-error-text"></p>
 		</div>
 
 

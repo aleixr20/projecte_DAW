@@ -341,6 +341,24 @@ class UserController extends AbstractController
         ]);
     }
 
+        /**
+     * METODE PER COMPROVAR SI UN NOM D'USUARI EXISTEIX (API en JSON)
+     * @Route("/user/validateUsername/{userName}", name="usernameExists")
+     */
+    public function checkUniqueUsername($userName, UserRepository $userRepository)
+    {
+        $userExists = false;
+
+        if ($userRepository->findOneBy(['nom_usuari' => $userName])) {
+            $userExists = true;
+        } 
+
+        $data[] = ['usernameExists' => $userExists];
+
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
+
+
     /**
      * METODE PER VEURE EL PERFIL D'UN ALTRE USUARI en JSON
      * @Route("/user/profile/{userName}", name="otherUserProfile")
