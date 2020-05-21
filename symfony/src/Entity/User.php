@@ -99,7 +99,7 @@ class User implements UserInterface
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @ORM\Column(type="string", length=2000, nullable=true)
      */
     private $descripcio;
 
