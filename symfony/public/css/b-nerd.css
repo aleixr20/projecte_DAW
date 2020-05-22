@@ -404,6 +404,16 @@ code {
     PERFIL USUARIS
 *******************************/
 
+.socialmedia-link {
+    color: red;
+    text-decoration: none;
+}
+
+.socialmedia-link:hover {
+    color: #666;
+    text-decoration: none;
+}
+
 .socialmedia-icon {
     font-size: 1.6em;
     vertical-align: sub;
@@ -496,6 +506,7 @@ code {
     }
     .menu-user img {
         width: 1.6em;
+        z-index: 5;
     }
     .menu-icon-logout {
         display: block;

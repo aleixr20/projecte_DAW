@@ -16,13 +16,13 @@
 
 
 				{% if user.github is defined and (user.github is not empty)%}
-					<a class="menu-username" href="https://www.github.com/{{ user.github }}" target="_blank">
+					<a class="socialmedia-link" href="https://www.github.com/{{ user.github }}" target="_blank">
 						<i class="socialmedia-icon fa fa-github-square"></i>&nbsp;{{user.github}}
 					</a>
 				{% endif %}
 				<br/>
 				{% if user.linkedin is defined and (user.linkedin is not empty)%}
-					<a class="menu-username" href="https://www.linkedin.com/{{ user.linkedin }}" target="_blank">
+					<a class="socialmedia-link" href="https://www.linkedin.com/{{ user.linkedin }}" target="_blank">
 						<i class="socialmedia-icon fa fa-linkedin-square"></i>&nbsp;{{user.linkedin}}
 					</a>
 				{% endif %}

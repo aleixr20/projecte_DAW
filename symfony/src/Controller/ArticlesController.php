@@ -37,20 +37,6 @@ class ArticlesController extends AbstractController
 {
 
     /**
-     * AQUI ES ON TENIM EL PROBLEMON
-     * 
-     * COM DEIA L'ALEIX, NO PODEM POSAR EL PRIMER TERME DE LA RUTA URL
-     * AMB UNA VARIABLE NO DEFINIDA, JA QUE LLAVORS PETEN ELS ALTRES ENRUTATS
-     * 
-     * PER NO QUEDARNOS ENCALLATS, ARA PER ARA, CREEM TANTS METODES COM SIGUIN
-     * NECESSARIS I DESPRES JA APLICAREM EL DRY (DONT REPEAT YOURSELF)
-     * 
-     * CREIE-ME QUE A MI EM FA MES MAL A A VISTA QUE A NINGU, PERO NO ENS ENCALLEM
-     * TIREM AMB ALGO ENCARA QUE SIGUI POC REUTILITZABLE
-     *
-     *********************************************************/
-
-    /**
      * METODE PER AFEGIR UN NOU ARTICLE
      * No entenc perque especifiques metodes GET i POST (els dos??)
      * 
@@ -68,15 +54,15 @@ class ArticlesController extends AbstractController
             //Crear EntityManager
             $entityManager = $this->getDoctrine()->getManager();
             //Capturar dades del formulari i assignar-les al article
-            $article->setTitol($form->get('titol')->getData())
-                ->setSubtitol($form->get('subtitol')->getData())
-                //Ara per ara la data de publicació es fixa, un timestamp manual
-                ->setContingut($form->get('contingut')->getData())
-                ->setDataPublicacio(new \DateTime())
-                ->setVisible(true)
+            $article
+                // ->setTitol($form->get('titol')->getData())
+                // ->setSubtitol($form->get('subtitol')->getData())
+                // //Ara per ara la data de publicació es fixa, un timestamp manual
+                // ->setContingut($form->get('contingut')->getData())
+                // ->setDataPublicacio(new \DateTime())
+                // ->setVisible(true)
                 ->setUser($this->getUser());
 
-            //Aquest funcio s'ha de revisar
             //Capturar el titol i convertir-lo a Slug amb lowercase i guions
             $text = strtolower($form->get('titol')->getData());
             $slug = strtolower(str_replace(" ", "-", $text));
@@ -88,13 +74,16 @@ class ArticlesController extends AbstractController
             $correccioTags = str_replace(', ', ',', $inputMetaTag);
 
             //Assignem a article els camps meta
-            $article->setMetaTag($correccioTags)
-                ->setMetaDescription($form->get('meta_description')->getData());
+            $article->setMetaTag($correccioTags);
+                // ->setMetaDescription($form->get('meta_description')->getData());
 
-            //Capturem categoria del selsect del formulari
-            $categoria = $form->get('categoria')->getData();
-            //Si la categoria es "afegir nova categoria"
-            if ($categoria->getNom() == "afegir nova categoria") {
+            // //Capturem categoria del selsect del formulari
+            // $categoria = $form->get('categoria')->getData();
+            // //Si la categoria es "afegir nova categoria"
+            // if ($categoria->getNom() == "afegir nova categoria") {
+
+                             if ($form->get('categoria')->getData()->getNom() == "afegir nova categoria") {
+
                 //Creem nova categoria amb el que hi hagi al input "nova categoria"
                 $afegirCategoria = new Categoria();
                 $afegirCategoria->setNom($form->get('nova_categoria')->getData());
@@ -257,7 +246,7 @@ class ArticlesController extends AbstractController
                 //         return $object->getId();
                 //     }
                 // ]);
-        
+
                 // return new JsonResponse(json_decode($catJson));
             }
         }

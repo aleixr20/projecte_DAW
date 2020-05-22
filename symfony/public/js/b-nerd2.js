@@ -10,8 +10,8 @@ window.onload = function() {
 
     var data = {
 
-        // path: 'http://localhost:8000',
-        path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
+        path: 'http://localhost:8000',
+        // path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
 
         menuVisibilityStatus: false,
         DOM: {

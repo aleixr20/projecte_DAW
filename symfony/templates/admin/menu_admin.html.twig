@@ -4,7 +4,7 @@
 	{% if app.user %}
 		<li>
 			<a
-				class="menu-user" href="{{ path('userProfile')}}">
+				class="menu-user" href="{{ path('userProfile', {username:app.user.username})}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
 					<img src="{{ asset("/img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
