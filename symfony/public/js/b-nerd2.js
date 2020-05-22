@@ -157,6 +157,7 @@ window.onload = function() {
             }
             view.listenBurger();
             view.listenDarkMode();
+            view.adminMenu();
 
 
         },
@@ -174,6 +175,11 @@ window.onload = function() {
                     controller.toggleContrast();
                 }
             })());
+        },
+        adminMenu: function() {
+            if (document.URL.search("/admin") > 0) {
+                document.getElementsByClassName('menu-user')[0].style.bottom = '71%'
+            }
         },
         //Metode per mostrar el menu lateral
         showMenu: function(Obj) {
@@ -489,41 +495,37 @@ window.onload = function() {
 window.onscroll = function() {
 
     //GESTIONAR QUE QUNA NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
-    // let homeURLs = this.document.getElementsByClassName('scrollable')[0].getElementsByClassName('menu-link');
-
-    // for (let i=0; i<homeURLs.length;i++){
-    //     if
-    // }
-
-
-    if (document.URL == "http://localhost:8000/user/profile/edit") {}
-    //Capturar numero de seccions que te la pàgina
-    let sections = document.getElementsByClassName("scrollable")
-        //Capturar els links que hi ha al menu
-    let links = document.getElementsByClassName("menu-link")
-
-    let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    //this.console.log(winScroll)
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let section_H = (height - 40) / (sections.length - 1)
-
-    for (i = 1; i <= sections.length; i++) {
-        if ((winScroll > (section_H * (i - 1))) && (winScroll < (section_H * i))) {
-            let current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            links[i - 1].className += " active";
-        }
-    }
-
-    let menuUserPositions = (height / 37); // =69 saltos winScroll
     let menuUser = document.getElementsByClassName('menu-user')
 
-    for (i = 1; i <= 38; i++) {
-        if ((winScroll > (menuUserPositions * (i - 1))) && (winScroll < (menuUserPositions * i))) {
-            menuUser[0].style.bottom = (35 + i) + "%"
+    if ((document.URL.search("/admin")) < 0) {
 
+        //Capturar numero de seccions que te la pàgina
+        let sections = document.getElementsByClassName("scrollable")
+
+        //Capturar els links que hi ha al menu
+        let links = document.getElementsByClassName("menu-link")
+
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        //this.console.log(winScroll)
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let section_H = (height - 40) / (sections.length - 1)
+
+        for (i = 1; i <= sections.length; i++) {
+            if ((winScroll > (section_H * (i - 1))) && (winScroll < (section_H * i))) {
+                let current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                links[i - 1].className += " active";
+            }
+        }
+
+        let menuUserPositions = (height / 37); // =69 saltos winScroll
+
+        for (i = 1; i <= 38; i++) {
+            if ((winScroll > (menuUserPositions * (i - 1))) && (winScroll < (menuUserPositions * i))) {
+                menuUser[0].style.bottom = (35 + i) + "%"
+
+            }
         }
     }
-
 
 }

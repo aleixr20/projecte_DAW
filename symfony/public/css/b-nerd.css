@@ -454,6 +454,57 @@ code {
 } */
 
 
+/*************************
+    ZONA ADMIN
+*****************************/
+
+.cat-admin {
+    padding: 1em 0;
+    /*chrome*/
+    display: -ms-flexbox;
+    /*firefox*/
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*
+    Amb media queries, el que s'ha de canviar es aixo
+    grid-template-columns: (X, 1fr);
+    */
+}
+
+.cat-admin img {
+    float: left;
+    padding: 0.1em 0;
+    margin-right: 0.5em;
+}
+
+.cat-item {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 5px;
+    margin: 5px;
+}
+
+.cat-item:hover {
+    _background-color: #ccc;
+}
+
+.cat-admin-info {
+    position: relative;
+}
+
+.cat-admin-info a {
+    position: absolute;
+    right: 0.5em;
+}
+
+.cat-admin-info a:hover {
+    color: red;
+}
+
+
 /*****************************
     MEDIA QUERIES
  *****************************/

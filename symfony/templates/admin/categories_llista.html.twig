@@ -7,27 +7,31 @@
 
 	<section>
 		<h1 class="titulo">Llista de categories actuals</h1>
-		<table class="table">
-			<tr>
-				<th class="text-right">ID</th>
-				<th class="text-right">Icona</th>
-				<th class="text-left">Nom de la categoria</th>
-				<th class="text-center">nº Articles</th>
-				<th></th>
-			</tr>
 
-			{%for cat in categories %}
-				<tr>
-					<td class="text-right">{{cat.id}}</td>
-					<td class="text-right"><img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip"></td>
-					<td class="text-left">{{cat.nom}}</td>
-					<td class="text-center">{{cat.articles|length}}</td>
-					<td class="text-center">
-						<a class="btn btn-outline-warning" href="{{ path('editar_categoria', {id: cat.id}) }}" alt"editar categoria">EDITAR</td>
-					</td>
-				</tr>
+		<div class="cat-admin">
+
+			{% for cat in categories %}
+				{% if cat.nom != "afegir nova categoria" %}
+
+					<div class="cat-item">
+
+						<img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip">
+
+						<div class="cat-admin-info">
+							{{cat.nom}}
+							<a href="{{ path('editarCategoria', {id: cat.id}) }}" alt"editar categoria">
+								<i class="fa fa-cog"></i>
+							</a><br/>
+
+							{{cat.articles|length}}
+							Articles publicats
+						</div>
+					</div>
+				{% endif %}
 			{% endfor %}
-		</table>
+		</div>
+
+
 	</section>
 
 {% endblock %}

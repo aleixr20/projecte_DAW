@@ -1,26 +1,21 @@
-<ul
-	id="menu-bottom">
-	<!--SI HI HA UN USUARI LOGGEJAT - primer mostrar el seu perfil-->
+<ul class="menu-user">
 	{% if app.user %}
 		<li>
 			<a
-				class="menu-user" href="{{ path('userProfile', {username:app.user.username})}}">
+				href="{{ path('userProfile', {username: app.user.username}) }}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
-					<img src="{{ asset("/img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
+					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
 					<i class="fa fa-user-circle"></i>
 				{% endif %}
 			</a>
 		</li>
 		<li>
-			<a class="menu-username" href="{{ path('userProfile')}}">{{app.user.username}}</a>
+			<a class="menu-link menu-username" href="{{ path('userProfile', {username: app.user.username}) }}">{{app.user.username}}</a>
 		</li>
 		<li>
-			<a class="menu-icon-logout" href="{{ path('app_logout')}}">
-				<i class="fa fa-power-off"></i>
-			</a>
-			<a class="menu-link-logout" href="{{ path('app_logout')}}">
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
 				sortir
 			</a>
 		</li>
@@ -31,29 +26,40 @@
 			</a>
 		</li>
 	{% endif %}
-	<!-- HAMBURGUESA TOGGLE -->
+</ul>
 
-	{# <li id="hamburgesa">
+<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+<ul class="menu-bottom">
+	<li>
+		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+	</li>
+
+	<li>
+		<a class="menu-link" href="{{ path('article_new')}}">NOU ARTICLE</a>
+	</li>
+		<li>
+		<a class="menu-link" href="{{ path('adminCategories')}}">ARTICLES</a>
+	</li>
+	<li>
+		<a class="menu-link" href="{{ path('adminCategories')}}">CATEGORIES</a>
+	</li>
+	<li>
+		<a class="menu-link" href="{{ path('adminCategories')}}">COMENTARIS</a>
+	</li>
+	<li>
+		<a class="menu-link" href="{{ path('adminCategories')}}">USUARIS</a>
+	</li>
+	<li>
+		<a class="menu-link" href="{{ path('adminCategories')}}">INFORMES</a>
+	</li>
+
+
+	<!-- HAMBURGESA -->
+	<li id="hamburgesa">
 		<i class="menu-icon fa fa-bars"></i>
-	</li> #}
-
-	<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
-	<li style="margin-top:2em;">
-		<a class="menu-icon" href="{{ path('homepage')}}">
-			<i class="fa fa-home"></i>
-		</a>
-		{# <a class="menu-link" href="{{ path('homepage')}}">INICI</a> #}
 	</li>
-	{# <li>
-		<a class="menu-icon" href="{{ path('homepage')}}">
-			<i class="fa fa-list"></i>
-		</a>
-	</li> #}
-
-	<!-- BUSCADOR -->
-	<li id="search">
-		<i class="menu-icon fa fa-search"></i>
+	<li id="dark-mode">
+		<i class="menu-icon fa fa-toggle-off"></i>
 	</li>
-
 
 </ul>
