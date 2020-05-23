@@ -259,11 +259,7 @@ window.onload = function() {
                         let feedbackModal = document.getElementById('feedback-form')
                         view.showFeedbackForm(shadow, feedbackModal)
 
-                        shadow.addEventListener("click", (function() {
-                            return function() {
-                                view.hideFeedbackForm(shadow, feedbackModal)
-                            }
-                        })());
+
                     }
                 })());
             }
@@ -273,13 +269,20 @@ window.onload = function() {
             shadow.style.backgroundColor = '#333'
             shadow.style.opacity = 0.9
             modal.style.display = 'block';
+            shadow.addEventListener("click", (function() {
+                return function() {
+                    view.hideFeedbackForm(shadow, feedbackModal)
+                }
+            })());
         },
         hideFeedbackForm: function(shadow, modal) {
             shadow.style.zIndex = -1;
             shadow.style.backgroundColor = 'transparent'
             shadow.style.opacity = 0
             modal.style.display = 'none';
-
+            shadow.removeEventListener("click", (function() {
+                return function() {}
+            })());
 
         },
         adminMenu: function() {
