@@ -118,11 +118,8 @@ class AdminController extends AbstractController
 
             $usuaris = $repository->findAll();
 
-            return $this->render('admin/admin.html.twig', [
-                'controller_name' => 'Preparant zona per a gestio d\'usuaris',
-
-            // return $this->render('admin/llistarUsuaris.html.twig', [
-                // 'usuaris' => $usuaris,
+            return $this->render('admin/llistarUsuaris.html.twig', [
+                'usuaris' => $usuaris,
             ]);
         }
 
