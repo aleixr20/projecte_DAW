@@ -41,7 +41,7 @@
 		<div class="text">{{ user.descripcio|raw }}
 			{{user.username}}
 			es usuari registrat desde
-			{{user.dataregistre|date('M\'y')}} i ha participat amb {{user.articles|length}} articles
+			{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}">{{user.articles|length}} articles
 		</div>
 			{# {% for cat in user.articles.categoria %}
 				<li>

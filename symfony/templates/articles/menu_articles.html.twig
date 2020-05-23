@@ -13,11 +13,12 @@
 	<li>
 		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.user.username})}}">{{article.user.username}}</a>
 	</li>
+	<li class="menu-link article-data">
+		{{article.datapublicacio|date("d M Y")}}
+	</li>
+
 	{% if app.user and (app.user == article.user) %}
 		<li>
-			{# <a class="menu-icon-logout" href="{{ path('app_logout')}}">
-				<i class="fa fa-power-off"></i>
-			</a> #}
 			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
 				sortir
 			</a>
@@ -25,13 +26,21 @@
 	{% endif %}
 </ul>
 
-	<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
-<ul
-	class="menu-bottom">
-	<li class="scrollable">
-		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
+<ul class="menu-bottom">
+
+	{% if app.user and is_granted('ROLE_ADMIN') %}
+		<li>
+			<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
+		</li>
+	{% endif %}
+	<li>
+		<a class="menu-link active" href="{{ path('articles_categoria', {cat_name: article.categoria.nom})}}">in{{article.categoria.nom}}</a>
 	</li>
-	<li class="scrollable">
+	<li>
+		<a class="menu-link" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+	</li>
+	<li>
 		<a class="menu-link" href="{{ path('homepage')}}#hard-skills">ARTICLES</a>
 	</li>
 
@@ -44,7 +53,7 @@
 		<i class="menu-icon fa fa-bars"></i>
 	</li>
 	<li id="dark-mode">
-		<i class="menu-icon fa fa-toggle-off"></i>
+		<a href=""><i class="menu-icon fa fa-toggle-off"></i></a>
 	</li>
 
 </ul>

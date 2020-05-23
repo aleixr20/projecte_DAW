@@ -4,11 +4,16 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\Categoria;
-use App\Entity\HomepageSections;
-use App\Form\CategoriaType;
-use App\Form\HomepageSectionsType;
+
+use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\ComentariRepository;
 use App\Repository\CategoriaRepository;
+
+use App\Form\AdminCategoriaType;
+
 
 
 use Symfony\Component\HttpFoundation\Request;
@@ -23,25 +28,15 @@ class AdminController extends AbstractController
 {
 
     /**
-     * AQUI TOTS ELS METODES EXCLUSIUS D'UN ADMIN
-     * 
-     * Llistar usuaris
-     * Activar/Bloquejar usuaris (update user.status)
-     * Activar/Bloquejar comentaris (update comment.status)
-     * Estadistiques, llistes, mailings...
-     *
-     *********************************************************/
-
-
-    /**
-     * PAGINA PRINCIPAL AMB LES OPCIONS D'ADMIN
+     * PAGINA PRINCIPAL D'ADMIN
      * @Route("/admin", name="admin")
      */
     public function index()
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
-            return $this->render('admin/index.html.twig', [
+
+            return $this->render('admin/admin.html.twig', [
                 'controller_name' => 'Pagina de gestio web (Admin)',
             ]);
         }
@@ -53,19 +48,18 @@ class AdminController extends AbstractController
 
 
 
-
     /**
+     * LLISTAR CATEGORIES
      * @Route("/admin/categories", name="adminCategories")
      */
-    public function llistarCategories()
+    public function llistarCategories(CategoriaRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            $repo_categories = $this->getDoctrine()->getRepository(Categoria::class);
-            $categories = $repo_categories->findAll();
+            $categories = $repository->findAll();
 
-            return $this->render('admin/categories_llista.html.twig', [
+            return $this->render('admin/llistarCategories.html.twig', [
                 'categories' => $categories,
             ]);
         }
@@ -74,27 +68,88 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('homepage');
     }
 
+
+    
     /**
-     * @Route("/admin/editarcategoria/{id}", name="editarCategoria")
+     * Dels articles a la llista del admin que volem veure?
+     * categories, autor, data publicacio, data actualitzacio (ocult/desplegable)
+     * 
+     * Mirant com posar.... nº comentaris, nº vots, public/esborrany/reportat
+     * 
+     * fa-eye
+     * fa-eye-slash
+     * fa-smile-o
+     * fa-frown-o
+     * fa-meh-o
+     * fa-rocket
      */
-    public function editarCategoria($id, Request $request, SluggerInterface $slugger): Response
+
+
+
+    /**
+     * LLISTAR ARTICLES
+     * @Route("/admin/articles", name="adminArticles")
+     */
+    public function llistarArticles(ArticleRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
-            $categoria = $cat_repository->findOneBy(array('id' => $id));
+            $articles = $repository->findAll();
+
+            return $this->render('admin/llistarArticles.html.twig', [
+                'articles' => $articles,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+
+        /**
+     * LLISTAR USUARIS
+     * @Route("/admin/usuaris", name="adminUsuaris")
+     */
+    public function llistarUsuaris(UserRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $usuaris = $repository->findAll();
+
+            return $this->render('admin/admin.html.twig', [
+                'controller_name' => 'Preparant zona per a gestio d\'usuaris',
+
+            // return $this->render('admin/llistarUsuaris.html.twig', [
+                // 'usuaris' => $usuaris,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * ADMIN EDITAR una CATEGORIA
+     * @Route("/admin/categoria/{id}", name="adminEditarCategoria")
+     */
+    public function editarCategoria($id, Request $request, CategoriaRepository $repository, SluggerInterface $slugger): Response
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            // $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
+            $categoria = $repository->findOneBy(array('id' => $id));
 
             //Crear Objecte Article i Form
-            $form = $this->createForm(CategoriaType::class, $categoria);
+            $form = $this->createForm(AdminCategoriaType::class, $categoria);
             $form->handleRequest($request);
 
             //Si el formulari es enviat, capture dde dades i pujar nou article a DB
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $entityManager = $this->getDoctrine()->getManager();
-
-                // $categoria->setNom($form->get('nom')->getData());
 
                 //Pujada de la imatge de logo/icona
                 $logoCategoria = $form->get('logo')->getData();
@@ -117,8 +172,6 @@ class AdminController extends AbstractController
                     // updates the 'imatge' property to store the image file name
                     // instead of its contents
                     $categoria->setLogo($nouNomArxiu);
-                } else {
-                    $categoria->setLogo('default_logo.jpg');
                 }
 
                 $entityManager->persist($categoria);
@@ -127,9 +180,9 @@ class AdminController extends AbstractController
                 return $this->redirectToRoute('adminCategories');
             }
 
-            return $this->render('admin/categories_editar.html.twig', [
+            return $this->render('admin/adminEditarCategoria.html.twig', [
                 'categoria' => $categoria,
-                'formEditarCategoria' => $form->createView(),
+                'adminEditarCategoria' => $form->createView(),
             ]);
         }
 

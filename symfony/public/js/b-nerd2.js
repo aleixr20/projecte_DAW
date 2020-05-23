@@ -126,6 +126,21 @@ window.onload = function() {
                 view.listenArticleFormInputs(data.articleForm)
             }
 
+            //Si estem al formulari d'editar article
+            // if (document.URL == data.path + "/new") {
+            //     model.loadArticleForm();
+            //     //view.validateFormArticles(data.articleForm)
+            //     view.listenArticleFormInputs(data.articleForm)
+            // }
+
+            //Si estem a la vista d'un article
+            if ((document.URL.search("/post/")) > 0) {
+                console.log('estoy en un articulo')
+                    // model.loadArticleForm();
+                    //view.validateFormArticles(data.articleForm)
+                view.listenArticleFeedback()
+            }
+
 
 
 
@@ -169,18 +184,6 @@ window.onload = function() {
                 }
             })());
         },
-        listenDarkMode: function() {
-            document.getElementById('dark-mode').addEventListener('click', (function() {
-                return function() {
-                    controller.toggleContrast();
-                }
-            })());
-        },
-        adminMenu: function() {
-            if (document.URL.search("/admin") > 0) {
-                document.getElementsByClassName('menu-user')[0].style.bottom = '71%'
-            }
-        },
         //Metode per mostrar el menu lateral
         showMenu: function(Obj) {
             Obj.shadow.style.backgroundColor = "#fff";
@@ -223,6 +226,13 @@ window.onload = function() {
                 Obj.navbar.style.width = "16vw";
             }
         },
+        listenDarkMode: function() {
+            document.getElementById('dark-mode').addEventListener('click', (function() {
+                return function() {
+                    controller.toggleContrast();
+                }
+            })());
+        },
         //Metode per apagar les llums
         lightsOff: function() {
             document.getElementById('dark-mode').innerHTML = '<i class="menu-icon fa fa-toggle-on"></i>'
@@ -237,6 +247,48 @@ window.onload = function() {
             body.style.color = '#666';
             body.style.backgroundColor = '#fff';
         },
+        listenArticleFeedback: function() {
+            let feedbackIcons = document.getElementsByClassName('feedback-icons')
+            for (let i = 0; i < feedbackIcons.length; i++) {
+                feedbackIcons[i].addEventListener("click", (function() {
+                    return function() {
+                        console.log('he clicado un icono ', i)
+                        let shadow = document.getElementById('fade')
+                            //let shadow = document.getElementsByTagName('main')[0]
+
+                        let feedbackModal = document.getElementById('feedback-form')
+                        view.showFeedbackForm(shadow, feedbackModal)
+
+                        shadow.addEventListener("click", (function() {
+                            return function() {
+                                view.hideFeedbackForm(shadow, feedbackModal)
+                            }
+                        })());
+                    }
+                })());
+            }
+        },
+        showFeedbackForm: function(shadow, modal) {
+            shadow.style.zIndex = 4;
+            shadow.style.backgroundColor = '#333'
+            shadow.style.opacity = 0.9
+            modal.style.display = 'block';
+        },
+        hideFeedbackForm: function(shadow, modal) {
+            shadow.style.zIndex = -1;
+            shadow.style.backgroundColor = 'transparent'
+            shadow.style.opacity = 0
+            modal.style.display = 'none';
+
+
+        },
+        adminMenu: function() {
+            if (document.URL.search("/admin") > 0) {
+                document.getElementsByClassName('menu-user')[0].style.bottom = '71%'
+            }
+        },
+
+
 
         listenRegisterFormInputs: function(Obj) {
 

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('admin/menu_admin.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	<section>
+		<h1 class="titulo">Llista de categories actuals</h1>
+
+		{# <div class="cat-admin"> #}
+		<div class="accordion" id="accordionExample">
+
+			{% for article in articles %}
+
+
+				<div class="card">
+					{% if article.visible %}
+						<div class="card-header">
+						{% else %}
+							<div class="card-header alert-warning">
+							{% endif %}
+							<div class="row no-gutters">
+								<div class="col-md-8">
+
+									<h5 class="card-title" data-toggle="collapse" data-target="#article_{{article.id}}">
+										{{article.titol }}</h5>
+								</div>
+								<div class="col-md-3 text-right">
+									<img src="/img/categories/{{ asset(article.categoria.logo) }}" class="cat-article-icon" alt="{{article.categoria.nom}} logotip">
+								</div>
+								<div class="col-md-1 text-right">
+								<i class="menu-icon fa fa-eye"></i>
+								</div>
+							</div>
+						</div>
+						<div class="card-body collapse" id="article_{{article.id}}" data-parent="#accordionExample">
+
+							<p class="card-text">{{article.subtitol}}</p>
+							<hr>
+							Creada el
+							{{article.dataPublicacio|date('d/m/Y')}}
+							per
+							{{article.user.username}}
+							({{article.user.articles|length}}
+							articles)<br/>
+							{% if article.dataActualitzacio != null %}
+								Darrera modificació:
+								{{article.dataActualitzacio|date('d/m/Y')}}<br/>
+							{% endif %}
+
+							{% if article.visible %}
+								<a href="#">passar article a esborrany</a>
+							{% else %}
+								<a href="#">passar article a public</a>
+							{% endif %}
+
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+
+		</section>
+	{% endblock %}

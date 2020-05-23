@@ -9,26 +9,36 @@
 		<h1 class="article_individual_titol">{{article.titol}}</h1>
 		<h4 class="article_individual_resum">{{article.subtitol}}</h4>
 		<div class="article_individual_content">
-			Publicada el&nbsp;{{article.datapublicacio|date("d/m/Y")}}&nbsp;en&nbsp;{{article.categoria.nom}}<br/>
-			Por&nbsp;{{article.user.username}}<br>
 			{{article.contingut|raw}}
 		</div>
-		<h3>
-			<p>
-				Publicada el&nbsp;{{article.datapublicacio|date("d/m/Y")}}&nbsp;en&nbsp;{{article.categoria.nom}}<br/>
-				Por&nbsp;{{article.user.username}}
-			</p>
+		{# <p class="article-footer">
+		Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
+		</p> #}
 
-			{% if app.user and is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
-			{% endif %}
+			<ul class="feedback-list">
+				<li class="feedback-icons">
+					<a href=""><i class="fa fa-frown-o"></i><a>
+				</li>
+				<li class="feedback-icons">
+					<a href=""><i class="fa fa-meh-o"></i></a>
+				</li>
+				<li class="feedback-icons">
+					<a href=""><i class="fa fa-smile-o"></i></a>
+				</li>
+				<li class="feedback-icons">
+					<a href=""><i class="fa fa-rocket"></i></a>
+				</li>
+			</ul>
+			<div id="feedback-form">
+			hola
+			</div>
+	</section>
 
-		</section>
 
-	{% endblock %}
+{% endblock %}
 
-		{% block javascripts %}
-			<script>
-				hljs.initHighlightingOnLoad();
-			</script>
-		{% endblock %}
+{% block javascripts %}
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+{% endblock %}

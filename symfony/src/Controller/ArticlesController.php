@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
+
 use App\Form\ArticleType;
 
 use App\Entity\Categoria;
@@ -174,6 +176,21 @@ class ArticlesController extends AbstractController
         return $this->render('articles/form_nou_article.html.twig', [
             'article' => $article,
             'formArticle' => $form->createView(),
+        ]);
+    }
+
+        /**
+     * PER VEURE UN ARTICLE
+     * @Route("/posts/{username}", name="articlesAutor", methods={"GET"})
+     */
+    public function articlesPerAutor($username, ArticleRepository $post_repo, UserRepository $user_repo)
+    {
+
+        $user = $user_repo->findOneBy(array('nom_usuari' => $username));
+        $posts = $post_repo->findBy(array('user' => $user));
+
+        return $this->render('articles/llista_articles.html.twig', [
+            'articles' => $posts,
         ]);
     }
 
