@@ -196,11 +196,13 @@ class ArticlesFixtures extends Fixture
 
         $article_php1 = new Article();
         $article_php1->setTitol($titol_php1)
-            ->setSubtitol('Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex.')
+            ->setResum('Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex.')
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_php1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_php)
+            ->setAutor($admin)
+            ->addCategories($categoria_php)
+            ->addCategories($categoria_symfony)
+
             ->setMetaTag('php,form,htmlentities')
             ->setContingut('
 <p>Meetus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -210,7 +212,7 @@ class ArticlesFixtures extends Fixture
 $result = $serializer-&gt;normalize($level1, null, [
 AbstractObjectNormalizer::ENABLE_MAX_DEPTH =&gt; true
 ]);
-</code></code></pre> 
+</code></pre> 
  
 <p>Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa. Fermentum posuere urna nec tincidunt praesent.</p>
 <pre><code class="language-php hljs">
@@ -231,11 +233,11 @@ $postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
 
         $article_php2 = new Article();
         $article_php2->setTitol($titol_php2)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
-            ->setSlug(str_replace(" ", "-", strtolower($titol_php1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_php)
+            ->setSlug(str_replace(" ", "-", strtolower($titol_php2)))
+            ->setAutor($admin)
+            ->addCategories($categoria_php)
             ->setMetaTag('mvc,php,modelo,vista,controlador')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -263,11 +265,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_apa1 = new Article();
         $article_apa1->setTitol($titol_apa1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_apa1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_apache)
+            ->setAutor($admin)
+            ->addCategories($categoria_apache)
             ->setMetaTag('servidor,apache, localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -301,11 +303,12 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_nginx1 = new Article();
         $article_nginx1->setTitol($titol_nginx1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_nginx1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_js)
+            ->setAutor($admin)
+            ->addCategories($categoria_js)
+            ->addCategories($categoria_css)
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -333,11 +336,12 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_sql1 = new Article();
         $article_sql1->setTitol($titol_sql1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_sql1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_js)
+            ->setAutor($admin)
+            ->addCategories($categoria_js)
+            ->addCategories($categoria_css)
             ->setMetaTag('bbdd,sql,')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -365,11 +369,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_mongo1 = new Article();
         $article_mongo1->setTitol($titol_mongo)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_mongo)))
-            ->setUser($user1)
-            ->setCategoria($categoria_mongo)
+            ->setAutor($user1)
+            ->addCategories($categoria_mongo)
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -397,11 +401,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_symfony1 = new Article();
         $article_symfony1->setTitol($titol_symfony1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_symfony1)))
-            ->setUser($user2)
-            ->setCategoria($categoria_symfony)
+            ->setAutor($user2)
+            ->addCategories($categoria_symfony)
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -435,11 +439,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_symfony2 = new Article();
         $article_symfony2->setTitol($titol_symfony2)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_symfony2)))
-            ->setUser($user2)
-            ->setCategoria($categoria_symfony)
+            ->setAutor($user2)
+            ->addCategories($categoria_symfony)
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -474,11 +478,13 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_java1 = new Article();
         $article_java1->setTitol($titol_java1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_java1)))
-            ->setUser($admin)
-            ->setCategoria($categoria_vue)
+            ->setAutor($admin)
+            ->addCategories($categoria_vue)
+            ->addCategories($categoria_js)
+
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('<
 p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -514,11 +520,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_java2 = new Article();
         $article_java2->setTitol($titol_java2)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_java2)))
-            ->setUser($admin)
-            ->setCategoria($categoria_java)
+            ->setAutor($admin)
+            ->addCategories($categoria_java)
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -546,11 +552,13 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_htm1 = new Article();
         $article_htm1->setTitol($titol_html1)
-            ->setSubtitol("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
+            ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_html1)))
-            ->setUser($user1)
-            ->setCategoria($categoria_html)
+            ->setAutor($user1)
+            ->addCategories($categoria_html)
+            ->addCategories($categoria_css)
+
             ->setMetaTag('servidor,nginx,localhost')
             ->setContingut('
 <p>Metus dictum at tempor commodo. Sapien et ligula ullamcorper malesuada proin libero nunc. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Risus nec feugiat in fermentum. Pulvinar sapien et ligula ullamcorper malesuada proin. Mi eget mauris pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.</p>
@@ -583,11 +591,11 @@ $result = $serializer-&gt;normalize($level1, null, [
 
         $article_html2 = new Article();
         $article_html2->setTitol($titol_html2)
-            ->setSubtitol("Exemple bàsic de la estructura HTML")
+            ->setResum("Exemple bàsic de la estructura HTML")
             ->setDataPublicacio(new DateTime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_html2)))
-            ->setUser($user1)
-            ->setCategoria($categoria_html)
+            ->setAutor($user1)
+            ->addCategories($categoria_html)
             ->setMetaTag('html,disseny, estructures')
             ->setContingut('
 <pre><code class="language-html hljs">

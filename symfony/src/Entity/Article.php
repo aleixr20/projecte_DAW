@@ -27,17 +27,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $subtitol;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $data_publicacio;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $data_actualitzacio;
+    private $resum;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,16 +45,45 @@ class Article
     private $meta_description;
 
     /**
+     * @ORM\Column(type="string", length=99999)
+     */
+    private $contingut;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $css;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $js;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", inversedBy="articles")
+     */
+    private $categories;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $autor;
 
-    // /**
-    //  * @ORM\ManyToOne(targetEntity="App\Entity\Tema", inversedBy="articles")
-    //  * @ORM\JoinColumn(nullable=true)
-    //  */
-    // private $tema;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $data_publicacio;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $data_actualitzacio;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comentari", mappedBy="article")
@@ -72,24 +91,16 @@ class Article
     private $comentaris;
 
     /**
-     * @ORM\Column(type="string", length=99999)
-     */
-    private $contingut;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categoria", inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Categoria;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $visible;
 
+
+
     public function __construct()
     {
         $this->comentaris = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,41 +120,18 @@ class Article
         return $this;
     }
 
-    public function getSubtitol(): ?string
+    public function getResum(): ?string
     {
-        return $this->subtitol;
+        return $this->resum;
     }
 
-    public function setSubtitol(string $subtitol): self
+    public function setResum(string $resum): self
     {
-        $this->subtitol = $subtitol;
+        $this->resum = $resum;
 
         return $this;
     }
 
-    public function getDataPublicacio(): ?\DateTimeInterface
-    {
-        return $this->data_publicacio;
-    }
-
-    public function setDataPublicacio(\DateTimeInterface $data_publicacio): self
-    {
-        $this->data_publicacio = $data_publicacio;
-
-        return $this;
-    }
-
-    public function getDataActualitzacio(): ?\DateTimeInterface
-    {
-        return $this->data_actualitzacio;
-    }
-
-    public function setDataActualitzacio(?\DateTimeInterface $data_actualitzacio): self
-    {
-        $this->data_actualitzacio = $data_actualitzacio;
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {
@@ -181,14 +169,112 @@ class Article
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getContingut(): ?string
     {
-        return $this->user;
+        return $this->contingut;
     }
 
-    public function setUser(?User $user): self
+    public function setContingut(string $contingut): self
     {
-        $this->user = $user;
+        $this->contingut = $contingut;
+
+        return $this;
+    }
+
+    public function getHtml(): ?string
+    {
+        return $this->html;
+    }
+
+    public function setHtml(?string $html): self
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+    public function getCss(): ?string
+    {
+        return $this->css;
+    }
+
+    public function setCss(?string $css): self
+    {
+        $this->css = $css;
+
+        return $this;
+    }
+
+    public function getJs(): ?string
+    {
+        return $this->js;
+    }
+
+    public function setJs(?string $js): self
+    {
+        $this->js = $js;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categoria[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategories(Categoria $categoria): self
+    {
+        if (!$this->categories->contains($categoria)) {
+            $this->categories[] = $categoria;
+        }
+
+        return $this;
+    }
+
+    public function removeCategories(Categoria $categoria): self
+    {
+        if ($this->categories->contains($categoria)) {
+            $this->categories->removeElement($categoria);
+        }
+
+        return $this;
+    }
+
+    public function getAutor(): ?User
+    {
+        return $this->autor;
+    }
+
+    public function setAutor(?User $autor): self
+    {
+        $this->autor = $autor;
+
+        return $this;
+    }
+
+    public function getDataPublicacio(): ?\DateTimeInterface
+    {
+        return $this->data_publicacio;
+    }
+
+    public function setDataPublicacio(\DateTimeInterface $data_publicacio): self
+    {
+        $this->data_publicacio = $data_publicacio;
+
+        return $this;
+    }
+
+    public function getDataActualitzacio(): ?\DateTimeInterface
+    {
+        return $this->data_actualitzacio;
+    }
+
+    public function setDataActualitzacio(?\DateTimeInterface $data_actualitzacio): self
+    {
+        $this->data_actualitzacio = $data_actualitzacio;
 
         return $this;
     }
@@ -220,30 +306,6 @@ class Article
                 $comentari->setArticle(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getContingut(): ?string
-    {
-        return $this->contingut;
-    }
-
-    public function setContingut(string $contingut): self
-    {
-        $this->contingut = $contingut;
-
-        return $this;
-    }
-
-    public function getCategoria(): ?Categoria
-    {
-        return $this->Categoria;
-    }
-
-    public function setCategoria(?Categoria $Categoria): self
-    {
-        $this->Categoria = $Categoria;
 
         return $this;
     }

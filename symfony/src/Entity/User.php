@@ -104,7 +104,7 @@ class User implements UserInterface
     private $descripcio;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="autor")
      */
     private $articles;
 
@@ -118,7 +118,6 @@ class User implements UserInterface
     {
         $this->articles = new ArrayCollection();
         $this->comentaris = new ArrayCollection();
-        $this->socialMedia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -389,7 +388,7 @@ class User implements UserInterface
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setUser($this);
+            $article->setAutor($this);
         }
 
         return $this;
@@ -400,8 +399,8 @@ class User implements UserInterface
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
             // set the owning side to null (unless already changed)
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
+            if ($article->getAutor() === $this) {
+                $article->setAutor(null);
             }
         }
 

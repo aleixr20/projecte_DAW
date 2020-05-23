@@ -39,7 +39,7 @@ class ArticleType extends AbstractType
                 ]
             ])
 
-            ->add('subtitol', TextType::class, [
+            ->add('resum', TextType::class, [
                 'label' => 'Breu resum del contingut del article',
                 'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional',
                 'attr' => ['class' => 'form-control'],
@@ -64,7 +64,7 @@ class ArticleType extends AbstractType
             ->add('meta_description', TextType::class, [
                 'label' => 'Meta Description *',
                 'attr' => ['class' => 'form-control', 'rows' => 2],
-                'help' => 'Text molt resumit i descriptiu per al Snippet dels buscadors. (maxim 155 caràcters)',
+                'help' => 'Text molt resumit i descriptiu per al Snippet dels buscadors. (de 100 a 155 caràcters)',
 
                 'constraints' => [
                     new Length([
@@ -76,11 +76,28 @@ class ArticleType extends AbstractType
                 ]
             ])
 
-            ->add('categoria', EntityType::class, [
-                'label' => 'Categoria *',
+            ->add('categoria1', EntityType::class, [
+                'label' => 'Categoria principal *',
+                'help' => 'Categoria a la que pertany l\'article. Tot i que pots assignar-ne 3, millor si en poses nomes 1.\n\rPer triar nomes 1 categoria, posa la mateixa als tres selectors',
+                'attr' => ['class' => 'form-control'],
+                'class' => Categoria::class,
+                'mapped' => false,
+            ])
+            ->add('categoria2', EntityType::class, [
+                'label' => 'Categoria secundaria',
                 //'help' => 'Categoria a la que pertany l\'article',
                 'attr' => ['class' => 'form-control'],
                 'class' => Categoria::class,
+                'mapped' => false,
+                'required' => false,
+            ])
+            ->add('categoria3', EntityType::class, [
+                'label' => 'Categoria alternativa',
+                //'help' => 'Categoria a la que pertany l\'article',
+                'attr' => ['class' => 'form-control'],
+                'class' => Categoria::class,
+                'mapped' => false,
+                'required' => false,
             ])
 
             ->add('nova_categoria', TextType::class, [

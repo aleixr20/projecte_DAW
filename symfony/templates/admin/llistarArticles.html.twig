@@ -27,22 +27,24 @@
 										{{article.titol }}</h5>
 								</div>
 								<div class="col-md-3 text-right">
-									<img src="/img/categories/{{ asset(article.categoria.logo) }}" class="cat-article-icon" alt="{{article.categoria.nom}} logotip">
+									{% for cat in article.categories %}
+										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="{{cat.nom}} logotip">
+									{% endfor %}
 								</div>
 								<div class="col-md-1 text-right">
-								<i class="menu-icon fa fa-eye"></i>
+									<i class="menu-icon fa fa-eye"></i>
 								</div>
 							</div>
 						</div>
 						<div class="card-body collapse" id="article_{{article.id}}" data-parent="#accordionExample">
 
-							<p class="card-text">{{article.subtitol}}</p>
+							<p class="card-text">{{article.resum}}</p>
 							<hr>
 							Creada el
 							{{article.dataPublicacio|date('d/m/Y')}}
 							per
-							{{article.user.username}}
-							({{article.user.articles|length}}
+							{{article.autor.username}}
+							({{article.autor.articles|length}}
 							articles)<br/>
 							{% if article.dataActualitzacio != null %}
 								Darrera modificació:

@@ -23,17 +23,7 @@ class Categoria
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $logo;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="Categoria")
-     */
-    private $articles;
-
-    /**
+        /**
      * @ORM\Column(type="string", length=255)
      */
     private $tipus;
@@ -41,7 +31,17 @@ class Categoria
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $logo;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $color;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
+     */
+    private $articles;
 
     public function __construct()
     {
@@ -69,6 +69,17 @@ class Categoria
 
         return $this;
     }
+    public function getTipus(): ?string
+    {
+        return $this->tipus;
+    }
+
+    public function setTipus(string $tipus): self
+    {
+        $this->tipus = $tipus;
+
+        return $this;
+    }
 
     public function getLogo(): ?string
     {
@@ -82,49 +93,6 @@ class Categoria
         return $this;
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->setCategoria($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->contains($article)) {
-            $this->articles->removeElement($article);
-            // set the owning side to null (unless already changed)
-            if ($article->getCategoria() === $this) {
-                $article->setCategoria(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTipus(): ?string
-    {
-        return $this->tipus;
-    }
-
-    public function setTipus(string $tipus): self
-    {
-        $this->tipus = $tipus;
-
-        return $this;
-    }
-
     public function getColor(): ?string
     {
         return $this->color;
@@ -133,6 +101,34 @@ class Categoria
     public function setColor(?string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticles(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->addCategories($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticles(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            $article->removeCategories($this);
+        }
 
         return $this;
     }

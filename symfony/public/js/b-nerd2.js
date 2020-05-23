@@ -69,8 +69,8 @@ window.onload = function() {
         },
         loadArticleForm: function() {
             data.articleForm.titol = document.getElementById('article_titol').parentNode
-            data.articleForm.subtitol = document.getElementById('article_subtitol').parentNode
-            data.articleForm.categoria = document.getElementById('article_categoria').parentNode
+            data.articleForm.resum = document.getElementById('article_resum').parentNode
+            data.articleForm.categoria1 = document.getElementById('article_categoria1').parentNode
             data.articleForm.novaCategoria = document.getElementById('article_nova_categoria').parentNode
             data.articleForm.contingut = document.getElementById('article_contingut').parentNode
             data.articleForm.metaTags = document.getElementById('article_meta_tag').parentNode
@@ -355,8 +355,8 @@ window.onload = function() {
             view.toggleHelpErrors(Obj.titol)
             view.validateLength(Obj.titol, 10, 50)
 
-            view.toggleHelpErrors(Obj.subtitol)
-            view.validateLength(Obj.subtitol, 50, 200)
+            view.toggleHelpErrors(Obj.resum)
+            view.validateLength(Obj.resum, 50, 200)
 
             view.toggleHelpErrors(Obj.metaTags)
             view.validateLength(Obj.metaTags, 0, 100)

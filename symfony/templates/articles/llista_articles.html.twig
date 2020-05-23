@@ -7,30 +7,18 @@
 
 {% block content %}
 
-
-	{# {{dump(app.user)}} #}
-
-
 	<section>
-		<div
-			style="padding-top:15vh">
-			{# <a class="menu-top" href="{{ path('articles_categoria', {cat_name: categoria.nom}) }}" alt"enllaç a articles de la categoria {{categoria.nom}}" title="Veure articles de {{categoria.nom}}">
-													<img src="{{ asset("img/categories/" ~ categoria.logo) }}" alt="{{categoria.nom}} icon" class="cat-icon">
-												</a> #}
+		<div style="padding-top:15vh">
+
 			{% for article in articles %}
 
 				<h3 class="article_titol">
 					<a href="{{ asset("post/" ~ article.slug) }}">{{article.titol}}</a>
 				</h3>
-				<p class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.subtitol}}</p>
-				{# <h4 class="article_subtitol" onclick="{{ "mostrar(" ~ article.titol }})">{{article.subtitol}}</h4> #}
+				<p class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.resum}}</p>
 
 			{% endfor %}
 		</div>
-		<script>
-			function mostrar(obj) {
-			console.log(obj)
-			}
-		</script>
+
 	</section>
 {% endblock %}

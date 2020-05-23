@@ -1,23 +1,23 @@
 <ul class="menu-user">
 	<li>
 		<a
-			href="{{ path('userProfile', {username: article.user.username}) }}">
+			href="{{ path('userProfile', {username: article.autor.username}) }}">
 			<!--SI L'USUARI TE IMATGE DE PERFIL-->
-			{% if article.user.imatge %}
-				<img src="{{ asset("img/imatges_perfil/" ~ article.user.imatge) }}" alt="imatge de perfil" id="img-modif">
+			{% if article.autor.imatge %}
+				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imatge de perfil" id="img-modif">
 			{% else %}
 				<i class="fa fa-user-circle"></i>
 			{% endif %}
 		</a>
 	</li>
 	<li>
-		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.user.username})}}">{{article.user.username}}</a>
+		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.autor.username})}}">{{article.autor.username}}</a>
 	</li>
 	<li class="menu-link article-data">
 		{{article.datapublicacio|date("d M Y")}}
 	</li>
 
-	{% if app.user and (app.user == article.user) %}
+	{% if app.user and (app.user == article.autor) %}
 		<li>
 			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
 				sortir
@@ -34,11 +34,14 @@
 			<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
 		</li>
 	{% endif %}
+	{% for cat in article.categories %}
+		<li>
+			<a class="menu-link" href="{{ path('articles_categoria', {cat_name: cat.nom})}}">in{{cat.nom}}</a>
+		</li>
+	{% endfor %}
+
 	<li>
-		<a class="menu-link active" href="{{ path('articles_categoria', {cat_name: article.categoria.nom})}}">in{{article.categoria.nom}}</a>
-	</li>
-	<li>
-		<a class="menu-link" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
 	</li>
 	<li>
 		<a class="menu-link" href="{{ path('homepage')}}#hard-skills">ARTICLES</a>
@@ -53,7 +56,9 @@
 		<i class="menu-icon fa fa-bars"></i>
 	</li>
 	<li id="dark-mode">
-		<a href=""><i class="menu-icon fa fa-toggle-off"></i></a>
+		<a href="">
+			<i class="menu-icon fa fa-toggle-off"></i>
+		</a>
 	</li>
 
 </ul>

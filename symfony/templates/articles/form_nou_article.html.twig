@@ -11,6 +11,15 @@
 			Nou Article
 		</h1>
 
+		{{form_errors(formArticle.titol) }}
+		{{ form_errors(formArticle.resum) }}
+		{{ form_errors(formArticle.meta_tag) }}
+		{{ form_errors(formArticle.meta_description) }}
+		{{ form_errors(formArticle.categoria1) }}
+		{# {{ form_errors(formArticle.categories[1]) }}
+		{{ form_errors(formArticle.categories[2) }} #}
+		{{ form_errors(formArticle.contingut) }}
+
 		{{ form_start(formArticle) }}
 		<div class="form-group">
 			{{ form_label(formArticle.titol) }}
@@ -19,9 +28,9 @@
 			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
-			{{ form_label(formArticle.subtitol) }}
-			{{ form_widget(formArticle.subtitol) }}
-			{{ form_help(formArticle.subtitol) }}
+			{{ form_label(formArticle.resum) }}
+			{{ form_widget(formArticle.resum) }}
+			{{ form_help(formArticle.resum) }}
 			<p class="form-error-text"></p>
 		</div>
 		<div class="form-group">
@@ -36,9 +45,21 @@
 			{{ form_help(formArticle.meta_description) }}
 			<p class="form-error-text"></p>
 		</div>
-		<div class="form-group" id="categories">
-			{{ form_label(formArticle.categoria) }}
-			{{ form_widget(formArticle.categoria) }}
+		<div class="form-group form-row" id="categories">
+			<div class="col-md-4">
+				{{ form_label(formArticle.categoria1) }}
+				{{ form_widget(formArticle.categoria1) }}
+			</div>
+			<div class="col-md-4">
+				{{ form_label(formArticle.categoria2) }}
+				{{ form_widget(formArticle.categoria2) }}
+			</div>
+			<div class="col-md-4">
+				{{ form_label(formArticle.categoria3) }}
+				{{ form_widget(formArticle.categoria3) }}
+			</div>
+			{{ form_help(formArticle.categoria1) }}
+
 		</div>
 		<div class="form-group" id="novaCategoria" style="display:none">
 			{{ form_label(formArticle.nova_categoria) }}
@@ -55,6 +76,7 @@
 
 
 		{{ form_widget(formArticle) }}
+
 		<button id="articleSubmit" class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar dades') }}</button>
 		{{ form_end(formArticle) }}
 

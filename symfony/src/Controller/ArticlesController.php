@@ -5,43 +5,27 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Doctrine\Common\Annotations\AnnotationReader;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Entity\Categoria;
+use App\Repository\CategoriaRepository;
 use App\Repository\UserRepository;
 
-use App\Form\ArticleType;
-
-use App\Entity\Categoria;
-
-//use App\Repository\TemaRepository;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-//Faltaran afegir el USE dels components de formularis
 
 
-
-use Symfony\Component\HttpFoundation\Request;
 
 class ArticlesController extends AbstractController
 {
 
     /**
      * METODE PER AFEGIR UN NOU ARTICLE
-     * No entenc perque especifiques metodes GET i POST (els dos??)
-     * 
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
     public function nouarticle(Request $request)
@@ -55,20 +39,14 @@ class ArticlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             //Crear EntityManager
             $entityManager = $this->getDoctrine()->getManager();
+
             //Capturar dades del formulari i assignar-les al article
-            $article
-                // ->setTitol($form->get('titol')->getData())
-                // ->setSubtitol($form->get('subtitol')->getData())
-                // //Ara per ara la data de publicació es fixa, un timestamp manual
-                // ->setContingut($form->get('contingut')->getData())
-                // ->setDataPublicacio(new \DateTime())
-                // ->setVisible(true)
-                ->setUser($this->getUser());
+            $article->setAutor($this->getUser())
+                ->setDataPublicacio(new \DateTime());
 
             //Capturar el titol i convertir-lo a Slug amb lowercase i guions
             $text = strtolower($form->get('titol')->getData());
             $slug = strtolower(str_replace(" ", "-", $text));
-            //Assignar al article l'Slug creat
             $article->setSlug($slug);
 
             //Capturar input type="text" (String) de camp meta i convertirlo a array
@@ -77,25 +55,31 @@ class ArticlesController extends AbstractController
 
             //Assignem a article els camps meta
             $article->setMetaTag($correccioTags);
-                // ->setMetaDescription($form->get('meta_description')->getData());
+            // ->setMetaDescription($form->get('meta_description')->getData());
 
-            // //Capturem categoria del selsect del formulari
-            // $categoria = $form->get('categoria')->getData();
+            // //Capturem categoria del select del formulari
+            $categoria1 = $form->get('categoria1')->getData();
             // //Si la categoria es "afegir nova categoria"
-            // if ($categoria->getNom() == "afegir nova categoria") {
-
-                             if ($form->get('categoria')->getData()->getNom() == "afegir nova categoria") {
+            if ($form->get('categoria1')->getData()->getNom() == "afegir nova categoria") {
 
                 //Creem nova categoria amb el que hi hagi al input "nova categoria"
                 $afegirCategoria = new Categoria();
                 $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                $afegirCategoria->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+                $afegirCategoria->setLogo('default-logo.png');
                 $entityManager->persist($afegirCategoria);
                 //fem el cambiazo
-                $categoria = $afegirCategoria;
+                $categoria1 = $afegirCategoria;
             }
-            //Afegir la categoria
-            $article->setCategoria($categoria);
+            //Afegir les categories
+            $article->addCategories($categoria1);
+
+            if ($form->get('categoria2')->getData() != null) {
+                $article->addCategories($form->get('categoria2')->getData());
+            }
+
+            if ($form->get('categoria3')->getData() != null) {
+                $article->addCategories($form->get('categoria3')->getData());
+            }
             //Persistir dades i pujar dades a DB
             $entityManager->persist($article);
             $entityManager->flush();
@@ -111,33 +95,34 @@ class ArticlesController extends AbstractController
 
     /**
      * METODE PER EDITAR UN ARTICLE EXISTENT
-     * Podem entrar per nom(slug) o per id
-     * 
      * @Route("/article/editar/{slug}", name="article_update", methods={"GET","POST"})
      */
-    public function editarArticle($slug, Request $request)
+    public function editarArticle($slug, Request $request, ArticleRepository $post_repo, CategoriaRepository $cat_repo)
     {
-
         //Obtenir dades del article
-        $post_repository = $this->getDoctrine()->getRepository(Article::class);
-        $article = $post_repository->findOneBy(array('slug' => $slug));
+        $article = $post_repo->findOneBy(array('slug' => $slug));
+        $categories = $article->getCategories();
+
         //Crear formulari amb les dades del article obtingut
         $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
 
+        //Passar la Colecció de Categories als 3 camps del formulari
+        $form->get('categoria1')->setData($categories[0]);
+
+        if ($categories[1] != null) {
+            $form->get('categoria2')->setData($categories[1]);
+        }
+        if ($categories[2] != null) {
+            $form->get('categoria3')->setData($categories[2]);
+        }
+
+        $form->handleRequest($request);
         //Si el formulari es enviat, captura les dades i pujar nou article a DB
         if ($form->isSubmitted() && $form->isValid()) {
+
             //Crear EntityManager
             $entityManager = $this->getDoctrine()->getManager();
-            //Capturar dades del formulari i assignar-les al article
-            $article->setTitol($form->get('titol')->getData())
-                ->setSubtitol($form->get('subtitol')->getData())
-                //Ara per ara la data de publicació es fixa, un timestamp manual
-                ->setContingut($form->get('contingut')->getData())
-                ->setDataActualitzacio(new \DateTime())
-                ->setUser($this->getUser());
 
-            //Aquest funcio s'ha de revisar
             //Capturar el titol i convertir-lo a Slug amb lowercase i guions
             $text = strtolower($form->get('titol')->getData());
             $slug = strtolower(str_replace(" ", "-", $text));
@@ -147,26 +132,39 @@ class ArticlesController extends AbstractController
             //Capturar input type="text" (String) de camp meta i convertirlo a array
             $inputMetaTag = $form->get('meta_tag')->getData();
             $correccioTags = str_replace(', ', ',', $inputMetaTag);
+            $article->setMetaTag($correccioTags);
 
-            //Assignem a article els camps meta
-            $article->setMetaTag($correccioTags)
-                ->setMetaDescription($form->get('meta_description')->getData());
-
-            //Capturem categoria del selsect del formulari
-            $categoria = $form->get('categoria')->getData();
+            //Capturem categoria del select del formulari
+            $categoria1 = $form->get('categoria1')->getData();
             //Si la categoria es "afegir nova categoria"
-            if ($categoria->getNom() == "afegir nova categoria") {
+            if ($categoria1->getNom() == "afegir nova categoria") {
                 //Creem nova categoria amb el que hi hagi al input "nova categoria"
                 $afegirCategoria = new Categoria();
                 $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                $afegirCategoria->setLogo('http://www.squaredbrainwebdesign.com/images/resources/PHP-logo.png');
+                $afegirCategoria->setLogo('default-logo.png');
                 $entityManager->persist($afegirCategoria);
                 //fem el cambiazo
-                $categoria = $afegirCategoria;
+                $categoria1 = $afegirCategoria;
             }
-            //Afegir la categoria
-            $article->setCategoria($categoria);
-            //Persistir dades i pujar dades a DB
+
+            //Resetejar la coleccio de Categories
+            $cats = $cat_repo->findAll();
+            for ($i = 0; $i < count($cats); $i++) {
+                $article->removeCategories($cats[$i]);
+            }
+
+            //Afegir les categories a la Collecioo
+            $article->addCategories($categoria1);
+
+            if ($form->get('categoria2')->getData() != null) {
+                $article->addCategories($form->get('categoria2')->getData());
+            }
+
+            if ($form->get('categoria3')->getData() != null) {
+                $article->addCategories($form->get('categoria3')->getData());
+            }
+
+            //Persistir dades i pujar a DB
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -179,15 +177,14 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-        /**
-     * PER VEURE UN ARTICLE
+    /**
+     * RETORNA TOTS ELS ARTICLES D'UN AUTOR
      * @Route("/posts/{username}", name="articlesAutor", methods={"GET"})
      */
     public function articlesPerAutor($username, ArticleRepository $post_repo, UserRepository $user_repo)
     {
-
         $user = $user_repo->findOneBy(array('nom_usuari' => $username));
-        $posts = $post_repo->findBy(array('user' => $user));
+        $posts = $post_repo->findBy(array('autor' => $user));
 
         return $this->render('articles/llista_articles.html.twig', [
             'articles' => $posts,
@@ -195,54 +192,30 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * PER VEURE UN ARTICLE
+     * VEURE EL DETALL D'UN ARTICLE
      * @Route("/post/{slug}", name="article_detall", methods={"GET"})
      */
-    public function slug($slug, ArticleRepository $articleRepository)
+    public function slug($slug, ArticleRepository $repository)
     {
 
-        $post_repository = $this->getDoctrine()->getRepository(Article::class);
-        $post = $post_repository->findOneBy(array('slug' => $slug));
+        $post = $repository->findOneBy(array('slug' => $slug));
+        $cat = $post->getCategories();
 
         return $this->render('articles/index.html.twig', [
             'article' => $post,
-            'color' => $post->getCategoria()->getColor()
+            'color' => $cat[0]->getColor()
         ]);
     }
 
-
-
     /**
-     * PER A FRONTEND AMB VUE -> RETORNA UN ARRAY D'OBJECTES ARTICLE
-     * @Route("/post_vue/{slug}", name="article_detall_vue")
-     */
-    public function slug_vue($slug, ArticleRepository $articleRepository, SerializerInterface $serializer): JsonResponse
-    {
-
-        $post_repository = $this->getDoctrine()->getRepository(Article::class);
-        $post = $post_repository->findOneBy(array('slug' => $slug));
-
-        // $result = $serializer->normalize($level1, null, [AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true]);
-        $postJson = $serializer->serialize($post, 'json', [
-            'ignored_attributes' => ['user', 'categoria'],
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            }
-        ]);
-
-        return new JsonResponse(json_decode($postJson));
-    }
-
-    /**
-     * RETORNA TOTS ELS ARTICLES D'UNA CATEGORIA
+     * MOSTRAR TOTS ELS ARTICLES D'UNA CATEGORIA
      * SI NO TROBA UNA CATEGORIA AMB EL MATEIX NOM
      * REDIRIGEIX CAP AL HOMEPAGE (PODEM CREAR UN 404)
      * @Route("/{cat_name}", name="articles_categoria")
      */
-    public function getArticles($cat_name, SerializerInterface $serializer)
+    public function getArticles($cat_name, CategoriaRepository $repository, SerializerInterface $serializer)
     {
-        $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
-        $categories = $cat_repository->findAll();
+        $categories = $repository->findAll();
 
         //Comprovar si la categoria entrada coincideix amb el nom d'una categoria existent
         for ($i = 0; $i < count($categories); $i++) {
