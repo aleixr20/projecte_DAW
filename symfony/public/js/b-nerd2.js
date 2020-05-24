@@ -226,6 +226,7 @@ window.onload = function() {
                 Obj.navbar.style.width = "16vw";
             }
         },
+        //Metode per escoltar quan encendre/apagar les llums
         listenDarkMode: function() {
             document.getElementById('dark-mode').addEventListener('click', (function() {
                 return function() {
@@ -247,17 +248,19 @@ window.onload = function() {
             body.style.color = '#666';
             body.style.backgroundColor = '#fff';
         },
+        //Metode per escoltar quan obrir modal FeedBack
         listenArticleFeedback: function() {
             let feedbackIcons = document.getElementsByClassName('feedback-icons')
             for (let i = 0; i < feedbackIcons.length; i++) {
                 feedbackIcons[i].addEventListener("click", (function() {
                     return function() {
-                        console.log('he clicado un icono ', i)
-                        let shadow = document.getElementById('fade')
-                            //let shadow = document.getElementsByTagName('main')[0]
+                        console.log(`he clicado en el icono numero ${i}`)
 
-                        let feedbackModal = document.getElementById('feedback-form')
-                        view.showFeedbackForm(shadow, feedbackModal)
+                        //let shadow = document.getElementById('fade')
+                        let section = document.getElementsByTagName('section')[0]
+
+                        let feedbackModal = document.getElementById('feedback-modal')
+                        view.showFeedbackForm(section, feedbackModal)
 
 
                     }
@@ -265,15 +268,24 @@ window.onload = function() {
             }
         },
         showFeedbackForm: function(shadow, modal) {
-            shadow.style.zIndex = 4;
-            shadow.style.backgroundColor = '#333'
-            shadow.style.opacity = 0.9
-            modal.style.display = 'block';
-            shadow.addEventListener("click", (function() {
-                return function() {
-                    view.hideFeedbackForm(shadow, feedbackModal)
+            // shadow.style.zIndex = 4;
+            // shadow.style.backgroundColor = '#333'
+            shadow.style.opacity = 0.2;
+            //modal.style.display = 'block';
+            //modal.style.opacity = 1;
+
+            window.onclick = function(event) {
+                if (event.target == shadow) {
+                    shadow.style.opacity = 1;
                 }
-            })());
+            }
+
+
+            // shadow.addEventListener("click", (function () {
+            //     return function () {
+            //         view.hideFeedbackForm(shadow, modal)
+            //     }
+            // })());
         },
         hideFeedbackForm: function(shadow, modal) {
             shadow.style.zIndex = -1;

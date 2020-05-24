@@ -356,8 +356,8 @@
         color: cornflowerblue;
     }
     
-    #feedback-form {
-        display: none;
+    #feedback-modal {
+        _display: none;
         z-index: 5;
         margin: 0;
         position: fixed;
