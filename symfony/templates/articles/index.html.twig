@@ -4,50 +4,6 @@
 	{{ include('articles/menu_articles.html.twig') }}
 {% endblock %}
 {% block content %}
-	{# <style>
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-		}
-
-		/* The Modal (background) */
-		.feedModal {
-			display: none; /* Hidden by default */
-			position: fixed; /* Stay in place */
-			z-index: 1; /* Sit on top */
-			padding-top: 100px; /* Location of the box */
-			left: 0;
-			top: 0;
-			width: 100%; /* Full width */
-			height: 100%; /* Full height */
-			overflow: auto; /* Enable scroll if needed */
-			background-color: rgb(0, 0, 0); /* Fallback color */
-			background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-		}
-
-		/* Modal Content */
-		.feedModal-content {
-			background-color: #fefefe;
-			margin: auto;
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%;
-		}
-
-		/* The Close Button */
-		.close {
-			color: #aaaaaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-			color: #000;
-			text-decoration: none;
-			cursor: pointer;
-		}
-	</style> #}
 
 	<section id="{{article.slug}}">
 		<h1 class="article_individual_titol">{{article.titol}}</h1>
@@ -56,8 +12,8 @@
 			{{article.contingut|raw}}
 		</div>
 		{# <p class="article-footer">
-																		Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
-																		</p> #}
+																										Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
+																										</p> #}
 
 		<ul class="feedback-list">
 			<li class="feedback-icons">
@@ -75,22 +31,24 @@
 			</li>
 		</ul>
 		<div id="feedback-modal">
-			hola
+			<h5 class="feedback-info">Feedback</h5>
+			{# <hr>
+						<p class="feedback-info">aqui el missatge de info</p> #}
+			<form>
+				<input type="hidden" id="feedback_type" name="feedback_type">
+				<textarea class="form-control" rows="4" name="feedback_comment"></textarea>
+			</form>
+			<p class="feedback-footer">Solo los usuarios registrados pueden añadir comentarios</p>
+			<div class="text-right">
+				{% if app.user and is_granted('ROLE_VALIDATED') %}
+				
+					<button type="submit" class="btn btn-outline-secondary">enviar</button>
+				{% else %}
+					<button type="button" class="btn btn-block btn-outline-secondary" disabled>solo los usuarios registrados pueden hacer comentarios</button>
+				{% endif %}
+			</div>
 		</div>
 
-
-		{# <!-- Trigger/Open The Modal -->
-		<button id="myBtn">Open Modal</button>
-		<!-- The Modal -->
-		<div
-			id="myModal" class="feedModal">
-
-			<!-- Modal content -->
-			<div class="feedModal-content">
-				<span class="close">&times;</span>
-				<p>Some text in the Modal..</p>
-			</div>
-		</div> #}
 	</section>
 
 
@@ -99,35 +57,5 @@
 {% block javascripts %}
 	<script>
 		hljs.initHighlightingOnLoad();
-
-{# // Get the modal
-var feedModal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var feedbackIcons = document.getElementsByClassName("feedback-icon");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-for (let i = 0; i < feedbackIcons.length; i++) {
-feedbackIcons[i].onclick = function () {
-console.log (`he clickado en ${i}`)
-feedModal.style.display = "block";
-}
-}
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-feedModal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-if (event.target == feedModal) {
-feedModal.style.display = "none";
-}
-} #}
 	</script>
 {% endblock %}

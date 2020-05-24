@@ -357,18 +357,19 @@
     }
     
     #feedback-modal {
-        _display: none;
-        z-index: 5;
-        margin: 0;
+        z-index: -1;
         position: fixed;
         top: 50%;
-        left: 56%;
-        transform: translate(-50%, -50%);
-        border: 1px solid red;
+        left: 22%;
+        margin-right: 16%;
+        transform: translate(0, -50%);
+        _border: 1px solid red;
         border-radius: 5px;
-        background-color: #ccc;
-        width: 80vh;
-        height: 10vh;
+        background-color: #eee;
+        width: -moz-available;
+        padding: 1em;
+        opacity: 0;
+        transition-duration: 1s;
     }
     /*****************************
         FORMULARIS
