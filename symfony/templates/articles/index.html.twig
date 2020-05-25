@@ -12,8 +12,8 @@
 			{{article.contingut|raw}}
 		</div>
 		{# <p class="article-footer">
-																										Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
-																										</p> #}
+																												Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
+																												</p> #}
 
 		<ul class="feedback-list">
 			<li class="feedback-icons">
@@ -33,15 +33,17 @@
 		<div id="feedback-modal">
 			<h5 class="feedback-info">Feedback</h5>
 			{# <hr>
-						<p class="feedback-info">aqui el missatge de info</p> #}
+									<p class="feedback-info">aqui el missatge de info</p> #}
 			<form>
 				<input type="hidden" id="feedback_type" name="feedback_type">
+				<input type="hidden" id="feedback_article" name="feedback_article" value="{{article.slug}}">
+
 				<textarea class="form-control" rows="4" name="feedback_comment"></textarea>
 			</form>
 			<p class="feedback-footer">Solo los usuarios registrados pueden añadir comentarios</p>
 			<div class="text-right">
 				{% if app.user and is_granted('ROLE_VALIDATED') %}
-				
+
 					<button type="submit" class="btn btn-outline-secondary">enviar</button>
 				{% else %}
 					<button type="button" class="btn btn-block btn-outline-secondary" disabled>solo los usuarios registrados pueden hacer comentarios</button>

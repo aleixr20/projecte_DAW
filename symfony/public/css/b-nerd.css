@@ -318,6 +318,11 @@
         font-size: 0.75em;
         _padding: 1em 1em 1em 4em;
         margin: 0;
+        overflow: scroll;
+    }
+    
+    pre:-webkit-scrollbar {
+        display: none;
     }
     
     code {
@@ -366,10 +371,13 @@
         _border: 1px solid red;
         border-radius: 5px;
         background-color: #eee;
+        /* Mozilla*/
         width: -moz-available;
+        /* Chrome */
+        width: -webkit-fill-available;
         padding: 1em;
         opacity: 0;
-        transition-duration: 1s;
+        transition-duration: 0.5s;
     }
     /*****************************
         FORMULARIS
@@ -550,6 +558,10 @@
             _padding-left: 22%;
             padding-right: 10%;
         }
+        #feedback-modal {
+            left: 22%;
+            margin-right: 10%;
+        }
     }
     
     @media only screen and (max-width: 992px) {
@@ -559,6 +571,10 @@
         section {
             padding-left: 22%;
             padding-right: 10%;
+        }
+        #feedback-modal {
+            left: 22%;
+            margin-right: 10%;
         }
         .btn-light {
             position: relative;
@@ -574,6 +590,10 @@
         section {
             padding-left: 22%;
             padding-right: 7%;
+        }
+        #feedback-modal {
+            left: 22%;
+            margin-right: 7%;
         }
     }
     
@@ -608,6 +628,10 @@
             padding-left: 18%;
             padding-right: 4%;
             padding-bottom: 5em;
+        }
+        #feedback-modal {
+            left: 18%;
+            margin-right: 7%;
         }
         .titulo {
             top: 5vh;

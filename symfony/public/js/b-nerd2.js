@@ -294,6 +294,7 @@ window.onload = function() {
             }
         },
         showFeedbackForm: function(shadow, modal, num) {
+            console.log(modal.getElementById('feedback_article'));
             modalInfo = modal.getElementsByClassName('feedback-info')[0]
             modalInfo.innerHTML = `<i class="fa fa-${data.fedbackText[num].icon}"></i> ${data.fedbackText[num].info}`;
             modalInfo.style.color = data.fedbackText[num].color
