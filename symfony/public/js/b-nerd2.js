@@ -24,6 +24,32 @@ window.onload = function() {
         articleForm: {},
         registerForm: {},
         editProfileForm: {},
+        fedbackText: [{
+                icon: 'frown-o',
+                color: 'tomato',
+                info: 'Soy un programador Pro, vanidoso, y con ganas de criticar vuestro trabajo !',
+                footer: 'Tu opinion no nos importa. Acabamos de finalizar nuestros estudios y con mucha humildad aceptamos nuestras limitaciones.<br/>La opinion de los minadores de moral, no nos interessa'
+            },
+            {
+                icon: 'meh-o',
+                color: 'orange',
+                info: 'Interesante, pero con matices. Se de lo que hablo y partes de vuestro apuntes contiene información incorrecta',
+                footer: 'Tu opinion nos interesa. Somos nerd con ansiosos de ampliar conociminetos. Agradecemos mucho tu aportación',
+
+            }, {
+                icon: 'smile-o',
+                color: 'forestgreen',
+                info: 'Guay! Este articulo me sido de mucha ayuda',
+                footer: 'No te flipes, que somos simples aprendices....<br/>Pero gràcies. Es bueno saber que nuestros apuntes han sido utiles a otras personas'
+
+            }, {
+                icon: 'rocket',
+                color: 'royalblue',
+                info: 'Felicidades, Buen trabajo. Os animo a seguir así!',
+                footer: 'Gràcias por tu apoyo! Nos gusta la programción y toda aportación es bienvenida'
+
+            }
+        ]
     };
 
     var model = {
@@ -256,47 +282,55 @@ window.onload = function() {
                     return function() {
                         console.log(`he clicado en el icono numero ${i}`)
 
-                        //let shadow = document.getElementById('fade')
-                        let section = document.getElementsByTagName('section')[0]
+                        let shadow = document.getElementById('fade')
+                            // let section = document.getElementsByTagName('section')[0]
 
                         let feedbackModal = document.getElementById('feedback-modal')
-                        view.showFeedbackForm(section, feedbackModal)
+                        view.showFeedbackForm(shadow, feedbackModal, i)
 
 
                     }
                 })());
             }
         },
-        showFeedbackForm: function(shadow, modal) {
-            // shadow.style.zIndex = 4;
-            // shadow.style.backgroundColor = '#333'
-            shadow.style.opacity = 0.2;
-            //modal.style.display = 'block';
-            //modal.style.opacity = 1;
+        showFeedbackForm: function(shadow, modal, num) {
+            modalInfo = modal.getElementsByClassName('feedback-info')[0]
+            modalInfo.innerHTML = `<i class="fa fa-${data.fedbackText[num].icon}"></i> ${data.fedbackText[num].info}`;
+            modalInfo.style.color = data.fedbackText[num].color
+
+            modalFooter = modal.getElementsByClassName('feedback-footer')[0]
+            modalFooter.innerHTML = data.fedbackText[num].footer
+            modalFooter.style.color = data.fedbackText[num].color
+
+            shadow.style.zIndex = 4;
+            shadow.style.backgroundColor = '#333'
+            shadow.style.opacity = 0.9;
+            // modal.style.display = 'block';
+            modal.style.opacity = 1;
+            modal.style.zIndex = 5
 
             window.onclick = function(event) {
                 if (event.target == shadow) {
-                    shadow.style.opacity = 1;
+                    shadow.style.opacity = 0;
+                    shadow.style.zIndex = -1;
+
+                    modal.style.opacity = 0;
+                    modal.style.zIndex = -1
+
                 }
             }
-
-
-            // shadow.addEventListener("click", (function () {
-            //     return function () {
-            //         view.hideFeedbackForm(shadow, modal)
-            //     }
-            // })());
         },
-        hideFeedbackForm: function(shadow, modal) {
-            shadow.style.zIndex = -1;
-            shadow.style.backgroundColor = 'transparent'
-            shadow.style.opacity = 0
-            modal.style.display = 'none';
-            shadow.removeEventListener("click", (function() {
-                return function() {}
-            })());
 
-        },
+        // hideFeedbackForm: function(shadow, modal) {
+        //     shadow.style.zIndex = -1;
+        //     shadow.style.backgroundColor = 'transparent'
+        //     shadow.style.opacity = 0
+        //     modal.style.display = 'none';
+        //     shadow.removeEventListener("click", (function() {
+        //         return function() {}
+        //     })());
+
+        // },
         adminMenu: function() {
             if (document.URL.search("/admin") > 0) {
                 document.getElementsByClassName('menu-user')[0].style.bottom = '71%'

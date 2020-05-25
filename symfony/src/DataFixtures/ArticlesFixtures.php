@@ -11,7 +11,7 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Categoria;
 
-use DateTime;
+use \Datetime;
 
 class ArticlesFixtures extends Fixture
 {
@@ -29,7 +29,7 @@ class ArticlesFixtures extends Fixture
         $admin = new User();
         $admin->setEmail('admin@admin.com')
             ->setNom('Aleix')->setCognom('Revesado')
-            ->setNomUsuari('aleixMaki')->setDataRegistre(new DateTime())
+            ->setNomUsuari('aleixMaki')->setDataRegistre(new \Datetime())
             ->setPassword($this->passwordEncoder->encodePassword($admin, "admin"))
             ->setImatge('perfil_random.png')
             ->setDescripcio('
@@ -45,7 +45,7 @@ class ArticlesFixtures extends Fixture
         $user1 = new User();
         $user1->setEmail('user1@admin.com')
             ->setNom('User')->setCognom('Uname')
-            ->setNomUsuari('usuario')->setDataRegistre(new DateTime())
+            ->setNomUsuari('usuario')->setDataRegistre(new \Datetime())
             ->setPassword($this->passwordEncoder->encodePassword($user1, "user1"))
             ->setImatge('62-5ec4629f12c91.jpeg')
             ->setDescripcio('
@@ -61,7 +61,7 @@ class ArticlesFixtures extends Fixture
         $user2 = new User();
         $user2->setEmail('user2@admin.com')
             ->setNom('Paco')->setCognom('Malote')
-            ->setNomUsuari('bigHacker')->setDataRegistre(new DateTime())
+            ->setNomUsuari('bigHacker')->setDataRegistre(new \Datetime())
             ->setPassword($this->passwordEncoder->encodePassword($user2, "user2"))
             ->setDescripcio('
 <p>Pharetra et ultrices neque ornare. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aliquet porttitor lacus luctus accumsan tortor posuere. Morbi tristique senectus et netus et malesuada fames ac.Vulputate dignissim suspendisse in est ante in nibh. Enim ut sem viverra aliquet eget sit amet tellus cras. Mattis molestie a iaculis at erat pellentesque adipiscing. Sed risus ultricies tristique nulla.</p>
@@ -78,7 +78,7 @@ class ArticlesFixtures extends Fixture
         $user3 = new User();
         $user3->setEmail('user3@admin.com')
             ->setNom('Anonim')->setCognom('No Verified')
-            ->setNomUsuari('quePalo')->setDataRegistre(new DateTime())
+            ->setNomUsuari('quePalo')->setDataRegistre(new \Datetime())
             ->setPassword($this->passwordEncoder->encodePassword($user3, "user3"));
 
         $roles = ["ROLE_USER"];
@@ -197,7 +197,7 @@ class ArticlesFixtures extends Fixture
         $article_php1 = new Article();
         $article_php1->setTitol($titol_php1)
             ->setResum('Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eaque ipsa, praesentium officia illo dignissimos aperiam ex.')
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_php1)))
             ->setAutor($admin)
             ->addCategories($categoria_php)
@@ -234,7 +234,7 @@ $postJson = $serializer-&gt;serialize($post, &#39;json&#39;, [
         $article_php2 = new Article();
         $article_php2->setTitol($titol_php2)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_php2)))
             ->setAutor($admin)
             ->addCategories($categoria_php)
@@ -261,12 +261,12 @@ $result = $serializer-&gt;normalize($level1, null, [
         $manager->persist($article_php2);
 
         //ARTICLE 3
-        $titol_apa1 = "Configuració Apache";
+        $titol_apa1 = "Configuracio Apache";
 
         $article_apa1 = new Article();
         $article_apa1->setTitol($titol_apa1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_apa1)))
             ->setAutor($admin)
             ->addCategories($categoria_apache)
@@ -304,7 +304,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_nginx1 = new Article();
         $article_nginx1->setTitol($titol_nginx1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_nginx1)))
             ->setAutor($admin)
             ->addCategories($categoria_js)
@@ -337,7 +337,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_sql1 = new Article();
         $article_sql1->setTitol($titol_sql1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_sql1)))
             ->setAutor($admin)
             ->addCategories($categoria_js)
@@ -365,12 +365,12 @@ $result = $serializer-&gt;normalize($level1, null, [
         $manager->persist($article_sql1);
 
         //ARTICLE 6
-        $titol_mongo = "Configuració MongoDB";
+        $titol_mongo = "Configuracio MongoDB";
 
         $article_mongo1 = new Article();
         $article_mongo1->setTitol($titol_mongo)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_mongo)))
             ->setAutor($user1)
             ->addCategories($categoria_mongo)
@@ -397,12 +397,12 @@ $result = $serializer-&gt;normalize($level1, null, [
         $manager->persist($article_mongo1);
 
         //ARTICLE 7
-        $titol_symfony1 = "Instal·lació Symfony";
+        $titol_symfony1 = "Install de Symfony";
 
         $article_symfony1 = new Article();
         $article_symfony1->setTitol($titol_symfony1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_symfony1)))
             ->setAutor($user2)
             ->addCategories($categoria_symfony)
@@ -440,7 +440,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_symfony2 = new Article();
         $article_symfony2->setTitol($titol_symfony2)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_symfony2)))
             ->setAutor($user2)
             ->addCategories($categoria_symfony)
@@ -479,7 +479,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_java1 = new Article();
         $article_java1->setTitol($titol_java1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_java1)))
             ->setAutor($admin)
             ->addCategories($categoria_vue)
@@ -521,7 +521,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_java2 = new Article();
         $article_java2->setTitol($titol_java2)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_java2)))
             ->setAutor($admin)
             ->addCategories($categoria_java)
@@ -553,7 +553,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_htm1 = new Article();
         $article_htm1->setTitol($titol_html1)
             ->setResum("Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Urna et pharetra pharetra massa massa.")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_html1)))
             ->setAutor($user1)
             ->addCategories($categoria_html)
@@ -592,7 +592,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $article_html2 = new Article();
         $article_html2->setTitol($titol_html2)
             ->setResum("Exemple bàsic de la estructura HTML")
-            ->setDataPublicacio(new DateTime())
+            ->setDataPublicacio(new \Datetime())
             ->setSlug(str_replace(" ", "-", strtolower($titol_html2)))
             ->setAutor($user1)
             ->addCategories($categoria_html)
