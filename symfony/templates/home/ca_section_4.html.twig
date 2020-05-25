@@ -6,5 +6,25 @@
 		<p>Praesent tristique magna sit amet purus gravida quis. Integer quis auctor elit sed. Nunc sed velit dignissim sodales ut eu sem integer vitae. Fringilla est ullamcorper eget nulla facilisi etiam. Scelerisque eu ultrices vitae auctor. Vestibulum mattis ullamcorper velit sed.</p>
 
 		<p>Tristique magna sit amet purus gravida quis blandit turpis cursus. Morbi tristique senectus et netus et malesuada fames ac. Egestas quis ipsum suspendisse ultrices gravida dictum. Id venenatis a condimentum vitae sapien. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Montes nascetur ridiculus mus mauris vitae ultricies.</p>
+
+		<form action="{{ contact_service.getForm() }}" method="POST">
+			<label for="name">Nom</label>
+			</br>
+			<input type="text" name="name"/>
+			</br>
+			<label for="email">Correu</label>
+			</br>
+			<input type="email" name="email"/>
+			</br>
+			<label for="subject">Assumpte</label>
+			</br>
+			<input type="text" name="subject"/>
+			</br>
+			<label for="message">Missatge</label>
+			</br>
+			<textarea name="message"></textarea>
+			</br>
+			<input type="submit" name="submit" value="Enviar"/>
+		</form>
 	</div>
 </section>

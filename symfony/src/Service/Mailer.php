@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Exception;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Twig\Environment;
@@ -30,6 +31,27 @@ class Mailer
                     'emails/registration.html.twig',[
                     'name' => $user->getNom(),
                     'token' => $user->getToken()
+                    ]
+                ),
+                'text/html'
+            );
+
+        $this->mailer->send($message);
+    }
+
+    public function sendContactMail($name, $email, $subject, $message)
+    {
+        $message = (new \Swift_Message('Email de verificació'))
+            ->setFrom('bnerdtodev@gmail.com')
+            ->setTo('bnerdtodev@gmail.com')
+            ->setSubject('Nou contacte')
+            ->setBody(
+                $this->twig->render(
+                    'emails/contact.html.twig',[
+                    'name' => $name,
+                    'email' => $email,
+                    'subject' => $subject,
+                    'message' => $message
                     ]
                 ),
                 'text/html'
