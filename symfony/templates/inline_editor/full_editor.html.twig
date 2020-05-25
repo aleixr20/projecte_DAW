@@ -6,21 +6,27 @@
     <script src="{{ asset('js/inline_editor.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/inline_editor.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
 </head>
 <body onload="refresh()">
 <div class="inline-editor">
-    {# ALERTA!  No tabular ni afegir salts de linia dintre dels textarea #}
+    {# ALERTA!  No tabular ni afegir salts de linia dintre dels div #}
+    	
     <h1 id="html-title" class="editor-title">HTML</h1>
-    <textarea id="html-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi HTML aqui...">{% if html is defined %}{{ html }}{% endif %}</textarea>
+    <div id="html-editor" class="editor" rows="10" onkeyup="refresh()">{% if html is defined %}{{ html }}{% endif %}</div>
     <h1 id="css-title" class="editor-title">CSS</h1>
-    <textarea id="css-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi CSS aqui...">{% if css is defined %}{{ css }}{% endif %}</textarea>
+    <div id="css-editor" class="editor" rows="10" onkeyup="refresh()">{% if css is defined %}{{ css }}{% endif %}</div>
     <h1 id="js-title" class="editor-title">JavaScript</h1>
-    <textarea id="js-editor" class="editor" rows="10" onkeyup="refresh()" placeholder="Codi JavaScript aqui...">{% if js is defined %}{{ js }}{% endif %}</textarea>
+    <div id="js-editor" class="editor" rows="10" onkeyup="refresh()">{% if js is defined %}{{ js }}{% endif %}</div>
     <div id="viewer-box">
         <iframe id="viewer">
         </iframe>
     </div>
 </div>
+
+<script>
+    
+</script>
 
 </body>
 </html>
