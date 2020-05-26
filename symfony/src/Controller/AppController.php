@@ -34,7 +34,7 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/editor/{slug}", name="inline_editor", methods={"GET"})
+     * @Route("/editor/{slugArticle}", name="inline_editor", methods={"GET"})
      */
     public function inlineEditor($slugArticle, ArticleRepository $repositoryArticle)
     {
