@@ -3,28 +3,31 @@
 	<div class="text">
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero justo laoreet. At imperdiet dui accumsan sit amet nulla. Fermentum leo vel orci porta non pulvinar neque laoreet.</p>
 
-		<p>Praesent tristique magna sit amet purus gravida quis. Integer quis auctor elit sed. Nunc sed velit dignissim sodales ut eu sem integer vitae. Fringilla est ullamcorper eget nulla facilisi etiam. Scelerisque eu ultrices vitae auctor. Vestibulum mattis ullamcorper velit sed.</p>
-
-		<p>Tristique magna sit amet purus gravida quis blandit turpis cursus. Morbi tristique senectus et netus et malesuada fames ac. Egestas quis ipsum suspendisse ultrices gravida dictum. Id venenatis a condimentum vitae sapien. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Montes nascetur ridiculus mus mauris vitae ultricies.</p>
-
 		<form action="{{ contact_service.getForm() }}" method="POST">
-			<label for="name">Nom</label>
-			</br>
-			<input type="text" name="name"/>
-			</br>
-			<label for="email">Correu</label>
-			</br>
-			<input type="email" name="email"/>
-			</br>
-			<label for="subject">Assumpte</label>
-			</br>
-			<input type="text" name="subject"/>
-			</br>
-			<label for="message">Missatge</label>
-			</br>
-			<textarea name="message"></textarea>
-			</br>
-			<input type="submit" name="submit" value="Enviar"/>
+			<div class="form-group">
+				<label for="name">Nom</label>
+				<input type="text" class="form-control" name="name"/>
+			</div>
+			<div class="form-group">
+				<label for="email">Correu</label>
+				<input type="email" class="form-control"name="email"/>
+			</div>
+			<div class="form-group">			
+				<label for="subject">Assumpte</label>
+				<select type="text" class="form-control"name="subject"/>
+					<option>Vull contractar-vos !</option>
+					<option>Vull felicitar-vos !</option>
+					<option>Tinc problemes amb el login o registre d'usuaris</option>
+					<option>Vull notificar un error o bug</option>
+					<option>Vull reivindicar drets de copyright</option>
+					<option>Vull contactar amb vosaltres</option>
+				</select>			
+			</div>
+			<div class="form-group">
+				<label for="message">Missatge</label>
+				<textarea name="message" class="form-control" rows="4"></textarea>
+			</div>
+			<input type="submit" class="btn btn-outline-secondary" name="submit" value="Enviar"/>
 		</form>
 	</div>
 </section>
