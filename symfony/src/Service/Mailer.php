@@ -24,7 +24,7 @@ class Mailer
     public function sendVerificationMail($user)
     {
         $message = (new \Swift_Message('Email de verificació'))
-            ->setFrom('bnerdtodev@gmail.com')
+            ->setFrom('noreply@b-nerd.cat')
             ->setTo($user->getEmail())
             ->setBody(
                 $this->twig->render(
@@ -42,8 +42,8 @@ class Mailer
     public function sendContactMail($name, $email, $subject, $message)
     {
         $message = (new \Swift_Message('Email de verificació'))
-            ->setFrom('bnerdtodev@gmail.com')
-            ->setTo('bnerdtodev@gmail.com')
+            ->setFrom('noreply@b-nerd.cat')
+            ->setTo('support@b-nerd.cat')
             ->setSubject('Nou contacte')
             ->setBody(
                 $this->twig->render(
