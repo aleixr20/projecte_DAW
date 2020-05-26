@@ -19,7 +19,7 @@ class Comentari
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titol;
+    private $tipus;
 
     /**
      * @ORM\Column(type="string", length=1000)
@@ -38,19 +38,29 @@ class Comentari
      */
     private $article;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dataPublicacio;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitol(): ?string
+    public function getTipus(): ?string
     {
-        return $this->titol;
+        return $this->tipus;
     }
 
-    public function setTitol(string $titol): self
+    public function setTipus(string $tipus): self
     {
-        $this->titol = $titol;
+        $this->tipus = $tipus;
 
         return $this;
     }
@@ -87,6 +97,30 @@ class Comentari
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getDataPublicacio(): ?\DateTimeInterface
+    {
+        return $this->dataPublicacio;
+    }
+
+    public function setDataPublicacio(\DateTimeInterface $dataPublicacio): self
+    {
+        $this->dataPublicacio = $dataPublicacio;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }

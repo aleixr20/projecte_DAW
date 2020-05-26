@@ -2,3 +2,4 @@
 symfony/var/
 symfony/var/cache/dev/profiler/index.csv
 symfony/var/cache/dev/profiler/index.csv
+symfony/.htaccess
