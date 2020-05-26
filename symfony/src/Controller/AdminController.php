@@ -33,7 +33,7 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-        //Si hi ha un usuari ROLE_ADMIN logejat,
+        //Si hi ha un usuari ROLE_ADMIN loguejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             return $this->render('admin/admin.html.twig', [
@@ -42,11 +42,8 @@ class AdminController extends AbstractController
         }
 
         //Si no hi havia ROLE_ADMIN loguejat
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('app_login');
     }
-
-
-
 
     /**
      * LLISTAR CATEGORIES
@@ -67,24 +64,6 @@ class AdminController extends AbstractController
         //Si no hi havia ROLE_ADMIN loguejat
         return $this->redirectToRoute('homepage');
     }
-
-
-    
-    /**
-     * Dels articles a la llista del admin que volem veure?
-     * categories, autor, data publicacio, data actualitzacio (ocult/desplegable)
-     * 
-     * Mirant com posar.... nº comentaris, nº vots, public/esborrany/reportat
-     * 
-     * fa-eye
-     * fa-eye-slash
-     * fa-smile-o
-     * fa-frown-o
-     * fa-meh-o
-     * fa-rocket
-     */
-
-
 
     /**
      * LLISTAR ARTICLES
@@ -107,7 +86,7 @@ class AdminController extends AbstractController
     }
 
 
-        /**
+    /**
      * LLISTAR USUARIS
      * @Route("/admin/usuaris", name="adminUsuaris")
      */
@@ -120,6 +99,26 @@ class AdminController extends AbstractController
 
             return $this->render('admin/llistarUsuaris.html.twig', [
                 'usuaris' => $usuaris,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * LLISTAR COMENTARIS
+     * @Route("/admin/comentaris", name="adminComentaris")
+     */
+    public function llistarComentaris(ArticleRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $articles = $repository->findAll();
+
+            return $this->render('admin/llistarComentaris.html.twig', [
+                'articles' => $articles,
             ]);
         }
 

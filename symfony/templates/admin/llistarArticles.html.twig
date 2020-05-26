@@ -8,11 +8,9 @@
 	<section>
 		<h1 class="titulo">Llista d'articles</h1>
 
-		{# <div class="cat-admin"> #}
 		<div class="accordion" id="accordionExample">
 
 			{% for article in articles %}
-
 
 				<div class="card">
 					{% if article.visible %}
@@ -32,36 +30,54 @@
 									{% endfor %}
 								</div>
 								<div class="col-md-1 text-right">
-									<i class="menu-icon fa fa-eye"></i>
+
+									{% if article.visible %}
+										<i class="admin-icons fa fa-eye-slash"></i>
+									{% else %}
+										<i class="admin-icons fa fa-eye"></i>
+									{% endif %}
+									<i class="admin-icons fa fa-cog"></i>
+
 								</div>
 							</div>
 						</div>
 						<div class="card-body collapse" id="article_{{article.id}}" data-parent="#accordionExample">
 
-							<p class="card-text">{{article.resum}}</p>
-							<hr>
-							Creada el
-							{{article.dataPublicacio|date('d/m/Y')}}
-							per
-							{{article.autor.username}}
-							({{article.autor.articles|length}}
-							articles)<br/>
-							{% if article.dataActualitzacio != null %}
-								Darrera modificació:
-								{{article.dataActualitzacio|date('d/m/Y')}}<br/>
+							<p class="card-text">{{article.resum}}
+								<hr>
+								Creada el
+								{{article.dataPublicacio|date('d/m/Y')}}
+								per
+								{{article.autor.username}}
+								({{article.autor.articles|length}}
+								articles)<br/>
+								{% if article.dataActualitzacio != null %}
+									Darrera modificació:
+									{{article.dataActualitzacio|date('d/m/Y')}}<br/>
+								{% endif %}
+							</p>
+							{% if article.comentaris|length != 0 %}
+								<hr>
+								{% for comment in article.comentaris %}
+									<p class="admin-comments">
+										{% if comment.tipus == 0 %}
+											<i class="fa fa-frown-o"></i>
+										{% elseif comment.tipus == 1 %}
+											<i class="fa fa-meh-o"></i>
+										{% elseif comment.tipus == 2 %}
+											<i class="fa fa-smile-o"></i>
+										{% elseif comment.tipus == 3 %}
+											<i class="fa fa-rocket"></i>
+										{% endif %}
+										 {{comment.user.username}} {{comment.dataPublicacio|date('d/m/Y')}} {{comment.visible}} <i class="fa fa-cog"></i><br/>
+										 "{{comment.text}}"
+									</p>
+								{% endfor %}
 							{% endif %}
-
-							{% if article.visible %}
-								<a href="#">passar article a esborrany</a>
-							{% else %}
-								<a href="#">passar article a public</a>
-							{% endif %}
-
 						</div>
 					</div>
 				{% endfor %}
 			</div>
-
 
 		</section>
 	{% endblock %}

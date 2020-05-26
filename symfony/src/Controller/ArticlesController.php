@@ -21,10 +21,6 @@ use App\Entity\Comentari;
 use App\Form\ComentariType;
 
 
-
-
-
-
 class ArticlesController extends AbstractController
 {
 
@@ -34,6 +30,12 @@ class ArticlesController extends AbstractController
      */
     public function nouarticle(Request $request)
     {
+        //Si l'usuari no te ROLE_ADMIN, redirigir a homepage
+        if (!in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+            return $this->redirectToRoute('homepage');
+        }
+
+
         //Crear Objecte Article i Form
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -51,11 +53,13 @@ class ArticlesController extends AbstractController
             //Capturar el titol i convertir-lo a Slug amb lowercase i guions
             $text = $form->get('titol')->getData();
 
-            $unwanted_array = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
-            'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
-            'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
-            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
-            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'l·l'=>'l', " " => "-");
+            $unwanted_array = array(
+                'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+                'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+                'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+                'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+                'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
+            );
 
             $slug = (strtr(strtolower($text), $unwanted_array));
 
@@ -100,7 +104,6 @@ class ArticlesController extends AbstractController
         }
 
         return $this->render('articles/form_nou_article.html.twig', [
-            // 'article' => $article,
             'formArticle' => $form->createView(),
         ]);
     }
@@ -111,9 +114,16 @@ class ArticlesController extends AbstractController
      */
     public function editarArticle($slug, Request $request, ArticleRepository $post_repo, CategoriaRepository $cat_repo)
     {
+
         //Obtenir dades del article
         $article = $post_repo->findOneBy(array('slug' => $slug));
         $categories = $article->getCategories();
+
+        //Si l'usuari no te ROLE_ADMIN, o es l'autor del article, redirigir a homepage
+        if (($this->getUser() != $article->getAutor()) || (!in_array("ROLE_ADMIN", $this->getUser()->getRoles()))) {
+            return $this->redirectToRoute('homepage');
+        }
+
 
         //Crear formulari amb les dades del article obtingut
         $form = $this->createForm(ArticleType::class, $article);
@@ -138,11 +148,13 @@ class ArticlesController extends AbstractController
             //Capturar el titol i convertir-lo a Slug amb lowercase i guions
             $text = $form->get('titol')->getData();
 
-            $unwanted_array = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
-            'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
-            'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
-            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
-            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'l·l'=>'l', " " => "-");
+            $unwanted_array = array(
+                'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+                'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+                'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+                'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+                'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
+            );
 
             $slug = (strtr(strtolower($text), $unwanted_array));
 
@@ -197,30 +209,12 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-
-
-
-    /**
-     * RETORNA TOTS ELS ARTICLES D'UN AUTOR
-     * @Route("/posts/{username}", name="articlesAutor", methods={"GET"})
-     */
-    public function articlesPerAutor($username, ArticleRepository $post_repo, UserRepository $user_repo)
-    {
-        $user = $user_repo->findOneBy(array('nom_usuari' => $username));
-        $posts = $post_repo->findBy(array('autor' => $user));
-
-        return $this->render('articles/llista_articles.html.twig', [
-            'articles' => $posts,
-        ]);
-    }
-
     /**
      * VEURE EL DETALL D'UN ARTICLE
      * @Route("/post/{slug}", name="article_detall", methods={"GET","POST"})
      */
     public function slug($slug, ArticleRepository $repository, Request $request)
     {
-
         //Obtenir dades del article   
         $post = $repository->findOneBy(array('slug' => $slug));
         $cat = $post->getCategories();
@@ -257,6 +251,20 @@ class ArticlesController extends AbstractController
             'article' => $post,
             'color' => $cat[0]->getColor(),
             'feedbackForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * RETORNA TOTS ELS ARTICLES D'UN AUTOR
+     * @Route("/posts/{username}", name="articlesAutor", methods={"GET"})
+     */
+    public function articlesPerAutor($username, ArticleRepository $post_repo, UserRepository $user_repo)
+    {
+        $user = $user_repo->findOneBy(array('nom_usuari' => $username));
+        $posts = $post_repo->findBy(array('autor' => $user));
+
+        return $this->render('articles/llista_articles.html.twig', [
+            'articles' => $posts,
         ]);
     }
 

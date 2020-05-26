@@ -1,77 +1,83 @@
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    
-    html {
-        scroll-behavior: smooth;
-        width: 100%;
-        height: 100%;
-    }
-    
-    body {
-        color: #666;
-        width: 100%;
-        height: 100%;
-        position: relative;
-        font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-family: 'Abel', sans-serif;
-        font-family: 'Roboto', sans-serif;
-        line-height: 1.5em;
-    }
-    
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-family: 'Inria Serif', serif;
-        font-weight: unset;
-        color: #999;
-    }
-    
-    p {
-        padding: 0.66em 0;
-        margin-bottom: 0;
-    }
-    
-    a {
-        color: #aaa;
-    }
-    
-    a:hover {
-        color: #666;
-        text-decoration: none;
-    }
-    
-    .text a {
-        font-style: italic;
-    }
-    /* RESET DEL BOOTSTRAP */
-    
-    ul {
-        padding: 0.66em 1.6em;
-        margin-bottom: 0;
-    }
-    /*****************************
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: #666;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Abel', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Inria Serif', serif;
+    font-weight: unset;
+    color: #999;
+}
+
+p {
+    padding: 0.66em 0;
+    margin-bottom: 0;
+}
+
+a {
+    color: #aaa;
+}
+
+a:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+.text a {
+    font-style: italic;
+}
+
+
+/* RESET DEL BOOTSTRAP */
+
+ul {
+    padding: 0.66em 1.6em;
+    margin-bottom: 0;
+}
+
+
+/*****************************
     MENUS NAVEGACIO
  *****************************/
-    
-    nav {
-        border-right: 3px solid red;
-        width: 20vw;
-        position: fixed;
-        top: 1%;
-        bottom: 1%;
-        left: 0;
-        z-index: 100;
-        transition-duration: 0.68s;
-    }
-    /*
+
+nav {
+    border-right: 3px solid red;
+    width: 20vw;
+    position: fixed;
+    top: 1%;
+    bottom: 1%;
+    left: 0;
+    z-index: 100;
+    transition-duration: 0.68s;
+}
+
+
+/*
 #menu-top {
     _font-size: 2em;
     color: #999;
@@ -83,380 +89,393 @@
     text-align: right;
 }
 */
-    
-    .menu-top,
-    .menu-user,
-    .menu-bottom {
-        font-family: Calibri, 'Trebuchet MS', sans-serif;
-        font-weight: 600;
-        color: #999;
-        text-align: right;
-        list-style-type: none;
-        position: absolute;
-        right: 0;
-        padding: 0.5em;
-    }
-    
-    .menu-top {
-        top: 14vh
-    }
-    
-    .menu-top img {
-        height: inherit;
-    }
-    
-    .menu-user {
-        bottom: 35vh;
-        transition-duration: 1s;
-        transition-timing-function: ease-in-out;
-    }
-    
-    .menu-user img {
-        width: 4em;
-        border-radius: 50%;
-    }
-    
-    .menu-bottom {
-        bottom: 10vh;
-    }
-    
-    .menu-bottom a {
-        color: #999;
-        font-style: initial;
-    }
-    
-    .menu-bottom a:hover,
-    .menu-bottom i:hover {
-        color: red;
-        text-decoration: none;
-    }
-    
-    .menu-icon-logout {
-        font-size: 1.6em;
-        padding: 0.2em 0;
-        display: none;
-    }
-    
-    .logout-link {
-        font-weight: 500;
-        font-style: italic;
-    }
-    
-    .menu-icon {
-        font-size: 1.6em;
-        padding: 0.2em 0;
-    }
-    
-    .menu-username,
-    .active {
-        color: red !important;
-    }
-    
-    #hamburgesa {
-        visibility: hidden;
-    }
-    
-    #dark-mode .menu-icon {
-        font-size: 1.2em;
-    }
-    /*****************************
+
+.menu-top,
+.menu-user,
+.menu-bottom {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    color: #999;
+    text-align: right;
+    list-style-type: none;
+    position: absolute;
+    right: 0;
+    padding: 0.5em;
+}
+
+.menu-top {
+    top: 14vh
+}
+
+.menu-top img {
+    height: inherit;
+}
+
+.menu-user {
+    bottom: 35vh;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+}
+
+.menu-user img {
+    width: 4em;
+    border-radius: 50%;
+}
+
+.menu-bottom {
+    bottom: 10vh;
+}
+
+.menu-bottom a {
+    color: #999;
+    font-style: initial;
+}
+
+.menu-bottom a:hover,
+.menu-bottom i:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.menu-icon-logout {
+    font-size: 1.6em;
+    padding: 0.2em 0;
+    display: none;
+}
+
+.logout-link {
+    font-weight: 500;
+    font-style: italic;
+}
+
+.menu-icon {
+    font-size: 1.6em;
+    padding: 0.2em 0;
+}
+
+.menu-username,
+.active {
+    color: red !important;
+}
+
+#hamburgesa {
+    visibility: hidden;
+}
+
+#dark-mode .menu-icon {
+    font-size: 1.2em;
+}
+
+
+/*****************************
     SECTIONS HOMEPAGE
  *****************************/
-    
-    .cat-list {
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .cat-list li {
-        float: left;
-        list-style: none;
-        width: 4em;
-        height: 4em;
-        padding: 0.4em;
-        border-radius: 5px;
-        border: 1px solid #eee;
-        margin: 0.5rem;
-        filter: grayscale(50%);
-    }
-    
-    .cat-list li:hover {
-        background-color: #eee;
-        filter: grayscale(0%);
-    }
-    
-    .cat-icon {
-        width: 100%;
-    }
-    
-    .cat-length {
-        position: relative;
-        top: -4.5em;
-        right: -4.2em;
-        color: #fff;
-        background-color: #999;
-        font-style: normal;
-    }
-    /*****************************
+
+.cat-list {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.cat-list li {
+    float: left;
+    list-style: none;
+    width: 4em;
+    height: 4em;
+    padding: 0.4em;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    margin: 0.5rem;
+    filter: grayscale(50%);
+}
+
+.cat-list li:hover {
+    background-color: #eee;
+    filter: grayscale(0%);
+}
+
+.cat-icon {
+    width: 100%;
+}
+
+.cat-length {
+    position: relative;
+    top: -4.5em;
+    right: -4.2em;
+    color: #fff;
+    background-color: #999;
+    font-style: normal;
+}
+
+
+/*****************************
     COMPOSICIO CONTENT DRETA
  *****************************/
-    
-    #fade {
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
-        transition-duration: 0.68s;
-        position: fixed;
-        z-index: -1;
-    }
-    
-    main {}
-    /*****************************
+
+#fade {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    transition-duration: 0.68s;
+    position: fixed;
+    z-index: -1;
+}
+
+main {}
+
+
+/*****************************
     HOMEPAGE
  *****************************/
-    
-    section {
-        min-height: 100vh;
-        padding-left: 22%;
-        padding-right: 16%;
-        padding-bottom: 5em;
-    }
-    
-    .onepage {
-        padding-top: 15vh;
-    }
-    
-    .titulo {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        position: relative;
-        top: 15vh;
-        margin-bottom: 20vh;
-    }
-    
-    .text {
-        _color: #666;
-        position: sticky;
-        top: 25vh;
-    }
-    /*****************************
+
+section {
+    min-height: 100vh;
+    padding-left: 22%;
+    padding-right: 16%;
+    padding-bottom: 5em;
+}
+
+.onepage {
+    padding-top: 15vh;
+}
+
+.titulo {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    position: relative;
+    top: 15vh;
+    margin-bottom: 20vh;
+}
+
+.text {
+    _color: #666;
+    position: sticky;
+    top: 25vh;
+}
+
+
+/*****************************
     FORM D'ARTICLES
  *****************************/
-    
-    #novaCategoria {
-        transition-duration: 0.5s;
-    }
-    
-    .help-text {
-        display: none;
-        margin-top: 1em;
-        padding: 0.5em 0.16em 0 1em;
-        font-size: 0.75em;
-        line-height: 1.16;
-        color: #999;
-    }
-    
-    .form-error-text {
-        display: none;
-        padding: 0.2em 1em;
-        font-size: 0.75em;
-        color: tomato;
-    }
-    /*****************************
+
+#novaCategoria {
+    transition-duration: 0.5s;
+}
+
+.help-text {
+    display: none;
+    margin-top: 1em;
+    padding: 0.5em 0.16em 0 1em;
+    font-size: 0.75em;
+    line-height: 1.16;
+    color: #999;
+}
+
+.form-error-text {
+    display: none;
+    padding: 0.2em 1em;
+    font-size: 0.75em;
+    color: tomato;
+}
+
+
+/*****************************
     ARTICLES
  *****************************/
-    
-    .article_individual_titol {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-weight: unset;
-        color: #999;
-        padding-top: 15vh
-    }
-    
-    .article_individual_resum {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-weight: unset;
-        color: #aaa;
-        font-style: italic;
-        font-size: 1.4rem;
-        padding-left: 0.16rem;
-    }
-    
-    .article_individual_content {
-        padding-top: 2em;
-        _font-size: 1.1rem;
-    }
-    
-    .article_titol a {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-size: 2rem;
-        font-weight: unset;
-        color: #999;
-        text-decoration: none;
-    }
-    
-    .article-data {
-        font-size: 0.8em;
-        font-style: italic;
-    }
-    
-    .article_categoria_icon {
-        width: 3em;
-        position: absolute;
-        right: 0;
-        top: 15vh;
-    }
-    
-    .categoria_icon {
-        width: 3em;
-        _border-radius: 2px;
-        padding: 0.5em;
-        _border: 1px solid #999;
-    }
-    
-    pre {
-        font-size: 0.75em;
-        _padding: 1em 1em 1em 4em;
-        margin: 0;
-        overflow: scroll;
-    }
-    
-    pre:-webkit-scrollbar {
-        display: none;
-    }
-    
-    code {
-        padding: 1em 1em 1em 4em !important
-    }
-    
-    .feedback-list {
-        border-top: 1px solid #999;
-        text-align: right;
-    }
-    
-    .feedback-icons {
-        display: inline-block;
-        font-size: 1.3em;
-        padding: 0 0.3em;
-        cursor: pointer;
-    }
-    
-    .feedback-icons:hover {
-        transform: rotate(360deg);
-        transition-duration: 1s;
-    }
-    
-    .fa-frown-o {
-        color: lightsalmon;
-    }
-    
-    .fa-meh-o {
-        color: gold;
-    }
-    
-    .fa-smile-o {
-        color: limegreen;
-    }
-    
-    .fa-rocket {
-        color: cornflowerblue;
-    }
-    
-    #feedback-modal {
-        z-index: -1;
-        position: fixed;
-        top: 50%;
-        left: 22%;
-        margin-right: 16%;
-        transform: translate(0, -50%);
-        _border: 1px solid red;
-        border-radius: 5px;
-        background-color: #eee;
-        /* Mozilla*/
-        width: -moz-available;
-        /* Chrome */
-        width: -webkit-fill-available;
-        padding: 1em;
-        opacity: 0;
-        transition-duration: 0.5s;
-    }
-    /*****************************
+
+.article_individual_titol {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: unset;
+    color: #999;
+    padding-top: 15vh
+}
+
+.article_individual_resum {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: unset;
+    color: #aaa;
+    font-style: italic;
+    font-size: 1.4rem;
+    padding-left: 0.16rem;
+}
+
+.article_individual_content {
+    padding-top: 2em;
+    _font-size: 1.1rem;
+}
+
+.article_titol a {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: unset;
+    color: #999;
+    text-decoration: none;
+}
+
+.article-data {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.article_categoria_icon {
+    width: 3em;
+    position: absolute;
+    right: 0;
+    top: 15vh;
+}
+
+.categoria_icon {
+    width: 3em;
+    _border-radius: 2px;
+    padding: 0.5em;
+    _border: 1px solid #999;
+}
+
+pre {
+    font-size: 0.75em;
+    _padding: 1em 1em 1em 4em;
+    margin: 0;
+    overflow: auto;
+}
+
+pre:-webkit-scrollbar {
+    display: none;
+}
+
+code {
+    padding: 1em 1em 1em 4em !important
+}
+
+.feedback-list {
+    border-top: 1px solid #999;
+    text-align: right;
+}
+
+.feedback-icons {
+    display: inline-block;
+    font-size: 1.3em;
+    padding: 0 0.3em;
+    cursor: pointer;
+}
+
+.feedback-icons:hover {
+    transform: rotate(360deg);
+    transition-duration: 1s;
+}
+
+.fa-frown-o {
+    color: lightsalmon;
+}
+
+.fa-meh-o {
+    color: gold;
+}
+
+.fa-smile-o {
+    color: limegreen;
+}
+
+.fa-rocket {
+    color: cornflowerblue;
+}
+
+#feedback-modal {
+    z-index: -1;
+    position: fixed;
+    top: 50%;
+    left: 22%;
+    margin-right: 16%;
+    transform: translate(0, -50%);
+    border-radius: 5px;
+    background-color: #eee;
+    /* Mozilla*/
+    width: -moz-available;
+    /* Chrome */
+    width: -webkit-fill-available;
+    padding: 1em;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+
+/*****************************
         FORMULARIS
     ***************************/
-    
-    .form.control:focus {
-        color: #495057;
-        background-color: #fff;
-        border-color: #80bdff;
-        outline: 0;
-        box-shadow: 0 0 0 .1rem rgba(0, 123, 255, .25);
-    }
-    
-    .form-error {
-        font-size: 0.75em;
-        color: red;
-        padding-left: 1em;
-    }
-    
-    .form-alert-errors {
-        position: relative;
-        padding: .75rem 1.25rem;
-        margin-bottom: 1rem;
-        _border: 1px solid transparent;
-        _border-radius: .25rem;
-        color: tomato;
-        background-color: transparent;
-        _background-color: #f8d7da;
-        _border-color: #f5c6cb;
-    }
-    
-    .form-alert-errors ul {
-        padding: 0.25em 0;
-        margin-bottom: 0;
-    }
-    
-    .btn-light {
-        background-color: #e2e6ea;
-        color: #444;
-        position: absolute;
-        bottom: 0;
-    }
-    
-    .btn-light:hover {
-        border-color: #6c757d;
-        background-color: #6c757d;
-        color: #fff;
-    }
-    /* .btn-outline-secondary:hover {
+
+.form.control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 .1rem rgba(0, 123, 255, .25);
+}
+
+.form-error {
+    font-size: 0.75em;
+    color: red;
+    padding-left: 1em;
+}
+
+.form-alert-errors {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    color: tomato;
+    background-color: transparent;
+}
+
+.form-alert-errors ul {
+    padding: 0.25em 0;
+    margin-bottom: 0;
+}
+
+.btn-light {
+    background-color: #e2e6ea;
+    color: #444;
+    position: absolute;
+    bottom: 0;
+}
+
+.btn-light:hover {
+    border-color: #6c757d;
+    background-color: #6c757d;
+    color: #fff;
+}
+
+
+/* .btn-outline-secondary:hover {
     color: transparent
 } */
-    /****************************
+
+
+/****************************
     PERFIL USUARIS
 *******************************/
-    
-    .socialmedia-link {
-        color: red;
-        text-decoration: none;
-    }
-    
-    .socialmedia-link:hover {
-        color: #666;
-        text-decoration: none;
-    }
-    
-    .socialmedia-icon {
-        font-size: 1.6em;
-        vertical-align: sub;
-        padding: 0.16em;
-    }
-    
-    .profile-image {
-        padding: 15vh 1em 0 0;
-        position: absolute;
-        right: 0;
-        height: 100%;
-    }
-    /* .form-group {
+
+.socialmedia-link {
+    color: red;
+    text-decoration: none;
+}
+
+.socialmedia-link:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+.socialmedia-icon {
+    font-size: 1.6em;
+    vertical-align: sub;
+    padding: 0.16em;
+}
+
+.profile-image {
+    padding: 15vh 1em 0 0;
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+
+
+/* .form-group {
     margin-bottom: 1rem;
 }
 
@@ -480,200 +499,252 @@
     border: 1px solid #eee;
     border-radius: .25rem;
 } */
-    /*************************
+
+
+/*************************
     ZONA ADMIN
 *****************************/
-    
-    .cat-admin {
-        padding: 1em 0;
-        /*chrome*/
-        display: -ms-flexbox;
-        /*firefox*/
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        /*
+
+.cat-admin {
+    padding: 1em 0;
+    /*chrome*/
+    display: -ms-flexbox;
+    /*firefox*/
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*
     Amb media queries, el que s'ha de canviar es aixo
     grid-template-columns: (X, 1fr);
     */
-    }
-    
-    .cat-admin img {
-        float: left;
-        padding: 0.1em 0;
-        margin-right: 0.5em;
-    }
-    
-    .cat-item {
-        border-radius: 5px;
-        background-color: #eee;
-        padding: 5px;
-        margin: 5px;
-    }
-    
-    .cat-item:hover {
-        _background-color: #ccc;
-    }
-    
-    .cat-admin-info {
-        position: relative;
-    }
-    
-    .cat-admin-info a {
-        position: absolute;
-        right: 0.5em;
-    }
-    
-    .cat-admin-info a:hover {
-        color: red;
-    }
-    
-    .card-header {
-        padding: 0.25em 1em;
-    }
-    
-    .no-gutters {
-        align-items: flex-end;
-    }
-    
-    .cat-article-icon {
-        width: 2em;
-        padding: 0
-    }
-    /*****************************
+}
+
+.cat-admin img {
+    float: left;
+    padding: 0.1em 0;
+    margin-right: 0.5em;
+}
+
+.cat-item {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 5px;
+    margin: 5px;
+}
+
+.cat-item:hover {
+    _background-color: #ccc;
+}
+
+.cat-admin-info {
+    position: relative;
+}
+
+.cat-admin-info a {
+    position: absolute;
+    right: 0.5em;
+}
+
+.cat-admin-info a:hover {
+    color: red;
+}
+
+.no-gutters {
+    align-items: flex-end;
+}
+
+.cat-article-icon {
+    width: 2em;
+    padding: 0
+}
+
+.admin-icons {
+    font-size: 1.2em;
+    padding: 0.25em;
+}
+
+.admin-comments {
+    font-size: 0.8em;
+    font-style: oblique;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: transparent;
+    background-clip: border-box;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.card-header {
+    padding: 0.25em 1em;
+    _background-color: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card-title {
+    margin-bottom: 0.3em;
+    cursor: pointer;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.66rem 1.16rem;
+    background-color: #fff;
+}
+
+
+/*****************************
     MEDIA QUERIES
  *****************************/
-    /* @media only screen and (max-width: 576px) and (orientation: landscape) {
+
+
+/* @media only screen and (max-width: 576px) and (orientation: landscape) {
     #menu-bottom {
         bottom: 5vh;
     }
 } */
-    
-    @media only screen and (max-width: 1200px) {
-        #hamburguesa {
-            visibility: hidden;
-        }
-        section {
-            _padding-left: 22%;
-            padding-right: 10%;
-        }
-        #feedback-modal {
-            left: 22%;
-            margin-right: 10%;
-        }
+
+@media only screen and (max-width: 1200px) {
+    #hamburguesa {
+        visibility: hidden;
     }
-    
-    @media only screen and (max-width: 992px) {
-        #hamburguesa {
-            visibility: hidden;
-        }
-        section {
-            padding-left: 22%;
-            padding-right: 10%;
-        }
-        #feedback-modal {
-            left: 22%;
-            margin-right: 10%;
-        }
-        .btn-light {
-            position: relative;
-            margin-top: 1em;
-            width: inherit;
-        }
+    section {
+        _padding-left: 22%;
+        padding-right: 10%;
     }
-    
-    @media only screen and (max-width: 780px) {
-        #hamburguesa {
-            visibility: hidden;
-        }
-        section {
-            padding-left: 22%;
-            padding-right: 7%;
-        }
-        #feedback-modal {
-            left: 22%;
-            margin-right: 7%;
-        }
+    #feedback-modal {
+        left: 22%;
+        margin-right: 10%;
     }
-    
-    @media only screen and (max-width: 576px) {
-        #hamburgesa {
-            visibility: visible;
-        }
-        .menu-user img {
-            width: 1.6em;
-            z-index: 5;
-        }
-        .menu-icon-logout {
-            display: block;
-            position: relative;
-            bottom: -6em;
-        }
-        .menu-link,
-        .menu-username,
-        .menu-link-logout {
-            _display: none;
-            visibility: hidden;
-            transition-duration: 1s;
-            opacity: 0;
-        }
-        .menu-bottom {
-            bottom: 5vh;
-        }
-        .primary-menu {
-            width: 3em;
-        }
-        section {
-            padding-left: 18%;
-            padding-right: 4%;
-            padding-bottom: 5em;
-        }
-        #feedback-modal {
-            left: 18%;
-            margin-right: 7%;
-        }
-        .titulo {
-            top: 5vh;
-            margin-bottom: 10vh;
-            font-size: 2rem;
-        }
-        .text {
-            font-size: 1rem;
-        }
-        .article_individual_titol {
-            font-size: 2rem;
-            padding-top: 5vh
-        }
-        .article_individual_resum {
-            font-size: 1.4rem;
-            padding-left: 0.16rem;
-        }
-        .article_individual_content {
-            font-size: 1rem;
-        }
-        .help-text {
-            padding-left: 0;
-            padding-right: 0;
-        }
-        .form-error-text {
-            padding-left: 0;
-            padding-right: 0;
-        }
+}
+
+@media only screen and (max-width: 992px) {
+    #hamburguesa {
+        visibility: hidden;
     }
-    
-    @media only screen and (max-width: 350px) {
-        section {
-            padding-left: 20%;
-        }
+    section {
+        padding-left: 22%;
+        padding-right: 10%;
     }
-    
-    @media only screen and (orientation: landscape) {
-        #hamburgesa {
-            margin-top: 0;
-        }
-        /* #menu-bottom {
+    #feedback-modal {
+        left: 22%;
+        margin-right: 10%;
+    }
+    .btn-light {
+        position: relative;
+        margin-top: 1em;
+        width: inherit;
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    #hamburguesa {
+        visibility: hidden;
+    }
+    section {
+        padding-left: 22%;
+        padding-right: 7%;
+    }
+    #feedback-modal {
+        left: 22%;
+        margin-right: 7%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    #hamburgesa {
+        visibility: visible;
+    }
+    .menu-user img {
+        width: 1.6em;
+        z-index: 5;
+    }
+    .menu-icon-logout {
+        display: block;
+        position: relative;
+        bottom: -6em;
+    }
+    .menu-link,
+    .menu-username,
+    .menu-link-logout {
+        _display: none;
+        visibility: hidden;
+        transition-duration: 1s;
+        opacity: 0;
+    }
+    .menu-bottom {
+        bottom: 5vh;
+    }
+    .primary-menu {
+        width: 3em;
+    }
+    section {
+        padding-left: 18%;
+        padding-right: 4%;
+        padding-bottom: 5em;
+    }
+    #feedback-modal {
+        left: 18%;
+        margin-right: 7%;
+    }
+    .titulo {
+        top: 5vh;
+        margin-bottom: 10vh;
+        font-size: 2rem;
+    }
+    .text {
+        font-size: 1rem;
+    }
+    .article_individual_titol {
+        font-size: 2rem;
+        padding-top: 5vh
+    }
+    .article_individual_resum {
+        font-size: 1.4rem;
+        padding-left: 0.16rem;
+    }
+    .article_individual_content {
+        font-size: 1rem;
+    }
+    .help-text {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .form-error-text {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    section {
+        padding-left: 20%;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    #hamburgesa {
+        margin-top: 0;
+    }
+    /* #menu-bottom {
         bottom: 5vh;
     } */
-    }
+}
