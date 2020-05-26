@@ -338,6 +338,7 @@
         display: inline-block;
         font-size: 1.3em;
         padding: 0 0.3em;
+        cursor: pointer;
     }
     
     .feedback-icons:hover {

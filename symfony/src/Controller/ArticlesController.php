@@ -17,6 +17,10 @@ use App\Repository\ArticleRepository;
 use App\Entity\Categoria;
 use App\Repository\CategoriaRepository;
 use App\Repository\UserRepository;
+use App\Entity\Comentari;
+use App\Form\ComentariType;
+
+
 
 
 
@@ -177,6 +181,9 @@ class ArticlesController extends AbstractController
         ]);
     }
 
+
+
+
     /**
      * RETORNA TOTS ELS ARTICLES D'UN AUTOR
      * @Route("/posts/{username}", name="articlesAutor", methods={"GET"})
@@ -193,17 +200,47 @@ class ArticlesController extends AbstractController
 
     /**
      * VEURE EL DETALL D'UN ARTICLE
-     * @Route("/post/{slug}", name="article_detall", methods={"GET"})
+     * @Route("/post/{slug}", name="article_detall", methods={"GET","POST"})
      */
-    public function slug($slug, ArticleRepository $repository)
+    public function slug($slug, ArticleRepository $repository, Request $request)
     {
 
+        //Obtenir dades del article   
         $post = $repository->findOneBy(array('slug' => $slug));
         $cat = $post->getCategories();
 
+        //Crear Objecte Comentari i Form
+        $comment = new Comentari();
+        $form = $this->createForm(ComentariType::class, $comment);
+        $form->handleRequest($request);
+
+        //Si el formulari es enviat, captura les dades i afegir comentari al article
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Crear EntityManager
+            $entityManager = $this->getDoctrine()->getManager();
+
+            //Capturar dades del formulari i assignar-les al article
+            $comment->setUser($this->getUser())
+                ->setArticle($post)
+                ->setDataPublicacio(new \DateTime())
+                ->setVisible(false);
+
+            //Crear EntityManager i persistir dades
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->render('articles/index.html.twig', [
+                'article' => $post,
+                'color' => $cat[0]->getColor(),
+                'feedbackForm' => $form->createView()
+            ]);
+        }
+
         return $this->render('articles/index.html.twig', [
             'article' => $post,
-            'color' => $cat[0]->getColor()
+            'color' => $cat[0]->getColor(),
+            'feedbackForm' => $form->createView(),
         ]);
     }
 

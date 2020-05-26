@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextAreaType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -39,10 +39,10 @@ class ArticleType extends AbstractType
                 ]
             ])
 
-            ->add('resum', TextType::class, [
+            ->add('resum', TextareaType::class, [
                 'label' => 'Breu resum del contingut del article',
                 'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control', 'rows' => 2],
                 'constraints' => [
                     new Length([
                         'min' => 50,
@@ -61,7 +61,7 @@ class ArticleType extends AbstractType
                 'attr' => ['class' => 'form-control'],
             ])
 
-            ->add('meta_description', TextType::class, [
+            ->add('meta_description', TextareaType::class, [
                 'label' => 'Meta Description *',
                 'attr' => ['class' => 'form-control', 'rows' => 2],
                 'help' => 'Text molt resumit i descriptiu per al Snippet dels buscadors. (de 100 a 155 caràcters)',

@@ -280,26 +280,24 @@ window.onload = function() {
             for (let i = 0; i < feedbackIcons.length; i++) {
                 feedbackIcons[i].addEventListener("click", (function() {
                     return function() {
+
                         console.log(`he clicado en el icono numero ${i}`)
-
                         let shadow = document.getElementById('fade')
-                            // let section = document.getElementsByTagName('section')[0]
-
                         let feedbackModal = document.getElementById('feedback-modal')
                         view.showFeedbackForm(shadow, feedbackModal, i)
-
-
                     }
                 })());
             }
         },
         showFeedbackForm: function(shadow, modal, num) {
-            console.log(modal.getElementById('feedback_article'));
-            modalInfo = modal.getElementsByClassName('feedback-info')[0]
+            // console.log(modal.getElementById('feedback_article'));
+            let modalInfo = modal.getElementsByClassName('feedback-info')[0]
             modalInfo.innerHTML = `<i class="fa fa-${data.fedbackText[num].icon}"></i> ${data.fedbackText[num].info}`;
-            modalInfo.style.color = data.fedbackText[num].color
+            modalInfo.style.color = data.fedbackText[num].color;
 
-            modalFooter = modal.getElementsByClassName('feedback-footer')[0]
+            modal.getElementsByTagName('input')[0].value = num
+
+            let modalFooter = modal.getElementsByClassName('feedback-footer')[0]
             modalFooter.innerHTML = data.fedbackText[num].footer
             modalFooter.style.color = data.fedbackText[num].color
 
@@ -311,15 +309,29 @@ window.onload = function() {
             modal.style.zIndex = 5
 
             window.onclick = function(event) {
-                if (event.target == shadow) {
-                    shadow.style.opacity = 0;
-                    shadow.style.zIndex = -1;
+                    if (event.target == shadow) {
+                        shadow.style.opacity = 0;
+                        shadow.style.zIndex = -1;
 
-                    modal.style.opacity = 0;
-                    modal.style.zIndex = -1
+                        modal.style.opacity = 0;
+                        modal.style.zIndex = -1
 
+                    }
                 }
-            }
+                // modal.getElementsByTagName('button').addEventListener("click", (function() {
+                //     return function() {
+                //         $data = {'feedback_type':1, 'feedback_comment':'hola', 'feedback_article':}
+                //         console.log(`he clicado en el icono numero ${i}`)
+
+            //         let shadow = document.getElementById('fade')
+            //             // let section = document.getElementsByTagName('section')[0]
+
+            //         let feedbackModal = document.getElementById('feedback-modal')
+            //         view.showFeedbackForm(shadow, feedbackModal, i)
+
+
+            //     }
+            // })());
         },
 
         // hideFeedbackForm: function(shadow, modal) {
