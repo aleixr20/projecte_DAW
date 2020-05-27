@@ -14,7 +14,7 @@ CKEDITOR.editorConfig = function(config) {
         { name: 'editing', items: ['Find', 'Replace'] },
         { name: 'insert', items: ['Link', 'Unlink', 'Image', 'HorizontalRule', 'PageBreak', 'Iframe'] },
         '/',
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'Blockquote', 'TextColor', 'BGColor', '-', 'Format', 'RemoveFormat'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'Blockquote', 'TextColor', 'BGColor', '-', 'RemoveFormat'] },
         { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'BidiLtr', 'BidiRtl', 'Language', 'CodeSnippet'] },
     ];
     // config.toolbarCanCollapse = true;
