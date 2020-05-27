@@ -31,7 +31,7 @@ class AdminController extends AbstractController
     public function index()
     {
         //Si hi ha un usuari ROLE_ADMIN loguejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             return $this->render('admin/admin.html.twig', [
                 'controller_name' => 'Pagina de gestio web (Admin)',
@@ -69,7 +69,7 @@ class AdminController extends AbstractController
     public function llistarArticlesCategoria($id, CategoriaRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $categoria = $repository->findOneBy(array('id' => $id));
             $articles = $categoria->getArticles();
@@ -90,7 +90,7 @@ class AdminController extends AbstractController
     public function llistarCategories(CategoriaRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $categories = $repository->findAll();
 
@@ -110,7 +110,7 @@ class AdminController extends AbstractController
     public function llistarComentaris(ArticleRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $articles = $repository->findAll();
 
@@ -130,7 +130,7 @@ class AdminController extends AbstractController
     public function llistarUsuaris(UserRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $usuaris = $repository->findAll();
 
@@ -151,7 +151,7 @@ class AdminController extends AbstractController
     public function editarArticle($id, Request $request, ArticleRepository $repository): Response
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $article = $repository->findOneBy(array('id' => $id));
 
@@ -186,7 +186,7 @@ class AdminController extends AbstractController
     public function editarCategoria($id, Request $request, CategoriaRepository $repository, SluggerInterface $slugger): Response
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             // $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
             $categoria = $repository->findOneBy(array('id' => $id));
@@ -246,7 +246,7 @@ class AdminController extends AbstractController
     public function editarUsuari($id, Request $request, UserRepository $repository): Response
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
-        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             //Crear formulari amb dades del usuari
             $usuari = $repository->findOneBy(array('id' => $id));

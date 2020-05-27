@@ -26,86 +26,88 @@ class ArticlesController extends AbstractController
 
     /**
      * METODE PER AFEGIR UN NOU ARTICLE
-     * @Route("/new", name="article_new", methods={"GET","POST"})
+     * @Route("/new", name="article_new")
      */
     public function nouarticle(Request $request)
     {
-        //Si l'usuari no te ROLE_ADMIN, redirigir a homepage
-        if (!in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
-            return $this->redirectToRoute('homepage');
+
+        //Si hi ha un usuari loguejat i es ROLE_ADMIN
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            //Crear Objecte Article i Form
+            $article = new Article();
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->handleRequest($request);
+
+            //Si el formulari es enviat, captura les dades i pujar nou article a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+                //Crear EntityManager
+                $entityManager = $this->getDoctrine()->getManager();
+
+                //Capturar dades del formulari i assignar-les al article
+                $article->setAutor($this->getUser())
+                    ->setDataPublicacio(new \DateTime());
+
+                //Capturar el titol i convertir-lo a Slug amb lowercase i guions
+                $text = $form->get('titol')->getData();
+
+                $unwanted_array = array(
+                    'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+                    'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+                    'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+                    'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+                    'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
+                );
+
+                $slug = (strtr(strtolower($text), $unwanted_array));
+
+                $article->setSlug($slug);
+
+                //Capturar input type="text" (String) de camp meta i convertirlo a array
+                $inputMetaTag = $form->get('meta_tag')->getData();
+                $correccioTags = str_replace(', ', ',', $inputMetaTag);
+
+                //Assignem a article els camps meta
+                $article->setMetaTag($correccioTags);
+                // ->setMetaDescription($form->get('meta_description')->getData());
+
+                // //Capturem categoria del select del formulari
+                $categoria1 = $form->get('categoria1')->getData();
+                // //Si la categoria es "afegir nova categoria"
+                if ($form->get('categoria1')->getData()->getNom() == "afegir nova categoria") {
+
+                    //Creem nova categoria amb el que hi hagi al input "nova categoria"
+                    $afegirCategoria = new Categoria();
+                    $afegirCategoria->setNom($form->get('nova_categoria')->getData());
+                    $afegirCategoria->setLogo('default-logo.png');
+                    $entityManager->persist($afegirCategoria);
+                    //fem el cambiazo
+                    $categoria1 = $afegirCategoria;
+                }
+                //Afegir les categories
+                $article->addCategories($categoria1);
+
+                if ($form->get('categoria2')->getData() != null) {
+                    $article->addCategories($form->get('categoria2')->getData());
+                }
+
+                if ($form->get('categoria3')->getData() != null) {
+                    $article->addCategories($form->get('categoria3')->getData());
+                }
+                //Persistir dades i pujar dades a DB
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('article_detall', ['slug' => $slug]);
+            }
+
+            return $this->render('articles/form_nou_article.html.twig', [
+                'formArticle' => $form->createView(),
+            ]);
         }
 
-
-        //Crear Objecte Article i Form
-        $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
-        //Si el formulari es enviat, captura les dades i pujar nou article a DB
-        if ($form->isSubmitted() && $form->isValid()) {
-            //Crear EntityManager
-            $entityManager = $this->getDoctrine()->getManager();
-
-            //Capturar dades del formulari i assignar-les al article
-            $article->setAutor($this->getUser())
-                ->setDataPublicacio(new \DateTime());
-
-            //Capturar el titol i convertir-lo a Slug amb lowercase i guions
-            $text = $form->get('titol')->getData();
-
-            $unwanted_array = array(
-                'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
-                'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
-                'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
-                'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
-                'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
-            );
-
-            $slug = (strtr(strtolower($text), $unwanted_array));
-
-            $article->setSlug($slug);
-
-            //Capturar input type="text" (String) de camp meta i convertirlo a array
-            $inputMetaTag = $form->get('meta_tag')->getData();
-            $correccioTags = str_replace(', ', ',', $inputMetaTag);
-
-            //Assignem a article els camps meta
-            $article->setMetaTag($correccioTags);
-            // ->setMetaDescription($form->get('meta_description')->getData());
-
-            // //Capturem categoria del select del formulari
-            $categoria1 = $form->get('categoria1')->getData();
-            // //Si la categoria es "afegir nova categoria"
-            if ($form->get('categoria1')->getData()->getNom() == "afegir nova categoria") {
-
-                //Creem nova categoria amb el que hi hagi al input "nova categoria"
-                $afegirCategoria = new Categoria();
-                $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                $afegirCategoria->setLogo('default-logo.png');
-                $entityManager->persist($afegirCategoria);
-                //fem el cambiazo
-                $categoria1 = $afegirCategoria;
-            }
-            //Afegir les categories
-            $article->addCategories($categoria1);
-
-            if ($form->get('categoria2')->getData() != null) {
-                $article->addCategories($form->get('categoria2')->getData());
-            }
-
-            if ($form->get('categoria3')->getData() != null) {
-                $article->addCategories($form->get('categoria3')->getData());
-            }
-            //Persistir dades i pujar dades a DB
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('article_detall', ['slug' => $slug]);
-        }
-
-        return $this->render('articles/form_nou_article.html.twig', [
-            'formArticle' => $form->createView(),
-        ]);
+        //Si no hi havia un ADMIN loguejat, per defecte, redirigir a homepage
+        return $this->redirectToRoute('homepage');
     }
 
     /**
@@ -115,97 +117,107 @@ class ArticlesController extends AbstractController
     public function editarArticle($slug, Request $request, ArticleRepository $post_repo, CategoriaRepository $cat_repo)
     {
 
-        //Obtenir dades del article
+        //Obtenir dades de l'article i l'usuari actual
         $article = $post_repo->findOneBy(array('slug' => $slug));
         $categories = $article->getCategories();
+        $usuari = $this->getUser();
 
-        //Si l'usuari no te ROLE_ADMIN, o es l'autor del article, redirigir a homepage
-        if (($this->getUser() != $article->getAutor()) || (!in_array("ROLE_ADMIN", $this->getUser()->getRoles()))) {
-            return $this->redirectToRoute('homepage');
-        }
+        //Si hi ha un usuari loguejat i es l'autor del article o ROLE_ADMIN
+        if ($usuari && (($usuari == $article->getAutor()) || in_array("ROLE_ADMIN", $usuari->getRoles()))) {
+
+            // //Si l'usuari no te ROLE_ADMIN, o es l'autor del article, redirigir a homepage
+            // if (($this->getUser() != $article->getAutor()) || (!in_array("ROLE_ADMIN", $this->getUser()->getRoles()))) {
+            //     return $this->redirectToRoute('homepage');
+            // }
 
 
-        //Crear formulari amb les dades del article obtingut
-        $form = $this->createForm(ArticleType::class, $article);
+            //Crear formulari amb les dades del article obtingut
+            $form = $this->createForm(ArticleType::class, $article);
 
-        //Passar la Colecció de Categories als 3 camps del formulari
-        $form->get('categoria1')->setData($categories[0]);
+            //Passar la Colecció de Categories als 3 camps del formulari
+            $form->get('categoria1')->setData($categories[0]);
 
-        if ($categories[1] != null) {
-            $form->get('categoria2')->setData($categories[1]);
-        }
-        if ($categories[2] != null) {
-            $form->get('categoria3')->setData($categories[2]);
-        }
-
-        $form->handleRequest($request);
-        //Si el formulari es enviat, captura les dades i pujar nou article a DB
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            //Crear EntityManager
-            $entityManager = $this->getDoctrine()->getManager();
-
-            //Capturar el titol i convertir-lo a Slug amb lowercase i guions
-            $text = $form->get('titol')->getData();
-
-            $unwanted_array = array(
-                'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
-                'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
-                'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
-                'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
-                'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
-            );
-
-            $slug = (strtr(strtolower($text), $unwanted_array));
-
-            //Assignar al article l'Slug creat
-            $article->setSlug($slug);
-
-            //Capturar input type="text" (String) de camp meta i convertirlo a array
-            $inputMetaTag = $form->get('meta_tag')->getData();
-            $correccioTags = str_replace(', ', ',', $inputMetaTag);
-            $article->setMetaTag($correccioTags);
-
-            //Capturem categoria del select del formulari
-            $categoria1 = $form->get('categoria1')->getData();
-            //Si la categoria es "afegir nova categoria"
-            if ($categoria1->getNom() == "afegir nova categoria") {
-                //Creem nova categoria amb el que hi hagi al input "nova categoria"
-                $afegirCategoria = new Categoria();
-                $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                $afegirCategoria->setLogo('default-logo.png');
-                $entityManager->persist($afegirCategoria);
-                //fem el cambiazo
-                $categoria1 = $afegirCategoria;
+            if ($categories[1] != null) {
+                $form->get('categoria2')->setData($categories[1]);
+            }
+            if ($categories[2] != null) {
+                $form->get('categoria3')->setData($categories[2]);
             }
 
-            //Resetejar la coleccio de Categories
-            $cats = $cat_repo->findAll();
-            for ($i = 0; $i < count($cats); $i++) {
-                $article->removeCategories($cats[$i]);
+            $form->handleRequest($request);
+            //Si el formulari es enviat, captura les dades i pujar nou article a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                //Crear EntityManager
+                $entityManager = $this->getDoctrine()->getManager();
+
+                //Capturar el titol i convertir-lo a Slug amb lowercase i guions
+                $text = $form->get('titol')->getData();
+
+                $unwanted_array = array(
+                    'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+                    'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+                    'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+                    'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+                    'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'l·l' => 'l', " " => "-"
+                );
+
+                $slug = (strtr(strtolower($text), $unwanted_array));
+
+                //Assignar al article l'Slug creat
+                $article->setSlug($slug);
+
+                //Capturar input type="text" (String) de camp meta i convertirlo a array
+                $inputMetaTag = $form->get('meta_tag')->getData();
+                $correccioTags = str_replace(', ', ',', $inputMetaTag);
+                $article->setMetaTag($correccioTags);
+
+                //Capturem categoria del select del formulari
+                $categoria1 = $form->get('categoria1')->getData();
+                //Si la categoria es "afegir nova categoria"
+                if ($categoria1->getNom() == "afegir nova categoria") {
+                    //Creem nova categoria amb el que hi hagi al input "nova categoria"
+                    $afegirCategoria = new Categoria();
+                    $afegirCategoria->setNom($form->get('nova_categoria')->getData());
+                    $afegirCategoria->setLogo('default-logo.png');
+                    $entityManager->persist($afegirCategoria);
+                    //fem el cambiazo
+                    $categoria1 = $afegirCategoria;
+                }
+
+                //Resetejar la coleccio de Categories
+                $cats = $cat_repo->findAll();
+                for ($i = 0; $i < count($cats); $i++) {
+                    $article->removeCategories($cats[$i]);
+                }
+
+                //Afegir les categories a la Collecioo
+                $article->addCategories($categoria1);
+
+                if ($form->get('categoria2')->getData() != null) {
+                    $article->addCategories($form->get('categoria2')->getData());
+                }
+
+                if ($form->get('categoria3')->getData() != null) {
+                    $article->addCategories($form->get('categoria3')->getData());
+                }
+
+                //Persistir dades i pujar a DB
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('article_detall', ['slug' => $slug]);
             }
 
-            //Afegir les categories a la Collecioo
-            $article->addCategories($categoria1);
-
-            if ($form->get('categoria2')->getData() != null) {
-                $article->addCategories($form->get('categoria2')->getData());
-            }
-
-            if ($form->get('categoria3')->getData() != null) {
-                $article->addCategories($form->get('categoria3')->getData());
-            }
-
-            //Persistir dades i pujar a DB
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('article_detall', ['slug' => $slug]);
+            return $this->render('articles/form_nou_article.html.twig', [
+                'article' => $article,
+                'formArticle' => $form->createView(),
+            ]);
         }
 
-        return $this->render('articles/form_nou_article.html.twig', [
-            'article' => $article,
-            'formArticle' => $form->createView(),
+        //Si no hi havia un ADMIN o l'autor del article loguejat, per defecte, redirigir a homepage
+        return $this->redirectToRoute('article_detall', [
+            'slug' => $slug
         ]);
     }
 

@@ -8,13 +8,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
-
-
-
 
 class AdminUserType extends AbstractType
 {
@@ -30,10 +27,7 @@ class AdminUserType extends AbstractType
                 'label' => 'Email *',
                 'attr' => ['class' => 'form-control']
             ])
-            // ->add('token', TextType::class, [
-            //     'label' => 'Token *',
-            //     'attr' => ['class' => 'form-control']
-            // ])
+
 
             ->add('roles', ChoiceType::class, [
                 'label' => 'Roles *',
@@ -66,6 +60,11 @@ class AdminUserType extends AbstractType
                 'mapped' => false,
             ])
 
+            ->add('descripcio', TextareaType::class, [
+                'label' => 'Text del perfil',
+                'attr' => ['class' => 'form-control', 'rows' => 7],
+                'required' => false
+            ])
             ->add('github', TextType::class, [
                 'label' => 'Github',
                 'attr' => ['class' => 'form-control'],
