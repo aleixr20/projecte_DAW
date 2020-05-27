@@ -261,7 +261,7 @@ $result = $serializer-&gt;normalize($level1, null, [
         $manager->persist($article_php2);
 
         //ARTICLE 3
-        $titol_apa1 = "Instal·lació Apache";
+        $titol_apa1 = "Instalacio Apache";
         $article_apa1 = new Article();
 
         $unwanted_array = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',

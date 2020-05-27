@@ -10,7 +10,7 @@ window.onload = function() {
 
     var data = {
 
-        path: 'http://localhost:8000',
+        path: 'https://localhost:8000',
         // path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
 
         menuVisibilityStatus: false,
@@ -146,7 +146,7 @@ window.onload = function() {
             }
 
             //Si estem al formulari d'articles
-            if (document.URL == data.path + "/new") {
+            if (document.URL == data.path + "/new" || document.URL.search("/article/editar/") > 0) {
                 model.loadArticleForm();
                 //view.validateFormArticles(data.articleForm)
                 view.listenArticleFormInputs(data.articleForm)
@@ -426,46 +426,95 @@ window.onload = function() {
             //Afegir listener de nova Categoria
         },
         toggleHelpErrors: function(Obj) {
-            //Quan entri al Input, mostrar Ajuda i Errors
-            Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
-                return function() {
-                    Obj.getElementsByClassName('help-text')[0].style.display = 'block'
-                    Obj.getElementsByClassName('form-error-text')[0].style.display = 'block'
-                }
-            })());
-            //Quan surti del Input, amagar Ajuda i Errors
-            Obj.getElementsByTagName('input')[0].addEventListener("focusout", (function() {
-                return function() {
-                    Obj.getElementsByClassName('help-text')[0].style.display = 'none'
-                    Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
-                }
-            })());
+            console.log(Obj)
+            //Comprova si els elements son input
+            if(Obj.getElementsByTagName('input')[0] != undefined){
+                console.log("INPUT No undefined")
+                //Quan entri al Input, mostrar Ajuda i Errors
+                Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
+                    return function() {
+                        Obj.getElementsByClassName('help-text')[0].style.display = 'block'
+                        Obj.getElementsByClassName('form-error-text')[0].style.display = 'block'
+                    }
+                })());
+                //Quan surti del Input, amagar Ajuda i Errors
+                Obj.getElementsByTagName('input')[0].addEventListener("focusout", (function() {
+                    return function() {
+                        Obj.getElementsByClassName('help-text')[0].style.display = 'none'
+                        Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
+                    }
+                })());
+            //Comprova si els elements son textarea    
+            }else if(Obj.getElementsByTagName('textarea')[0] != undefined){
+                //Quan entri al Input, mostrar Ajuda i Errors
+                Obj.getElementsByTagName('textarea')[0].addEventListener("focusin", (function() {
+                    return function() {
+                        Obj.getElementsByClassName('help-text')[0].style.display = 'block'
+                        Obj.getElementsByClassName('form-error-text')[0].style.display = 'block'
+                    }
+                })());
+                //Quan surti del Input, amagar Ajuda i Errors
+                Obj.getElementsByTagName('textarea')[0].addEventListener("focusout", (function() {
+                    return function() {
+                        Obj.getElementsByClassName('help-text')[0].style.display = 'none'
+                        Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
+                    }
+                })());
+            }
         },
 
         validateLength: function(inputObj, min, max) {
-            //Mentres escrigui -> eventListener per actualitzar Error
-            inputObj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
-                return function() {
+            //Comprova si els elements son input
+            if(inputObj.getElementsByTagName('input')[0] != undefined){
+                //Mentres escrigui -> eventListener per actualitzar Error
+                inputObj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
+                    return function() {
 
-                    //Capturar l'objecte input i error
-                    let input = inputObj.getElementsByTagName('input')[0]
-                    let error = inputObj.getElementsByClassName('form-error-text')[0]
+                        //Capturar l'objecte input i error
+                        let input = inputObj.getElementsByTagName('input')[0]
+                        let error = inputObj.getElementsByClassName('form-error-text')[0]
 
-                    //Si el tamany es mes petit o mes gran dels especificats
-                    if (input.value.length < min || input.value.length > max) {
-                        error.style.color = 'tomato'
-                        input.style.border = '1px solid red'
-                        error.innerHTML = `Actualmente ${input.value.length} carácteres)`
+                        //Si el tamany es mes petit o mes gran dels especificats
+                        if (input.value.length < min || input.value.length > max) {
+                            error.style.color = 'tomato'
+                            input.style.border = '1px solid red'
+                            error.innerHTML = `Actualmente ${input.value.length} carácteres)`
 
-                    } else {
-                        error.style.color = '#999'
-                        input.style.border = '1px solid #ced4da'
-                        console.info(inputObj.value, 'CAMPO CORRECTO')
-                        error.innerHTML = ``
+                        } else {
+                            error.style.color = '#999'
+                            input.style.border = '1px solid #ced4da'
+                            console.info(inputObj.value, 'CAMPO CORRECTO')
+                            error.innerHTML = ``
 
+                        }
                     }
-                }
-            })());
+                })());
+            //Comprova si els elements son textarea
+            }else if(inputObj.getElementsByTagName('textarea')[0] != undefined){
+                //Mentres escrigui -> eventListener per actualitzar Error
+                inputObj.getElementsByTagName('textarea')[0].addEventListener("keyup", (function() {
+                    return function() {
+
+                        //Capturar l'objecte input i error
+                        let input = inputObj.getElementsByTagName('textarea')[0]
+                        let error = inputObj.getElementsByClassName('form-error-text')[0]
+
+                        //Si el tamany es mes petit o mes gran dels especificats
+                        if (input.value.length < min || input.value.length > max) {
+                            error.style.color = 'tomato'
+                            input.style.border = '1px solid red'
+                            error.innerHTML = `Actualmente ${input.value.length} carácteres)`
+
+                        } else {
+                            error.style.color = '#999'
+                            input.style.border = '1px solid #ced4da'
+                            console.info(inputObj.value, 'CAMPO CORRECTO')
+                            error.innerHTML = ``
+
+                        }
+                    }
+                })());
+            }
         },
         checkUniqueUsername: function(Obj) {
 
@@ -576,12 +625,44 @@ window.onload = function() {
                     let inputObj = Obj.getElementsByTagName('input')[0]
                     let string = inputObj.value;
                     //Reemplaçar inline els valors escapats del string
+                    string = string.replace('linkedin.com/in/', '');
+                    string = string.replace('github.com/', '');
+                    string = string.replace('twitter.com/', '');
+                    string = string.replace('facebook.com/', '');
                     string = string.replace('http', '');
                     string = string.replace(':', '');
                     string = string.replace('/', '');
-                    string = string.replace('www', '');
+                    string = string.replace('www.', '');
                     string = string.replace('<', '');
                     string = string.replace('>', '');
+                    //Cambir el valor del input del formulari
+                    inputObj.value = string;
+                }
+            })());
+            Obj.getElementsByTagName('input')[0].addEventListener("focusout", (function() {
+                return function() {
+
+                    //Capturar el valor del input
+                    let inputObj = Obj.getElementsByTagName('input')[0]
+                    let string = inputObj.value;
+                    //Reemplaçar inline els valors escapats del string
+                    let onlyUsername = false;
+                    while(!onlyUsername){
+                        string = string.replace('linkedin.com/in/', '');
+                        string = string.replace('github.com/', '');
+                        string = string.replace('twitter.com/', '');
+                        string = string.replace('facebook.com/', '');
+                        string = string.replace('https', '');
+                        string = string.replace('http', '');
+                        string = string.replace(':', '');
+                        string = string.replace('/', '');
+                        string = string.replace('www.', '');
+                        string = string.replace('<', '');
+                        string = string.replace('>', '');
+                        if(string.search('/') == -1) onlyUsername = true;
+                        console.log(string)
+                        console.log(string.search('/'));
+                    }
                     //Cambir el valor del input del formulari
                     inputObj.value = string;
                 }
