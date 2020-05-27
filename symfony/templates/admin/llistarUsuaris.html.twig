@@ -50,7 +50,7 @@
 									{{usuari.ultimlogin|date('d/m/Y')}}
 								</td>
 								<td>
-									<a href="{{path('articlesAutor', {username:usuari.username}) }}">
+									<a href="{{path('articlesAutor', {username:usuari.username}) }}" alt="Enllaç a la llista d'articles de {{usuari.username}}" title="Veure articles de {{usuari.username}}">
 										{{usuari.articles|length}}</a>
 								</td>
 
@@ -58,7 +58,7 @@
 									{{usuari.comentaris|length}}
 								</td>
 								<td>
-									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}">
+									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="Editar l'usuari {{usuari.username}}" title="Administrar l'usuari {{usuari.username}}">
 										<i class="admin-icons fa fa-cog"></i>
 									</a>
 								</td>

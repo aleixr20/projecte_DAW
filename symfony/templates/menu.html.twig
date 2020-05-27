@@ -2,7 +2,7 @@
 	{% if app.user %}
 		<li>
 			<a
-				href="{{ path('userProfile', {username: app.user.username}) }}">
+				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.username}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -12,19 +12,17 @@
 			</a>
 		</li>
 		<li>
-			<a class="menu-link menu-username" href="{{ path('userProfile', {username: app.user.username}) }}">{{app.user.username}}</a>
+			<a class="menu-link menu-username" href="{{ path('userProfile', {username: app.user.username}) }}" alt="Enllaç al perfil d'usuari" title="Veure perfil d'usuari">{{app.user.username}}</a>
 		</li>
 		<li>
-			{# <a class="menu-icon-logout" href="{{ path('app_logout')}}">
-							<i class="fa fa-power-off"></i>
-						</a> #}
-			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
+
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}" alt="Tancar la sessió">
 				sortir
 			</a>
 		</li>
 	{% else %}
 		<li>
-			<a class="menu-icon" href="{{ path('app_login')}}">
+			<a class="menu-icon" href="{{ path('app_login')}}" alt="Enllaç a formulari de login">
 				<i class="fa fa-user-circle"></i>
 			</a>
 		</li>
@@ -34,28 +32,28 @@
 <!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
 <ul class="menu-bottom">
 	<li class="scrollable">
-		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+		<a class="menu-link active" href="{{ path('homepage')}}#about-us" alt="Pagina d'inici">b-NERD toDEVELOPE</a>
 	</li>
 	<li class="scrollable">
-		<a class="menu-link" href="{{ path('homepage')}}#hard-skills">HARD SKILLS</a>
+		<a class="menu-link" href="{{ path('homepage')}}#hard-skills" alt="Enllaç a la secció de categories">HARD SKILLS</a>
 	</li>
 	<li class="scrollable">
-		<a class="menu-link" href="{{ path('homepage')}}#how">MAS</a>
+		<a class="menu-link" href="{{ path('homepage')}}#how" alt="Enllaç a la secció de presentació">MAS</a>
 	</li>
 	<li class="scrollable">
-		<a class="menu-link" href="{{ path('homepage')}}#contact">CONTACTO</a>
+		<a class="menu-link" href="{{ path('homepage')}}#contact" alt="Enllaç al formulari de contacte">CONTACTE</a>
 	</li>
 
 	<!-- BUSCADOR -->
-	<li id="search">
+	{# <li id="search">
 		<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
 		{# <i class="menu-icon fa fa-search"></i> #}
-	</li>
+	</li> #}
 	<li id="hamburgesa">
-		<i class="menu-icon fa fa-bars"></i>
+		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
 	</li>
 	<li id="dark-mode">
-		<i class="menu-icon fa fa-toggle-off"></i>
+		<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
 	</li>
 
 </ul>

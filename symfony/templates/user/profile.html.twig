@@ -6,64 +6,74 @@
 
 {% block content %}
 
-<section>
-	<div class="row">
-		<div class="col-md-6">
-			<h1 class="titulo">{{user.username}}</h1>
-			<p>
-				{{ user.nom }}
-				{{ user.cognom }}
-			</p>
+	<section>
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="titulo">{{user.username}}</h1>
+				<p>
+					{{ user.nom }}
+					{{ user.cognom }}
+				</p>
 
 
-			{% if user.github is defined and (user.github is not empty)%}
-				<a class="socialmedia-link" href="https://www.github.com/{{ user.github }}" target="_blank">
-					<i class="socialmedia-icon fa fa-github-square"></i>&nbsp;{{user.github}}
-				</a>
-			{% endif %}
-			<br/>
-			{% if user.linkedin is defined and (user.linkedin is not empty)%}
-				<a class="socialmedia-link" href="https://www.linkedin.com/in/{{ user.linkedin }}" target="_blank">
-					<i class="socialmedia-icon fa fa-linkedin-square"></i>&nbsp;{{user.linkedin}}
-				</a>
-			{% endif %}
-
-		</div>
-		<div class="col-md-6">
-			{% if user.imatge %}
-				{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
-				<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="imatge de perfil" class="profile-image">
-			{% else %}
-				<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="imatge de perfil" class="profile-image">
-			{% endif %}
-		</div>
-	</div>
-
-	<p class="text">{{ user.descripcio|raw }}
-	</p>
-	<p>
-		{{user.username}}
-		es usuari registrat desde
-		{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}">{{user.articles|length}} articles</a>
-	
-			{# {% for cat in user.articles.categoria %}
-				<li>
-					<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
-						<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
-						<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
+				{% if user.github is defined and (user.github is not empty)%}
+					<a class="socialmedia-link" href="https://www.github.com/{{ user.github }}" alt="Enllaç al Github de {{user.username}}" title="https://www.github.com/{{user.github}}" target="_blank">
+						<i class="socialmedia-icon fa fa-github-square"></i>&nbsp;{{user.github}}
 					</a>
-				</li>
-			{% endfor %} #}
-<br>
-			{% if app.user and (user.username == app.user.username) %}
-			<a class="btn btn-secondary" href="{{ path('userProfileEdit') }}">Editar perfil</a>
-{% endif %}
-<br>
-{{ user.comentaris|length }} comentaris
-{# {% set urlLinkedin = user.linkedin | slice(0,4) == 'http' ? user.linkedin : 'http://' ~ user.linkedin %} #}
-</p>
-</section>
-{% endblock %}
+				{% endif %}
+				<br/>
+				{% if user.linkedin is defined and (user.linkedin is not empty)%}
+					<a class="socialmedia-link" href="https://www.linkedin.com/{{ user.linkedin }}" alt="Enllaç al Linkedin de {{user.username}}" title="https://www.linkedin.com/{{user.linkedin}}" target="_blank">
+						<i class="socialmedia-icon fa fa-linkedin-square"></i>&nbsp;{{user.linkedin}}
+					</a>
+				{% endif %}
+				<br/>
+				{% if user.twitter is defined and (user.twitter is not empty)%}
+					<a class="socialmedia-link" href="https://www.twitter.com/{{ user.twitter }}" alt="Enllaç al Twitter de {{user.username}}" title="https://www.twitter.com/{{user.twitter}}" target="_blank">
+						<i class="socialmedia-icon fa fa-twitter-square"></i>&nbsp;{{user.twitter}}
+					</a>
+				{% endif %}
+				<br/>
+				{% if user.linkedin is defined and (user.linkedin is not empty)%}
+					<a class="socialmedia-link" href="https://www.facebook.com/{{ user.facebook }}" alt="Enllaç al Facebook de {{user.username}}" title="https://www.facebook.com/{{user.facebook}}" target="_blank">
+						<i class="socialmedia-icon fa fa-facebook-square"></i>&nbsp;{{user.facebook}}
+					</a>
+				{% endif %}
 
- 
- 
+			</div>
+			<div class="col-md-6">
+				{% if user.imatge %}
+					{# HE CAMBIAT AQUESTA LINIA AFEGINT L'ASSET #}
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="Imatge de perfil de {{user.username}}" class="profile-image">
+				{% else %}
+					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="Sense imatge de perfil" class="profile-image">
+				{% endif %}
+			</div>
+		</div>
+
+		<p class="text">{{ user.descripcio|raw }}
+		</p>
+		<p>
+			{{user.username}}
+			es usuari registrat desde
+			{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
+			{{user.username}}">{{user.articles|length}}articles
+		</p>
+	</a>
+
+	{# {% for cat in user.articles.categoria %}
+					<li>
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
+							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
+						</a>
+					</li>
+				{% endfor %} #}
+	<br>
+	{% if app.user and (user.username == app.user.username) %}
+		<a class="btn btn-secondary" href="{{ path('userProfileEdit') }}" alt="Editar perfil">Editar perfil</a>
+	{% endif %}
+	<br>
+	{{ user.comentaris|length }}
+	comentaris
+</p></section>{% endblock %}</p>
