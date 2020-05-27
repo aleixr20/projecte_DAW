@@ -13,9 +13,9 @@
 			{% for article in articles %}
 
 				<h3 class="article_titol">
-					<a href="{{ asset("post/" ~ article.slug) }}">{{article.titol}}</a>
+					<a href="{{ asset("post/" ~ article.slug) }}" alt="Veure article {{article.titol}}" alt="Veure article">{{article.titol}}</a>
 				</h3>
-				<p class="article_subtitol" onclick="mostrar('{{article.titol}}')">{{article.resum}}</p>
+				<p class="article_subtitol">{{article.resum}}</p>
 
 			{% endfor %}
 		</div>

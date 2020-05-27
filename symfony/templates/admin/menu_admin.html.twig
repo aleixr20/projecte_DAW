@@ -2,7 +2,7 @@
 	{% if app.user %}
 		<li>
 			<a
-				href="{{ path('userProfile', {username: app.user.username}) }}">
+				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.username}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -15,13 +15,13 @@
 			<a class="menu-link menu-username" href="{{ path('userProfile', {username: app.user.username}) }}">{{app.user.username}}</a>
 		</li>
 		<li>
-			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}" alt="Tancar la sessió">
 				sortir
 			</a>
 		</li>
 	{% else %}
 		<li>
-			<a class="menu-icon" href="{{ path('app_login')}}">
+			<a class="menu-icon" href="{{ path('app_login')}}" alt="Enllaç a formulari de login">
 				<i class="fa fa-user-circle"></i>
 			</a>
 		</li>
@@ -31,35 +31,35 @@
 <!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
 <ul class="menu-bottom">
 	<li>
-		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+		<a class="menu-link active" href="{{ path('homepage')}}" añt=" Pagina d'incici" title="Tornar a la pàgina d'inici">b-NERD toDEVELOPE</a>
 	</li>
 
 	<li>
-		<a class="menu-link" href="{{ path('article_new')}}">NOU ARTICLE</a>
+		<a class="menu-link" href="{{ path('article_new')}}" alt="Formulari de nou article">NOU ARTICLE</a>
 	</li>
 		<li>
-		<a class="menu-link" href="{{ path('adminArticles')}}">ARTICLES</a>
+		<a class="menu-link" href="{{ path('adminArticles')}}" alt="Enllaç a l'administrador d'articles">ARTICLES</a>
 	</li>
 	<li>
-		<a class="menu-link" href="{{ path('adminCategories')}}">CATEGORIES</a>
+		<a class="menu-link" href="{{ path('adminCategories')}}" alt="Enllaç a l'administrador de categories">CATEGORIES</a>
 	</li>
 	<li>
-		<a class="menu-link" href="{{ path('adminCategories')}}">COMENTARIS</a>
+		<a class="menu-link" href="{{ path('adminCategories')}}" alt="Enllaç a l'administrador de comentaris">COMENTARIS</a>
 	</li>
 	<li>
-		<a class="menu-link" href="{{ path('adminUsuaris')}}">USUARIS</a>
+		<a class="menu-link" href="{{ path('adminUsuaris')}}" alt="Enllaç a l'administrador d'usuaris">USUARIS</a>
 	</li>
-	<li>
+	{# <li>
 		<a class="menu-link" href="{{ path('adminCategories')}}">INFORMES</a>
-	</li>
+	</li> #}
 
 
 	<!-- HAMBURGESA -->
 	<li id="hamburgesa">
-		<i class="menu-icon fa fa-bars"></i>
+		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
 	</li>
 	<li id="dark-mode">
-		<i class="menu-icon fa fa-toggle-off"></i>
+		<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
 	</li>
 
 </ul>

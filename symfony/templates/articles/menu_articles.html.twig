@@ -1,7 +1,7 @@
 <ul class="menu-user">
 	<li>
 		<a
-			href="{{ path('userProfile', {username: article.autor.username}) }}">
+			href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}">
 			<!--SI L'USUARI TE IMATGE DE PERFIL-->
 			{% if article.autor.imatge %}
 				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -11,7 +11,7 @@
 		</a>
 	</li>
 	<li>
-		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.autor.username})}}">{{article.autor.username}}</a>
+		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}" title="Veure perfil de {{article.autor.username}}">{{article.autor.username}}</a>
 	</li>
 	<li class="menu-link article-data">
 		{{article.datapublicacio|date("d M Y")}}
@@ -19,7 +19,7 @@
 
 	{% if app.user and (app.user == article.autor) %}
 		<li>
-			<a class="menu-link logout-link" href="{{ path('app_logout')}}">
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}" alt="Tancar la sessió">
 				sortir
 			</a>
 		</li>
@@ -31,34 +31,30 @@
 
 	{% if app.user and is_granted('ROLE_ADMIN') %}
 		<li>
-			<a href="{{ path('article_update', {slug:article.slug}) }}">editar article</a>
+			<a href="{{ path('article_update', {slug:article.slug}) }}" alt="Editar article">editar article</a>
 		</li>
 	{% endif %}
 	{% for cat in article.categories %}
 		<li>
-			<a class="menu-link" href="{{ path('articles_categoria', {cat_name: cat.nom})}}">in{{cat.nom}}</a>
+			<a class="menu-link" href="{{ path('articles_categoria', {cat_name: cat.nom})}}" alt="Veure articles de la categoria in{{cat.nom}}" title="Veure articles de la categoria in{{cat.nom}}">in{{cat.nom}}</a>
 		</li>
 	{% endfor %}
 
 	<li>
-		<a class="menu-link active" href="{{ path('homepage')}}#about-us">b-NERD toDEVELOPE</a>
+		<a class="menu-link active" href="{{ path('homepage')}}" alt="Pagina d'inici" title="Tornar a la pàgina d'inici">b-NERD toDEVELOPE</a>
 	</li>
 	<li>
-		<a class="menu-link" href="{{ path('homepage')}}#hard-skills">ARTICLES</a>
+		<a class="menu-link" href="{{ path('homepage')}}#hard-skills" alt="Enllaç a la secció de categories">ARTICLES</a>
 	</li>
 
 	<!-- BUSCADOR -->
-	<li id="search">
-		<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
-		{# <i class="menu-icon fa fa-search"></i> #}
-	</li>
-	<li id="hamburgesa">
-		<i class="menu-icon fa fa-bars"></i>
-	</li>
-	<li id="dark-mode">
-		<a href="">
-			<i class="menu-icon fa fa-toggle-off"></i>
-		</a>
-	</li>
-
-</ul>
+	{# <li id="search">
+			<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
+			<i class="menu-icon fa fa-search"></i> #}
+</li>
+<li id="hamburgesa">
+	<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
+</li>
+<li id="dark-mode">
+	<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
+</li></a></li></ul>

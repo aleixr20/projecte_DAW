@@ -7,6 +7,6 @@
 {% block content %}
 
 	<section id="menu_item_section_name_4">
-        <p>S'ha enviat un enllaç de verificació a {{ user.email }}, ves a <a href="{{ path('app_login')}}">inicar sessió</a> o si no l'has rebut o ha caducat fes <a href="{{ path('reenviament_token', {'userId': user.id })}}">click aquí</a> per tornar-lo a enviar.</p>
+        <p>S'ha enviat un enllaç de verificació a {{ user.email }}, ves a <a href="{{ path('app_login')}}" alt="Enllaç a login">inicar sessió</a> o si no l'has rebut o ha caducat fes <a href="{{ path('reenviament_token', {'userId': user.id })}}" alt="Enllaç a sol·licitud de reenviament de mail de verificació">click aquí</a> per tornar-lo a enviar.</p>
 	</section>
 {% endblock %}

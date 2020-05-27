@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('admin/menu_admin.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	<section>
+		<h1 class="titulo">Editar Usuari</h1>
+
+		{{ form_start(adminEditarUsuari) }}
+		<div class="form-row">
+			<div class="col-md-6">
+
+				<div class="form-group">
+					{{ form_label(adminEditarUsuari.data_registre) }}
+					{{ form_widget(adminEditarUsuari.data_registre) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(adminEditarUsuari.nom_usuari) }}
+					{{ form_widget(adminEditarUsuari.nom_usuari) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(adminEditarUsuari.email) }}
+					{{ form_widget(adminEditarUsuari.email) }}
+				</div>
+			</div>
+			<div class="col-md-6">
+				{% if user.imatge %}
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" style="padding:1em;" alt="imatge de perfil" class="profile-image">
+				{% else %}
+					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" style="padding:1em;" alt="imatge de perfil" class="profile-image">
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.roles) }}
+				{{ form_widget(adminEditarUsuari.roles) }}
+
+			</div>
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.imatge) }}
+				{{ form_widget(adminEditarUsuari.imatge) }}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ form_label(adminEditarUsuari.descripcio) }}
+			{{ form_widget(adminEditarUsuari.descripcio) }}
+		</div>
+		<div class="form-row">
+
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.github) }}
+				{{ form_widget(adminEditarUsuari.github) }}
+			</div>
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.linkedin) }}
+				{{ form_widget(adminEditarUsuari.linkedin) }}
+			</div>
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.twitter) }}
+				{{ form_widget(adminEditarUsuari.twitter) }}
+			</div>
+			<div class="col-md-6 form-group">
+				{{ form_label(adminEditarUsuari.facebook) }}
+				{{ form_widget(adminEditarUsuari.facebook) }}
+			</div>
+		</div>
+
+
+		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		{{ form_end(adminEditarUsuari) }}
+	</section>
+
+{% endblock %}
