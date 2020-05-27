@@ -429,7 +429,6 @@ window.onload = function() {
             console.log(Obj)
             //Comprova si els elements son input
             if(Obj.getElementsByTagName('input')[0] != undefined){
-                console.log("INPUT No undefined")
                 //Quan entri al Input, mostrar Ajuda i Errors
                 Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
                     return function() {
@@ -660,8 +659,6 @@ window.onload = function() {
                         string = string.replace('<', '');
                         string = string.replace('>', '');
                         if(string.search('/') == -1) onlyUsername = true;
-                        console.log(string)
-                        console.log(string.search('/'));
                     }
                     //Cambir el valor del input del formulari
                     inputObj.value = string;
