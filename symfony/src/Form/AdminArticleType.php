@@ -27,7 +27,6 @@ class AdminArticleType extends AbstractType
                     'year' => 'Any',
                 ],
                 'format' => 'dd  MM  yyyy',
-
             ])
 
             ->add('data_actualitzacio', DateType::class, [

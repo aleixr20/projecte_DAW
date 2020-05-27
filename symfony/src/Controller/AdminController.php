@@ -62,7 +62,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('homepage');
     }
 
-        /**
+    /**
      * LLISTAR ARTICLES d'UNA CATEGORIA
      * @Route("/admin/articles/categoria/{id}", name="adminArticlesCategoria")
      */
@@ -198,8 +198,6 @@ class AdminController extends AbstractController
             //Si el formulari es enviat, capture dde dades i pujar nou article a DB
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $entityManager = $this->getDoctrine()->getManager();
-
                 //Pujada de la imatge de logo/icona
                 $logoCategoria = $form->get('logo')->getData();
 
@@ -223,6 +221,8 @@ class AdminController extends AbstractController
                     $categoria->setLogo($nouNomArxiu);
                 }
 
+                //Persistir dades i pujar a DB
+                $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($categoria);
                 $entityManager->flush();
 
@@ -239,7 +239,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('homepage');
     }
 
-        /**
+    /**
      * EDITAR DADES ADMIN d'UN USUARI
      * @Route("/admin/usuari/{id}", name="adminEditarUsuari")
      */
@@ -248,15 +248,40 @@ class AdminController extends AbstractController
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
+            //Crear formulari amb dades del usuari
             $usuari = $repository->findOneBy(array('id' => $id));
-
-            //Crear Objecte User i Form
             $form = $this->createForm(AdminUserType::class, $usuari);
+
+            //Comprovar roles del usuari pel select del formulari
+            if (in_array("ROLE_ADMIN", $usuari->getRoles())) {
+                $form->get('roles')->setData('ROLE_ADMIN');
+            } else if (in_array("ROLE_VALIDATED", $usuari->getRoles())) {
+                $form->get('roles')->setData('ROLE_VALIDATED');
+            } else {
+                $form->get('roles')->setData('ROLE_USER');
+            }
+
             $form->handleRequest($request);
 
-            //Si el formulari es enviat, capturar dades i actualitzar article a DB
+            //Si el formulari es enviat, capturar dades i actualitzar a DB
             if ($form->isSubmitted() && $form->isValid()) {
 
+                //Comprovar el select de ROLE
+                $role =  $form->get('roles')->getData();
+                if ($role == 'ROLE_ADMIN') {
+                    $usuari->setRoles(['ROLE_USER', 'ROLE_VALIDATED', 'ROLE_ADMIN']);
+                } else if ($role == 'ROLE_VALIDATED') {
+                    $usuari->setRoles(['ROLE_USER', 'ROLE_VALIDATED']);
+                } else {
+                    $usuari->setRoles(['ROLE_USER']);
+                }
+
+                //Comprovar el select de eliminar imatge de perfil es true
+                if ($form->get('imatge')->getData()) {
+                    $usuari->setImatge('');
+                }
+
+                //Persistir dades i pujar a DB
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($usuari);
                 $entityManager->flush();
