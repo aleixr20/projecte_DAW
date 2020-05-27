@@ -96,6 +96,8 @@ class ArticlesController extends AbstractController
             if ($form->get('categoria3')->getData() != null) {
                 $article->addCategories($form->get('categoria3')->getData());
             }
+
+            
             //Persistir dades i pujar dades a DB
             $entityManager->persist($article);
             $entityManager->flush();
