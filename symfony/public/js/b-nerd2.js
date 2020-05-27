@@ -10,7 +10,9 @@ window.onload = function() {
 
     var data = {
 
-        path: 'https://localhost:8000',
+        path: 'https://www.b-nerd.cat',
+        // path: 'https://localhost:8000',
+
         // path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
 
         menuVisibilityStatus: false,
@@ -427,8 +429,8 @@ window.onload = function() {
         },
         toggleHelpErrors: function(Obj) {
             console.log(Obj)
-            //Comprova si els elements son input
-            if(Obj.getElementsByTagName('input')[0] != undefined){
+                //Comprova si els elements son input
+            if (Obj.getElementsByTagName('input')[0] != undefined) {
                 //Quan entri al Input, mostrar Ajuda i Errors
                 Obj.getElementsByTagName('input')[0].addEventListener("focusin", (function() {
                     return function() {
@@ -443,8 +445,8 @@ window.onload = function() {
                         Obj.getElementsByClassName('form-error-text')[0].style.display = 'none'
                     }
                 })());
-            //Comprova si els elements son textarea    
-            }else if(Obj.getElementsByTagName('textarea')[0] != undefined){
+                //Comprova si els elements son textarea    
+            } else if (Obj.getElementsByTagName('textarea')[0] != undefined) {
                 //Quan entri al Input, mostrar Ajuda i Errors
                 Obj.getElementsByTagName('textarea')[0].addEventListener("focusin", (function() {
                     return function() {
@@ -464,7 +466,7 @@ window.onload = function() {
 
         validateLength: function(inputObj, min, max) {
             //Comprova si els elements son input
-            if(inputObj.getElementsByTagName('input')[0] != undefined){
+            if (inputObj.getElementsByTagName('input')[0] != undefined) {
                 //Mentres escrigui -> eventListener per actualitzar Error
                 inputObj.getElementsByTagName('input')[0].addEventListener("keyup", (function() {
                     return function() {
@@ -488,8 +490,8 @@ window.onload = function() {
                         }
                     }
                 })());
-            //Comprova si els elements son textarea
-            }else if(inputObj.getElementsByTagName('textarea')[0] != undefined){
+                //Comprova si els elements son textarea
+            } else if (inputObj.getElementsByTagName('textarea')[0] != undefined) {
                 //Mentres escrigui -> eventListener per actualitzar Error
                 inputObj.getElementsByTagName('textarea')[0].addEventListener("keyup", (function() {
                     return function() {
@@ -646,7 +648,7 @@ window.onload = function() {
                     let string = inputObj.value;
                     //Reemplaçar inline els valors escapats del string
                     let onlyUsername = false;
-                    while(!onlyUsername){
+                    while (!onlyUsername) {
                         string = string.replace('linkedin.com/in/', '');
                         string = string.replace('github.com/', '');
                         string = string.replace('twitter.com/', '');
@@ -658,7 +660,7 @@ window.onload = function() {
                         string = string.replace('www.', '');
                         string = string.replace('<', '');
                         string = string.replace('>', '');
-                        if(string.search('/') == -1) onlyUsername = true;
+                        if (string.search('/') == -1) onlyUsername = true;
                     }
                     //Cambir el valor del input del formulari
                     inputObj.value = string;
