@@ -15,11 +15,11 @@
 
 					<div class="cat-item">
 
-						<img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="{{cat.nom}} logotip">
+						<img src="/img/categories/{{ asset(cat.logo) }}" class="categoria_icon" alt="Logotip de la categoria {{cat.nom}}">
 
 						<div class="cat-admin-info">
 							{{cat.nom}}
-							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"editar categoria">
+							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"Editar categoria" title="Editar categoria">
 								<i class="fa fa-cog"></i>
 							</a><br/>
 

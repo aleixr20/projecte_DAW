@@ -27,7 +27,7 @@
 								<div class="col-md-4 text-right">
 									{% for cat in article.categories %}
 										<a href="{{ path('adminArticlesCategoria', {id: cat.id}) }}" alt="llistar articles de la categoria {{cat.nom}}" title="llistar articles de la categoria {{cat.nom}}">
-										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="{{cat.nom}} logotip"></a>
+										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="Logotip del la categoria {{cat.nom}}"></a>
 									{% endfor %}
 									{% if article.visible %}
 										<i class="admin-icons fa fa-eye-slash"></i>
