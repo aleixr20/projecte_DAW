@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('admin/menu_admin.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	<section class="onepage">
+		<h1>Editar Categoria</h1>
+
+		{{ form_start(adminEditarCategoria) }}
+		<div class="form-group">
+			{{ form_label(adminEditarCategoria.nom) }}
+			{{ form_widget(adminEditarCategoria.nom) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(adminEditarCategoria.tipus) }}
+			{{ form_widget(adminEditarCategoria.tipus) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(adminEditarCategoria.logo) }}
+			{{ form_widget(adminEditarCategoria.logo) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(adminEditarCategoria.color) }}
+			{{ form_widget(adminEditarCategoria.color) }}
+		</div>
+		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		{{ form_end(adminEditarCategoria) }}
+	</section>
+
+{% endblock %}

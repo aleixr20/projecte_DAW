@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ include('admin/menu_admin.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	<section class="onepage">
+		<h1>Editar Article</h1>
+
+		{{ form_start(adminEditarArticle) }}
+		<div class="form-group form-row">
+
+			<div class="col-md-6">
+				{{ form_label(adminEditarArticle.data_publicacio) }}
+				{{ form_widget(adminEditarArticle.data_publicacio) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_label(adminEditarArticle.data_actualitzacio) }}
+				{{ form_widget(adminEditarArticle.data_actualitzacio) }}
+			</div>
+		</div>
+		<div class="form-group form-row">
+			<div class="col-md-6">
+
+				{{ form_label(adminEditarArticle.autor) }}
+				{{ form_widget(adminEditarArticle.autor) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_label(adminEditarArticle.visible) }}
+				{{ form_widget(adminEditarArticle.visible) }}
+			</div>
+		</div>
+		<button type="submit" class="btn btn-block btn-outline-secondary">ACTUALITZAR DADES</button>
+
+
+		{# <button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button> #}
+		{{ form_end(adminEditarArticle) }}
+		<a class="btn btn-outline-secondary" href="{{ path('article_detall', {slug: article.slug}) }}">Veure article</button>
+		<a class="btn btn-outline-secondary" href="{{ path('adminArticles') }}">Cancelar</button>
+
+	</section>
+
+{% endblock %}

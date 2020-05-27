@@ -4,20 +4,17 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
-use App\Entity\Categoria;
-
-use App\Repository\UserRepository;
-use App\Repository\ArticleRepository;
-use App\Repository\ComentariRepository;
-use App\Repository\CategoriaRepository;
-
-use App\Form\AdminCategoriaType;
-
-
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+use App\Repository\ArticleRepository;
+use App\Form\AdminArticleType;
+use App\Repository\CategoriaRepository;
+use App\Form\AdminCategoriaType;
+use App\Repository\ComentariRepository;
+use App\Form\AdminComentariType;
+use App\Repository\UserRepository;
+use App\Form\AdminUserType;
 
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -46,6 +43,47 @@ class AdminController extends AbstractController
     }
 
     /**
+     * LLISTAR ARTICLES
+     * @Route("/admin/articles", name="adminArticles")
+     */
+    public function llistarArticles(ArticleRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $articles = $repository->findAll();
+
+            return $this->render('admin/llistarArticles.html.twig', [
+                'articles' => $articles,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+        /**
+     * LLISTAR ARTICLES d'UNA CATEGORIA
+     * @Route("/admin/articles/categoria/{id}", name="adminArticlesCategoria")
+     */
+    public function llistarArticlesCategoria($id, CategoriaRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $categoria = $repository->findOneBy(array('id' => $id));
+            $articles = $categoria->getArticles();
+
+            return $this->render('admin/llistarArticles.html.twig', [
+                'articles' => $articles,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * LLISTAR CATEGORIES
      * @Route("/admin/categories", name="adminCategories")
      */
@@ -66,17 +104,17 @@ class AdminController extends AbstractController
     }
 
     /**
-     * LLISTAR ARTICLES
-     * @Route("/admin/articles", name="adminArticles")
+     * LLISTAR COMENTARIS
+     * @Route("/admin/comentaris", name="adminComentaris")
      */
-    public function llistarArticles(ArticleRepository $repository)
+    public function llistarComentaris(ArticleRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $articles = $repository->findAll();
 
-            return $this->render('admin/llistarArticles.html.twig', [
+            return $this->render('admin/llistarComentaris.html.twig', [
                 'articles' => $articles,
             ]);
         }
@@ -84,7 +122,6 @@ class AdminController extends AbstractController
         //Si no hi havia ROLE_ADMIN loguejat
         return $this->redirectToRoute('homepage');
     }
-
 
     /**
      * LLISTAR USUARIS
@@ -106,19 +143,35 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('homepage');
     }
 
+
     /**
-     * LLISTAR COMENTARIS
-     * @Route("/admin/comentaris", name="adminComentaris")
+     * EDITAR DADES ADMIN d'UN ARTICLE
+     * @Route("/admin/article/{id}", name="adminEditarArticle")
      */
-    public function llistarComentaris(ArticleRepository $repository)
+    public function editarArticle($id, Request $request, ArticleRepository $repository): Response
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            $articles = $repository->findAll();
+            $article = $repository->findOneBy(array('id' => $id));
 
-            return $this->render('admin/llistarComentaris.html.twig', [
-                'articles' => $articles,
+            //Crear Objecte Article i Form
+            $form = $this->createForm(AdminArticleType::class, $article);
+            $form->handleRequest($request);
+
+            //Si el formulari es enviat, capturar dades i actualitzar article a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('adminArticles');
+            }
+
+            return $this->render('admin/adminEditarArticle.html.twig', [
+                'adminEditarArticle' => $form->createView(),
+                'article' => $article,
             ]);
         }
 
@@ -179,6 +232,41 @@ class AdminController extends AbstractController
             return $this->render('admin/adminEditarCategoria.html.twig', [
                 'categoria' => $categoria,
                 'adminEditarCategoria' => $form->createView(),
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+        /**
+     * EDITAR DADES ADMIN d'UN USUARI
+     * @Route("/admin/usuari/{id}", name="adminEditarUsuari")
+     */
+    public function editarUsuari($id, Request $request, UserRepository $repository): Response
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $usuari = $repository->findOneBy(array('id' => $id));
+
+            //Crear Objecte User i Form
+            $form = $this->createForm(AdminUserType::class, $usuari);
+            $form->handleRequest($request);
+
+            //Si el formulari es enviat, capturar dades i actualitzar article a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($usuari);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('adminUsuaris');
+            }
+
+            return $this->render('admin/adminEditarUsuari.html.twig', [
+                'adminEditarUsuari' => $form->createView(),
+                'user' => $usuari,
             ]);
         }
 
