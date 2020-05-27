@@ -8,79 +8,88 @@
 	<section>
 		<h1 class="titulo">Llista de usuaris</h1>
 
+		<div class="accordion" id="accordionExample">
 
-		<table class="table-sm">
-			<tr>
-				<td>username</td>
-				<td>nom</td>
-				<td>email</td>
-				<td>registre</td>
-				<td>ultimlogin</td>
-				<td><i class="fa fa-github"></i></td>
-				<td><i class="fa fa-linkedin"></i></td>
-				<td><i class="fa fa-twitter"></i></td>
-				<td><i class="fa fa-facebook"></i></td>
-				<td><i class="fa fa-book"></i></td>
-				<td><i class="fa fa-commenting-o"></i></td>
-				<td></td>
-			</tr>
-			{% for usuari in usuaris %}
+			<table class="table">
+				<tr>
+					<td style="width:5em;">username</td>
+					<td style="width:10em;">nom</td>
+					<td>registre</td>
+					<td>ultimlogin</td>
+					<td style="width:3em;">
+						<i class="fa fa-book"></i>
+					</td>
+					<td style="width:3em;">
+						<i class="fa fa-commenting-o"></i>
+					</td>
+					<td style="width:3em;"></td>
+				</tr>
+				{% for usuari in usuaris %}
 
-				{% if 'ROLE_ADMIN' in usuari.roles %}
-					<tr class="alert-primary">
+					{% if 'ROLE_ADMIN' in usuari.roles %}
+						<tr class="alert-primary">
 
-					{% elseif 'ROLE_VALIDATED' in usuari.roles %}
-						<tr class="alert-success">
+						{% elseif 'ROLE_VALIDATED' in usuari.roles %}
+							<tr class="alert-success">
 
-						{% elseif 'ROLE_USER' in usuari.roles %}
+							{% elseif 'ROLE_USER' in usuari.roles %}
 
-							<tr class="alert-warning">
-							{% endif %}
-							<td>
-								{{usuari.username}}
-							</td>
-							<td>
-								{{usuari.nom}}
-								{{usuari.cognom}}
-							</td>
-							<td>
-								{{usuari.email}}
-							</td>
-							<td>
-								{{usuari.dataregistre|date('d/m/Y')}}
-							</td>
-							<td>
-								{{usuari.ultimlogin|date('d/m/Y')}}
-							</td>
-							<td>
-								{{usuari.github}}
-							</td>
-							<td>
-								{{usuari.linkedin}}
-							</td>
-							<td>
-								{{usuari.twitter}}
-							</td>
-							<td>
-								{{usuari.facebook}}
-							</td>
-							<td>
-								<a href="{{path('articlesAutor', {username:usuari.username}) }}">
-									{{usuari.articles|length}}</a>
-							</td>
+								<tr class="alert-warning">
+								{% endif %}
+								<td>
+									<div data-toggle="collapse" data-target="#usuari_{{usuari.id}}">{{usuari.username}}</div>
+								</td>
+								<td>
+									{{usuari.nom}}
+									{{usuari.cognom}}
+								</td>
+								<td>
+									{{usuari.dataregistre|date('d/m/Y')}}
+								</td>
+								<td>
+									{{usuari.ultimlogin|date('d/m/Y')}}
+								</td>
+								<td>
+									<a href="{{path('articlesAutor', {username:usuari.username}) }}">
+										{{usuari.articles|length}}</a>
+								</td>
 
-							<td>
-								{{usuari.comentaris|length}}
-							</td>
-							<td>
-								<a href="{{path('userProfile', {username:usuari.username}) }}">
-									<i class="fa fa-eye"></i></a>
+								<td>
+									{{usuari.comentaris|length}}
+								</td>
+								<td>
+									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}">
+										<i class="fa fa-cog"></i>
+									</a>
 								</td>
 							</td>
 						</tr>
-
+						<tr class="collapse" id="usuari_{{usuari.id}}" data-parent="#accordionExample">
+							<td colspan="2">
+								<p>
+									{{usuari.email}}<br/>
+									{% if usuari.github != null %}
+										<i class="fa fa-github"></i>
+										{{usuari.github}}<br/>
+									{% endif %}
+									{% if usuari.linkedin != null %}
+										<i class="fa fa-linkedin"></i>
+										{{usuari.linkedin}}<br/>
+									{% endif %}
+									{% if usuari.twitter != null %}
+										<i class="fa fa-twitter"></i>
+										{{usuari.twitter}}<br/>
+									{% endif %}
+									{% if usuari.facebook != null %}
+										<i class="fa fa-facebook"></i>
+										{{usuari.facebook}}<br/>
+									{% endif %}
+								</p>
+							</td>
+							<td colspan="5">{{usuari.descripcio|raw}}</td>
+						</tr>
 					{% endfor %}
-
-
-				</section>
-			{% endblock %}
+				</table>
+			</div>
+		</section>
+	{% endblock %}

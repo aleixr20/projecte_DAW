@@ -565,6 +565,10 @@ code {
     padding: 0.25em;
 }
 
+a .admin-icons:hover {
+    color: red;
+}
+
 .admin-comments {
     font-size: 0.8em;
     font-style: oblique;
@@ -608,6 +612,10 @@ code {
     min-height: 1px;
     padding: 0.66rem 1.16rem;
     background-color: #fff;
+}
+
+.card-text {
+    padding: 0;
 }
 
 

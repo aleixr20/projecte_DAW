@@ -24,21 +24,19 @@
 									<h5 class="card-title" data-toggle="collapse" data-target="#article_{{article.id}}">
 										{{article.titol }}</h5>
 								</div>
-								<div class="col-md-3 text-right">
+								<div class="col-md-4 text-right">
 									{% for cat in article.categories %}
-										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="{{cat.nom}} logotip">
+										<a href="{{ path('adminArticlesCategoria', {id: cat.id}) }}" alt="llistar articles de la categoria {{cat.nom}}" title="llistar articles de la categoria {{cat.nom}}">
+										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="{{cat.nom}} logotip"></a>
 									{% endfor %}
-								</div>
-								<div class="col-md-1 text-right">
-
 									{% if article.visible %}
 										<i class="admin-icons fa fa-eye-slash"></i>
 									{% else %}
 										<i class="admin-icons fa fa-eye"></i>
 									{% endif %}
-									<i class="admin-icons fa fa-cog"></i>
-
+									<a href="{{ path('adminEditarArticle', {id: article.id}) }}" alt="Administrar article" title="Administrar article"><i class="admin-icons fa fa-cog"></i></a>
 								</div>
+
 							</div>
 						</div>
 						<div class="card-body collapse" id="article_{{article.id}}" data-parent="#accordionExample">
@@ -50,12 +48,15 @@
 								per
 								{{article.autor.username}}
 								({{article.autor.articles|length}}
-								articles)<br/>
-								{% if article.dataActualitzacio != null %}
-									Darrera modificació:
-									{{article.dataActualitzacio|date('d/m/Y')}}<br/>
-								{% endif %}
+								articles)
 							</p>
+
+							{% if article.dataActualitzacio != null %}
+								<p class="card-text">
+								Darrera modificació: {{article.dataActualitzacio|date('d/m/Y')}}
+								</p>
+							{% endif %}
+
 							{% if article.comentaris|length != 0 %}
 								<hr>
 								{% for comment in article.comentaris %}
@@ -69,8 +70,11 @@
 										{% elseif comment.tipus == 3 %}
 											<i class="fa fa-rocket"></i>
 										{% endif %}
-										 {{comment.user.username}} {{comment.dataPublicacio|date('d/m/Y')}} {{comment.visible}} <i class="fa fa-cog"></i><br/>
-										 "{{comment.text}}"
+										{{comment.user.username}}
+										{{comment.dataPublicacio|date('d/m/Y')}}
+										{{comment.visible}}
+										<i class="fa fa-cog"></i><br/>
+										"{{comment.text}}"
 									</p>
 								{% endfor %}
 							{% endif %}
