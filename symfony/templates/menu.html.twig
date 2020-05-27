@@ -2,7 +2,7 @@
 	{% if app.user %}
 		<li>
 			<a
-				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.username}}">
+				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
@@ -48,7 +48,7 @@
 	{# <li id="search">
 		<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
 		{# <i class="menu-icon fa fa-search"></i> #}
-	</li> #}
+	</li>
 	<li id="hamburgesa">
 		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
 	</li>

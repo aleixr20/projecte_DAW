@@ -160,10 +160,12 @@ nav {
 
 #hamburgesa {
     visibility: hidden;
+    cursor: pointer;
 }
 
 #dark-mode .menu-icon {
     font-size: 1.2em;
+    cursor: pointer;
 }
 
 
