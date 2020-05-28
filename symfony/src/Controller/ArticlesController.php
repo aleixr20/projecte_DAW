@@ -254,14 +254,14 @@ class ArticlesController extends AbstractController
 
             return $this->render('articles/index.html.twig', [
                 'article' => $post,
-                'color' => $cat[0]->getColor(),
+                'categoria' => $cat[0],
                 'feedbackForm' => $form->createView()
             ]);
         }
 
         return $this->render('articles/index.html.twig', [
             'article' => $post,
-            'color' => $cat[0]->getColor(),
+            'categoria' => $cat[0],
             'feedbackForm' => $form->createView(),
         ]);
     }
@@ -312,7 +312,6 @@ class ArticlesController extends AbstractController
                 return $this->render('articles/llista_articles.html.twig', [
                     'articles' => $posts,
                     'categoria' => $categories[$i],
-                    'color' => $categories[$i]->getColor()
                 ]);
 
                 //OPCIO JSON
