@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_description %}
-	<meta description="Full Stack Nerds d'ultima fornada!! Articles in{{categoria.nom}}">
+	<meta name="description" content="Full Stack Nerds d'ultima fornada!! Articles in{{categoria.nom}}">
 {% endblock %}
 
 {% block meta_ogg %}
 	<!-- Open Graph data -->
 	<meta property="og:title" content="
-	{% if categoria is defined %}
-		Articles de la categoria {{  categoria.nom }}
-	{% elseif articles[0].autor is defined%}
-		Articles de l'usuari {{ articles[0].autor.nom }}
-	{% else %}
-		Default image
-	{% endif %}
-	" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="{{ app.request.uri }}" />
+			{% if categoria is defined %}
+				Articles de la categoria {{  categoria.nom }}
+			{% elseif autor is defined %}
+				Articles de {{ autor.username }}
+			{% else %}
+				Default image
+			{% endif %}
+			"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="{{ app.request.uri }}"/>
 	<meta property="og:image" content="
 	{% if categoria is defined %}
 		{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ categoria.logo) }}
@@ -32,14 +32,18 @@
 {% endblock %}
 
 {% block title %}
+	{% if categoria is defined %}
 		b-NERDS! in{{categoria.nom}}
+	{% elseif autor is defined %}
+		b-NERDS! by {{autor.username}}
+	{% endif %}
 {% endblock %}
 
 {% block extrastyes %}
 	{% if (categoria.color is defined) and (categoria.color is not empty) %}
 		<style>
 			nav {
-				border-right: 3px solid {{categoria.color}};
+				border-right: 3px solid{{categoria.color}};
 			}
 			.menu-username,
 			.active {
