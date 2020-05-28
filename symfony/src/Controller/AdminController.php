@@ -107,15 +107,15 @@ class AdminController extends AbstractController
      * LLISTAR COMENTARIS
      * @Route("/admin/comentaris", name="adminComentaris")
      */
-    public function llistarComentaris(ArticleRepository $repository)
+    public function llistarComentaris(ComentariRepository $repository)
     {
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            $articles = $repository->findAll();
+            $comentaris = $repository->findAll();
 
             return $this->render('admin/llistarComentaris.html.twig', [
-                'articles' => $articles,
+                'comentaris' => array_reverse($comentaris),
             ]);
         }
 
