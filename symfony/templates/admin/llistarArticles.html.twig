@@ -44,7 +44,9 @@
 						</div>
 						<div class="card-body collapse" id="article_{{article.id}}" data-parent="#accordionExample">
 
-							<p class="card-text">{{article.resum}}
+							<p class="card-text">
+							Resum: {{article.resum}}<br/>
+							SEO: {{article.metadescription}}
 								<hr>
 								Creada el {{article.dataPublicacio|date('d/m/Y')}}
 								 per <a href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}" title="Veure perfil de {{article.autor.username}}">
