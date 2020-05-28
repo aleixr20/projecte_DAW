@@ -3,10 +3,10 @@
 		<a
 			href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}">
 			<!--SI L'USUARI TE IMATGE DE PERFIL-->
-			{% if article.autor.imatge %}
+			{% if(article.autor.imatge) and (article.autor.imatge is not empty) %}
 				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imatge de perfil" id="img-modif">
 			{% else %}
-				<i class="fa fa-user-circle"></i>
+				<i class="menu-icon fa fa-user-circle"></i>
 			{% endif %}
 		</a>
 	</li>

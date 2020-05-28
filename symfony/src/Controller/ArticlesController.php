@@ -273,8 +273,10 @@ class ArticlesController extends AbstractController
     public function articlesPerAutor($username, ArticleRepository $post_repo, UserRepository $user_repo)
     {
         $user = $user_repo->findOneBy(array('nom_usuari' => $username));
-        $posts = $post_repo->findBy(array('autor' => $user));
+        $postsAutor = $post_repo->findBy(array('autor' => $user, 'visible' => true));
 
+        //Girar l'array perque surtin per ordre de mes nous a mes antics
+        $posts = array_reverse($postsAutor);
         return $this->render('articles/llista_articles.html.twig', [
             'articles' => $posts,
         ]);
@@ -293,7 +295,18 @@ class ArticlesController extends AbstractController
         //Comprovar si la categoria entrada coincideix amb el nom d'una categoria existent
         for ($i = 0; $i < count($categories); $i++) {
             if ($cat_name == $categories[$i]->getNom()) {
-                $posts = $categories[$i]->getArticles();
+
+                //Si hi ha coincidencia, obtenir tots els articles
+                $allPosts = $categories[$i]->getArticles();
+                $publicPosts = [];
+                //Per cada article comprovar la seva visibilitat (nomes colem els publics)
+                for ($j = 0; $j < count($allPosts); $j++) {
+                    if ($allPosts[$j]->getVisible()) {
+                        array_push($publicPosts, $allPosts[$j]);
+                    }
+                }
+                //Finalment girem l'array perque surtin per ordre de mes nous a mes antics
+                $posts = array_reverse($publicPosts);
 
                 //Si hi ha coincidencia, fer return
                 return $this->render('articles/llista_articles.html.twig', [
