@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block meta_description %}
+	<meta description="{{user.descripcio}}">
+{% endblock %}
+
+{% block title %}
+	B-NERDS! Meet {{user.username}}
+{% endblock %}
+
 {% block navbar %}
 	{{ include('menu.html.twig') }}
 {% endblock %}

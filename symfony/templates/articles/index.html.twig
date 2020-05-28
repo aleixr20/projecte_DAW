@@ -1,5 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block meta_description %}
+	<meta description="{{article.metadescription}}">
+{% endblock %}
+{% block meta_ogg %}
+
+{% endblock %}
+
+{% block title %}
+	b-Nerds! {{article.titol}}
+{% endblock %}
+
+{% block extrastyes %}
+	<link href="{{ asset('bundles/fosckeditor/plugins/codesnippet/lib/highlight/styles/rainbow.css') }}" rel="stylesheet">
+	<script src="{{ asset('bundles/fosckeditor//plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+{% endblock %}
+
+
 {% block navbar %}
 	{{ include('articles/menu_articles.html.twig') }}
 {% endblock %}
@@ -13,12 +30,9 @@
 		</div>
 		<div>
 			{% if article.html is not null  %}
-				<a href="{{ path('inline_editor',{slugArticle:article.slug}) }}">Nerd it</a>	
-			{% endif %}	
+				<a href="{{ path('inline_editor',{slugArticle:article.slug}) }}">Nerd it</a>
+			{% endif %}
 		</div>
-		{# <p class="article-footer">
-																																		Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
-																																		</p> #}
 
 		<ul class="feedback-list">
 			<li class="feedback-icons">
@@ -41,13 +55,11 @@
 			{{ form_start(feedbackForm) }}
 
 			{# {% if app.user in article.comentaris.user %} #}
-{# hola #}
+			{# hola #}
 			{# {% else %} #}
-				{{ form_widget(feedbackForm.text) }}
-				{{ form_widget(feedbackForm.tipus) }}
+			{{ form_widget(feedbackForm.text) }}{{ form_widget(feedbackForm.tipus) }}
 			{# {% endif %} #}
-
-			<p class="feedback-footer">Solo los usuarios registrados pueden añadir comentarios</p>
+				<p class="feedback-footer"> Solo los usuarios registrados pueden añadir comentarios</p>
 			<div class="text-right">
 				{% if app.user and is_granted('ROLE_VALIDATED') %}
 					<button type="submit" class="btn btn-outline-secondary">enviar</button>

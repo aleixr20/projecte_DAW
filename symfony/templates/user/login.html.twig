@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	B-NERDS! Login
+{% endblock %}
+
 {% block navbar %}
 	{{ include('menu.html.twig') }}
 {% endblock %}
@@ -19,8 +23,6 @@
 					<div class="alert alert-success">Gracies per registrar-te. Fes login i disfruta</div>
 				{% endif %}
 			{% endif %}
-
-
 
 
 			{% if error %}
@@ -45,7 +47,7 @@
 
 		</form>
 		{# <button type="button" class="btn btn-block btn-outline-secondary" onclick="location.href='{{ path('app_register') }}'"> Registra`t
-																				</button> #}
+																						</button> #}
 		<p class="text">Encara no t'has registrar? a que esperas,
 			<a href="{{ path('app_register') }}" alt="Enllaç al formulari de registre" title="Registre't">Uneixte al club !</a>
 		</p>

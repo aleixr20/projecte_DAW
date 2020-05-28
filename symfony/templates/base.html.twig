@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="ca">
 
-	{% block head %}
-		{{ include('head.html.twig') }}
-	{% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		{% block meta_description %}
+			<meta description="Full Stack Nerds d'ultima fornada!! Adictes a la programació amb ganas d'aprendre-ho tot! Aqui compartim els nostres apunts i recursos to Develop.">
+		{% endblock %}
+
+		{% block meta_ogg %}
+
+		{% endblock %}
+
+		<title>
+			{% block title %}
+				B-NERDS! toDevelop
+			{% endblock %}
+		</title>
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link href="https://fonts.googleapis.com/css2?family=Abel&family=Inria+Serif:ital,wght@0,300;0,400;1,300;1,400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+			{% block extralinks %}{% endblock %}
+
+			<link rel="stylesheet" href="{{ asset('css/b-nerd.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/estils-aleix.css') }}">
+			<script src="{{ asset('js/b-nerd2.js') }}"></script>
+			{% block extrastyes %}{% endblock %}
+		{% endblock %}
+	</head>
 	<body>
 		{% block body %}
 
-			<!--MENU DE NAVEGACIO - LATERAL ESQUERRA-->
 			<nav class="primary-menu">
 				{% block navbar %}{% endblock %}
 			</nav>
-
-			<!--CONTINGUT DE LA WEB - ZONA DRETA-->
 			<main>
 				<div id="fade"></div>
 				{% block content %}{% endblock %}
@@ -21,7 +51,6 @@
 
 		{% endblock %}
 
-		{% block javascripts %}
-		{% endblock %}
+		{% block javascripts %}{% endblock %}
 	</body>
-</html>
+</html></head></html>
