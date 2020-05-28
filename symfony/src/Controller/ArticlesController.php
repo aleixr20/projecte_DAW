@@ -279,6 +279,7 @@ class ArticlesController extends AbstractController
         $posts = array_reverse($postsAutor);
         return $this->render('articles/llista_articles.html.twig', [
             'articles' => $posts,
+            'autor' => $posts[0]->getAutor()
         ]);
     }
 
