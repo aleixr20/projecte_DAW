@@ -10,6 +10,7 @@
 	<meta property="og:url" content="{{ app.request.uri }}" />
 	<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ article.categories[0].logo) }}" />
 	<meta property="og:description" content="{{article.metadescription}}" />
+	<meta property="og:image:width" content="300" />
 	<meta property="og:site_name" content="B-NERD TO DEVELOPE" />
 	<meta property="article:published_time" content="{{ article.dataPublicacio|date() }}" />
 	<meta property="article:modified_time" content="{{ article.dataActualitzacio|date() }}" />
