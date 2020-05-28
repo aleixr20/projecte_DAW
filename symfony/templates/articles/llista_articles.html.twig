@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_description %}
-	<meta description="Full Stack Nerds d'ultima fornada!! Articles sobre XXX">
+	<meta description="Full Stack Nerds d'ultima fornada!! Articles in{{categoria.nom}}">
 {% endblock %}
 
 {% block meta_ogg %}
@@ -31,27 +31,27 @@
 {% endblock %}
 
 {% block title %}
-		B-NERDS! inXXX
+		b-NERDS! in{{categoria.nom}}
 {% endblock %}
 
 {% block extrastyes %}
-	{% if (color is defined) and (color is not empty) %}
+	{% if (categoria.color is defined) and (categoria.color is not empty) %}
 		<style>
 			nav {
-				border-right: 3px solid{{color}};
+				border-right: 3px solid {{categoria.color}};
 			}
 			.menu-username,
 			.active {
-				color: {{color}}
+				color: {{categoria.color}}
 				!important;
 			}
 			.menu-bottom a:hover,
 			.menu-bottom i:hover {
-				color: {{color}}
+				color: {{categoria.color}}
 				;
 			}
 			a:hover {
-				color: {{color}}
+				color: {{categoria.color}}
 				;
 			}
 		</style>

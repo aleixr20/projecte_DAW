@@ -19,12 +19,34 @@
 {% endblock %}
 
 {% block title %}
-	b-Nerds! {{article.titol}}
+	b-NERDS! {{article.titol}}
 {% endblock %}
 
 {% block extrastyes %}
 	<link href="{{ asset('bundles/fosckeditor/plugins/codesnippet/lib/highlight/styles/rainbow.css') }}" rel="stylesheet">
 	<script src="{{ asset('bundles/fosckeditor//plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+
+	{% if (categoria.color is defined) and (categoria.color is not empty) %}
+		<style>
+			nav {
+				border-right: 3px solid {{categoria.color}};
+			}
+			.menu-username,
+			.active {
+				color: {{categoria.color}}
+				!important;
+			}
+			.menu-bottom a:hover,
+			.menu-bottom i:hover {
+				color: {{categoria.color}}
+				;
+			}
+			a:hover {
+				color: {{categoria.color}}
+				;
+			}
+		</style>
+	{% endif %}
 {% endblock %}
 
 
