@@ -11,6 +11,11 @@
 		<div class="article_individual_content">
 			{{article.contingut|raw}}
 		</div>
+		<div>
+			{% if article.html is not null  %}
+				<a href="{{ path('inline_editor',{slugArticle:article.slug}) }}">Nerd it</a>	
+			{% endif %}	
+		</div>
 		{# <p class="article-footer">
 																																		Publicada el {{article.datapublicacio|date("d/m/Y")}} por {{article.user.username}} en {{article.categoria.nom}}
 																																		</p> #}

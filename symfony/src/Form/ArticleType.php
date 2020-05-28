@@ -110,8 +110,23 @@ class ArticleType extends AbstractType
             ->add('contingut', CKEditorType::class, [
                 'label' => 'Contingut article *',
                 //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
-                'attr' => ['class' => 'form-control', 'rows' => 5],
-                // 'config' => array('toolbar' => "toolbar_nerd")
+                'attr' => ['class' => 'form-control', 'rows' => 5]
+
+            ])
+            ->add('html', TextareaType::class, [
+                'label' => 'Contingut html ide embed *',
+                //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
+                'attr' => ['class' => 'form-control', 'rows' => 5]
+            ])
+            ->add('css', TextareaType::class, [
+                'label' => 'Contingut css ide embed *',
+                //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
+                'attr' => ['class' => 'form-control', 'rows' => 5]
+            ])
+            ->add('js', TextareaType::class, [
+                'label' => 'Contingut js ide embed *',
+                //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
+                'attr' => ['class' => 'form-control', 'rows' => 5]
             ])
 
             ->add('visible', ChoiceType::class, [
