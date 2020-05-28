@@ -51,7 +51,7 @@ class AdminController extends AbstractController
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            $articles = $repository->findAll();
+            $articles = array_reverse($repository->findAll());
 
             return $this->render('admin/llistarArticles.html.twig', [
                 'articles' => $articles,

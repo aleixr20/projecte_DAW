@@ -4,10 +4,10 @@
 			<a
 				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
 				<!--SI L'USUARI TE IMATGE DE PERFIL-->
-				{% if app.user.imatge %}
+				{% if app.user.imatge and app.user.imatge is not empty %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
-					<i class="fa fa-user-circle"></i>
+					<i class="menu-icon fa fa-user-circle"></i>
 				{% endif %}
 			</a>
 		</li>
@@ -22,8 +22,8 @@
 		</li>
 	{% else %}
 		<li>
-			<a class="menu-icon" href="{{ path('app_login')}}" alt="Enllaç a formulari de login">
-				<i class="fa fa-user-circle"></i>
+			<a href="{{ path('app_login')}}" alt="Enllaç a formulari de login">
+				<i class="menu-icon fa fa-user-circle"></i>
 			</a>
 		</li>
 	{% endif %}
@@ -55,5 +55,11 @@
 	<li id="dark-mode">
 		<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
 	</li>
+	{% if app.user and is_granted('ROLE_ADMIN',app.user.roles) %}
+		<li>
+			<a class="menu-link" href="{{ path('admin')}}" alt="Enllaç al zona admin">admin</a>
+		</li>
+	{% endif %}
+
 
 </ul>

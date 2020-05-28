@@ -3,7 +3,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>
-		{% block title %}B-NERD ! {#{page_title}#}{% endblock %}
+		{% block title %}B-NERD !
+			{#{page_title}#}
+		{% endblock %}
 	</title>
 	{% block stylesheets %}
 		<!--BOOTSRAP - En prinicipi no els farem servir, pero els deixo aqui per si de cas-->
@@ -15,8 +17,8 @@
 		<!--AWESOME ICON FONT-->
 		<link
 		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- AXIOS -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<!-- AXIOS -->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<!--GOOGLE FONTS-->
 		<link href="https://fonts.googleapis.com/css2?family=Abel&family=Inria+Serif:ital,wght@0,300;0,400;1,300;1,400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
@@ -43,6 +45,9 @@
 				.menu-bottom i:hover {
 					color: {{color}}
 					;
+				}
+				a:hover {
+					color: {{color}};
 				}
 			</style>
 		{% endif %}

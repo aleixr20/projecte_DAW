@@ -51,10 +51,8 @@
 		<p class="text">{{ user.descripcio|raw }}
 		</p>
 		<p>
-			{{user.username}}
-			es usuari registrat desde
-			{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
-			{{user.username}}">{{user.articles|length}}articles</a>
+			{{user.username}} es usuari registrat desde	{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
+			{{user.username}}">{{user.articles|length}} articles</a>
 		</p>
 
 		<br/>

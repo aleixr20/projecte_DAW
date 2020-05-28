@@ -243,7 +243,7 @@ window.onload = function() {
 
             Obj.userMenu.style.bottom = "30%"
             Obj.navbar.style.backgroundColor = "transparent";
-            if (window.screen.availWidth < 576) {
+            if (window.screen.availWidth < 576 || window.screen.orientation.type == "landscape-primary") {
                 Obj.navbar.style.width = "3em";
                 for (i = 0; i < Obj.menuLinks.length; i++) {
                     Obj.menuLinks[i].style.opacity = "0";

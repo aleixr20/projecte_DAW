@@ -27,14 +27,17 @@
 								<div class="col-md-4 text-right">
 									{% for cat in article.categories %}
 										<a href="{{ path('adminArticlesCategoria', {id: cat.id}) }}" alt="llistar articles de la categoria {{cat.nom}}" title="llistar articles de la categoria {{cat.nom}}">
-										<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="Logotip del la categoria {{cat.nom}}"></a>
+											<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="Logotip del la categoria {{cat.nom}}"></a>
 									{% endfor %}
+									<a href="{{ asset("post/" ~ article.slug) }}" alt="Veure article {{article.titol}}" alt="Veure article">
 									{% if article.visible %}
-										<i class="admin-icons fa fa-eye-slash"></i>
+										<i class="admin-icons fa fa-eye-slash"></i></a>
 									{% else %}
-										<i class="admin-icons fa fa-eye"></i>
+										<i class="admin-icons fa fa-eye"></i></a>
 									{% endif %}
-									<a href="{{ path('adminEditarArticle', {id: article.id}) }}" alt="Administrar article" title="Administrar article"><i class="admin-icons fa fa-cog"></i></a>
+									<a href="{{ path('adminEditarArticle', {id: article.id}) }}" alt="Administrar article" title="Administrar article">
+										<i class="admin-icons fa fa-cog"></i>
+									</a>
 								</div>
 
 							</div>
@@ -43,17 +46,18 @@
 
 							<p class="card-text">{{article.resum}}
 								<hr>
-								Creada el
-								{{article.dataPublicacio|date('d/m/Y')}}
-								per
-								{{article.autor.username}}
-								({{article.autor.articles|length}}
-								articles)
+								Creada el {{article.dataPublicacio|date('d/m/Y')}}
+								 per <a href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}" title="Veure perfil de {{article.autor.username}}">
+								{{article.autor.username}}</a>
+								 (<a href="{{path('articlesAutor', {username:article.autor.username}) }}" 
+								 alt="Enllaç a llista d'articles de {{article.autor.username}}" 
+								 title="Veure articles de {{article.autor.username}}">{{article.autor.articles|length}} articles</a>)
 							</p>
 
 							{% if article.dataActualitzacio != null %}
 								<p class="card-text">
-								Darrera modificació: {{article.dataActualitzacio|date('d/m/Y')}}
+									Darrera modificació:
+									{{article.dataActualitzacio|date('d/m/Y')}}
 								</p>
 							{% endif %}
 
