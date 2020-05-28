@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block meta_description %}
-	<meta name="description" content="Full Stack Nerds d'ultima fornada!! Articles in{{categoria.nom}}">
+	<meta name="description" content="Full Stack Nerds d'ultima fornada!! Articles
+	{% if categoria is defined %}
+		 in{{categoria.nom}}"
+	{% elseif autor is defined %}
+		 by {{autor.username}}"
+	{% endif %}
 {% endblock %}
 
 {% block meta_ogg %}
