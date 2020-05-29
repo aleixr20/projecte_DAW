@@ -432,29 +432,30 @@ window.onload = function() {
 
             //Afegir listener de nova Categoria
             Obj.selectorCategoria1.addEventListener("change", function() {
-                if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value == 126){
+                if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].text == "afegir nova categoria"){
                     Obj.novaCategoriaOption.style.display = "block";
-                }else if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126){
+                }else if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].text != "afegir nova categoria"){
                         Obj.novaCategoriaOption.style.display = "none";
                 }
             })
             Obj.selectorCategoria2.addEventListener("change", function() {
-                if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value == 126){
+                console.log(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].text)
+                if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].text == "afegir nova categoria"){
                     Obj.novaCategoriaOption.style.display = "block";
-                }else if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126){
+                }else if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].text != "afegir nova categoria"){
                         Obj.novaCategoriaOption.style.display = "none";
                 }
             })
             Obj.selectorCategoria3.addEventListener("change", function() {
-                if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value == 126){
+                if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].text == "afegir nova categoria"){
                     Obj.novaCategoriaOption.style.display = "block";
-                }else if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
-                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126){
+                }else if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].text != "afegir nova categoria" &&
+                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].text != "afegir nova categoria"){
                         Obj.novaCategoriaOption.style.display = "none";
                 }
             })
