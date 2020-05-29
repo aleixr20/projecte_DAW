@@ -15,8 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
+
 
 class ArticleType extends AbstractType
 {
@@ -116,17 +115,20 @@ class ArticleType extends AbstractType
             ->add('html', TextareaType::class, [
                 'label' => 'Contingut html ide embed *',
                 //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
-                'attr' => ['class' => 'form-control', 'rows' => 5]
+                'attr' => ['class' => 'form-control', 'rows' => 5],
+                'required' => false
             ])
             ->add('css', TextareaType::class, [
                 'label' => 'Contingut css ide embed *',
                 //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
-                'attr' => ['class' => 'form-control', 'rows' => 5]
+                'attr' => ['class' => 'form-control', 'rows' => 5],
+                'required' => false
             ])
             ->add('js', TextareaType::class, [
                 'label' => 'Contingut js ide embed *',
                 //'help' => 'Compte amb les etiquetes html. Recorda que els fragments de codi s\'obren amb <pre> i s\'han de tancar amb </pre> sense tabulacions',
-                'attr' => ['class' => 'form-control', 'rows' => 5]
+                'attr' => ['class' => 'form-control', 'rows' => 5],
+                'required' => false
             ])
 
             ->add('visible', ChoiceType::class, [

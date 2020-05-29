@@ -9,26 +9,29 @@
 		<h1 class="titulo">Llista de comentaris</h1>
 
 
-		{% for comentari in comentaris %}
+		{% for comment in comentaris %}
 
 			<p class="admin-comments">
 
-				{% if comentari.tipus == 0 %}
+				{% if comment.tipus == 0 %}
 					<i class="fa fa-frown-o"></i>
-				{% elseif comentari.tipus == 1 %}
+				{% elseif comment.tipus == 1 %}
 					<i class="fa fa-meh-o"></i>
-				{% elseif comentari.tipus == 2 %}
+				{% elseif comment.tipus == 2 %}
 					<i class="fa fa-smile-o"></i>
-				{% elseif comentari.tipus == 3 %}
+				{% elseif comment.tipus == 3 %}
 					<i class="fa fa-rocket"></i>
 				{% endif %}
-				{{comentari.user.username}}	el {{comentari.dataPublicacio|date('d/m/Y')}}<br/>
-				"{{comentari.text}}"<br/>
-				{% if comentari.visible %}
-					 Aquest comentari es visible al article <a href="">moderar comentari</a>
-					{% else %}
-					 Comentari no visible al article <a href="">moderar comentari</a>
-				{% endif %}
+				{{comment.user.username}} el {{comment.dataPublicacio|date('d/m/Y')}} a <a href="{{path('article_detall',{slug:comment.article.slug}) }}" alt="Veure article {{comment.article.titol}}" title="Veure article">{{comment.article.titol}}</a><br/>
+				"{{comment.text}}"<br/>
+					{% if comment.visible %}
+						✔ Aquest comentari es visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Publicar comentarí">amagar</a>
+						{% else %}
+						✖ Comentari no visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Amagar comentari">publicar</a>
+					{% endif %}
+				, <a href="{{path('adminEditarComentari', {id:comment.id}) }}" alt="Moderar comentari">moderar</a>
+				 o <a href="{{path('adminEliminarComentari', {id:comment.id, autor:comment.user.username}) }}" alt="Eliminar comentari">eliminar</a>
+				 comentari)
 			</p>
 
 		{% endfor %}

@@ -56,13 +56,13 @@
 								 title="Veure articles de {{article.autor.username}}">{{article.autor.articles|length}} articles</a>)
 							</p>
 
-							{% if article.dataActualitzacio != null %}
+							{% if article.dataActualitzacio is not empty %}
 								<p class="card-text">
 									Darrera modificació:
 									{{article.dataActualitzacio|date('d/m/Y')}}
 								</p>
 							{% endif %}
-
+							<a href="{{path('adminEliminarArticle', {id:article.id, slug:article.slug, autor:article.autor.username}) }}" alt="eliminar article">eliminar article</a>
 							{% if article.comentaris|length != 0 %}
 								<hr>
 								{% for comment in article.comentaris %}
@@ -77,10 +77,16 @@
 											<i class="fa fa-rocket"></i>
 										{% endif %}
 										{{comment.user.username}}
-										{{comment.dataPublicacio|date('d/m/Y')}}
-										{{comment.visible}}
-										<i class="fa fa-cog"></i><br/>
-										"{{comment.text}}"
+										{{comment.dataPublicacio|date('d/m/Y')}}<br/>
+										"{{comment.text}}"<br/>
+										{% if comment.visible %}
+											✔ Aquest comentari es visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Publicar comentarí">amagar</a>
+											{% else %}
+											✖ Comentari no visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Amagar comentari">publicar</a>
+										{% endif %}
+										, <a href="{{path('adminEditarComentari', {id:comment.id}) }}" alt="Moderar comentari">moderar</a>
+										 o <a href="{{path('adminEliminarComentari', {id:comment.id, autor:comment.user.username}) }}" alt="Eliminar comentari">eliminar</a>
+										 comentari)
 									</p>
 								{% endfor %}
 							{% endif %}

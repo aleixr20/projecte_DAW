@@ -76,6 +76,8 @@ class AdminController extends AbstractController
 
             return $this->render('admin/llistarArticles.html.twig', [
                 'articles' => $articles,
+                // 'articles' => array_reverse($articles),
+
             ]);
         }
 
@@ -113,6 +115,27 @@ class AdminController extends AbstractController
         if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
             $comentaris = $repository->findAll();
+
+            return $this->render('admin/llistarComentaris.html.twig', [
+                'comentaris' => array_reverse($comentaris),
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * LLISTAR COMENTARIS d'UN USUARI
+     * @Route("/admin/comentaris/{username}", name="adminComentarisUsuari")
+     */
+    public function llistarComentarisUsuari($username, UserRepository $user_repo, ComentariRepository $comment_repo)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $usuari = $user_repo->findOneBy(array('nom_usuari' => $username));
+            $comentaris = $comment_repo->findBy(array('user' => $usuari));
 
             return $this->render('admin/llistarComentaris.html.twig', [
                 'comentaris' => array_reverse($comentaris),
@@ -240,6 +263,74 @@ class AdminController extends AbstractController
     }
 
     /**
+     * CANVIAR VISIBILITAT D'UN COMENTARI
+     * @Route("/admin/comentari/publicar/{id}", name="adminPublicarComentari")
+     */
+    public function publicarComentari($id, ComentariRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            //Obtenir la info del comentari
+            $comentari = $repository->findOneBy((array('id' => $id)));
+            //Si esta en visible false, pasar a true i viceversa
+            if ($comentari->getVisible()) {
+                $comentari->setVisible(false);
+            } else {
+                $comentari->setVisible(true);
+            }
+
+            //Persistir dades i pujar a DB
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comentari);
+            $entityManager->flush();
+
+            //Obtenir tots els comentaris i relllistar
+            return $this->redirectToRoute('adminComentaris');
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * EDITAR DADES ADMIN d'UN COMENTARI
+     * @Route("/admin/comentari/editar/{id}", name="adminEditarComentari")
+     */
+    public function editarComentari($id, Request $request, ComentariRepository $repository): Response
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            //Crear formulari amb dades del comentari
+            $comment = $repository->findOneBy(array('id' => $id));
+            $form = $this->createForm(AdminComentariType::class, $comment);
+
+            $form->handleRequest($request);
+
+            //Si el formulari es enviat, capturar dades i actualitzar a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                //Persistir dades i pujar a DB
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($comment);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('adminCometnaris');
+            }
+
+            return $this->render('admin/adminEditarComentari.html.twig', [
+                'adminEditarComentari' => $form->createView(),
+                // 'user' => $usuari,
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+
+    /**
      * EDITAR DADES ADMIN d'UN USUARI
      * @Route("/admin/usuari/{id}", name="adminEditarUsuari")
      */
@@ -293,6 +384,81 @@ class AdminController extends AbstractController
                 'adminEditarUsuari' => $form->createView(),
                 'user' => $usuari,
             ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+
+
+    /**
+     * ELIMINAR ARTICLE
+     * @Route("/admin/delete/article/{id}/{slug}/{autor}", name="adminEliminarArticle")
+     */
+    public function eliminarArticle($id, $slug, $autor, ArticleRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $article = $repository->findOneBy(array('id' => $id));
+
+            //Comprovar segon i tercer paramentres per seguretat
+            if ($article && ($article->getSlug() === $slug) && ($article->getAutor()->getUsername() === $autor)) {
+                //Eliminar de la DB
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($article);
+                $entityManager->flush();
+            }
+            return $this->redirectToRoute('adminArticles');
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+    /**
+     * ELIMINAR COMENTARI
+     * @Route("/admin/comentari/eliminar/{id}/{autor}", name="adminEliminarComentari")
+     */
+    public function eliminarComentari($id, $autor, ComentariRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $comment = $repository->findOneBy(array('id' => $id));
+
+            //Comprovar segon paramatre d'entrada per mes seguretat
+            if ($comment && ($comment->getUser()->getUsername() === $autor)) {
+
+                //Eliminar de la DB
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($comment);
+                $entityManager->flush();
+            }
+            return $this->redirectToRoute('adminComentaris');
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * ELIMINAR USUARI
+     * @Route("/admin/delete/user/{username}", name="eliminarUsuari")
+     */
+    public function eliminarUsuari($username, UserRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $usuari = $repository->findOneBy(array('username' => $username));
+
+            //Eliminar de la DB
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($usuari);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('adminUsuaris');
         }
 
         //Si no hi havia ROLE_ADMIN loguejat

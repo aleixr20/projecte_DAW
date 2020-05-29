@@ -381,6 +381,12 @@ code {
     color: cornflowerblue;
 }
 
+.comments {
+    font-size: 0.9em;
+    font-style: oblique;
+    padding-left: 1em;
+}
+
 #feedback-modal {
     z-index: -1;
     position: fixed;

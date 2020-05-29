@@ -83,6 +83,26 @@
 				<i class="fa fa-rocket"></i>
 			</li>
 		</ul>
+
+		<div>
+		{% for comment in article.comentaris %}
+			<p class="comments">
+				{% if comment.visible %}
+					{% if comment.tipus == 0 %}
+						<i class="fa fa-frown-o"></i>
+					{% elseif comment.tipus == 1 %}
+						<i class="fa fa-meh-o"></i>
+					{% elseif comment.tipus == 2 %}
+						<i class="fa fa-smile-o"></i>
+					{% elseif comment.tipus == 3 %}
+						<i class="fa fa-rocket"></i>
+					{% endif %}
+					{{comment.user.username}} el {{comment.dataPublicacio|date('d/m/Y')}}<br/>
+					"{{comment.text}}"
+				{% endif %}
+			</p>
+		{% endfor %}
+		</div>
 		<div id="feedback-modal">
 			<h5 class="feedback-info">Feedback</h5>
 

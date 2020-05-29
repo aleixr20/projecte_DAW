@@ -8,25 +8,25 @@
 	<section class="onepage">
 		<h1>Editar Categoria</h1>
 
-		{{ form_start(adminEditarCategoria) }}
+		{{ form_start(adminEditarComentari) }}
 		<div class="form-group">
-			{{ form_label(adminEditarCategoria.nom) }}
-			{{ form_widget(adminEditarCategoria.nom) }}
+			{{ form_label(adminEditarComentari.tipus) }}
+			{{ form_widget(adminEditarComentari.tipus) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(adminEditarCategoria.tipus) }}
-			{{ form_widget(adminEditarCategoria.tipus) }}
+			{{ form_label(adminEditarComentari.text) }}
+			{{ form_widget(adminEditarComentari.text) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(adminEditarCategoria.logo) }}
-			{{ form_widget(adminEditarCategoria.logo) }}
+			{{ form_label(adminEditarComentari.visible) }}
+			{{ form_widget(adminEditarComentari.visible) }}
 		</div>
 		<div class="form-group">
-			{{ form_label(adminEditarCategoria.color) }}
-			{{ form_widget(adminEditarCategoria.color) }}
+			{{ form_label(adminEditarComentari.dataPublicacio) }}
+			{{ form_widget(adminEditarComentari.dataPublicacio) }}
 		</div>
 		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
-		{{ form_end(adminEditarCategoria) }}
+		{{ form_end(adminEditarComentari) }}
 	</section>
 
 {% endblock %}
