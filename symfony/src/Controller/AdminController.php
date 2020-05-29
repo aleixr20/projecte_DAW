@@ -234,7 +234,7 @@ class AdminController extends AbstractController
 
                     // Move the file to the directory where imatges are stored
                     try {
-                        $logoCategoria->move('img\categories', $nouNomArxiu);
+                        $logoCategoria->move('img/categories', $nouNomArxiu);
                     } catch (FileException $e) {
                         throw new Error($e);
                     }
