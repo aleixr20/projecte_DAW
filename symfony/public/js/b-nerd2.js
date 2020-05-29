@@ -10,8 +10,9 @@ window.onload = function() {
 
     var data = {
 
-        path: 'https://www.b-nerd.cat',
-        // path: 'https://localhost:8000',
+        // path: 'https://www.b-nerd.cat',
+        path: 'https://localhost:8000',
+
         // path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
 
         menuVisibilityStatus: false,
@@ -102,6 +103,11 @@ window.onload = function() {
             data.articleForm.contingut = document.getElementById('article_contingut').parentNode
             data.articleForm.metaTags = document.getElementById('article_meta_tag').parentNode
             data.articleForm.metaDescription = document.getElementById('article_meta_description').parentNode
+            // Defineixo aquests elements perque els anteriros no em serveixen perque criden al pare, crec que alguns no son correctes
+            data.articleForm.selectorCategoria1 = document.getElementById('article_categoria1')
+            data.articleForm.selectorCategoria2 = document.getElementById('article_categoria2')
+            data.articleForm.selectorCategoria3 = document.getElementById('article_categoria3')
+            data.articleForm.novaCategoriaOption = document.getElementById('novaCategoria')
         },
         loadRegisterForm: function() {
             data.registerForm.nom = document.getElementById('registration_form_nom').parentNode
@@ -425,9 +431,35 @@ window.onload = function() {
             view.validateLength(Obj.metaDescription, 100, 160)
 
             //Afegir listener de nova Categoria
+            Obj.selectorCategoria1.addEventListener("change", function() {
+                if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value == 126){
+                    Obj.novaCategoriaOption.style.display = "block";
+                }else if(Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126){
+                        Obj.novaCategoriaOption.style.display = "none";
+                }
+            })
+            Obj.selectorCategoria2.addEventListener("change", function() {
+                if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value == 126){
+                    Obj.novaCategoriaOption.style.display = "block";
+                }else if(Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126){
+                        Obj.novaCategoriaOption.style.display = "none";
+                }
+            })
+            Obj.selectorCategoria3.addEventListener("change", function() {
+                if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value == 126){
+                    Obj.novaCategoriaOption.style.display = "block";
+                }else if(Obj.selectorCategoria3.options[Obj.selectorCategoria3.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria2.options[Obj.selectorCategoria2.selectedIndex].value != 126 &&
+                    Obj.selectorCategoria1.options[Obj.selectorCategoria1.selectedIndex].value != 126){
+                        Obj.novaCategoriaOption.style.display = "none";
+                }
+            })
         },
         toggleHelpErrors: function(Obj) {
-            console.log(Obj)
                 //Comprova si els elements son input
             if (Obj.getElementsByTagName('input')[0] != undefined) {
                 //Quan entri al Input, mostrar Ajuda i Errors
