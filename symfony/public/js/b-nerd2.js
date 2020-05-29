@@ -12,7 +12,6 @@ window.onload = function() {
 
         path: 'https://www.b-nerd.cat',
         // path: 'https://localhost:8000',
-
         // path: 'http://labs.iam.cat/~a14alerevagu/b-nerd',
 
         menuVisibilityStatus: false,

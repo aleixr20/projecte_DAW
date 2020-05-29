@@ -54,7 +54,7 @@ class AppController extends AbstractController
         }
 
         if(!isset($js)){
-            $css = "";
+            $js = "";
         }
 
         return $this->render('inline_editor/full_editor.html.twig', [
