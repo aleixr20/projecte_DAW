@@ -80,6 +80,7 @@ class ArticlesController extends AbstractController
                     $afegirCategoria = new Categoria();
                     $afegirCategoria->setNom($form->get('nova_categoria')->getData());
                     $afegirCategoria->setLogo('default-logo.png');
+                    $afegirCategoria->setTipus('oculta');
                     $entityManager->persist($afegirCategoria);
                     //fem el cambiazo
                     $categoria1 = $afegirCategoria;
@@ -180,6 +181,7 @@ class ArticlesController extends AbstractController
                     $afegirCategoria = new Categoria();
                     $afegirCategoria->setNom($form->get('nova_categoria')->getData());
                     $afegirCategoria->setLogo('default-logo.png');
+                    $afegirCategoria->setTipus('oculta');
                     $entityManager->persist($afegirCategoria);
                     //fem el cambiazo
                     $categoria1 = $afegirCategoria;

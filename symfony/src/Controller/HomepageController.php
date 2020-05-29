@@ -26,11 +26,13 @@ class HomepageController extends AbstractController
         $categories_frontend = $repo_categories->findBy(['tipus' => 'frontend']);
         $categories_backend = $repo_categories->findBy(['tipus' => 'backend']);
         $categories_sistemes = $repo_categories->findBy(['tipus' => 'sistemes']);
+        $categories_altres = $repo_categories->findBy(['tipus' => 'altres']);
 
         return $this->render('homepage.html.twig', [
             'categories_frontend' => $categories_frontend,
             'categories_backend' => $categories_backend,
             'categories_sistemes' => $categories_sistemes,
+            'categories_altres' => $categories_altres,
         ]);
     }
 }
