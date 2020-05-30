@@ -1,7 +1,9 @@
 <ul class="menu-user">
 	{% if app.user %}
 		<li>
-			<a href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
+			<a
+				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
+				<!--SI L'USUARI TE IMATGE DE PERFIL-->
 				{% if app.user.imatge and app.user.imatge is not empty %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
@@ -27,6 +29,7 @@
 	{% endif %}
 </ul>
 
+<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
 <ul class="menu-bottom">
 	<li class="scrollable">
 		<a class="menu-link active" href="{{ path('homepage')}}#about-us" alt="Pagina d'inici">b-NERD toDEVELOPE</a>
@@ -41,6 +44,11 @@
 		<a class="menu-link" href="{{ path('homepage')}}#contact" alt="Enllaç al formulari de contacte">CONTACTE</a>
 	</li>
 
+	<!-- BUSCADOR -->
+	{# <li id="search">
+		<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
+		{# <i class="menu-icon fa fa-search"></i> #}
+	</li>
 	<li id="hamburgesa">
 		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
 	</li>
@@ -52,4 +60,6 @@
 			<a class="menu-link" href="{{ path('admin')}}" alt="Enllaç al zona admin">admin</a>
 		</li>
 	{% endif %}
+
+
 </ul>

@@ -28,7 +28,7 @@
 
 	{% if app.user and is_granted('ROLE_ADMIN') %}
 		<li>
-			<a href="{{ path('article_update', {slug:article.slug}) }}" alt="Editar article">editar article</a>
+			<a class="menu-link" href="{{ path('article_update', {slug:article.slug}) }}" alt="Editar article">editar article</a>
 		</li>
 	{% endif %}
 	{% for cat in article.categories %}

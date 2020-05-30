@@ -234,7 +234,11 @@ window.onload = function() {
          * @param {HTMLElement} Obj Elements del DOM esencials (menu i fade)
          */
         showMenu: function(Obj) {
-            Obj.shadow.style.backgroundColor = "#fff";
+            if (data.darkMode) {
+                Obj.shadow.style.backgroundColor = "#333";
+            } else {
+                Obj.shadow.style.backgroundColor = "#fff";
+            }
             Obj.shadow.style.zIndex = 1;
             Obj.shadow.addEventListener("click", (function() {
                 return function() {
@@ -243,7 +247,11 @@ window.onload = function() {
             })());
             Obj.userMenu.style.bottom = "75%"
             Obj.navbar.style.width = "80%";
-            Obj.navbar.style.backgroundColor = "rgba(100, 100, 100, 0.1)";
+            if (data.darkMode) {
+                Obj.navbar.style.backgroundColor = "#444)";
+            } else {
+                Obj.navbar.style.backgroundColor = "#ccc)";
+            }
 
             for (i = 0; i < Obj.menuLinks.length; i++) {
                 Obj.menuLinks[i].style.opacity = "1";
@@ -265,13 +273,13 @@ window.onload = function() {
             Obj.shadow.removeEventListener("click", function() {});
 
             Obj.userMenu.style.bottom = "30%"
-            Obj.navbar.style.backgroundColor = "transparent";
+                //Obj.navbar.style.backgroundColor = "transparent";
             if (window.screen.availWidth < 576 || window.screen.orientation.type == "landscape-primary") {
                 Obj.navbar.style.width = "3em";
                 for (i = 0; i < Obj.menuLinks.length; i++) {
                     Obj.menuLinks[i].style.opacity = "0";
                     Obj.menuLinks[i].style.visibility = "hidden";
-                    Obj.menuLinks[i].removeEventListener("click", function() {});
+                    // Obj.menuLinks[i].removeEventListener("click", function() {});
                 }
             } else {
                 Obj.navbar.style.width = "16vw";
@@ -437,7 +445,7 @@ window.onload = function() {
             view.validateLength(Obj.titol, 'input', 10, 50)
 
             view.toggleHelpErrors(Obj.resum, 'textarea')
-            view.validateLength(Obj.resum, 'textarea', 50, 200)
+            view.validateLength(Obj.resum, 'textarea', 50, 400)
 
             view.toggleHelpErrors(Obj.metaTags, 'input')
             view.validateLength(Obj.metaTags, 'input', 0, 100)
@@ -722,7 +730,7 @@ window.onload = function() {
 
 window.onscroll = function() {
 
-    //GESTIONAR QUE QUNA NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
+    //GESTIONAR QUE QUAN NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
     let menuUser = document.getElementsByClassName('menu-user')
 
     if ((document.URL.search("/admin")) < 0) {

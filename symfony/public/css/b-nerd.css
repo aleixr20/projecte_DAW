@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Calibri';
+    src: local('Calibri'), url('calibri.woff') format('woff')
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,8 +23,12 @@ body {
     font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-family: 'Abel', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
     line-height: 1.5em;
+    transition-duration: 0.1s;
 }
 
 h1,
@@ -28,8 +37,17 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    _font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-family: 'Inria Serif', serif;
+    font-family: 'Alice', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Caladea', serif;
+    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Pompiere', cursive;
+    font-family: 'Life Savers', cursive;
+    font-family: 'Marvel', sans-serif;
+    font-family: 'Gentium Basic', serif;
+    font-family: 'Gupter', serif;
     font-weight: unset;
     color: #999;
 }
@@ -93,7 +111,23 @@ nav {
 .menu-top,
 .menu-user,
 .menu-bottom {
-    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Gupter', serif;
+    font-family: 'Inria Serif', serif;
+    font-family: 'Alice', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Caladea', serif;
+    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Pompiere', cursive;
+    font-family: 'Life Savers', cursive;
+    font-family: 'Gentium Basic', serif;
+    font-family: 'BenchNine', sans-serif;
+    font-family: 'Teko', sans-serif;
+    font-family: 'Pragati Narrow', sans-serif;
+    font-family: 'News Cycle', sans-serif;
+    font-family: 'Marvel', sans-serif;
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
     font-weight: 600;
     color: #999;
     text-align: right;
@@ -101,6 +135,7 @@ nav {
     position: absolute;
     right: 0;
     padding: 0.5em;
+    line-height: 1.3em;
 }
 
 .menu-top {
@@ -242,7 +277,6 @@ section {
 }
 
 .titulo {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     position: relative;
     top: 15vh;
     margin-bottom: 20vh;
@@ -293,14 +327,14 @@ section {
  *****************************/
 
 .article_individual_titol {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    _font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: unset;
     color: #999;
     padding-top: 15vh
 }
 
 .article_individual_resum {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Gentium Basic', serif;
     font-weight: unset;
     color: #aaa;
     font-style: italic;
@@ -309,13 +343,22 @@ section {
     margin-top: -1.5em;
 }
 
+.llista-titol {
+    line-height: 1em;
+}
+
+.llista-resum {
+    padding: 0 0 1em 0;
+    font-size: 0.9em;
+}
+
 .article_individual_content {
     padding-top: 2em;
     _font-size: 1.1rem;
 }
 
 .article_titol a {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    _font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 2rem;
     font-weight: unset;
     color: #999;
@@ -720,6 +763,7 @@ a .admin-icons:hover {
         bottom: -6em;
     }
     .menu-link,
+    .scrollable-link,
     .menu-username,
     .menu-link-logout {
         _display: none;
@@ -751,12 +795,13 @@ a .admin-icons:hover {
         font-size: 1rem;
     }
     .article_individual_titol {
-        font-size: 2rem;
+        font-size: 1.8rem;
         padding-top: 5vh
     }
     .article_individual_resum {
         font-size: 1.4rem;
         padding-left: 0.16rem;
+        margin-top: -1em;
     }
     .article_individual_content {
         font-size: 1rem;
@@ -772,6 +817,10 @@ a .admin-icons:hover {
     .form-error-text {
         padding-left: 0;
         padding-right: 0;
+    }
+    .feedback-list {
+        text-align: left;
+        padding: 0.66em 0.5em;
     }
 }
 
@@ -794,6 +843,7 @@ a .admin-icons:hover {
         bottom: 5vh;
     }
     .menu-link,
+    .scrollable-link,
     .menu-username,
     .menu-link-logout {
         _display: none;
