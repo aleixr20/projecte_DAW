@@ -272,6 +272,14 @@ section {
     color: #999;
 }
 
+.form-warning-text {
+    display: none;
+    padding: 0.2em 1em;
+    font-size: 0.75em;
+    color: orangered;
+    margin-bottom: 1em;
+}
+
 .form-error-text {
     display: none;
     padding: 0.2em 1em;
@@ -396,13 +404,25 @@ code {
     transform: translate(0, -50%);
     border-radius: 5px;
     background-color: #eee;
-    /* Mozilla*/
-    width: -moz-available;
     /* Chrome */
     width: auto;
+    /* Mozilla*/
+    width: -moz-available;
     padding: 1em;
     opacity: 0;
     transition-duration: 0.5s;
+}
+
+.feedback-info {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+
+.feedback-footer {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    font-size: 0.9rem;
+    font-style: oblique;
 }
 
 
@@ -742,6 +762,10 @@ a .admin-icons:hover {
         font-size: 1rem;
     }
     .help-text {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .form-warning-text {
         padding-left: 0;
         padding-right: 0;
     }

@@ -19,9 +19,13 @@
 
 						<div class="cat-admin-info">
 							{{cat.nom}}
-							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"Editar categoria" title="Editar categoria">
+							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"editar categoria" title="Editar categoria">
 								<i class="fa fa-cog"></i>
-							</a><br/>
+							</a><br>
+							<a href="{{ path('adminEliminarCategoria', {id: cat.id}) }}" alt"eliminar categoria" title="Eliminar categoria">
+								<i class="fa fa-trash-o"></i>
+							</a>
+							<br/>
 
 							{{cat.articles|length}}
 							Articles publicats
@@ -31,6 +35,7 @@
 			{% endfor %}
 		</div>
 
+		<a href="{{path('adminAfegirCategoria')}}" alt="Afegir nova categoria">Afegir nova categoria</a>
 
 	</section>
 

@@ -41,8 +41,6 @@ class ArticlesController extends AbstractController
 
             //Si el formulari es enviat, captura les dades i pujar nou article a DB
             if ($form->isSubmitted() && $form->isValid()) {
-                //Crear EntityManager
-                $entityManager = $this->getDoctrine()->getManager();
 
                 //Capturar dades del formulari i assignar-les al article
                 $article->setAutor($this->getUser())
@@ -69,24 +67,25 @@ class ArticlesController extends AbstractController
 
                 //Assignem a article els camps meta
                 $article->setMetaTag($correccioTags);
-                // ->setMetaDescription($form->get('meta_description')->getData());
+
+                // VERSIO ANTERIOR ON AFEGIEM CATEGORIES DESDE FORM D'ARTICLE
 
                 // //Capturem categoria del select del formulari
-                $categoria1 = $form->get('categoria1')->getData();
-                // //Si la categoria es "afegir nova categoria"
-                if ($form->get('categoria1')->getData()->getNom() == "afegir nova categoria") {
+                // $categoria1 = $form->get('categoria1')->getData();
+                // // //Si la categoria es "afegir nova categoria"
+                // if ($form->get('categoria1')->getData()->getNom() == "afegir nova categoria") {
 
-                    //Creem nova categoria amb el que hi hagi al input "nova categoria"
-                    $afegirCategoria = new Categoria();
-                    $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                    $afegirCategoria->setLogo('default-logo.png');
-                    $afegirCategoria->setTipus('oculta');
-                    $entityManager->persist($afegirCategoria);
-                    //fem el cambiazo
-                    $categoria1 = $afegirCategoria;
-                }
+                //     //Creem nova categoria amb el que hi hagi al input "nova categoria"
+                //     $afegirCategoria = new Categoria();
+                //     $afegirCategoria->setNom($form->get('nova_categoria')->getData());
+                //     $afegirCategoria->setLogo('default-logo.png');
+                //     $afegirCategoria->setTipus('oculta');
+                //     $entityManager->persist($afegirCategoria);
+                //     //fem el cambiazo
+                //     $categoria1 = $afegirCategoria;
+                // }
                 //Afegir les categories
-                $article->addCategories($categoria1);
+                $article->addCategories($form->get('categoria1')->getData());
 
                 if ($form->get('categoria2')->getData() != null) {
                     $article->addCategories($form->get('categoria2')->getData());
@@ -96,6 +95,7 @@ class ArticlesController extends AbstractController
                     $article->addCategories($form->get('categoria3')->getData());
                 }
                 //Persistir dades i pujar dades a DB
+                $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($article);
                 $entityManager->flush();
 
@@ -126,12 +126,6 @@ class ArticlesController extends AbstractController
         //Si hi ha un usuari loguejat i es l'autor del article o ROLE_ADMIN
         if ($usuari && (($usuari == $article->getAutor()) || in_array("ROLE_ADMIN", $usuari->getRoles()))) {
 
-            // //Si l'usuari no te ROLE_ADMIN, o es l'autor del article, redirigir a homepage
-            // if (($this->getUser() != $article->getAutor()) || (!in_array("ROLE_ADMIN", $this->getUser()->getRoles()))) {
-            //     return $this->redirectToRoute('homepage');
-            // }
-
-
             //Crear formulari amb les dades del article obtingut
             $form = $this->createForm(ArticleType::class, $article);
 
@@ -148,9 +142,6 @@ class ArticlesController extends AbstractController
             $form->handleRequest($request);
             //Si el formulari es enviat, captura les dades i pujar nou article a DB
             if ($form->isSubmitted() && $form->isValid()) {
-
-                //Crear EntityManager
-                $entityManager = $this->getDoctrine()->getManager();
 
                 //Capturar el titol i convertir-lo a Slug amb lowercase i guions
                 $text = $form->get('titol')->getData();
@@ -173,19 +164,22 @@ class ArticlesController extends AbstractController
                 $correccioTags = str_replace(', ', ',', $inputMetaTag);
                 $article->setMetaTag($correccioTags);
 
-                //Capturem categoria del select del formulari
-                $categoria1 = $form->get('categoria1')->getData();
-                //Si la categoria es "afegir nova categoria"
-                if ($categoria1->getNom() == "afegir nova categoria") {
-                    //Creem nova categoria amb el que hi hagi al input "nova categoria"
-                    $afegirCategoria = new Categoria();
-                    $afegirCategoria->setNom($form->get('nova_categoria')->getData());
-                    $afegirCategoria->setLogo('default-logo.png');
-                    $afegirCategoria->setTipus('oculta');
-                    $entityManager->persist($afegirCategoria);
-                    //fem el cambiazo
-                    $categoria1 = $afegirCategoria;
-                }
+                // VERSIO ANTERIOR ON AFEGIEM CATEGORIES DESDE FORM D'ARTICLE
+
+                // //Capturem categoria del select del formulari
+                // $categoria1 = $form->get('categoria1')->getData();
+
+                // //Si la categoria es "afegir nova categoria"
+                // if ($categoria1->getNom() == "afegir nova categoria") {
+                //     //Creem nova categoria amb el que hi hagi al input "nova categoria"
+                //     $afegirCategoria = new Categoria();
+                //     $afegirCategoria->setNom($form->get('nova_categoria')->getData());
+                //     $afegirCategoria->setLogo('default-logo.png');
+                //     $afegirCategoria->setTipus('oculta');
+                //     $entityManager->persist($afegirCategoria);
+                //     //fem el cambiazo
+                //     $categoria1 = $afegirCategoria;
+                // }
 
                 //Resetejar la coleccio de Categories
                 $cats = $cat_repo->findAll();
@@ -194,7 +188,7 @@ class ArticlesController extends AbstractController
                 }
 
                 //Afegir les categories a la Collecioo
-                $article->addCategories($categoria1);
+                $article->addCategories($form->get('categoria1')->getData());
 
                 if ($form->get('categoria2')->getData() != null) {
                     $article->addCategories($form->get('categoria2')->getData());
@@ -205,6 +199,7 @@ class ArticlesController extends AbstractController
                 }
 
                 //Persistir dades i pujar a DB
+                $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($article);
                 $entityManager->flush();
 
@@ -257,6 +252,7 @@ class ArticlesController extends AbstractController
             return $this->render('articles/index.html.twig', [
                 'article' => $post,
                 'categoria' => $cat[0],
+                'commentSucces' => true,
                 'feedbackForm' => $form->createView()
             ]);
         }
@@ -264,6 +260,7 @@ class ArticlesController extends AbstractController
         return $this->render('articles/index.html.twig', [
             'article' => $post,
             'categoria' => $cat[0],
+            'commentSucces' => false,
             'feedbackForm' => $form->createView(),
         ]);
     }

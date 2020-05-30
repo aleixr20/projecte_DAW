@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Repository\ArticleRepository;
 use App\Form\AdminArticleType;
+use App\Entity\Categoria;
 use App\Repository\CategoriaRepository;
 use App\Form\AdminCategoriaType;
 use App\Repository\ComentariRepository;
@@ -203,6 +204,64 @@ class AdminController extends AbstractController
     }
 
     /**
+     * ADMIN AFEGIR una CATEGORIA
+     * @Route("/admin/categoria/nova", name="adminAfegirCategoria")
+     */
+    public function afegirCategoria(Request $request, SluggerInterface $slugger): Response
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            //Crear Objecte Categoria i Form
+            $categoria = new Categoria();
+
+            $form = $this->createForm(AdminCategoriaType::class, $categoria);
+            $form->handleRequest($request);
+
+            //Si el formulari es enviat, capture de dades i pujar nova categoria a DB
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                //Pujada de la imatge de logo/icona
+                $logoCategoria = $form->get('logo')->getData();
+
+                // this condition is needed because the 'imatge' field is not required
+                // so the image file must be processed only when a file is uploaded
+                if ($logoCategoria) {
+                    $nomArxiuOriginal = pathinfo($logoCategoria->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $nomArxiu = $slugger->slug($nomArxiuOriginal);
+                    $nouNomArxiu = $nomArxiu . '-' . uniqid() . '.' . $logoCategoria->guessExtension();
+
+                    // Move the file to the directory where imatges are stored
+                    try {
+                        $logoCategoria->move('img/categories', $nouNomArxiu);
+                    } catch (FileException $e) {
+                        throw new Error($e);
+                    }
+
+                    // updates the 'imatge' property to store the image file name
+                    // instead of its contents
+                    $categoria->setLogo($nouNomArxiu);
+                }
+
+                //Persistir dades i pujar a DB
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($categoria);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('adminCategories');
+            }
+
+            return $this->render('admin/adminEditarCategoria.html.twig', [
+                'adminEditarCategoria' => $form->createView(),
+            ]);
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * ADMIN EDITAR una CATEGORIA
      * @Route("/admin/categoria/{id}", name="adminEditarCategoria")
      */
@@ -211,14 +270,13 @@ class AdminController extends AbstractController
         //Si hi ha un usuari ROLE_ADMIN logejat,
         if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
 
-            // $cat_repository = $this->getDoctrine()->getRepository(Categoria::class);
             $categoria = $repository->findOneBy(array('id' => $id));
 
-            //Crear Objecte Article i Form
+            //Crear objecte Form amb dades de la Categoria
             $form = $this->createForm(AdminCategoriaType::class, $categoria);
             $form->handleRequest($request);
 
-            //Si el formulari es enviat, capture dde dades i pujar nou article a DB
+            //Si el formulari es enviat, capture de dades i actualitzar categoria a DB
             if ($form->isSubmitted() && $form->isValid()) {
 
                 //Pujada de la imatge de logo/icona
@@ -416,6 +474,36 @@ class AdminController extends AbstractController
         //Si no hi havia ROLE_ADMIN loguejat
         return $this->redirectToRoute('homepage');
     }
+
+    /**
+     * ELIMINAR CATEGORIA
+     * @Route("/admin/delete/categoria/{id}", name="adminEliminarCategoria")
+     */
+    public function eliminarCategoria($id, CategoriaRepository $repository)
+    {
+        //Si hi ha un usuari ROLE_ADMIN logejat,
+        if ($this->getUser() && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+
+            $categoria = $repository->findOneBy(array('id' => $id));
+
+            //Si la categoria te articles, anular el delete
+            if (count($categoria->getArticles()) > 0) {
+                return $this->redirectToRoute('adminCategories', [
+                ]);
+            }
+
+            //Eliminar de la DB
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($categoria);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('adminCategories');
+        }
+
+        //Si no hi havia ROLE_ADMIN loguejat
+        return $this->redirectToRoute('homepage');
+    }
+
     /**
      * ELIMINAR COMENTARI
      * @Route("/admin/comentari/eliminar/{id}/{autor}", name="adminEliminarComentari")

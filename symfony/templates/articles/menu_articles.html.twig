@@ -1,8 +1,6 @@
 <ul class="menu-user">
 	<li>
-		<a
-			href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}">
-			<!--SI L'USUARI TE IMATGE DE PERFIL-->
+		<a href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}">
 			{% if(article.autor.imatge) and (article.autor.imatge is not empty) %}
 				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imatge de perfil" id="img-modif">
 			{% else %}
@@ -26,7 +24,6 @@
 	{% endif %}
 </ul>
 
-<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
 <ul class="menu-bottom">
 
 	{% if app.user and is_granted('ROLE_ADMIN') %}
@@ -47,14 +44,15 @@
 		<a class="menu-link" href="{{ path('homepage')}}#hard-skills" alt="Enllaç a la secció de categories">ARTICLES</a>
 	</li>
 
-	<!-- BUSCADOR -->
-	{# <li id="search">
-			<a class="menu-link" href="{{ path('homepage')}}#contact">SEARCH</a>
-			<i class="menu-icon fa fa-search"></i> #}
-</li>
-<li id="hamburgesa">
-	<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
-</li>
-<li id="dark-mode">
-	<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
-</li></a></li></ul>
+	<li id="hamburgesa">
+		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
+	</li>
+	<li id="dark-mode">
+		<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
+	</li>
+	{% if app.user and is_granted('ROLE_ADMIN',app.user.roles) %}
+		<li>
+			<a class="menu-link" href="{{ path('admin')}}" alt="Enllaç al zona admin">admin</a>
+		</li>
+	{% endif %}
+</ul>

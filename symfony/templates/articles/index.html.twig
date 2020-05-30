@@ -5,22 +5,23 @@
 {% endblock %}
 {% block meta_ogg %}
 	<!-- Open Graph data -->
-	<meta property="og:title" content="{{ article.titol }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="{{ app.request.uri }}" />
-	<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ article.categories[0].logo) }}" />
-	<meta property="og:description" content="{{article.metadescription}}" />
-	<meta property="og:image:width" content="300" />
-	<meta property="og:site_name" content="B-NERD TO DEVELOPE" />
-	<meta property="article:published_time" content="{{ article.dataPublicacio|date() }}" />
-	<meta property="article:modified_time" content="{{ article.dataActualitzacio|date() }}" />
-	<meta property="article:author" content="{{ article.autor }}" />
-	<meta property="article:section" content="{{ article.categories[0] }}" />
-	<meta property="article:tag" content="{{ article.metaTag }}" />
+	<meta property="og:title" content="{{ article.titol }}"/>
+	<meta property="og:type" content="article"/>
+	<meta property="og:url" content="{{ app.request.uri }}"/>
+	<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ article.categories[0].logo) }}"/>
+	<meta property="og:description" content="{{article.metadescription}}"/>
+	<meta property="og:image:width" content="300"/>
+	<meta property="og:site_name" content="B-NERD TO DEVELOPE"/>
+	<meta property="article:published_time" content="{{ article.dataPublicacio|date() }}"/>
+	<meta property="article:modified_time" content="{{ article.dataActualitzacio|date() }}"/>
+	<meta property="article:author" content="{{ article.autor }}"/>
+	<meta property="article:section" content="{{ article.categories[0] }}"/>
+	<meta property="article:tag" content="{{ article.metaTag }}"/>
 {% endblock %}
 
 {% block title %}
-	b-NERDS! {{article.titol}}
+	b-NERDS!
+	{{article.titol}}
 {% endblock %}
 
 {% block extrastyes %}
@@ -30,12 +31,11 @@
 	{% if (categoria.color is defined) and (categoria.color is not empty) %}
 		<style>
 			nav {
-				border-right: 3px solid {{categoria.color}};
+				border-color:{{categoria.color}};
 			}
 			.menu-username,
 			.active {
-				color: {{categoria.color}}
-				!important;
+				color: {{categoria.color}} !important;
 			}
 			.menu-bottom a:hover,
 			.menu-bottom i:hover {
@@ -85,43 +85,47 @@
 		</ul>
 
 		<div>
-		{% for comment in article.comentaris %}
-			<p class="comments">
-				{% if comment.visible %}
-					{% if comment.tipus == 0 %}
-						<i class="fa fa-frown-o"></i>
-					{% elseif comment.tipus == 1 %}
-						<i class="fa fa-meh-o"></i>
-					{% elseif comment.tipus == 2 %}
-						<i class="fa fa-smile-o"></i>
-					{% elseif comment.tipus == 3 %}
-						<i class="fa fa-rocket"></i>
+			{% for comment in article.comentaris %}
+				<p class="comments">
+					{% if comment.visible %}
+						{% if comment.tipus == 0 %}
+							<i class="fa fa-frown-o"></i>
+						{% elseif comment.tipus == 1 %}
+							<i class="fa fa-meh-o"></i>
+						{% elseif comment.tipus == 2 %}
+							<i class="fa fa-smile-o"></i>
+						{% elseif comment.tipus == 3 %}
+							<i class="fa fa-rocket"></i>
+						{% endif %}
+						{{comment.user.username}}
+						el
+						{{comment.dataPublicacio|date('d/m/Y')}}<br/>
+						"{{comment.text}}"
 					{% endif %}
-					{{comment.user.username}} el {{comment.dataPublicacio|date('d/m/Y')}}<br/>
-					"{{comment.text}}"
-				{% endif %}
-			</p>
-		{% endfor %}
+				</p>
+			{% endfor %}
 		</div>
 		<div id="feedback-modal">
-			<h5 class="feedback-info">Feedback</h5>
+			<label for="comentari_text" class="feedback-info"></label>
 
-			{{ form_start(feedbackForm) }}
-
-			{# {% if app.user in article.comentaris.user %} #}
-			{# hola #}
-			{# {% else %} #}
-			{{ form_widget(feedbackForm.text) }}{{ form_widget(feedbackForm.tipus) }}
-			{# {% endif %} #}
-				<p class="feedback-footer"> Solo los usuarios registrados pueden añadir comentarios</p>
-			<div class="text-right">
-				{% if app.user and is_granted('ROLE_VALIDATED') %}
-					<button type="submit" class="btn btn-outline-secondary">enviar</button>
-				{% else %}
-					<button type="button" class="btn btn-block btn-outline-secondary" disabled>solo los usuarios registrados pueden hacer comentarios</button>
-				{% endif %}
-			</div>
-			{{ form_end(feedbackForm) }}
+			{% if commentSucces %}
+				<p>
+					Gracies pel teu comentari. En breu un moderador hi donarà retroacció
+				</p>
+			{% else %}
+				{{ form_start(feedbackForm) }}
+				{{ form_widget(feedbackForm.text) }}{{ form_widget(feedbackForm.tipus) }}
+				<p class="feedback-footer">
+					Solo los usuarios registrados pueden añadir comentarios</p>
+				<div>
+					{% if app.user and is_granted('ROLE_VALIDATED') %}
+						<button type="submit" class="btn btn-outline-secondary">enviar</button>
+					{% else %}
+						<a href="{{path('app_login')}}" type="button" class="btn btn-block btn-outline-secondary" disabled>solo los usuarios registrados pueden hacer comentarios</a>
+					{% endif %}
+				</div>
+				{{ form_end(feedbackForm) }}
+			{% endif %}
 		</div>
 
 	</section>

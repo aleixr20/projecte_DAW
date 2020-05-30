@@ -1,9 +1,7 @@
 <ul class="menu-user">
 	{% if app.user %}
 		<li>
-			<a
-				href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
-				<!--SI L'USUARI TE IMATGE DE PERFIL-->
+			<a href="{{ path('userProfile', {username: app.user.username}) }}" alt="Veure perfil de {{app.user.username}}">
 				{% if app.user.imatge %}
 					<img src="{{ asset("img/imatges_perfil/" ~ app.user.imatge) }}" alt="imatge de perfil" id="img-modif">
 				{% else %}
@@ -28,7 +26,6 @@
 	{% endif %}
 </ul>
 
-<!--RESTA DE ITEMS DEL MENU - PAGINA INICI-->
 <ul class="menu-bottom">
 	<li>
 		<a class="menu-link active" href="{{ path('homepage')}}" añt=" Pagina d'incici" title="Tornar a la pàgina d'inici">b-NERD toDEVELOPE</a>
@@ -37,7 +34,7 @@
 	<li>
 		<a class="menu-link" href="{{ path('article_new')}}" alt="Formulari de nou article">NOU ARTICLE</a>
 	</li>
-		<li>
+	<li>
 		<a class="menu-link" href="{{ path('adminArticles')}}" alt="Enllaç a l'administrador d'articles">ARTICLES</a>
 	</li>
 	<li>
@@ -49,12 +46,7 @@
 	<li>
 		<a class="menu-link" href="{{ path('adminUsuaris')}}" alt="Enllaç a l'administrador d'usuaris">USUARIS</a>
 	</li>
-	{# <li>
-		<a class="menu-link" href="{{ path('adminCategories')}}">INFORMES</a>
-	</li> #}
 
-
-	<!-- HAMBURGESA -->
 	<li id="hamburgesa">
 		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
 	</li>
