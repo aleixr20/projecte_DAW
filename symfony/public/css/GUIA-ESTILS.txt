@@ -1,7 +1,0 @@
-<main>
-<section>
-<h1> -> padding top 15vh
-Els titols tant de seccions, pagines com articles no pot ser superior a 50~60 caracters
-Els subtitols (resums) queden millor quan arriben als 150 caracters -> ideal uns 160~180
-
-La classe text nomes fer-la servir al home page (se li haura llavors de cambiar el nom)

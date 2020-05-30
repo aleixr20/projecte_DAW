@@ -15,7 +15,7 @@
 
 					<div class="cat-item">
 
-						<img src="/img/categories{{ asset(cat.logo) }}" class="categoria_icon" alt="Logotip de la categoria {{cat.nom}}">
+						<img src="{{ asset("img/categories/" ~ cat.logo) }}" class="categoria_icon" alt="Logotip de la categoria {{cat.nom}}">
 
 						<div class="cat-admin-info">
 							{{cat.nom}}
