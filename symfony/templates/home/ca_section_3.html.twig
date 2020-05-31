@@ -6,5 +6,17 @@
 		<p>Praesent tristique magna sit amet purus gravida quis. Integer quis auctor elit sed. Nunc sed velit dignissim sodales ut eu sem integer vitae. Fringilla est ullamcorper eget nulla facilisi etiam. Scelerisque eu ultrices vitae auctor. Vestibulum mattis ullamcorper velit sed.</p>
 
 		<p>Tristique magna sit amet purus gravida quis blandit turpis cursus. Morbi tristique senectus et netus et malesuada fames ac. Egestas quis ipsum suspendisse ultrices gravida dictum. Id venenatis a condimentum vitae sapien. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat. Montes nascetur ridiculus mus mauris vitae ultricies.</p>
+		<ul class="cat-list">
+			{% for cat in categories_altres %}
+				{% if cat.articles|length > 0 %}
+					<li>
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
+							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
 	</div>
 </section>
