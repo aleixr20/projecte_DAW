@@ -12,8 +12,8 @@
 
 			<table class="table alert-light">
 				<tr>
-					<td style="width:5em;">username</td>
-					<td style="width:10em;">nom</td>
+					<td style="min-width:10em;">username</td>
+					<td>nom</td>
 					<td>registre</td>
 					<td>ultimlogin</td>
 					<td style="width:3em;">
@@ -22,7 +22,7 @@
 					<td style="width:3em;">
 						<i class="fa fa-commenting-o"></i>
 					</td>
-					<td style="width:6em;"></td>
+					{# <td style="width:6em;"></td> #}
 				</tr>
 				{% for usuari in usuaris %}
 
@@ -37,10 +37,12 @@
 								<tr class="alert-warning">
 								{% endif %}
 								<td>
-									<div data-toggle="collapse" data-target="#usuari_{{usuari.id}}" style="cursor:pointer;">{{usuari.username}}</div>
+									<div data-toggle="collapse" data-target="#usuari_{{usuari.id}}" style="cursor:pointer;">
+										<i class="fa fa-arrow-circle-down"></i>&nbsp;{{usuari.username}}
+									</div>
 								</td>
 								<td>
-									{{usuari.nom}} {{usuari.cognom}}
+									{{usuari.nom}}&nbsp;{{usuari.cognom}}
 								</td>
 								<td>
 									{{usuari.dataregistre|date('d/m/Y')}}
@@ -56,14 +58,14 @@
 									<a href="{{path('adminComentarisUsuari', {username:usuari.username}) }}" alt="Enllaç a la llista de comentaris de de {{usuari.username}}" title="Veure comentaris de {{usuari.username}}">
 										{{usuari.comentaris|length}}</a>
 								</td>
-								<td>
+								{# <td>
 									<a href="{{ path('userProfile', {username: usuari.username}) }}" alt="Veure perfil de {{usuari.username}}" title="Veure perfil de {{usuari.username}}">
 										<i class="admin-icons fa fa-eye"></i>
 									</a>
 									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="Editar l'usuari {{usuari.username}}" title="Administrar l'usuari {{usuari.username}}">
 										<i class="admin-icons fa fa-cog"></i>
 									</a>
-								</td>
+								</td> #}
 							</td>
 						</tr>
 						<tr class="alert-light collapse" id="usuari_{{usuari.id}}" data-parent="#accordionExample">
@@ -86,9 +88,17 @@
 										<i class="fa fa-facebook"></i>
 										{{usuari.facebook}}<br/>
 									{% endif %}
+									</p>
+									<p>
+									<a href="{{ path('userProfile', {username: usuari.username}) }}" alt="Veure perfil de {{usuari.username}}" title="Veure perfil de {{usuari.username}}">
+										<i class="fa fa-eye"></i> veure perfil
+									</a><br/>
+									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="Editar l'usuari {{usuari.username}}" title="Administrar l'usuari {{usuari.username}}">
+										<i class=" fa fa-pencil-square-o"></i> administrar
+									</a>
 								</p>
 							</td>
-							<td colspan="5">{{usuari.descripcio|raw}}</td>
+							<td colspan="4">{{usuari.descripcio|raw}}</td>
 						</tr>
 					{% endfor %}
 				</table>
