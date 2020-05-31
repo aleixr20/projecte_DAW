@@ -88,7 +88,7 @@ class UserType extends AbstractType
 
             ->add('descripcio', TextAreaType::class, [
                 'label' => 'Presentació',
-                'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional',
+                'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional i no pot contenir mes de 2000 caràcters',
                 'attr' => ['class' => 'form-control', 'rows' => '6'],
                 'constraints' => [
                     new Length([
