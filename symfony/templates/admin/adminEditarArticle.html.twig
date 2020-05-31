@@ -31,13 +31,11 @@
 				{{ form_widget(adminEditarArticle.visible) }}
 			</div>
 		</div>
-		<button type="submit" class="btn btn-block btn-outline-secondary" alt="Confirmar l'actualització de dades">guardar</button>
-
-
-		{{ form_end(adminEditarArticle) }}
-		<br/>
+		<button type="submit" class="btn btn-outline-secondary" alt="Confirmar l'actualització de dades">guardar</button>
 		<a class="btn btn-outline-secondary" href="{{ path('article_detall', {slug: article.slug}) }}" alt="Enllaç a la pàgina del article">Veure article</button>
 		<a class="btn btn-outline-secondary" href="{{ path('adminArticles') }}"  alt="Tornar a l'administrador d'articles">Cancelar</button>
+
+		{{ form_end(adminEditarArticle) }}
 
 	</section>
 

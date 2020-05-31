@@ -58,15 +58,14 @@
 
 		<p class="text">{{ user.descripcio|raw }}
 		</p>
-		<p>
-			{{user.username}} es usuari registrat desde	{{user.dataregistre|date('M\'y')}} i ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
-			{{user.username}}">{{user.articles|length}} articles</a>
+		<p class="comments text-right">
+			{{user.username}} es usuari registrat desde	{{user.dataregistre|date('Y')}}<br/>
+			ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
+			{{user.username}}">{{user.articles|length}} articles <i class="fa fa-sticky-note-o"></i></a><br/>
+			{{ user.comentaris|length }} comentaris <i class="fa fa-comment-o"></i><br/>
+			{% if app.user and (user.username == app.user.username) or is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('userProfileEdit') }}" alt="Editar perfil">editar perfil <i class="fa fa-pencil-square-o"></i></a>
+			{% endif %}
 		</p>
-
-		<br/>
-		{% if app.user and (user.username == app.user.username) %}
-			<a class="btn btn-secondary" href="{{ path('userProfileEdit') }}" alt="Editar perfil">Editar perfil</a>
-		{% endif %}
-		<p>{{ user.comentaris|length }}	comentaris</p>
 	</section>
 {% endblock %}

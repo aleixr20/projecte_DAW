@@ -25,7 +25,9 @@
 			{{ form_label(adminEditarCategoria.color) }}
 			{{ form_widget(adminEditarCategoria.color) }}
 		</div>
-		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		<button class="btn btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminCategories') }}'">Cancel·la</button>
+
 		{{ form_end(adminEditarCategoria) }}
 	</section>
 

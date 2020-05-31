@@ -296,7 +296,7 @@ class UserController extends AbstractController
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Desa',
-                'attr' => ['class' => 'btn btn-outline-info']
+                'attr' => ['class' => 'btn btn-outline-secondary']
             ])
             ->getForm();
 

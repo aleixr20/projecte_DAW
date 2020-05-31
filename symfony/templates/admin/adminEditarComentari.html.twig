@@ -25,7 +25,9 @@
 			{{ form_label(adminEditarComentari.dataPublicacio) }}
 			{{ form_widget(adminEditarComentari.dataPublicacio) }}
 		</div>
-		<button class="btn btn-block btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		<button class="btn btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminComentaris') }}'">Cancel·la</button>
+
 		{{ form_end(adminEditarComentari) }}
 	</section>
 
