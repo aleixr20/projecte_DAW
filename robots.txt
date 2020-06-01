@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: 
+Disallow: /admin/
+Disallow: /demos/
+Disallow: /user/
+
+Sitemap: https://www.b-nerd.cat/sitemap.xml

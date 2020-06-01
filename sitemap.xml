@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.b-nerd.cat/</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/HTML</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/CSS</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/Bootstrap</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/JS</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/VUE</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/SQL</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/MongoDB</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/PHP</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/Symfony</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/Java</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/Node</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/Apache</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/NGINX</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/algo-de-html</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/funcions-de-geolocalitzacio-amb-js</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/algo-de-js</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/vue-contra-api</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/model-vista-controlador-(mvc)-amb-php</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/funciones-php-para-validar-formularios</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/crear-entity-a-symfony</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/getters-i-setters(java)</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.b-nerd.cat/post/configuracio-apache</loc>
+  <lastmod>2020-05-29T07:14:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+</urlset>
