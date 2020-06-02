@@ -61,7 +61,8 @@ a:hover {
 
 /* RESET DEL BOOTSTRAP */
 
-ul {
+ul,
+ol {
     padding: 0.66em 1.6em;
     margin-bottom: 0;
 }
@@ -122,6 +123,7 @@ nav {
 .menu-bottom a {
     color: #999;
     font-style: initial;
+    text-decoration: none;
 }
 
 .menu-bottom a:hover,

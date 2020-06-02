@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+	{{ include('docs/menu_docs.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+	{% for section in sections %}
+
+		{{ include('docs/' ~ lang ~ '/' ~ section.file ~ '.html.twig') }}
+
+	{% endfor %}
+
+
+{% endblock %}

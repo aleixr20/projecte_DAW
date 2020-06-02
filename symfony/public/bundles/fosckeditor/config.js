@@ -19,6 +19,7 @@ CKEDITOR.editorConfig = function(config) {
     ];
     // config.toolbarCanCollapse = true;
     config.extraPlugins = 'codesnippet';
+    // config.extraPlugins = 'uploadimage';
     // config.codeSnippet_theme = 'monokai_sublime';
     config.codeSnippet_theme = 'rainbow';
     // config.codeSnippet_theme = 'darcula';
