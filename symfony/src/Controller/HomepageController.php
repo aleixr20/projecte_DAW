@@ -48,8 +48,8 @@ class HomepageController extends AbstractController
         $sections = [
             ['linkslug' => 'portada', 'linkalt' => 'Portada de la documentación', 'linkname' => 'INICIO', 'file' => '1_portada'],
             ['linkslug' => 'producto', 'linkalt' => 'El producto b-nerd', 'linkname' => 'B-NERD', 'file' => '2_producto'],
-            // ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '3_objetivos'],
-            // ['linkslug' => 'metodologia', 'linkalt' => 'Metodologia del proyecto', 'linkname' => 'METODOLOGIA', 'file' => '2_metodologia']
+            ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '3_objetivos'],
+            ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '4_planificacion']
         ];
         return $this->render('docs/docs.html.twig', [
             'lang' => 'es',

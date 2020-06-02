@@ -1,23 +1,27 @@
 <ul class="menu-user">
 	<li>
 		<a class="menu-link logout-link" href="{{ path('homepage')}}" alt="Enllaç a formulari de login">
-			{# <i class="menu-icon fa fa-home"></i> #}
-			b-nerd !		</a>
+			b-nerd !
+		</a>
 	</li>
 </ul>
 
 <ul class="menu-bottom">
-{# 
-	<li>
-		<a class="menu-link active" href="{{ path('homepage')}}" alt="Enllaç a formulari de login">
-			<i class="menu-icon fa fa-home"></i>
-			www.b-nerd.cat
+
+	{# <li>
+		<a class="menu-link" href="{{ path('homepage')}}" alt="Enllaç a formulari de login">
+			<i class="admin-icon fa fa-home"></i>
 		</a>
 	</li> #}
 	{% for section in sections %}
 		<li>
-			<a class="menu-link scrollable" href="#{{section.linkslug}}" alt="{{section.linkalt}}">{{section.linkname}}</a>
+			{% if loop.first %}
+				<a class="menu-link scrollable active" href="#{{section.linkslug}}" alt="{{section.linkalt}}">{{section.linkname}}</a>
+			{% else %}
+				<a class="menu-link scrollable" href="#{{section.linkslug}}" alt="{{section.linkalt}}">{{section.linkname}}</a>
+			{% endif %}
 		</li>
+
 	{% endfor %}
 
 	<li id="hamburgesa">

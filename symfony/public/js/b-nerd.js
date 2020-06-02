@@ -716,7 +716,34 @@ window.onscroll = function() {
     //GESTIONAR QUE QUAN NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
     let menuUser = document.getElementsByClassName('menu-user');
 
-    if ((document.URL.search("/admin")) < 0) {
+    //Esto deberia estar declarado como variable global y cargar los datos en el window.onload
+    //Como esta ahora, se esta rellenando la misma variable en cada scroll con los mismos datos
+    //Esta primer trozo de codigo es mio y me gusta mucho mas que la otra version que saque de internet
+    let docSections = [];
+    if ((document.URL.search("/docs")) > 0) {
+        //Capturar numero de seccions que te la pàgina
+        let sections = document.getElementsByTagName("section");
+        //Capturar numero de links scrollable que te la pàgina
+        let links = document.getElementsByClassName("scrollable");
+        let scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+        docSections[0] = { section: 0, start: 0, end: sections[0].scrollHeight - 100 }
+
+        for (let j = 1; j < sections.length; j++) {
+            docSections[j] = { section: j, start: docSections[j - 1].end, end: docSections[j - 1].end + sections[j].scrollHeight }
+        }
+
+        //Esto es lo unico que deberia haber en el window.onscroll
+        for (let k = 0; k < docSections.length; k++) {
+            if (scrollPosition > docSections[k].start && scrollPosition < docSections[k].end) {
+                let current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                links[k].className += " active";
+                //console.log(k)
+            }
+        }
+
+        //Esta versión la saque hace demasiado tiempo de internet y no es muy precisa, falla en los calculos
+    } else if ((document.URL.search("/admin")) < 0) {
         //Capturar numero de seccions que te la pàgina
         let sections = document.getElementsByTagName("section");
         //Capturar numero de links scrollable que te la pàgina

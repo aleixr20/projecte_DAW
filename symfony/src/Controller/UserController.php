@@ -215,15 +215,20 @@ class UserController extends AbstractController
 
     /**
      * METODE PER EDITAR EL PERFIL D'UN USUARI
-     * @Route("/user/profile/edit", name="userProfileEdit")
+     * @Route("/user/{username}/edit", name="userProfileEdit")
      */
-    public function userProfileEdit(Request $request, SluggerInterface $slugger)
+    public function userProfileEdit($username, Request $request, SluggerInterface $slugger)
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
 
-        $user = $this->getUser();
+        if (in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+            $repository = $this->getDoctrine()->getRepository(User::class);
+            $user = $repository->findOneBy(['nom_usuari' => $username]);
+        } else {
+            $user = $this->getUser();
+        }
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -341,7 +346,7 @@ class UserController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * METODE PER COMPROVAR SI UN NOM D'USUARI EXISTEIX (API en JSON)
      * @Route("/user/validateUsername/{userName}", name="usernameExists")
      */
@@ -351,7 +356,7 @@ class UserController extends AbstractController
 
         if ($userRepository->findOneBy(['nom_usuari' => $userName])) {
             $userExists = true;
-        } 
+        }
 
         $data[] = ['usernameExists' => $userExists];
 

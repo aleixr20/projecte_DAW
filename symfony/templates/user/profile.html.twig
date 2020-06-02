@@ -64,7 +64,7 @@
 			{{user.username}}">{{user.articles|length}} articles <i class="fa fa-sticky-note-o"></i></a><br/>
 			{{ user.comentaris|length }} comentaris <i class="fa fa-comment-o"></i><br/>
 			{% if app.user and (user.username == app.user.username) or is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('userProfileEdit') }}" alt="Editar perfil">editar perfil <i class="fa fa-pencil-square-o"></i></a>
+				<a href="{{ path('userProfileEdit', {username:user.username}) }}" alt="Editar perfil">editar perfil <i class="fa fa-pencil-square-o"></i></a>
 			{% endif %}
 		</p>
 	</section>
