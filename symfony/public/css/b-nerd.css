@@ -255,6 +255,25 @@ section {
     _padding-top: 5vh;
 }
 
+.doc-cat-list {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-cat-list li {
+    float: left;
+    list-style: none;
+    width: 6em;
+    height: 6em;
+    padding: 0.4em;
+    margin: 0.5rem;
+}
+
+.doc-cat-icon {
+    width: 100%;
+}
+
 
 /*****************************
     FORM D'ARTICLES

@@ -49,7 +49,9 @@ class HomepageController extends AbstractController
             ['linkslug' => 'portada', 'linkalt' => 'Portada de la documentación', 'linkname' => 'INICIO', 'file' => '1_portada'],
             ['linkslug' => 'producto', 'linkalt' => 'El producto b-nerd', 'linkname' => 'B-NERD', 'file' => '2_producto'],
             ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '3_objetivos'],
-            ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '4_planificacion']
+            ['linkslug' => 'tecnologias', 'linkalt' => 'Tecnologias utilizadas en el proyecto', 'linkname' => 'TECHS', 'file' => '4_tecnologias'],
+            ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '5_planificacion']
+
         ];
         return $this->render('docs/docs.html.twig', [
             'lang' => 'es',

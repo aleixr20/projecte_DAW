@@ -742,6 +742,13 @@ window.onscroll = function() {
             }
         }
 
+        let menuUserPositions = (document.body.scrollHeight / 37); // =69 saltos winScroll
+        for (s = 1; s <= 38; s++) {
+            if ((scrollPosition > (menuUserPositions * (s - 1))) && (scrollPosition < (menuUserPositions * s))) {
+                menuUser[0].style.bottom = (35 + s) + "%";
+            }
+        }
+
         //Esta versión la saque hace demasiado tiempo de internet y no es muy precisa, falla en los calculos
     } else if ((document.URL.search("/admin")) < 0) {
         //Capturar numero de seccions que te la pàgina
