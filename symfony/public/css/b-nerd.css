@@ -112,8 +112,11 @@ nav {
 }
 
 .menu-user img {
-    width: 4em;
+    width: 3em;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    height: 3em;
 }
 
 .menu-bottom {
@@ -272,6 +275,10 @@ section {
 }
 
 .doc-cat-icon {
+    width: 100%;
+}
+
+.doc-img {
     width: 100%;
 }
 
