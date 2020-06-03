@@ -46,12 +46,12 @@ class HomepageController extends AbstractController
 
         // if ($idioma == 'en') {
         $sections = [
-            ['linkslug' => 'portada', 'linkalt' => 'Portada de la documentación', 'linkname' => 'INICIO', 'file' => '1_portada'],
-            ['linkslug' => 'producto', 'linkalt' => 'El producto b-nerd', 'linkname' => 'B-NERD', 'file' => '2_producto'],
-            ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '3_objetivos'],
-            ['linkslug' => 'tecnologias', 'linkalt' => 'Tecnologias utilizadas en el proyecto', 'linkname' => 'TECHS', 'file' => '4_tecnologias'],
-            ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '5_planificacion'],
-            ['linkslug' => 'wireframes', 'linkalt' => 'Prototipos de diseño inical', 'linkname' => 'WIREFRAMES', 'file' => '6_wireframes'],
+            ['linkslug' => 'portada', 'linkalt' => 'Portada de la documentación', 'linkname' => 'INICIO', 'file' => '01_portada'],
+            ['linkslug' => 'producto', 'linkalt' => 'El producto b-nerd', 'linkname' => 'B-NERD', 'file' => '02_producto'],
+            ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '03_objetivos'],
+            ['linkslug' => 'tecnologias', 'linkalt' => 'Tecnologias utilizadas en el proyecto', 'linkname' => 'TECHS', 'file' => '04_tecnologias'],
+            ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '05_planificacion'],
+            ['linkslug' => 'wireframes', 'linkalt' => 'Prototipos de diseño inical', 'linkname' => 'WIREFRAMES', 'file' => '06_wireframes'],
             ['linkslug' => 'funcionalidades', 'linkalt' => 'Diagra de casos de uso', 'linkname' => 'FUNCIONALIDADES', 'file' => '7_funcionalidades'],
 
 

@@ -742,8 +742,8 @@ window.onscroll = function() {
             }
         }
 
-        let menuUserPositions = (document.body.scrollHeight / 37); // =69 saltos winScroll
-        for (s = 1; s <= 38; s++) {
+        let menuUserPositions = (document.body.scrollHeight / 50); // =69 saltos winScroll
+        for (s = 1; s <= 50; s++) {
             if ((scrollPosition > (menuUserPositions * (s - 1))) && (scrollPosition < (menuUserPositions * s))) {
                 menuUser[0].style.bottom = (35 + s) + "%";
             }
