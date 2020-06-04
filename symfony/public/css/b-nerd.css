@@ -98,11 +98,7 @@ nav {
 }
 
 .menu-top {
-    top: 14vh
-}
-
-.menu-top img {
-    height: inherit;
+    bottom: 60vh
 }
 
 .menu-user {

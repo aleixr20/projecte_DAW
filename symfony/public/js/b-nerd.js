@@ -713,14 +713,13 @@ window.onload = function() {
 
 window.onscroll = function() {
 
-    //GESTIONAR QUE QUAN NO ESTIGUEM AL HOME NO ES CANVIIN ELS COLORS DEL MENU LATERAL
-    let menuUser = document.getElementsByClassName('menu-user');
 
     //Esto deberia estar declarado como variable global y cargar los datos en el window.onload
     //Como esta ahora, se esta rellenando la misma variable en cada scroll con los mismos datos
     //Esta primer trozo de codigo es mio y me gusta mucho mas que la otra version que saque de internet
     let docSections = [];
     if ((document.URL.search("/docs")) > 0) {
+
         //Capturar numero de seccions que te la pàgina
         let sections = document.getElementsByTagName("section");
         //Capturar numero de links scrollable que te la pàgina
@@ -742,15 +741,17 @@ window.onscroll = function() {
             }
         }
 
-        let menuUserPositions = (document.body.scrollHeight / 50); // =69 saltos winScroll
-        for (s = 1; s <= 50; s++) {
+        let menuTop = document.getElementsByClassName('menu-top');
+        let menuUserPositions = (document.body.scrollHeight / 20); // =69 saltos winScroll
+        for (s = 1; s <= 20; s++) {
             if ((scrollPosition > (menuUserPositions * (s - 1))) && (scrollPosition < (menuUserPositions * s))) {
-                menuUser[0].style.bottom = (35 + s) + "%";
+                menuTop[0].style.bottom = (60 + s) + "%";
             }
         }
 
         //Esta versión la saque hace demasiado tiempo de internet y no es muy precisa, falla en los calculos
     } else if ((document.URL.search("/admin")) < 0) {
+
         //Capturar numero de seccions que te la pàgina
         let sections = document.getElementsByTagName("section");
         //Capturar numero de links scrollable que te la pàgina
@@ -770,7 +771,7 @@ window.onscroll = function() {
                 }
             }
         }
-
+        let menuUser = document.getElementsByClassName('menu-user');
         let menuUserPositions = (height / 37); // =69 saltos winScroll
         for (i = 1; i <= 38; i++) {
             if ((winScroll > (menuUserPositions * (i - 1))) && (winScroll < (menuUserPositions * i))) {
