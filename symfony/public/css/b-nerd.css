@@ -203,6 +203,19 @@ nav {
     font-style: normal;
 }
 
+.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
 
 /*****************************
     COMPOSICIO CONTENT DRETA
@@ -726,6 +739,7 @@ a .admin-icons:hover {
     }
     .menu-user img {
         width: 1.6em;
+        height: 1.6em;
         z-index: 5;
     }
     .menu-icon-logout {

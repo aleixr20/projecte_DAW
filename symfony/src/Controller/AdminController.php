@@ -374,7 +374,7 @@ class AdminController extends AbstractController
                 $entityManager->persist($comment);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('adminCometnaris');
+                return $this->redirectToRoute('adminComentaris');
             }
 
             return $this->render('admin/adminEditarComentari.html.twig', [

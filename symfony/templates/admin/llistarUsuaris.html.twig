@@ -58,14 +58,6 @@
 									<a href="{{path('adminComentarisUsuari', {username:usuari.username}) }}" alt="Enllaç a la llista de comentaris de de {{usuari.username}}" title="Veure comentaris de {{usuari.username}}">
 										{{usuari.comentaris|length}}</a>
 								</td>
-								{# <td>
-									<a href="{{ path('userProfile', {username: usuari.username}) }}" alt="Veure perfil de {{usuari.username}}" title="Veure perfil de {{usuari.username}}">
-										<i class="admin-icons fa fa-eye"></i>
-									</a>
-									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="Editar l'usuari {{usuari.username}}" title="Administrar l'usuari {{usuari.username}}">
-										<i class="admin-icons fa fa-cog"></i>
-									</a>
-								</td> #}
 							</td>
 						</tr>
 						<tr class="alert-light collapse" id="usuari_{{usuari.id}}" data-parent="#accordionExample">

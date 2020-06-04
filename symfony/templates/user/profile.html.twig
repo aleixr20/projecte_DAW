@@ -59,7 +59,7 @@
 		<p class="text">{{ user.descripcio|raw }}
 		</p>
 		<p class="comments text-right">
-			{{user.username}} es usuari registrat desde	{{user.dataregistre|date('Y')}}<br/>
+			{{user.username}} es usuari desde	{{user.dataregistre|date('Y')}}<br/>
 			ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
 			{{user.username}}">{{user.articles|length}} articles <i class="fa fa-sticky-note-o"></i></a><br/>
 			{{ user.comentaris|length }} comentaris <i class="fa fa-comment-o"></i><br/>
