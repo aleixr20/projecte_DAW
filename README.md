@@ -9,7 +9,7 @@ Esta web es el resultado de un proyecto de fin de curso de tres compañeros de D
 Elegir la temàtica no fue tarea fàcil, pues encontrar un producto en el que se pudiesen integrar los contenidos acadèmicos trabajados, como demostración de las aptitudes y conocimientos adquiridos, era complejo por la dificultad de conseguir que pudiesen coexisitir distintas tecnologias de frontend, backend y sistemas sin xocar entre ellas.
 
 Por ello elegimos como aplicación web que para muchos seria a primera vista un simple blog de artículos (posts). No obstante, desde cero, sin usar ningun CRM, template o plantilla predefinida. Permitiendonos compartir nuestro aprendizage con artículos repartido en categorias para los distintos idiomas de programación, frameworks o temas en general.
-----
+
 ### Marcandonos como objetivos principales:
 
 - Desarrollar el backend con Symfony para una gestión del enrutado de las URL que nos permitiese jugar con las categorias inCSS, inPHP, inApache...)
@@ -27,22 +27,19 @@ _"Pero cuidado, si eres uno de esos programadores Pro repleto de orgullo y con g
 Aporta o Aparta!!"_    
 
 
-## Objectivos
-lorem ipsum
+### Teconologia utilizadas
+- HTML5 CSS3, Javascript y Twig para el Frontend
+- PHP, Symfony5 y Doctrine para backend
 
-## Format
-lorem ipsum
+## Requisitos para su intalación
 
-## Requisits
-lorem ipsum
-- req1
-- re12
+- Symfony5 y composer
+- PHP 7.X y bases de datos que admita JSON
 - ...
 
-## Instalació
+## Instalación
 lorem ipsum
 
-### i ...
+
 
 ---
-
