@@ -62,9 +62,9 @@ class HomepageController extends AbstractController
             ['linkslug' => 'seguridad', 'linkalt' => 'Seguridad aplicada', 'linkname' => 'SEGURIDAD', 'file' => '12-seguridad'],
             ['linkslug' => 'valoraciones', 'linkalt' => 'Nuestras valoraciones personales', 'linkname' => 'VALORACIONES', 'file' => '13-valoraciones'],
 
-            ['linkslug' => 'estilos', 'linkalt' => 'Guia de estilos finales', 'linkname' => 'GUIA DE ESTILOS', 'file' => '14-estilos'],
-            ['linkslug' => 'manual', 'linkalt' => 'Manual de usuario', 'linkname' => 'MANUAL DE USUARIO', 'file' => '15-manual'],
-            ['linkslug' => 'demo', 'linkalt' => 'Instalación de versión para Demo', 'linkname' => 'VERSION DEMO', 'file' => '16-demo'],
+            // ['linkslug' => 'estilos', 'linkalt' => 'Guia de estilos finales', 'linkname' => 'GUIA DE ESTILOS', 'file' => '14-estilos'],
+            ['linkslug' => 'manual', 'linkalt' => 'Manual de  usuarios e instalación', 'linkname' => 'INSTALACION', 'file' => '15-manual'],
+            // ['linkslug' => 'demo', 'linkalt' => 'Instalación de versión para Demo', 'linkname' => 'VERSION DEMO', 'file' => '16-demo'],
 
             ['linkslug' => 'conclusion', 'linkalt' => 'Conclusiones finales', 'linkname' => 'CONCLUSIONES', 'file' => '17-conclusiones'],
 
