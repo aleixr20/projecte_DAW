@@ -2,27 +2,102 @@
 	<h1 class="doc-titol">Eso de lo que nos sentimos orgullosos</h1>
 	<div class="doc-text">
 		<p>
-			Editor online enlazado y coloreado
-		</p>
-		<p>
-			Incrustacion de HTML enriquecido en articulos (CKEditor)
-		</p>
-		<p>
-			Incrustacion de codigo formatado como un IDE (CodeSnippet)
-		</p>
-		<p>
-			Gestion de cuentas de correo (no-replay y formulario de contacto)
-		</p>
-		<p>
-			Personalización del perfil
-		</p>
-		<p>
-			Estrcutura de meta datos preparada para posicionamiento SEO y OG
-		</p>
-		<p>
-			Personalización del perfil
+			Trump nos felicita por nuestra gran exito en el desarollo
 		</p>
 
+		Mobile First (responsive)
+		<ul>
+			<li>
+				Nos marcamos como objetivo de diseño frontend seguir las tendéncias Mobile First. Aunque al final dedicasemos muchas horas y nos retrasase en la planificacón, debido a que todo el CSS y JS es propio y *no copiado*, estmos muy stisfechos con los resultados obtenidos
+			</li>
+		</ul>
+		User Experience UI/UX
+		<ul>
+			<li>
+				Teniamos claro que la UX no es un vanalidad y que si existe es por algo. Procuramos implementar al máximo posible todas sus recomendaciones y creemos que los resultados *dicen mucho al rescepto*
+			</li>
+		</ul>
+		Dark Mode
+		<ul>
+			<li>
+				Bendita inspiración! Loca propuesta, que surgió a medio proyecto y que dada su poca complejidad, decidimos probar de implementar. Grata sorpresa la que nos llavamos y de la que *estamos muy satisfechos* o *mola mucho*
+			</li>
+		</ul>
+		Comentaris
+		<ul>
+			<li>
+				Este era un punto de nuestro proyecto, muy importante debido a que queriamos que existiese la posiblidad de dar un feedback a los articulos, con la finalidad de que usuarios mas Pro, via comentarios, pudiesen proporcionar conocimento, correcciones y experiencias, que aportar a nuestro aprendizage.<br/>
+				No obstante, era de dificil implementación, si no gestionabamos de alguna modo el acceso total a comentarios por parte de usuarios anonimos y/o bots.<br/>
+				*En un prinicipo, por falta de tiempo en su dessarrollo, quedó descartado y al final, lo conseguimos implementar*
+			</li>
+		</ul>
+
+		Code Snippet
+		<ul>
+			<li>
+				Todo programador *entiende* mejor un fragmento de codigo, si lo ve como lo veria en su IDE. Creiamo que seria de mayor dificultad y sin embargo descubrimos la existencia de muchas de librerias javascript dedicadas a eso.
+			</li>
+		</ul>
+		IDE online y demos
+		<ul>
+			<li>
+				Nos interesa mucho, incorporar en *la web*, que un articulo pudiese contener ejemplos de codigo (html, css y js) que se pudiesen probar online en un editor integrado parecido a w3schools, codepen, jsbin...
+				<br/>
+				<a href="{{path('article_detall', {slug:'integracion-de-un-ide-(html,-css-y-javascript)'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Serialize
+		<ul>
+			<li>
+				Aunque no consegumos implementar un frontend reactivo con VUE para llamadas a backend tipo API, Si aprendimos y profundizamos en un *complemento* de Symfony que esta preparado y listo para su uso, con el propisto de devolver los articulos en formato JSON para adaptación del backend a tipo API.
+				<br/>
+				<a href="{{path('article_detall', {slug:'convertir-entidades-de-symfony-en-json'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Meta OG y posicionamiento SEO
+		<ul>
+			<li>
+				Dejamos la estructura web ya prepada con el protocolo OpenGraph para el "rich object share in a sociay media". Ademas de las meta tags necessarias para la redacción de contenido enfocado a posicionamineto SEO
+				<br/>
+				<a href="{{path('article_detall', {slug:'implementacion-de-open-graph-en-el-proyecto'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Apartat de demos
+		<ul>
+			<li>
+				Conseguimos ajusta la configuración del servidor para la coexistecnia de Symfony con una carpeta demos externa a su enrutado.
+				<br/>
+				<a href="{{path('article_detall', {slug:'coexistir-rutas-del-servidor-con-las-de-symfony'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Cuentas de correo
+		<ul>
+			<li>
+				Vara evitar el registro indiscriminado de cuentas de usuario "fake" via bots. Resolvimos añadir la *popular* estraregia de forçar en el registro de usuarios, la validación de estos con un mail de verificación. Para ello se han configurado especificas cuentas de correo "no-replay" y aprendimos de la integración de los services en Symofony y el componete SwiftMailer
+				<a href="{{path('article_detall', {slug:'validacion-de-email-con-swiftmailer-en-symfony'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Deployment
+		<ul>
+			<li>
+				Ya desde el primer sprint, hicimos deployment de una versión de prueba en la plataforma labs de nuestro centro educstivo con la finalidad de estar en todo momento XXX los posibles problemes del despliegue en un entorno de producción real.<br/>
+				Aprovechamos que teniamos un dominio y hosting gratuito producto de la participación en el concurso "webs al punt cat" para realizar un Deplayment integral lo mas parecido posible a una situación real.
+				<a href="{{path('article_detall', {slug:'despliegue-completo-de-symfony-en-el-servidor'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
+
+		Certificat SSL
+		<ul>
+			<li>
+				Siguiendo la tendencia actual, hacia el encriptado de toda comunicación TIC, era relevante para nosotros, que si el producto final, salia a mercado y por lo tanto se hacia publicaba y visble a todo nerd, debia hacer-se con un certificado SSL
+				<a href="{{path('article_detall', {slug:'generar-certificado-ssl-gratuito'}) }}" target="blank">ver explicación detallada</a>
+			</li>
+		</ul>
 
 	</div>
 </section>
