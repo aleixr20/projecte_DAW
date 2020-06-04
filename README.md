@@ -30,12 +30,13 @@ Aporta o Aparta!!"_
 ### Teconologia utilizadas
 - HTML5 CSS3, Javascript y Twig para el Frontend
 - PHP, Symfony5 y Doctrine para backend
+
 ---
 ## Requisitos para su intalación
-
 - Symfony5 y composer
 - PHP 7.X y bases de datos que admita JSON
 - ...
+
 ---
 ### Instalación
 lorem ipsum
