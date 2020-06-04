@@ -26,18 +26,18 @@ Toda contrubución a nuestro aprendizaje seria mas que bienvenida."_
 _"Pero cuidado, si eres uno de esos programadores Pro repleto de orgullo y con ganas de criticar, te equivocaste de web. Tomate una pildora de humildad y empieza por preguntarte ¿Si tan experto eres, que haces buscando ayuda en una web de novatos?. Ahorrate los tecnicismos y los comentarios vanidosos, los minadores de moral no son bienvenidos.    
 Aporta o Aparta!!"_    
 
-
+---
 ### Teconologia utilizadas
 - HTML5 CSS3, Javascript y Twig para el Frontend
 - PHP, Symfony5 y Doctrine para backend
-
+---
 ## Requisitos para su intalación
 
 - Symfony5 y composer
 - PHP 7.X y bases de datos que admita JSON
 - ...
-
-## Instalación
+---
+### Instalación
 lorem ipsum
 
 
