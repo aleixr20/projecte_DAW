@@ -37,9 +37,9 @@ class HomepageController extends AbstractController
     }
 
     /**
-     * @Route("/docs", name="docs")
+     * @Route("/doc", name="doc")
      */
-    public function docs()
+    public function documentacio()
     {
 
         $idioma = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);

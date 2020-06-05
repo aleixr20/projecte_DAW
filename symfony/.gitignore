@@ -18,3 +18,4 @@
 ###< symfony/phpunit-bridge ###
 .env
 /src/Migrations
+/public/docs
