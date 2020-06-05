@@ -1,59 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block meta_description %}
-	<meta name="description" content="Full Stack Nerds d'ultima fornada!! Articles
-	{% if categoria is defined %}
-		 in{{categoria.nom}}"
-	{% elseif autor is defined %}
-		 by {{autor.username}}"
-	{% endif %}
-{% endblock %}
+{% if categoria is defined %}
+	{% block meta_description %}
+		<meta name="description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to be Full Stack Developers in{{categoria.nom}}. Aqui nuestros apuntes, ejercicios y ejemplos sobre {{categoria.nom}}">
+	{% endblock %}
+{% elseif autor is defined %}
+	{% block meta_description %}
+		<meta name="description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to Full Stack Develop in everything. Aqui los apuntes, ejercicios y ejemplos de {{autor.username}}">
+	{% endblock %}
+{% endif %}
 
 {% block meta_ogg %}
 	<!-- Open Graph data -->
-	<meta property="og:title" content="
-			{% if categoria is defined %}
-				Articles de la categoria {{  categoria.nom }}
-			{% elseif autor is defined %}
-				Articles de {{ autor.username }}
-			{% else %}
-				Default image
-			{% endif %}
-			"/>
+
+	{% if categoria is defined %}
+		<meta property="og:title" content="Articles de la categoria {{  categoria.nom }}"/>
+	{% elseif autor is defined %}
+		<meta property="og:title" content="Articles de {{  autor.username }}"/>
+	{% else %}
+		<meta property="og:title" content="Articles b-Nerd"/>
+	{% endif %}
+
 	<meta property="og:type" content="website"/>
 	<meta property="og:url" content="{{ app.request.uri }}"/>
-	<meta property="og:image" content="
-	{% if categoria is defined %}
-		{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ categoria.logo) }}
-	{% elseif articles[0].autor is defined%}
-		{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/imatges_perfil/' ~ articles[0].autor.imatge) }}
-	{% else %}
-		Default image
-	{% endif %}
-	" />
-	<meta property="og:image:width" content="300" />
-	<meta property="og:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Posuere ac ut consequat semper viverra nam libero justo laoreet. At imperdiet dui accumsan sit amet nulla. Fermentum leo vel orci porta non pulvinar neque laoreet." />
-	<meta property="og:site_name" content="B-NERD TO DEVELOPE" />
-{% endblock %}
 
+
+	{% if categoria is defined %}
+		<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/categories/' ~ categoria.logo) }}"/>
+	{% elseif autor is defined%}
+		<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/imatges_perfil/' ~ autor.imatge) }}"/>
+	{% else %}
+		<meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ asset('img/brand/logo_bnerd.png') }}"/>
+	{% endif %}
+
+	<meta property="og:image:width" content="300"/>
+
+	{% if categoria is defined %}
+		<meta property="og:description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to be Full Stack Developers in{{categoria.nom}}. Aqui nuestros apuntes, ejercicios y ejemplos sobre {{categoria.nom}}"/>
+	{% elseif autor is defined%}
+		<meta property="og:description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to Full Stack Develop in everything. Aqui los apuntes, ejercicios y ejemplos de {{autor.username}}"/>
+	{% else %}
+		<meta property="og:description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to Full Stack Develop in everything. Aqui compartimos apuntes, ejercicios y ejemplos"/>
+	{% endif %}
+
+	<meta property="og:site_name" content="B-NERDS toDEVELOP!"/>
+
+{% endblock %}
 {% block title %}
 	{% if categoria is defined %}
 		b-NERDS! in{{categoria.nom}}
 	{% elseif autor is defined %}
-		b-NERDS! by {{autor.username}}
+		b-NERDS! by	{{autor.username}}
 	{% endif %}
 {% endblock %}
-
 {% block extrastyes %}
 	{% if (categoria.color is defined) and (categoria.color is not empty) %}
 		<style>
 			nav {
-				border-right: 3px solid{{categoria.color}};
+				border-color: {{categoria.color}};
 			}
 			.menu-username,
 			.active {
-				color: {{categoria.color}}
-				!important;
+				color: {{categoria.color}} !important;
 			}
 			.menu-bottom a:hover,
 			.menu-bottom i:hover {
@@ -67,11 +75,9 @@
 		</style>
 	{% endif %}
 {% endblock %}
-
 {% block navbar %}
 	{{ include('menu.html.twig') }}
 {% endblock %}
-
 {% block content %}
 
 	<section>
