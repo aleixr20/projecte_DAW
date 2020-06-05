@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% if categoria is defined %}
-	{% block meta_description %}
+{% block meta_description %}
+
+	{% if categoria is defined %}
 		<meta name="description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to be Full Stack Developers in{{categoria.nom}}. Aqui nuestros apuntes, ejercicios y ejemplos sobre {{categoria.nom}}">
-	{% endblock %}
-{% elseif autor is defined %}
-	{% block meta_description %}
+	{% elseif autor is defined %}
 		<meta name="description" content="Always Nerds!  Geeks to learn in constant Develoop!  Nerds to Full Stack Develop in everything. Aqui los apuntes, ejercicios y ejemplos de {{autor.username}}">
-	{% endblock %}
-{% endif %}
+	{% endif %}
+
+{% endblock %}
 
 {% block meta_ogg %}
 	<!-- Open Graph data -->
@@ -50,14 +50,16 @@
 	{% if categoria is defined %}
 		b-NERDS! in{{categoria.nom}}
 	{% elseif autor is defined %}
-		b-NERDS! by	{{autor.username}}
+		b-NERDS! by
+		{{autor.username}}
 	{% endif %}
 {% endblock %}
 {% block extrastyes %}
 	{% if (categoria.color is defined) and (categoria.color is not empty) %}
 		<style>
 			nav {
-				border-color: {{categoria.color}};
+				border-color: {{categoria.color}}
+				;
 			}
 			.menu-username,
 			.active {

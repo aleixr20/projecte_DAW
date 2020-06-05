@@ -718,7 +718,10 @@ window.onscroll = function() {
     //Como esta ahora, se esta rellenando la misma variable en cada scroll con los mismos datos
     //Esta primer trozo de codigo es mio y me gusta mucho mas que la otra version que saque de internet
     let docSections = [];
-    if ((document.URL.search("/docs")) > 0) {
+    if ((document.URL.search("/doc")) > 0) {
+
+        let menuTop = document.getElementsByClassName('menu-user');
+        menuTop[0].style.bottom = '60vh';
 
         //Capturar numero de seccions que te la pàgina
         let sections = document.getElementsByTagName("section");
@@ -741,7 +744,6 @@ window.onscroll = function() {
             }
         }
 
-        let menuTop = document.getElementsByClassName('menu-top');
         let menuUserPositions = (document.body.scrollHeight / 20); // =69 saltos winScroll
         for (s = 1; s <= 20; s++) {
             if ((scrollPosition > (menuUserPositions * (s - 1))) && (scrollPosition < (menuUserPositions * s))) {
