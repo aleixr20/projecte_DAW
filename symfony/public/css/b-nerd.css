@@ -268,6 +268,10 @@ section {
     _padding-top: 5vh;
 }
 
+.doc-list {
+    padding: 0 0.6em;
+}
+
 .doc-cat-list {
     display: inline-block;
     padding: 0;

@@ -1,18 +1,12 @@
-<ul class="menu-user">
+<ul class="menu-user" style="bottom:58vh">
 	<li>
 		<a class="menu-link logout-link" href="{{ path('homepage')}}" alt="Enllaç a formulari de login">
-			b-nerd !
+			b-Nerds!
 		</a>
 	</li>
 </ul>
 
 <ul class="menu-bottom">
-
-	{# <li>
-		<a class="menu-link" href="{{ path('homepage')}}" alt="Enllaç a formulari de login">
-			<i class="admin-icon fa fa-home"></i>
-		</a>
-	</li> #}
 	{% for section in sections %}
 		<li>
 			{% if loop.first %}

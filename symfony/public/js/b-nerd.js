@@ -720,9 +720,6 @@ window.onscroll = function() {
     let docSections = [];
     if ((document.URL.search("/doc")) > 0) {
 
-        let menuTop = document.getElementsByClassName('menu-user');
-        menuTop[0].style.bottom = '60vh';
-
         //Capturar numero de seccions que te la pàgina
         let sections = document.getElementsByTagName("section");
         //Capturar numero de links scrollable que te la pàgina
@@ -744,6 +741,7 @@ window.onscroll = function() {
             }
         }
 
+        let menuTop = document.getElementsByClassName('menu-user');
         let menuUserPositions = (document.body.scrollHeight / 20); // =69 saltos winScroll
         for (s = 1; s <= 20; s++) {
             if ((scrollPosition > (menuUserPositions * (s - 1))) && (scrollPosition < (menuUserPositions * s))) {
