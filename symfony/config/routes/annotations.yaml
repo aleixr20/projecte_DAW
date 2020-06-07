@@ -1,7 +1,9 @@
 App:
     resource: App\Controller\AppController
     type: annotation
-
+API:
+    resource: App\Controller\APIController
+    type: annotation
 Homepage:
     resource: App\Controller\HomepageController
     type: annotation
