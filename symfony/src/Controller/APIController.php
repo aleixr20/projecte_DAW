@@ -221,7 +221,6 @@ class APIController extends AbstractController
         } else if ($password == 'm07act41') {
             //Del contrari, si hi havia dades, obtenir el comentari de la DB
             $comentari = $repository->findOneBy(['id' => $comentari_id]);
-            //Modificar-ne la visibilitat
             //Eliminar de la DB
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comentari);
