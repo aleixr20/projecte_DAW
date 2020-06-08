@@ -1,16 +1,28 @@
 <section id="{{section.linkslug}}">
 	<h1 class="doc-titol">Aspectos de seguridad trabajados</h1>
 	<div class="doc-text">
-			<p>
-			Limitación de comentarios a solo usuarios registrados. Asi mismo, solo visibles cuando una admin los modere
+		<p>
+			Dado que el proyecto contiene varios formularios vulnerables a ataques de inyección, decidimos dedicarle las horas necesarias para evitar:
 		</p>
-					<p>
-			Control con JS para evitar la insercion de URL completes en redes sociales
+		<ul>
+			<li>
+				URLs falsas en las redes sociales de los usuarios.
+			</li>
+			<li>
+				Que un usuario al editar su perfil no pueda incluir scripts.
+			</li>
+			<li>
+				Contraseñas poco seguras.
+			</li>
+		</ul>
+		<p>
+			Puesto a que es conocida la facilidad con la que se crean cuentas falsas, era importante para nosotros implementa contramedidads ya conocidas como la de un mail de verificación.
 		</p>
 		<p>
-			Limitación de reegistro de usuario via Bots mediante mail de confirmación para la verificación de registro
+			Limitación de comentarios a solo usuarios registrados. Asi mismo, solo serán visibles cuando una admin los modere.
 		</p>
-
-
+		<p>
+			Implementación de un certificado SSL para garantizar una navegación segura.
+		</p>
 	</div>
 </section>

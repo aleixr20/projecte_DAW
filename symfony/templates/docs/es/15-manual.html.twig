@@ -2,48 +2,41 @@
 	<h1 class="doc-titol">Manual de usuario e instalación de versión demo</h1>
 	<div class="doc-text">
 		<p>
-			La mejor forma de testear la web es registrar-se en ella.
+			La mejor forma de testear la web es registrarse en ella.
 			<a href="{{path('app_register')}}" target="blank">enlace a registro de usuario</a><br>
-			Para su instalación en local, serà preciso disponer de Symofny y composer instalados
-			<ul>
-				<li>
-					<a href="https://symfony.com/download" alt="enlace a website oficial de Symfony" target="blank">Download Symfony from Symfony.com</a>
-				</li>
-				<li>
-					<a href="https://getcomposer.org/download/" alt="enlace a website oficial de composer" target="blank">Download Composer from getcomposer.org</a>
-				</li>
-			</ul>
-			<ol>
-				<li>Crear un
-					<a href="https://symfony.com/doc/current/setup.htmlnuevo" alt="enlace a documentación oficial de Symfony" target="blank">nuevo proyecto --full</a>
-					de Symfony
-				</li>
-				<li>
-					Vincular la carpeta del nuevo proyecto con nuestro
-					<a href="https://github.com/aleixr20/projecte_DAW/tree/master/symfony" alt="enlace a repositoria Git" target="blank">repositorio Git</a><br/>
-					$git remote show origin<br/>
-					$git remote add origin https://github.com/aleixr20/projecte_DAW.git
-				</li>
-				<li>
-					Crea una base de datos y
-					<a href="https://symfony.com/doc/current/doctrine.html#configuring-the-database" alt="enlace a documentación oficial de Symfony" target="blank">configura el archivo .env</a>
-					con los datos de acceso a tu base de datos
-				</li>
-				<li>
-					ejecutar en consola o terminal (si tu IDE no lo integra)<br>
-					php bin/console make:migrations<br/>
-					php bin/console doctrine:migrations:migrate<br/>
-					php bin/console doctrine:fixtures:load<br/></li>
-			</ol>
-			Eso deberia ser suficiente si no fuera por los componentes extras que instalamos y que posiblemente no tengas en la versión --full por defecto de un nuevo proyecto en Symfony.
-			<ul>
-				<li>composer requiere XX</li>
-				<li>composer requiere XX</li>
-				<li>composer requiere XX</li>
-				<li>composer requiere XX</li>
-				<li>composer requiere XX</li>
-				<li>composer requiere XX</li>
-			</ul>
+			Para su instalación en local, será preciso disponer de Symfony5 y Composer instalados.
 		</p>
+		<ul>
+			<li>
+				<a href="https://symfony.com/download" alt="enlace a website oficial de Symfony" target="blank">Download Symfony from Symfony.com</a>
+			</li>
+			<li>
+				<a href="https://getcomposer.org/download/" alt="enlace a website oficial de composer" target="blank">Download Composer from getcomposer.org</a>
+			</li>
+		</ul>
+		<ol>
+			<li>
+				Clonar nuestro
+				<a href="https://github.com/rogercrdaw/b-Nerd" alt="enlace a repositoria Git" target="blank">repositorio Git</a><br/>
+				$git clone https://github.com/rogercrdaw/b-Nerd.git
+			</li>
+			<li>
+				Crea una base de datos y
+				<a href="https://symfony.com/doc/current/doctrine.html#configuring-the-database" alt="enlace a documentación oficial de Symfony" target="blank">configura el archivo .env</a>
+				con los datos de acceso a tu base de datos
+			</li>
+			<li>
+				Ejecutar en consola o terminal (si tu IDE no lo integra)<br>
+				php bin/console make:migrations<br/>
+				php bin/console doctrine:migrations:migrate<br/>
+				php bin/console doctrine:fixtures:load<br/></li>
+		</ol>
+		<p>
+			Aquí tienes una demostración de como Nerdear por nuestra web.
+		</p>
+		<video width="100%" poster="{{ asset('docs/docs-img/demo.jpg') }}" controls>
+			<source src="{{ asset('docs/files/demo.mp4') }}" type="video/mp4">
+			Your browser does not support HTML video.
+		</video>
 	</div>
 </section>
