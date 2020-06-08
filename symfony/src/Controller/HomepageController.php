@@ -64,13 +64,13 @@ class HomepageController extends AbstractController
                 ['linkslug' => 'fracasos', 'linkalt' => 'Objetivos no alcanzados', 'linkname' => 'FRACASOS', 'file' => '10-fracasos'],
                 ['linkslug' => 'exitos', 'linkalt' => 'Objetivos logrados', 'linkname' => 'EXITOS', 'file' => '11-exitos'],
                 ['linkslug' => 'seguridad', 'linkalt' => 'Seguridad aplicada', 'linkname' => 'SEGURIDAD', 'file' => '12-seguridad'],
-                ['linkslug' => 'valoraciones', 'linkalt' => 'Nuestras valoraciones personales', 'linkname' => 'VALORACIONES', 'file' => '13-valoraciones'],
 
                 ['linkslug' => 'pitch', 'linkalt' => 'Pitch y presentación comercial', 'linkname' => 'MEDIA', 'file' => '14-media'],
                 ['linkslug' => 'manual', 'linkalt' => 'Manual de  usuarios e instalación', 'linkname' => 'INSTALACION', 'file' => '15-manual'],
                 // ['linkslug' => 'demo', 'linkalt' => 'Instalación de versión para Demo', 'linkname' => 'VERSION DEMO', 'file' => '16-demo'],
+                ['linkslug' => 'valoraciones', 'linkalt' => 'Nuestras valoraciones personales', 'linkname' => 'FEEDBACK', 'file' => '13-valoraciones'],
 
-                ['linkslug' => 'conclusion', 'linkalt' => 'Conclusiones finales', 'linkname' => 'CONCLUSIONES', 'file' => '17-conclusiones']
+                // ['linkslug' => 'conclusion', 'linkalt' => 'Conclusiones finales', 'linkname' => 'CONCLUSIONES', 'file' => '17-conclusiones']
 
             ];
             return $this->render('docs/docs.html.twig', [
