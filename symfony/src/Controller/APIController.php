@@ -217,7 +217,7 @@ class APIController extends AbstractController
 
         //Si hi havia dades buides, tirar una excepció
         if (empty($comentari_id) || empty($password)) {
-            throw new NotFoundHttpException('No s\ha pogut modificar el comentari per falta de dades');
+            throw new NotFoundHttpException('No s\ha pogut eliminar el comentari per falta de dades');
         } else if ($password == 'm07act41') {
             //Del contrari, si hi havia dades, obtenir el comentari de la DB
             $comentari = $repository->findOneBy(['id' => $comentari_id]);
