@@ -18,11 +18,11 @@ class ComentariType extends AbstractType
     {
         $builder
             ->add('text', TextareaType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Escriu aqui al teu comentari. Procura que no sigui superior a 500 caràcters'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Escribe aquí tu comentario. Procura que no exceder los 500 caracteres'],
                 'constraints' => [
                     new Length([
                         'max' => 500,
-                        'maxMessage' => 'Error, el títol no pot contenir mes de {{ limit }} caràcters ',
+                        'maxMessage' => 'Error, el comentario no puede contener más de {{ limit }} caracteres ',
                     ])
                 ]
             ])

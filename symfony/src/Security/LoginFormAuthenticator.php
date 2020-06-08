@@ -71,7 +71,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email incorrecte.');
+            throw new CustomUserMessageAuthenticationException('Email incorrecto.');
         }
 
         return $user;
@@ -89,7 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
                 }
             }
             if($validated == false){
-                throw new CustomUserMessageAuthenticationException('Usuari no verificat');
+                throw new CustomUserMessageAuthenticationException('Usuario no verificado');
             }
         }
         
