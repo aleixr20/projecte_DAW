@@ -64,7 +64,7 @@
 			</div>
 			<div class="col-lg-3 ">
 				<button onclick="location.href='{{ path('userChangePassword') }}'" type="button" class="btn btn-light">
-					Canviar contrasenya
+					Cambiar la contraseña
 				</button>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 		</div>
 
 
-		<h2>Xarxes Socials</h2>
+		<h2>Redes Sociales</h2>
 		<div class="form-group">
 			{{ form_label(editForm.github) }}
 			{{ form_widget(editForm.github) }}
@@ -111,8 +111,8 @@
 			<p class="form-error-text"></p>
 		</div>
 
-		<button class="btn btn-outline-secondary">Desa</button>
-		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('userProfile', {username: app.user.username}) }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary">Guardar</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('userProfile', {username: app.user.username}) }}'">Cancelar</button>
 		{{ form_end(editForm) }}
 	</section>
 {% endblock %}

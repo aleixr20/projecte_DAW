@@ -291,16 +291,16 @@ class UserController extends AbstractController
 
         $form = $this->createFormBuilder()
             ->add('oldPassword', PasswordType::class, [
-                'label' => 'Contrasenya actual',
+                'label' => 'Contraseña actual',
             ])
             ->add('newPassword', PasswordType::class, [
-                'label' => 'Contrasenya nova'
+                'label' => 'Contraseña nueva'
             ])
             ->add('repitNewPassword', PasswordType::class, [
-                'label' => 'Repeteix la contrasenya',
+                'label' => 'Repite la contraseña',
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Desa',
+                'label' => 'Guardar',
                 'attr' => ['class' => 'btn btn-outline-secondary']
             ])
             ->getForm();
@@ -328,14 +328,14 @@ class UserController extends AbstractController
 
                     return $this->render('user/change_password.html.twig', [
                         'changePasswordForm' => $form->createView(),
-                        'error' => 'Les contrasenyes no coincideixen.'
+                        'error' => 'Las contraseñas no coinciden.'
                     ]);
                 }
             } else {
 
                 return $this->render('user/change_password.html.twig', [
                     'changePasswordForm' => $form->createView(),
-                    'error' => 'La contrasenya actual no es correcte.'
+                    'error' => 'La contraseña actual no es correcta.'
                 ]);
             }
         }
@@ -373,7 +373,7 @@ class UserController extends AbstractController
         if ($userRepository->findOneBy(['nom_usuari' => $userName])) {
             $user = $userRepository->findOneBy(['nom_usuari' => $userName]);
         } else {
-            throw new Error("No existeix l'usuari");
+            throw new Error("No existe el usuario");
         }
 
         $userJson = $serializer->serialize($user, 'json', [

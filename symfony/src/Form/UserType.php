@@ -23,59 +23,59 @@ class UserType extends AbstractType
         $builder
 
             ->add('nom', TextType::class, [
-                'label' => 'Nom *',
+                'label' => 'Nombre *',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'El nom no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El nombre no puede ser inferior a {{ limit }} caracteres',
                         'max' => 40,
-                        'maxMessage' => 'El nom no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El nombre no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('cognom', TextType::class, [
-                'label' => 'Cognom *',
+                'label' => 'Apellido *',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'El cognom no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El apellido no puede ser inferior a {{ limit }} caracteres',
                         'max' => 40,
-                        'maxMessage' => 'El cognom no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El apellido no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('email', EmailType::class, [
                 'label' => 'Email *',
-                'help' => 'Adreça de correu electronic.',
+                'help' => 'Dirección de correo electrónico.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'max' => 100,
-                        'maxMessage' => 'El mail no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El mail no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('nom_usuari', TextType::class, [
-                'label' => 'Nom d\'usuari',
-                'help' => 'Aques serà el teu nom públic. Ha de ser unic i de 8 a 14 caràcters.',
+                'label' => 'Nombre de usuario',
+                'help' => 'Este será tu nombre público. Debe de ser único y de 8 a 14 caracteres.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'El nom d\'usuari no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El nombre de usuario no puede ser inferior a {{ limit }} caracteres',
                         'max' => 14,
-                        'maxMessage' => 'El nom d\'usuari no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El nombre de usuario no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('imatge', FileType::class, [
-                'label' => 'Seleccionar una imatge (jpg, png)',
+                'label' => 'Seleccionar una imagen (jpg, png)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -87,13 +87,13 @@ class UserType extends AbstractType
             ])
 
             ->add('descripcio', TextAreaType::class, [
-                'label' => 'Presentació',
-                'help' => 'Una petita descripció, Es el text que es veurà en el llistat d\'articles. Aquest camp es opcional i no pot contenir mes de 2000 caràcters',
+                'label' => 'Presentación',
+                'help' => 'Una pequeña descripción, es el texto que se verà en el listado de artículos. Este campo es opcional y no puede contener más de 2000 caracteres',
                 'attr' => ['class' => 'form-control', 'rows' => '6'],
                 'constraints' => [
                     new Length([
                         'max' => 2000,
-                        'maxMessage' => 'La presentació no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'La presentación no puede ser superior a {{ limit }} caracteres',
                     ]),
                 ],
                 'required' => false,
@@ -102,37 +102,37 @@ class UserType extends AbstractType
 
             ->add('github', TextType::class, [
                 'label' => 'Github',
-                'help' => 'Nom d\'usuari de Github. Nomes el nom d\'usuari. No cal escriure la url http/:/www.github...',
+                'help' => 'Nombre de usuario de Github. Sólo el nombre de usuario. No es necesario escribir la url http/:/www.github...',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
             ])
             ->add('linkedin', TextType::class, [
                 'label' => 'Linkedin',
-                'help' => 'Nom d\'usuari de Linkedin. Nomes el nom d\'usuari. No cal escriure la url http/:/www.linkedin...',
+                'help' => 'Nombre de usuario de Linkedin. Sólo el nombre de usuario. No es necesario escribir la url http/:/www.linkedin...',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
             ])
             ->add('twitter', TextType::class, [
                 'label' => 'Twitter',
-                'help' => 'Nom d\'usuari de Twitter. Nomes el nom d\'usuari. No cal escriure la url http/:/www.twitter...',
+                'help' => 'Nombre de usuario de Twitter. Sólo el nombre de usuario. No es necesario escribir la url http/:/www.twitter...',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
             ])
             ->add('facebook', TextType::class, [
                 'label' => 'Facebook',
-                'help' => 'Nom d\'usuari de Facebook. Nomes el nom d\'usuari. No cal escriure la url http/:/www.facebook...',
+                'help' => 'Nombre de usuario de Facebook. Sólo el nombre de usuario. No es necesario escribir la url http/:/www.facebook...',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
             ])
 
             ->add('data_naixament', BirthdayType::class, [
-                'label' => 'Data de naixement',
-                'help' => 'Aquest camp es opcional. ',
+                'label' => 'Fecha de nacimiento',
+                'help' => 'Este campo es opcional. ',
                 // 'attr' => ['class' => 'form-control'],
                 'placeholder' => [
-                    'day' => 'Dia',
+                    'day' => 'Día',
                     'month' => 'Mes',
-                    'year' => 'Any',
+                    'year' => 'Año',
                 ],
                 'format' => 'dd  MM  yyyy',
                 'required' => false,

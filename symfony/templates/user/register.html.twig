@@ -12,7 +12,7 @@
 {% block content %}
 	<section>
 		<h1 class="titulo">
-			Formulari d'alta nou usuari
+			Formulario de alta de nuevo usuario
 		</h1>
 
 		{{ form_start(registrationForm) }}
@@ -75,13 +75,13 @@
 		</div>
 
 		{{ form_widget(registrationForm.agreeTerms) }}
-		<label for="{{ registrationForm.agreeTerms.vars.id }}">Accepto els
-			<a target="_blank" alt="Enllaç a termes i condicions" href="https://www.rocketlawyer.com/es/es/sem/condiciones-generales-de-venta-de-bienes-o-servicios-en-internet?gclid=CjwKCAjw7-P1BRA2EiwAXoPWAzOX8S3UChlVLnffxHLx4KZ-t448B4BqRfwQuCF3WJSpFVgHr3aa-BoCNM4QAvD_BwE">termes i condicions</a>
+		<label for="{{ registrationForm.agreeTerms.vars.id }}">Acepto los
+			<a target="_blank" alt="Enlace a terminos y condiciones" href="{{ app.request.getSchemeAndHttpHost() }}/terminos/terminos.pdf">terminos y condiciones</a>
 		</label>
 		<br/>
 
-		<button class="btn btn-outline-secondary">Register</button>
-		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('homepage') }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary">Registro</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('homepage') }}'">Cancela</button>
 
 		{{ form_end(registrationForm) }}
 	</section>

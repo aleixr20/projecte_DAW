@@ -1,19 +1,19 @@
 <section id="hard-skills">
-	<h1 class="titulo">Reconocelo! Si estas en las TIC, eres Nerd!</h1>
+	<h1 class="titulo">Reconócelo! Si estás en las TIC, eres Nerd!</h1>
 	<div class="text">
 		<p>
-			Futuro se escribe en binario, y el binario ya es obseleto cuando hablamos de computación cuántica.<br/>
-			Bienvenido al mundo de los Full Stack Developers, esos tontos que para aprender a hacer una cosa tuviereon que apender muchas otras, y cuando creias que ya lo tenias, apareció otra mejor. 
+			Futuro se escribe en binario, y el binario ya es obsoleto cuando hablamos de computación cuántica.<br/>
+			Bienvenido al mundo de los Full Stack Developers, esos tontos que para aprender a hacer una cosa tuvieron que aprender muchas otras, y cuando creías que ya lo tenías, apareció otra mejor. 
 		</p>
 		<p>
-			Desde el navegador, al servidor, pasando por bases de datos y sistemas.. De frontend a backend mezclando una gran lista de tecnologías y idiomas de programación. Y es que si algo hemos aprendido, es que no hay ninguno perfecto, cada uno es bueno en lo suyo y el mejor para segun  que proyecto.
+			Desde el navegador, al servidor, pasando por bases de datos y sistemas.. De frontend a backend mezclando una gran lista de tecnologías e idiomas de programación. Y es que si algo hemos aprendido, es que no hay ninguno perfecto, cada uno es bueno en lo suyo y el mejor para según que proyecto.
 		</p>
 
 		<ul class="cat-list">
 			{% for cat in categories_frontend %}
 				{% if cat.articles|length > 0 %}
 					<li>
-						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"Enlace a artículos de la categoría {{cat.nom}}" title="Ver artículos de {{cat.nom}}">
 							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
 							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
 						</a>
@@ -24,7 +24,7 @@
 			{% for cat in categories_backend %}
 				{% if cat.articles|length > 0 %}
 					<li>
-						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"Enlace a artículos de la categoría {{cat.nom}}" title="Ver artículos de {{cat.nom}}">
 							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
 							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
 						</a>
@@ -35,7 +35,7 @@
 			{% for cat in categories_sistemes %}
 				{% if cat.articles|length > 0 %}
 					<li>
-						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"Enlace a artículos de la categoría {{cat.nom}}" title="Ver artículos de {{cat.nom}}">
 							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
 							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
 						</a>
@@ -46,7 +46,7 @@
 						{% for cat in categories_altres %}
 				{% if cat.articles|length > 0 %}
 					<li>
-						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"enllaç a articles de la categoria {{cat.nom}}" title="Veure articles de {{cat.nom}}">
+						<a href="{{ path('articles_categoria', {cat_name: cat.nom}) }}" alt"Enlace a artículos de la categoría {{cat.nom}}" title="Ver artículos de {{cat.nom}}">
 							<img src="{{ asset("img/categories/" ~ cat.logo) }}" alt="{{cat.nom}} icon" class="cat-icon">
 							<span class="badge badge-secondary cat-length">{{cat.articles|length }}</span>
 						</a>
@@ -55,7 +55,7 @@
 			{% endfor %}
 		</ul>
 		<p>
-			La memoria es finita, y para no olvidar, eso que un dia aprendimos, pero ya no usamos con la suficiente frecuencia para recordarlo, aqui queda eso de lo que hablamos. Y si algo no esta aquí, es porque ya tardas en enseñarnoslo.
+			La memoria es finita, y para no olvidar, eso que un día aprendimos, pero ya no usamos con la suficiente frecuencia para recordarlo, aquí queda eso de lo que hablamos. Y si algo no esta aquí, es porque ya tardas en enseñárnoslo.
 		</p>
 	</div>
 </section>

@@ -18,25 +18,25 @@ window.onload = function() {
                 icon: 'frown-o',
                 color: 'tomato',
                 info: 'Soy un programador Pro, vanidoso, y con ganas de criticar vuestro trabajo !',
-                footer: '"Prescindible. Acabamos de finalizar nuestros estudios y con mucha humildad aceptamos nuestras limitaciones. La opinion de los minadores de moral, no nos interessa"'
+                footer: '"Prescindible. Acabamos de finalizar nuestros estudios y con mucha humildad aceptamos nuestras limitaciones. La opinión de los minadores de moral, no nos interesa"'
             },
             {
                 icon: 'meh-o',
                 color: 'orange',
-                info: 'Interesante, pero con matices. Se de lo que hablo y partes de vuestro apuntes contiene información incorrecta',
-                footer: '"Tu opinion nos interesa. Somos nerds, ansiosos por ampliar conociminetos. Agradecemos mucho tu aportación"',
+                info: 'Interesante, pero con matices. Se de lo que hablo y partes de vuestros apuntes contienen información incorrecta',
+                footer: '"Tu opinión nos interesa. Somos nerds, ansiosos por ampliar conociminetos. Agradecemos mucho tu aportación"',
 
             }, {
                 icon: 'smile-o',
                 color: 'forestgreen',
-                info: 'Guay! Este articulo me ha sido de mucha ayuda',
-                footer: '"No te flipes, que somos simples aprendices....Pero gràcies. Es bueno saber que nuestros apuntes han sido utiles a otras personas"'
+                info: 'Guay! Este artículo me ha sido de mucha ayuda',
+                footer: '"No te flipes, que somos simples aprendices....Pero gracias. Es bueno saber que nuestros apuntes han sido utiles a otras personas"'
 
             }, {
                 icon: 'rocket',
                 color: 'royalblue',
-                info: 'Felicidades, Buen trabajo. Os animo a seguir avançando!',
-                footer: '"Gràcias por tu apoyo! Nos gusta la programción y toda aportación es bienvenida"'
+                info: 'Felicidades, Buen trabajo. Os animo a seguir avanzando!',
+                footer: '"Grácias por tu apoyo! Nos gusta la programción y toda aportación es bienvenida"'
             }
         ]
     };

@@ -116,12 +116,12 @@
 				{{ form_start(feedbackForm) }}
 				{{ form_widget(feedbackForm.text) }}{{ form_widget(feedbackForm.tipus) }}
 				<p class="feedback-footer">
-					Solo los usuarios registrados pueden añadir comentarios</p>
+					Sólo los usuarios registrados pueden añadir comentarios</p>
 				<div>
 					{% if app.user and is_granted('ROLE_VALIDATED') %}
 						<button type="submit" class="btn btn-outline-secondary">enviar</button>
 					{% else %}
-						<a href="{{path('app_login')}}" type="button" class="btn btn-block btn-outline-secondary" disabled>solo los usuarios registrados pueden hacer comentarios</a>
+						<a href="{{path('app_login')}}" type="button" class="btn btn-block btn-outline-secondary" disabled>sólo los usuarios registrados pueden hacer comentarios</a>
 					{% endif %}
 				</div>
 				{{ form_end(feedbackForm) }}

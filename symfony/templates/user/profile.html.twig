@@ -23,25 +23,25 @@
 				</p>
 
 				{% if user.github is defined and (user.github is not empty)%}
-					<a class="socialmedia-link" href="https://www.github.com/{{ user.github }}" alt="Enllaç al Github de {{user.username}}" title="https://www.github.com/{{user.github}}" target="_blank">
+					<a class="socialmedia-link" href="https://www.github.com/{{ user.github }}" alt="Enlace al Github de {{user.username}}" title="https://www.github.com/{{user.github}}" target="_blank">
 						<i class="socialmedia-icon fa fa-github-square"></i>&nbsp;{{user.github}}
 					</a>
 				{% endif %}
 				<br/>
 				{% if user.linkedin is defined and (user.linkedin is not empty)%}
-					<a class="socialmedia-link" href="https://www.linkedin.com/in/{{ user.linkedin }}" alt="Enllaç al Linkedin de {{user.username}}" title="https://www.linkedin.com/in/{{user.linkedin}}" target="_blank">
+					<a class="socialmedia-link" href="https://www.linkedin.com/in/{{ user.linkedin }}" alt="Enlace al Linkedin de {{user.username}}" title="https://www.linkedin.com/in/{{user.linkedin}}" target="_blank">
 						<i class="socialmedia-icon fa fa-linkedin-square"></i>&nbsp;{{user.linkedin}}
 					</a>
 				{% endif %}
 				<br/>
 				{% if user.twitter is defined and (user.twitter is not empty)%}
-					<a class="socialmedia-link" href="https://www.twitter.com/{{ user.twitter }}" alt="Enllaç al Twitter de {{user.username}}" title="https://www.twitter.com/{{user.twitter}}" target="_blank">
+					<a class="socialmedia-link" href="https://www.twitter.com/{{ user.twitter }}" alt="Enlace al Twitter de {{user.username}}" title="https://www.twitter.com/{{user.twitter}}" target="_blank">
 						<i class="socialmedia-icon fa fa-twitter-square"></i>&nbsp;{{user.twitter}}
 					</a>
 				{% endif %}
 				<br/>
 				{% if user.linkedin is defined and (user.facebook is not empty)%}
-					<a class="socialmedia-link" href="https://www.facebook.com/{{ user.facebook }}" alt="Enllaç al Facebook de {{user.username}}" title="https://www.facebook.com/{{user.facebook}}" target="_blank">
+					<a class="socialmedia-link" href="https://www.facebook.com/{{ user.facebook }}" alt="Enlace al Facebook de {{user.username}}" title="https://www.facebook.com/{{user.facebook}}" target="_blank">
 						<i class="socialmedia-icon fa fa-facebook-square"></i>&nbsp;{{user.facebook}}
 					</a>
 				{% endif %}
@@ -49,9 +49,9 @@
 			</div>
 			<div class="col-md-6">
 				{% if user.imatge %}
-					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="Imatge de perfil de {{user.username}}" class="profile-image">
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" alt="Imagen de perfil de {{user.username}}" class="profile-image">
 				{% else %}
-					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="Sense imatge de perfil" class="profile-image">
+					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" alt="Sin imagen de perfil" class="profile-image">
 				{% endif %}
 			</div>
 		</div>
@@ -59,10 +59,10 @@
 		<p class="text">{{ user.descripcio|raw }}
 		</p>
 		<p class="comments text-right">
-			{{user.username}} es usuari desde	{{user.dataregistre|date('Y')}}<br/>
-			ha participat amb <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllaç a llista d'articles de {{user.username}}" title="Veure articles de
-			{{user.username}}">{{user.articles|length}} articles <i class="fa fa-sticky-note-o"></i></a><br/>
-			{{ user.comentaris|length }} comentaris <i class="fa fa-comment-o"></i><br/>
+			{{user.username}} es usuario desde	{{user.dataregistre|date('Y')}}<br/>
+			ha participado con <a href="{{path('articlesAutor', {username:user.username}) }}" alt="Enllace a la lista de artículos de {{user.username}}" title="Ver artículos de
+			{{user.username}}">{{user.articles|length}} artículos <i class="fa fa-sticky-note-o"></i></a><br/>
+			{{ user.comentaris|length }} comentarios <i class="fa fa-comment-o"></i><br/>
 			{% if app.user and (user.username == app.user.username) or is_granted('ROLE_ADMIN') %}
 				<a href="{{ path('userProfileEdit', {username:user.username}) }}" alt="Editar perfil">editar perfil <i class="fa fa-pencil-square-o"></i></a>
 			{% endif %}

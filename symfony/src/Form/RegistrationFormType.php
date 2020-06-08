@@ -23,90 +23,90 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom *',
+                'label' => 'Nombre *',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'El nom no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El nom no puede ser inferior a {{ limit }} caracteres',
                         'max' => 40,
-                        'maxMessage' => 'El nom no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El nom no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('cognom', TextType::class, [
-                'label' => 'Cognom *',
+                'label' => 'Apellido *',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'El cognom no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El apellido no puede ser inferior a {{ limit }} caracteres',
                         'max' => 40,
-                        'maxMessage' => 'El cognom no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El apellido no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('email', EmailType::class, [
                 'label' => 'Email *',
-                'help' => 'Adreça de correu electrònic on rebre la verificació del registre.',
+                'help' => 'Dirección de correo electrónico donde recibir la verificación del registro.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'max' => 100,
-                        'maxMessage' => 'El mail no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El mail no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('nom_usuari', TextType::class, [
-                'label' => 'Nom d\'usuari *',
-                'help' => 'Aques serà el teu nom públic. Ha de ser unic i de 8 a 14 caràcters.',
+                'label' => 'Nombre de usuario *',
+                'help' => 'Este será tu nombre público. Debe de ser único y de 8 a 14 caracteres.',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'El nom d\'usuari no pot ser inferior a {{ limit }} caràcters',
+                        'minMessage' => 'El nombre de usuario no puede ser inferior a {{ limit }} caracteres',
                         'max' => 14,
-                        'maxMessage' => 'El nom d\'usuari no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'El nombre de usuario no puede ser superior a {{ limit }} caracteres',
                     ])
                 ]
             ])
 
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Contrasenya *',
-                'help' => 'Tria una contrasenya de minim 8 caracters que contingui lletres minuscules, majuscules i algun numeros',
+                'label' => 'Contraseña *',
+                'help' => 'Elige una contraseña de mínimo 8 caracteres y que contenga letras minúsculas, mayúsculas y algún número',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Por favor, introduzca una contraseña',
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'La contrasenya ha de ser sminim de {{ limit }} caràcters',
+                        'minMessage' => 'La contraseña debe de ser mínimo de {{ limit }} caracteres',
                         'max' => 50,
-                        'maxMessage' => 'La contrasenya no pot ser superior a {{ limit }} caràcters',
+                        'maxMessage' => 'La contraseña no debe de ser superior a {{ limit }} caracteres',
                     ]),
                 ],
                 'mapped' => false,
             ])
 
             ->add('pass2', PasswordType::class, [
-                'label' => 'Repetir contrasenya *',
-                'help' => 'Torna a escriure la contrasenya i asegurat que la mateixa',
+                'label' => 'Repetir contraseña *',
+                'help' => 'Vuelve a introducir la contraseña asegurandote de que coincidan',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false
             ])
 
             ->add('data_naixament', BirthdayType::class, [
-                'label' => 'Data de naixement',
-                'help' => 'Aquest camp es opcional. ',
+                'label' => 'Fecha de nacimiento',
+                'help' => 'Este campo es opcional.',
                 'attr' => ['class' => 'form-control'],
                 'placeholder' => [
                     'day' => 'Dia',
                     'month' => 'Mes',
-                    'year' => 'Any',
+                    'year' => 'Año',
                 ],
                 'format' => 'dd  MM  yyyy',
                 'required' => false,
@@ -116,7 +116,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => "Has d'acceptar els termes i condicions.",
+                        'message' => "Debes aceptar los términos y condiciones",
                     ]),
                 ],
             ]);
