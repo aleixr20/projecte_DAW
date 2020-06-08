@@ -50,29 +50,27 @@ class HomepageController extends AbstractController
             // if ($idioma == 'en') {
 
             $sections = [
+                //Definición, planteamiento y aspectos globales del proyecto
                 ['linkslug' => 'portada', 'linkalt' => 'Portada de la documentación', 'linkname' => 'ABOUT US', 'file' => '01-portada'],
                 ['linkslug' => 'indice', 'linkalt' => 'Indice de contenido de la documentación', 'linkname' => 'INDICE', 'file' => '02-indice'],
-
                 ['linkslug' => 'producto', 'linkalt' => 'El producto b-nerd', 'linkname' => 'B-NERD', 'file' => '03-producto'],
                 ['linkslug' => 'objetivos', 'linkalt' => 'Objetivos del proyecto', 'linkname' => 'OBJETIVOS', 'file' => '04-objetivos'],
                 ['linkslug' => 'tecnologias', 'linkalt' => 'Tecnologias utilizadas en el proyecto', 'linkname' => 'TECHS', 'file' => '05-tecnologias'],
                 ['linkslug' => 'planificacion', 'linkalt' => 'Planificacion del proyecto', 'linkname' => 'PLANIFICACIÓN', 'file' => '06-planificacion'],
+                //Especificaciones del dessarollo
                 ['linkslug' => 'wireframes', 'linkalt' => 'Prototipos de diseño inical', 'linkname' => 'WIREFRAMES', 'file' => '07-wireframes'],
                 ['linkslug' => 'funcionalidades', 'linkalt' => 'Diagra de casos de uso', 'linkname' => 'FUNCIONALIDADES', 'file' => '08-casosdus'],
                 ['linkslug' => 'BBDD', 'linkalt' => 'Disenño de la base de datos', 'linkname' => 'BBDD', 'file' => '09-bbdd'],
-
                 ['linkslug' => 'fracasos', 'linkalt' => 'Objetivos no alcanzados', 'linkname' => 'FRACASOS', 'file' => '10-fracasos'],
                 ['linkslug' => 'exitos', 'linkalt' => 'Objetivos logrados', 'linkname' => 'EXITOS', 'file' => '11-exitos'],
                 ['linkslug' => 'seguridad', 'linkalt' => 'Seguridad aplicada', 'linkname' => 'SEGURIDAD', 'file' => '12-seguridad'],
-
-                ['linkslug' => 'pitch', 'linkalt' => 'Pitch y presentación comercial', 'linkname' => 'MEDIA', 'file' => '14-media'],
-                ['linkslug' => 'manual', 'linkalt' => 'Manual de  usuarios e instalación', 'linkname' => 'INSTALACION', 'file' => '15-manual'],
-                // ['linkslug' => 'demo', 'linkalt' => 'Instalación de versión para Demo', 'linkname' => 'VERSION DEMO', 'file' => '16-demo'],
-                ['linkslug' => 'valoraciones', 'linkalt' => 'Nuestras valoraciones personales', 'linkname' => 'FEEDBACK', 'file' => '13-valoraciones'],
-
-                // ['linkslug' => 'conclusion', 'linkalt' => 'Conclusiones finales', 'linkname' => 'CONCLUSIONES', 'file' => '17-conclusiones']
-
+                //Anexos para uso e instalación
+                ['linkslug' => 'media', 'linkalt' => 'Pitch y presentación comercial', 'linkname' => 'MEDIA', 'file' => '13-media'],
+                ['linkslug' => 'manual', 'linkalt' => 'Manual de  usuarios e instalación', 'linkname' => 'INSTALACION', 'file' => '14-manual'],
+                //Conclusiones
+                ['linkslug' => 'valoraciones', 'linkalt' => 'Nuestras valoraciones personales', 'linkname' => 'FEEDBACK', 'file' => '15-valoraciones']
             ];
+
             return $this->render('docs/docs.html.twig', [
                 'lang' => 'es',
                 'sections' => $sections,

@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Editar Article</h1>
+		<h1 class="titulo">Editar Artículo</h1>
 
 		{{ form_start(adminEditarArticle) }}
 		<div class="form-group form-row">
@@ -31,9 +31,9 @@
 				{{ form_widget(adminEditarArticle.visible) }}
 			</div>
 		</div>
-		<button type="submit" class="btn btn-outline-secondary" alt="Confirmar l'actualització de dades">guardar</button>
-		<a class="btn btn-outline-secondary" href="{{ path('article_detall', {slug: article.slug}) }}" alt="Enllaç a la pàgina del article">Veure article</button>
-		<a class="btn btn-outline-secondary" href="{{ path('adminArticles') }}"  alt="Tornar a l'administrador d'articles">Cancelar</button>
+		<button type="submit" class="btn btn-outline-secondary" alt="Confirmar actualitzación de datos">guardar</button>
+		<a class="btn btn-outline-secondary" href="{{ path('article_detall', {slug: article.slug}) }}" alt="enlace a la página del artículo" target="blank">Ver artícul</button>
+		<a class="btn btn-outline-secondary" href="{{ path('adminArticles') }}"  alt="Volver al administrador de artículos">Cancelar</button>
 
 		{{ form_end(adminEditarArticle) }}
 

@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Llista d'articles</h1>
+		<h1 class="titulo">Listado de artículos</h1>
 
 		<div class="accordion" id="accordionExample">
 
@@ -26,16 +26,16 @@
 								</div>
 								<div class="col-md-4 text-right">
 									{% for cat in article.categories %}
-										<a href="{{ path('adminArticlesCategoria', {id: cat.id}) }}" alt="llistar articles de la categoria {{cat.nom}}" title="llistar articles de la categoria {{cat.nom}}">
-											<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="Logotip del la categoria {{cat.nom}}"></a>
+										<a href="{{ path('adminArticlesCategoria', {id: cat.id}) }}" alt="listado de artículos de la categoría {{cat.nom}}" title="Listado de artículos de la categoría {{cat.nom}}">
+											<img src="/img/categories/{{ asset(cat.logo) }}" class="cat-article-icon" alt="Logotipo del la categoría {{cat.nom}}"></a>
 									{% endfor %}
-									<a href="{{ asset("post/" ~ article.slug) }}" alt="Veure article {{article.titol}}" alt="Veure article">
+									<a href="{{ asset("post/" ~ article.slug) }}" alt="ver artículo {{article.titol}}" title="Ver artículo" target="blank">
 									{% if article.visible %}
 										<i class="admin-icons fa fa-eye-slash"></i></a>
 									{% else %}
 										<i class="admin-icons fa fa-eye"></i></a>
 									{% endif %}
-									<a href="{{ path('adminEditarArticle', {id: article.id}) }}" alt="Administrar article" title="Administrar article">
+									<a href="{{ path('adminEditarArticle', {id: article.id}) }}" alt="administrar artículo" title="Administrar artículo">
 										<i class="admin-icons fa fa-cog"></i>
 									</a>
 								</div>

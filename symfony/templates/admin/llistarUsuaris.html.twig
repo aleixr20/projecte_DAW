@@ -6,23 +6,22 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Llista de usuaris</h1>
+		<h1 class="titulo">Listado de usuarios</h1>
 
 		<div class="accordion" id="accordionExample">
 
 			<table class="table alert-light">
 				<tr>
 					<td style="min-width:10em;">username</td>
-					<td>nom</td>
-					<td>registre</td>
-					<td>ultimlogin</td>
+					<td>nombre</td>
+					<td>registro</td>
+					<td>ultimologin</td>
 					<td style="width:3em;">
 						<i class="fa fa-book"></i>
 					</td>
 					<td style="width:3em;">
 						<i class="fa fa-commenting-o"></i>
 					</td>
-					{# <td style="width:6em;"></td> #}
 				</tr>
 				{% for usuari in usuaris %}
 
@@ -51,11 +50,11 @@
 									{{usuari.ultimlogin|date('d/m/Y')}}
 								</td>
 								<td>
-									<a href="{{path('articlesAutor', {username:usuari.username}) }}" alt="Enllaç a la llista d'articles de {{usuari.username}}" title="Veure articles de {{usuari.username}}">
+									<a href="{{path('articlesAutor', {username:usuari.username}) }}" alt="enlace a la lista de artículos de {{usuari.username}}" title="Ver artículos de {{usuari.username}}" target="blank">
 										{{usuari.articles|length}}</a>
 								</td>
 								<td>
-									<a href="{{path('adminComentarisUsuari', {username:usuari.username}) }}" alt="Enllaç a la llista de comentaris de de {{usuari.username}}" title="Veure comentaris de {{usuari.username}}">
+									<a href="{{path('adminComentarisUsuari', {username:usuari.username}) }}" alt="enlace a la lista de comentarios de {{usuari.username}}" title="Ver comentarios de {{usuari.username}}" target="blank">
 										{{usuari.comentaris|length}}</a>
 								</td>
 							</td>
@@ -82,10 +81,10 @@
 									{% endif %}
 									</p>
 									<p>
-									<a href="{{ path('userProfile', {username: usuari.username}) }}" alt="Veure perfil de {{usuari.username}}" title="Veure perfil de {{usuari.username}}">
-										<i class="fa fa-eye"></i> veure perfil
+									<a href="{{ path('userProfile', {username: usuari.username}) }}" alt="ver perfil de {{usuari.username}}" title="Ver perfil de {{usuari.username}}" target="blank">
+										<i class="fa fa-eye"></i> ver perfil
 									</a><br/>
-									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="Editar l'usuari {{usuari.username}}" title="Administrar l'usuari {{usuari.username}}">
+									<a href="{{path('adminEditarUsuari', {id:usuari.id}) }}" alt="editar usuario {{usuari.username}}" title="Administrar usuario {{usuari.username}}">
 										<i class=" fa fa-pencil-square-o"></i> administrar
 									</a>
 								</p>

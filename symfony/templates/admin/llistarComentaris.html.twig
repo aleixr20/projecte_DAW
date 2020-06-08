@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Llista de comentaris</h1>
+		<h1 class="titulo">Listado de comentarios</h1>
 
 
 		{% for comment in comentaris %}
@@ -22,16 +22,16 @@
 				{% elseif comment.tipus == 3 %}
 					<i class="fa fa-rocket"></i>
 				{% endif %}
-				{{comment.user.username}} el {{comment.dataPublicacio|date('d/m/Y')}} a <a href="{{path('article_detall',{slug:comment.article.slug}) }}" alt="Veure article {{comment.article.titol}}" title="Veure article">{{comment.article.titol}}</a><br/>
+				{{comment.user.username}} el {{comment.dataPublicacio|date('d/m/Y')}} a <a href="{{path('article_detall',{slug:comment.article.slug}) }}" alt="ver artículo {{comment.article.titol}}" title="Ver artículo" target="blank">{{comment.article.titol}}</a><br/>
 				"{{comment.text}}"<br/>
 					{% if comment.visible %}
-						✔ Aquest comentari es visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Publicar comentarí">amagar</a>
+						✔ Este comentario es visible en el artículo (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Publicar comentario">ocultar</a>
 						{% else %}
-						✖ Comentari no visible al article (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Amagar comentari">publicar</a>
+						✖ Comentario no visible en el artículo (<a href="{{path('adminPublicarComentari', {id:comment.id}) }}" alt="Amagar comentari">publicar</a>
 					{% endif %}
-				, <a href="{{path('adminEditarComentari', {id:comment.id}) }}" alt="Moderar comentari">moderar</a>
-				 o <a href="{{path('adminEliminarComentari', {id:comment.id, autor:comment.user.username}) }}" alt="Eliminar comentari">eliminar</a>
-				 comentari)
+				, <a href="{{path('adminEditarComentari', {id:comment.id}) }}" alt="Moderar comentario">moderar</a>
+				 o <a href="{{path('adminEliminarComentari', {id:comment.id, autor:comment.user.username}) }}" alt="Eliminar comentario">eliminar</a>
+				 comentario)
 			</p>
 
 		{% endfor %}

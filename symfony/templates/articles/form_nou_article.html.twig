@@ -8,7 +8,7 @@
 
 	<section id="menu_item_section_name_4">
 		<h1 class="titulo">
-			Nou Article
+			Nuevo artículo
 		</h1>
 
 		{{form_errors(formArticle.titol) }}
@@ -45,7 +45,7 @@
 		</div>
 
 		<div class="form-group form-row" id="article_categories">
-			<p id="article_categories_help" class="form-warning-text">Si vols afegir una categoria que s'ajusti mes al contingut de l'article, guarda l'article com a esborrany i al panell d'administració afegeix la nova categoria amb el seu nom, logotip, tipus i color corresponent.</p>
+			<p id="article_categories_help" class="form-warning-text">Si quieres añadir una nueva categoría que se ajuste mejor al contenido del artículo, guarda este borrador y desde el panel de administración añade la categoría con su logotipo, nombre, color...</p>
 			<div class="col-md-4">
 				{{ form_label(formArticle.categoria1) }}
 				{{ form_widget(formArticle.categoria1) }}
@@ -91,7 +91,7 @@
 		{{ form_widget(formArticle) }}
 
 		<button id="articleSubmit" class="btn btn-outline-secondary">{{ button_label|default('guardar dades') }}</button>
-		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('admin') }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('admin') }}'">Cancelar</button>
 
 		{{ form_end(formArticle) }}
 

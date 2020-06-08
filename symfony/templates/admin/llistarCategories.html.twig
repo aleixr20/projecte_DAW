@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Llista de categories actuals</h1>
+		<h1 class="titulo">Listado de categorias actuals</h1>
 
 		<div class="cat-admin">
 
@@ -15,27 +15,27 @@
 
 					<div class="cat-item">
 
-						<img src="{{ asset("img/categories/" ~ cat.logo) }}" class="categoria_icon" alt="Logotip de la categoria {{cat.nom}}">
+						<img src="{{ asset("img/categories/" ~ cat.logo) }}" class="categoria_icon" alt="Logotipo de la categoría {{cat.nom}}">
 
 						<div class="cat-admin-info">
 							{{cat.nom}}
-							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"editar categoria" title="Editar categoria">
+							<a href="{{ path('adminEditarCategoria', {id: cat.id}) }}" alt"editar categoría" title="Editar categoría">
 								<i class="fa fa-cog"></i>
 							</a><br>
-							<a href="{{ path('adminEliminarCategoria', {id: cat.id}) }}" alt"eliminar categoria" title="Eliminar categoria">
+							<a href="{{ path('adminEliminarCategoria', {id: cat.id}) }}" alt"eliminar categoría" title="Eliminar categoría">
 								<i class="fa fa-trash-o"></i>
 							</a>
 							<br/>
 
 							{{cat.articles|length}}
-							Articles publicats
+							Articlulos publicados
 						</div>
 					</div>
 				{% endif %}
 			{% endfor %}
 		</div>
 
-		<a href="{{path('adminAfegirCategoria')}}" alt="Afegir nova categoria">Afegir nova categoria</a>
+		<a href="{{path('adminAfegirCategoria')}}" alt="añadir nueva categoría">Añadir nueva categoría</a>
 
 	</section>
 

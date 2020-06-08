@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section>
-		<h1 class="titulo">Editar Usuari</h1>
+		<h1 class="titulo">Editar Usuario</h1>
 
 		{{ form_start(adminEditarUsuari) }}
 		<div class="form-row">
@@ -27,9 +27,9 @@
 			</div>
 			<div class="col-md-6">
 				{% if user.imatge %}
-					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" style="padding:1em;" alt="imatge de perfil" class="profile-image">
+					<img src="{{ asset("img/imatges_perfil/" ~ user.imatge) }}" style="padding:1em;" alt="imagen de perfil" class="profile-image">
 				{% else %}
-					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" style="padding:1em;" alt="imatge de perfil" class="profile-image">
+					<img src="{{ asset("img/imatges_perfil/default.jpg") }}" style="padding:1em;" alt="imagen de perfil" class="profile-image">
 				{% endif %}
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 		</div>
 
 		<button class="btn btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
-		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminUsuaris') }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminUsuaris') }}'">Cancelar</button>
 
 		{{ form_end(adminEditarUsuari) }}
 	</section>

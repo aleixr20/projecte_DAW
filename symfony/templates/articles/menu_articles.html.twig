@@ -1,15 +1,15 @@
 <ul class="menu-user">
 	<li>
-		<a href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}">
+		<a href="{{ path('userProfile', {username: article.autor.username}) }}" alt="ver perfil de {{article.autor.username}}">
 			{% if(article.autor.imatge) and (article.autor.imatge is not empty) %}
-				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imatge de perfil" id="img-modif">
+				<img src="{{ asset("img/imatges_perfil/" ~ article.autor.imatge) }}" alt="imagen de perfil" id="img-modif">
 			{% else %}
 				<i class="menu-icon fa fa-user-circle"></i>
 			{% endif %}
 		</a>
 	</li>
 	<li>
-		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.autor.username}) }}" alt="Veure perfil de {{article.autor.username}}" title="Veure perfil de {{article.autor.username}}">{{article.autor.username}}</a>
+		<a class="menu-link menu-username" href="{{ path('userProfile', {username: article.autor.username}) }}" alt="ver perfil de {{article.autor.username}}" title="ver perfil de {{article.autor.username}}">{{article.autor.username}}</a>
 	</li>
 	<li class="menu-link article-data">
 		{{article.datapublicacio|date("d M Y")}}
@@ -17,8 +17,8 @@
 
 	{% if app.user and (app.user == article.autor) %}
 		<li>
-			<a class="menu-link logout-link" href="{{ path('app_logout')}}" alt="Tancar la sessió">
-				sortir
+			<a class="menu-link logout-link" href="{{ path('app_logout')}}" alt="cerrar la sessión">
+				salir
 			</a>
 		</li>
 	{% endif %}
@@ -28,31 +28,31 @@
 
 	{% if app.user and is_granted('ROLE_ADMIN') %}
 		<li>
-			<a class="menu-link" href="{{ path('article_update', {slug:article.slug}) }}" alt="Editar article">editar article</a>
+			<a class="menu-link" href="{{ path('article_update', {slug:article.slug}) }}" alt="editar artículo">editar artículo</a>
 		</li>
 	{% endif %}
 	{% for cat in article.categories %}
 		<li>
-			<a class="menu-link" href="{{ path('articles_categoria', {cat_name: cat.nom})}}" alt="Veure articles de la categoria in{{cat.nom}}" title="Veure articles de la categoria in{{cat.nom}}">in{{cat.nom}}</a>
+			<a class="menu-link" href="{{ path('articles_categoria', {cat_name: cat.nom})}}" alt="ver artículos de la categoria in{{cat.nom}}" title="Ver artículos de la categoría in{{cat.nom}}">in{{cat.nom}}</a>
 		</li>
 	{% endfor %}
 
 	<li>
-		<a class="menu-link active" href="{{ path('homepage')}}" alt="Pagina d'inici" title="Tornar a la pàgina d'inici">b-NERD toDEVELOPE</a>
+		<a class="menu-link active" href="{{ path('homepage')}}" alt="pagina de inicio" title="Volver a la pàgina d'inici">b-NERDS</a>
 	</li>
 	<li>
-		<a class="menu-link" href="{{ path('homepage')}}#hard-skills" alt="Enllaç a la secció de categories">ARTICLES</a>
+		<a class="menu-link" href="{{ path('homepage')}}#hard-skills" alt="enlace a la sección de categorías">ARTICULOS</a>
 	</li>
 
 	<li id="hamburgesa">
-		<i class="menu-icon fa fa-bars" alt="Desplegar el menu de navegació"></i>
+		<i class="menu-icon fa fa-bars" alt="ver menu de navegació"></i>
 	</li>
 	<li id="dark-mode">
-		<i class="menu-icon fa fa-toggle-off" alt="Botó per activar o desactivar el tema fosc"></i>
+		<i class="menu-icon fa fa-toggle-off" alt="botón para activar o desactivar el tema oscuro"></i>
 	</li>
 	{% if app.user and is_granted('ROLE_ADMIN',app.user.roles) %}
 		<li>
-			<a class="menu-link" href="{{ path('admin')}}" alt="Enllaç al zona admin">admin</a>
+			<a class="menu-link" href="{{ path('admin')}}" alt="enlacea la zona admin">admin</a>
 		</li>
 	{% endif %}
 </ul>

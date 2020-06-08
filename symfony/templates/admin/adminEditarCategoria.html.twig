@@ -6,7 +6,7 @@
 {% block content %}
 
 	<section class="onepage">
-		<h1>Editar Categoria</h1>
+		<h1>Editar Categoría</h1>
 
 		{{ form_start(adminEditarCategoria) }}
 		<div class="form-group">
@@ -25,8 +25,8 @@
 			{{ form_label(adminEditarCategoria.color) }}
 			{{ form_widget(adminEditarCategoria.color) }}
 		</div>
-		<button class="btn btn-outline-secondary">{{ button_label|default('guardar canvis') }}</button>
-		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminCategories') }}'">Cancel·la</button>
+		<button class="btn btn-outline-secondary">{{ button_label|default('guardar cambios') }}</button>
+		<button class="btn btn-outline-secondary" type="button" onclick="location.href='{{ path('adminCategories') }}'">Cancelar</button>
 
 		{{ form_end(adminEditarCategoria) }}
 	</section>

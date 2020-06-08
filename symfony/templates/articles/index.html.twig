@@ -110,7 +110,7 @@
 
 			{% if commentSucces %}
 				<p>
-					Gracies pel teu comentari. En breu un moderador hi donarà retroacció
+					Gracias por tu comentario. En breve un moderador le hechará un vistazo
 				</p>
 			{% else %}
 				{{ form_start(feedbackForm) }}
@@ -121,7 +121,7 @@
 					{% if app.user and is_granted('ROLE_VALIDATED') %}
 						<button type="submit" class="btn btn-outline-secondary">enviar</button>
 					{% else %}
-						<a href="{{path('app_login')}}" type="button" class="btn btn-block btn-outline-secondary" disabled>sólo los usuarios registrados pueden hacer comentarios</a>
+						<a href="{{path('app_login')}}" type="button" class="btn btn-block btn-outline-secondary" disabled>sólo los usuarios registrados pueden añadir comentarios</a>
 					{% endif %}
 				</div>
 				{{ form_end(feedbackForm) }}
